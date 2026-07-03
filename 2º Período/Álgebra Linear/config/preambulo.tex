@@ -1,0 +1,70 @@
+
+% ==============================================================================
+% 1. SISTEMA E CODIFICAÇÃO (Sempre no início)
+% ==============================================================================
+\usepackage[utf8]{inputenc}       % Suporte para acentuação direta
+\usepackage[T1]{fontenc}          % Codificação de fonte correta para português
+\usepackage[brazil]{babel}        % Tradução e hifenização em português
+\usepackage{indentfirst}          % Indenta o primeiro parágrafo de cada seção
+\usepackage{lmodern}              % Fonte Latin Modern (limpa e profissional)
+\usepackage{csquotes}             % Gerenciamento avançado de aspas e citações
+
+
+% ==============================================================================
+% 2. MATEMÁTICA E TEOREMAS
+% ==============================================================================
+\usepackage{amsmath}              % Recursos matemáticos avançados
+\usepackage{amsfonts}             % Fontes matemáticas
+\usepackage{amssymb}              % Símbolos matemáticos adicionais
+\usepackage{amsthm}               % Configuração de ambientes de teoremas
+
+% Configuração dos Teoremas (Traduzidos para o português)
+\newtheorem{Axiom}{Axioma}[section]
+\newtheorem{Conjecture}{Conjectura}[section]
+\newtheorem{Definition}{Definição}[section]
+\newtheorem{Theorem}{Teorema}[section]
+\newtheorem*{Proof}{Demonstração}
+\newtheorem{Example}{Exemplo}[section]
+\newtheorem{Corolary}{Corolário}[section]
+\newtheorem{Proposition}{Proposição}[section]
+
+% ==============================================================================
+% 3. GRÁFICOS, CORES E DIAGRAMAÇÃO
+% ==============================================================================
+\usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry} % Margens padrão
+\usepackage{graphicx}             % Suporte para inserção de imagens e figuras
+\graphicspath{{imgs/}}         % Define a pasta padrão para buscar fotos/gráficos
+\usepackage{microtype}            % Melhora o espaçamento entre letras e evita hífens excessivos
+\usepackage{fancyhdr}             % Permite customizar cabeçalhos e rodapés
+\usepackage{float}                % Controle estrito de posição de elementos ([H])
+\usepackage{pgfplots}             % Criação de gráficos diretamente no LaTeX
+\pgfplotsset{compat=1.18}         % Boa prática: define a compatibilidade do pgfplots
+
+% ==============================================================================
+% 4. TABELAS AVANÇADAS
+% ==============================================================================
+\usepackage{booktabs}             % Linhas de tabela profissionais (\toprule, etc)
+\usepackage{multirow}             % Linhas múltiplas em tabelas
+\usepackage{tabularx}             % Tabelas com largura ajustável automática
+\usepackage{makecell}             % Quebras de linha e alinhamento dentro de células
+
+% ==============================================================================
+% 5. CÓDIGOS DE PROGRAMAÇÃO
+% ==============================================================================
+\usepackage{listings}             % Exibição de blocos de código fonte
+
+% ==============================================================================
+% 6. LINKS, URLs E REFERÊNCIAS (Sempre por último)
+% ==============================================================================
+\usepackage{url}                  % Formatação correta de links de internet
+\usepackage[num]{abntex2cite}     % Normas ABNT para citações
+\usepackage{hyperref}             % Transforma sumário, links e citações em hiperlinks clicáveis
+\hypersetup{
+	colorlinks=true,              % Ativa cores nos links em vez de caixas coloridas
+	linkcolor=blue,               % Cor dos links internos (sumário, figuras)
+	citecolor=green,              % Cor das citações bibliográficas
+	filecolor=magenta,            
+	urlcolor=cyan                 % Cor de links de sites externos
+}
+
+%\usepackage{glossaries}
