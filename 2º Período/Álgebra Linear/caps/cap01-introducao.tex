@@ -17,6 +17,8 @@ Através destas notas de aula, eu pretendo ajudar os estudantes a entenderem tod
 
 \section{Representação Geométrica de Sistemas Lineares}
 
+\textbf{Importante:} este capítulo é baseado em \cite{slide1doyuri}
+
 Em Álgebra Linear, nós estamos interessados em um problema principal, que é a base de todo o ferramental teórico que será desenvolvido: "Como podemos resolver um sistema linear de $m$ equações e $n$ variáveis? Quando é possível fazer isto?".
 
 Para responder a esta pergunta, é necessário primeiramente definir o que é um sistema linear:
@@ -42,6 +44,14 @@ $$
 	2x - y = 5
 \end{cases}.
 $$
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{imgs/alglin-01-sistema-linear}
+	\caption[Exemplo de sistema linear]{exemplo de sistema linear (arquivo pessoal)}
+	\label{fig:alglin-01-sistema-linear}
+\end{figure}
+
 
 Resolver este sistema não é uma tarefa difícil: da primeira equação, sabemos que $y = -\dfrac{x}{2}$. Da segunda equação, sabemos que $y = 2x - 5$. A solução procurada é exatamente o ponto $P$ em que as duas retas se intersectam (neste caso, $P = (2, -1)$). No entanto, esta abordagem nos revela um modo de pensar, ao qual chamaremos de \textbf{"row picture"}: estamos olhando para as linhas do sistema linear. Em uma representação geométrica, esta abordagem se preocupa com o que as equações representam geometricamente (neste caso, duas retas em $\mathbb{R}^2$ que se interceptam em um único ponto).
 
@@ -86,7 +96,24 @@ $$
 \end{bmatrix}.
 $$
 
-% Colocar aqui algum exemplo de x + y, x - y, 2x, -y ...
+\begin{Example}
+	Sejam $u = \begin{bmatrix}
+		3 \\
+		1 
+	\end{bmatrix}$ e $v = \begin{bmatrix}
+	1 \\
+	-1
+	\end{bmatrix}$. Então, $u, v, u + v, u - v, -u, -v, 2u$ são conforme indicado na figura a seguir:
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1.0\linewidth]{imgs/alglin-02-vetores}
+		\caption[Operações entre vetores]{Operações entre vetores (arquivo pessoal)}
+		\label{fig:alglin-02-vetores}
+	\end{figure}
+	
+	
+\end{Example}
 
 Por sua vez, tendo definido provisoriamente o conceito de vetor, vamos fazer uma definição para o conceito de combinação linear:
 
@@ -155,4 +182,116 @@ $$
 \end{bmatrix}.
 $$
 
-Não só isto é perfeitamente possível, como também esta é a forma como trabalharemos em muitos casos ao longo do curso (mas, de igual modo, o conceito de combinação linear será muito importante, como ainda veremos).
+Não só isto é perfeitamente possível, como também esta é a forma como trabalharemos em muitos casos ao longo do curso (mas, de igual modo, o conceito de combinação linear será muito importante, como ainda veremos). Para realizar esta multiplicação, nós podemos pensar de duas formas: pelas linhas ou pelas colunas da matriz.
+
+Se nós temos uma matriz $A = \begin{bmatrix}
+	linha~1 \\
+	linha~2 \\
+	\vdots \\
+	linha~m
+\end{bmatrix}$ e um vetor $x$, podemos pensar que $Ax = \begin{bmatrix}
+	linha~1 \cdot x \\
+	linha~2 \cdot x \\
+	\vdots \\
+	linha~m \cdot x
+\end{bmatrix}$, onde $\cdot$ indica uma operação entre vetores que definiremos em breve: o produto interno euclidiano.
+
+Por outro lado, se ao invés de olharmos para as linhas de $A$, nós olharmos para as suas colunas, se nós definimos $A = \begin{bmatrix} coluna~1 & coluna~2 & \cdots & coluna~n \end{bmatrix}$, e $x = \begin{bmatrix}
+	x_1 \\
+	x_2 \\
+	\vdots \\
+	x_n
+\end{bmatrix}$, nós temos que $Ax = x_1[coluna~1] + x_2[coluna~2] + ... + x_n[coluna~n]$. Ou seja, nós temos duas informações: $Ax$ é um vetor, e $Ax$ pode ser escrito como a combinação linear das colunas de $A$.
+
+Olhemos novamente para o sistema linear que estávamos estudando: vamos fazer a operação que desejávamos obter para concluir que esta representação equivale ao sistema linear que nós tínhamos antes:
+
+$$
+\begin{bmatrix}
+	1 & 2 \\
+	2 & -1
+\end{bmatrix}
+\begin{bmatrix}
+	x \\
+	y
+\end{bmatrix}
+=
+x\begin{bmatrix}
+	1 \\
+	2
+\end{bmatrix}
++
+y\begin{bmatrix}
+	2 \\
+	-1
+\end{bmatrix}
+=
+\begin{bmatrix}
+	0 \\
+	5
+\end{bmatrix}.
+$$
+
+Nós podemos estender o mesmo raciocínio para qualquer sistema linear de $m$ equações e $n$ incógnitas e concluir que, se $A$ é a matriz dos coeficientes do sistema, $x$ é o vetor das incógnitas e $b$ é o vetor dos termos independentes, todo sistema linear pode ser escrito como
+
+\begin{center}
+	\fbox{$Ax = b$}
+\end{center}
+
+Algo importante a se notar é que, para todas as operações que nós vamos desenvolver, as dimensões das matrizes e dos vetores devem estar corretas. No caso da multiplicação de uma matriz por um vetor, por exemplo, se $A$ é uma matriz com $m$ linhas e $n$ colunas (denotamos por $m\times n$), $x$ deve ser um vetor $n\times 1$, e a saída $b$ será um vetor $m\times 1$. Igualmente, somas de vetores só fazem sentido se as dimensões dos vetores somados forem iguais.
+
+\section{Classificação de Sistemas Lineares}
+
+Como é possível imaginar, nem sempre um sistema linear possuirá uma única solução. É possível que o sistema não possua nenhuma solução, e também é possível que o sistema possua infinitas soluções. Assim sendo, nós podemos classificar um sistema linear quanto à quantidade de soluções que ele possui:
+
+\begin{itemize}
+	\item \textbf{Sistema Possível e Determinado (SPD)}: possui uma única solução;
+	\item \textbf{Sistema Possível e Indeterminado (SPI)}: possui infinitas soluções;
+	\item \textbf{Sistema Impossível (SI)}: não possui nenhuma solução.
+\end{itemize}
+
+Vejamos alguns exemplos:
+
+\begin{Example}[SPD]
+	$$
+	\begin{cases}
+		x + 2y = 0 \\
+		2x - y = 5
+	\end{cases}
+	$$
+\end{Example}
+
+\begin{Example}[SPI]
+	$$
+	\begin{cases}
+		x + 2y = 4 \\
+		2x + 4y = 8
+	\end{cases}
+	$$
+\end{Example}
+
+\begin{Example}[SI]
+	$$
+	\begin{cases}
+		x + 2y = 4 \\
+		2x + 4y = 7
+	\end{cases}
+	$$
+\end{Example}
+
+Como sugestão pessoal, pensem no significado geométrico destes três casos quando estamos lidando com sistemas lineares $2\times 2$.
+
+\section{Produto Interno Euclidiano}
+
+Nós vamos agora definir uma importante operação entre vetores: o produto interno euclidiano. É importante saber que o produto interno euclidiano é apenas \textbf{um} produto interno. No entanto, nós não definiremos formalmente o conceito de produto interno agora porque tal definição dependerá do conceito de espaço vetorial. Dito isso, vamos à definição:
+
+\begin{Definition}[Produto Interno Euclidiano]
+	Sejam $x$ e $y$ dois vetores $n\times 1$. O \textbf{produto interno euclidiano} é definido como:
+	
+	$$
+	x\cdot y = \sum\limits_{i = 1}^{n} x_iy_i = x_1y_1 + x_2y_2 + \cdots + x_ny_n.
+	$$
+\end{Definition}
+
+Duas propriedades importantes do produto interno euclidiano são a simetria ($x\cdot y = y\cdot x$) e a linearidade ($(\alpha x + z) \cdot y = \alpha(x\cdot y) + z\cdot y$).
+
+% Definir melhor a linearidade

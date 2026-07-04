@@ -6,13 +6,30 @@
 \author{Elian Miguel Ferreira Custódio}
 \date{\today}
 
+\makeatletter
+\ifx\abntrefinfo\undefined
+	\newcommand{\abntrefinfo}[3]{}
+\else
+	\renewcommand{\abntrefinfo}[3]{}
+\fi
+\makeatother
 \begin{document}
 \frontmatter
+
 \maketitle
 \tableofcontents
+\listoffigures
+
 \mainmatter
 
 \input{caps/cap01-introducao}
 
 \backmatter
+
+\cleardoublepage 
+\addcontentsline{toc}{chapter}{Referências}
+
+\bibliographystyle{abntex2-num}
+\bibliography{refs/bibliografia}
+
 \end{document}
