@@ -366,10 +366,10 @@ Com a definição que nós demos para a multiplicação $AB$, nós chegamos à f
 	
 	$$
 	c_{ij} = (Ab_j)_i = (b_{1j}a_1 + b_{2j}a_2 + ... + b_{nj}a_n)_i = \begin{bmatrix}
-		\text{linha $1$ de $A$}\cdot b_j \\
-		\text{linha $2$ de $A$}\cdot b_j \\
+		(\text{linha $1$ de $A$})\cdot b_j \\
+		(\text{linha $2$ de $A$})\cdot b_j \\
 		\vdots \\
-		\text{linha $m$ de $A$}\cdot b_j
+		(\text{linha $m$ de $A$})\cdot b_j
 	\end{bmatrix}_i = (\text{linha $i$ de $A$})\cdot b_j = \sum\limits_{k = 1}^{n} a_{ik}b_{kj}.
 	$$
 	
@@ -377,3 +377,72 @@ Com a definição que nós demos para a multiplicação $AB$, nós chegamos à f
 \end{Proof}
 
 % Detalhar mais a demonstração.
+
+Um ponto importante na interpretação da multiplicação de matrizes é o fato de que, dadas duas matrizes $A_{m\times n}$ e $B_{n\times p}$, assim como nós podemos ver a coluna $j$ de $AB$ como $A(\text{coluna $i$ de $B$})$, nós podemos enxergar a linha $i$ de $AB$ como $(\text{linha $i$ de $A$})B$ (esta operação faz sentido porque as linhas de $A$ são vetores $1\times n$). Ou seja, enquanto as colunas de $AB$ são combinações lineares das colunas de $A$, as linhas de $AB$ são combinações lineares das linhas de $B$.
+
+Nós temos alguns casos específicos e mais importantes da multiplicação de matrizes:
+
+\begin{itemize}
+	\item Se $A$ é uma matriz $1\times n$ e $B$ é uma matriz $n\times 1$, então $AB$ é o produto interno euclidiano, que definimos anteriormente.
+	
+	\item Se $A$ é uma matriz $m\times 1$ e $B$ é uma matriz $1\times p$, então todas as colunas de $AB$ são múltiplas das colunas de $A$, e todas as linhas de $AB$ são múltiplas das linhas de $B$. Nós chamamos esta operação de \textbf{produto externo}, e a matriz $AB$ é dita uma \textbf{matriz de posto 1}.
+\end{itemize}
+
+\section{Propriedades da Multiplicação de Matrizes}
+
+Vamos agora enunciar e demonstrar algumas propriedades da multiplicação de matrizes.
+
+\begin{Theorem}[Não-comutatividade]
+	Sejam $A$ e $B$ duas matrizes $n\times n$. Então, em geral, $AB\neq BA$.
+\end{Theorem}
+
+\begin{Proof}
+	Existem inúmeros exemplos deste fato. Para mostrar um, suponha
+	
+	$$
+	A = \begin{bmatrix}
+		1 & 1 \\
+		0 & 1
+	\end{bmatrix} \text{~e~}
+	B = \begin{bmatrix}
+		1 & 0 \\
+		1 & 1
+	\end{bmatrix}.
+	$$
+	Então:
+	
+	$$
+	AB = \begin{bmatrix}
+		1 & 1 \\
+		0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 & 0 \\
+		1 & 1
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		2 & 1 \\
+		1 & 1
+	\end{bmatrix}
+	$$
+	
+	$$
+	BA = \begin{bmatrix}
+		1 & 0 \\
+		1 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 & 1 \\
+		0 & 1
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		1 & 1 \\
+		1 & 2
+	\end{bmatrix}.
+	$$
+	
+	Assim, $AB\neq BA$.
+	
+	\qed
+\end{Proof}
+
