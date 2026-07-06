@@ -5,7 +5,7 @@
 
 No capítulo anterior, nós entendemos a interpretação geométrica de um sistema linear, e vimos que todo sistema linear pode ser escrito como uma equação matricial $Ax = b$. Agora, nós estamos interessados em encontrar um algoritmo que seja capaz de resolver qualquer sistema linear PD, independentemente do seu tamanho.
 
-\section{Eliminação}
+\section{Ideia da Eliminação}
 
 Para descrevermos o processo de eliminação, primeiramente nós vamos definir o que é um pivô. Para motivar este conceito, vamos introduzir qual é a ideia da eliminação. Suponha que nós temos um sistema linear
 
@@ -46,7 +46,7 @@ Segue que $y = 2$ e $x = 3$ no segundo sistema. Porém, veja o que acontece geom
 	\label{fig:alglin-05-eliminacao-2}
 \end{figure}
 
-Como podemos perceber, a solução do segundo sistema linear é também a solução do primeiro sistema. Então, se nós tivermos um sistema linear PD mais complexo, a ideia é que nós podemos resolvê-lo facilmente apenas utilizando somas, multiplicações e (como nós veremos) trocas de linha.
+Como podemos perceber, a solução do segundo sistema linear é também a solução do primeiro sistema. Então, se nós tivermos um sistema linear PD mais complexo, a ideia é que nós podemos resolvê-lo facilmente apenas utilizando subtrações, multiplicações e (como nós veremos) trocas de linha.
 
 No entanto, como nós vimos no primeiro capítulo, nem todo sistema linear é possível e determinado. Alguns sistemas não possuem nenhuma solução, e outros sistemas possuem infinitas soluções. Vamos ver o que acontece no caso $2\times 2$ quando aplicamos a eliminação nesses tipos de sistemas.
 
@@ -96,7 +96,7 @@ No entanto, como nós vimos no primeiro capítulo, nem todo sistema linear é po
 
 Em ambos os casos, quando o sistema é impossível, e quando o sistema é possível e indeterminado, a eliminação produz uma linha inteira de zeros no lado esquerdo da equação. Por outro lado, quando o sistema é possível e determinado, isso não acontece. Então, a partir deste fato, nós podemos definir o conceito de pivô:
 
-\begin{Definition}
+\begin{Definition}[Pivô]
 	Nós chamamos de \textbf{pivô} ao primeiro elemento não-nulo de uma linha usado para eliminação.
 \end{Definition}
 
@@ -110,10 +110,270 @@ Uma pergunta importante é: "como nós definimos o fator de multiplicação dura
 
 Para fazer isso, nós podemos definir o multiplicador como abaixo:
 
-\begin{Definition}
+\begin{Definition}[Multiplicador]
 	Nós definimos o \textbf{multiplicador} como:
 	
 	$$
 	\text{multiplicador} = \dfrac{\text{elemento a ser eliminado}}{\text{pivô}}.
 	$$
 \end{Definition}
+
+Antes de fazermos uma descrição mais detalhada do processo de eliminação, vamos definir dois conceitos que serão importantes em breve: os conceitos de matriz triangular superior e matriz triangular inferior.
+
+\begin{Definition}[Matriz triangular superior]
+	Seja $U$ uma matriz quadrada $n\times n$ tal que $u_{ij} = 0$ quando $i > j$ (ou seja, todas as entradas abaixo da diagonal principal são iguais a zero). Então, $U$ é dita uma matriz \textbf{triangular superior}.
+\end{Definition}
+
+\begin{Definition}[Matriz triangular inferior]
+	Seja $L$ uma matriz quadrada $n\times n$ tal que $l_{ij} = 0$ quando $i < j$ (ou seja, todas as entradas acima da diagonal principal são iguais a zero). Então, $L$ é dita uma matriz \textbf{triangular inferior}.
+\end{Definition}
+
+\section{Eliminação}
+Agora, estamos prontos para descrever mais detalhadamente o processo de eliminação. A ideia central é simples: a partir de um sistema $Ax = b$, nós queremos aplicar operações elementares nas linhas de modo a obter um sistema triangular $Ux = c$, onde $U$ é uma matriz triangular superior. Em seguida, nós usamos o novo sistema para encontrar as coordenadas de $x$, por meio do processo de substituição.
+
+Para cada parte do processo de eliminação nós damos um nome: transformar $Ax = b$ em $Ux = c$ é um processo chamado de \textbf{escalonamento}, e encontrar a solução do sistema original a partir do sistema triangular superior é um processo chamado de \textbf{retrossubstituição}.
+
+\begin{itemize}
+	\item \textbf{Escalonamento}: Nós partimos de um sistema $Ax = b$. Aplicamos subtrações, multiplicações e trocas de linha à matriz $A$ e ao vetor $b$. Ao final do processo, obtemos uma matriz $U$ triangular superior e um novo vetor $c$, ficando com o sistema $Ux = c$.
+	
+	\item \textbf{Retrossubstituição}: A partir do sistema $Ux = c$, nós encontramos os valores das coordenadas de $x$, começando da última linha até chegar à primeira.
+\end{itemize}
+
+\begin{Example}
+	Resolva o sistema linear $Ax = b$, onde $A = \begin{bmatrix}
+		2 & 4 & -1 \\
+		4 & 5 & 7 \\
+		8 & -2 & 6
+	\end{bmatrix}$, $x = \begin{bmatrix}
+		x_1 \\
+		x_2 \\
+		x_3
+	\end{bmatrix}$ e $b = \begin{bmatrix}
+		3 \\
+		1 \\
+		2
+	\end{bmatrix}$.
+	
+	\textbf{Resolução:} Em primeiro lugar, vamos escalonar a matriz $A$, aplicando as mesmas operações ao vetor $b$. Nós temos que $2$ é o primeiro pivô do sistema, e queremos eliminar o elemento $a_{21}$, que é $4$. Então, o nosso primeiro multiplicador é dado por $\dfrac{4}{2} = 2$. Faremos, então, $L_2 - 2L_1$ em $A$ e em $b$. Nós obtemos:
+	
+	$$
+	\begin{bmatrix}
+		2 & 4 & -1 \\
+		4 & 5 & 7 \\
+		8 & -2 & 6
+	\end{bmatrix} \overset{L_2 - 2L_1}{\implies} \begin{bmatrix}
+		2 & 4 & -1 \\
+		0 & -3 & 9 \\
+		8 & -2 & 6
+	\end{bmatrix}
+	$$
+	
+	$$
+	\begin{bmatrix}
+		3 \\
+		1 \\
+		2
+	\end{bmatrix} \overset{L_2 - 2L_1}{\implies} \begin{bmatrix}
+		3 \\
+		-5 \\
+		2
+	\end{bmatrix}
+	$$
+	
+	Agora, nós queremos eliminar o elemento $a_{31}$, que é $8$ (lembre-se que, dado um pivô, nós queremos zerar todos os elementos que estão abaixo dele). Como o pivô atual continua sendo $2$, nós temos que o segundo multiplicador é dado por $\dfrac{8}{2} = 4$. Assim sendo, nós faremos $L_3 - 4L_1$:
+	
+	$$
+	\begin{bmatrix}
+		2 & 4 & -1 \\
+		0 & -3 & 9 \\
+		8 & -2 & 6
+	\end{bmatrix} \overset{L_3 - 4L_1}{\implies} \begin{bmatrix}
+		2 & 4 & -1 \\
+		0 & -3 & 9 \\
+		0 & -18 & 10
+	\end{bmatrix}
+	$$
+	
+	$$
+	\begin{bmatrix}
+		3 \\
+		-5 \\
+		2
+	\end{bmatrix} \overset{L_3 - 4L_1}{\implies} \begin{bmatrix}
+		3 \\
+		-5 \\
+		-10
+	\end{bmatrix}
+	$$
+	
+	Já eliminamos todos os elementos abaixo do primeiro pivô, então vamos procurar um pivô na segunda linha. O primeiro elemento diferente de zero é $-3$, logo ele será o nosso pivô atual. Queremos, neste passo, eliminar todos os elementos abaixo do pivô. No caso, só há um elemento a ser eliminado, que é o elemento na posição $a_{32}$, correspondente ao $-18$. Assim sendo, o nosso multiplicador será $\dfrac{-18}{-3} = 6$, e, deste modo, faremos $L_3 - 6L_2$:
+	
+	$$
+	\begin{bmatrix}
+		2 & 4 & -1 \\
+		0 & -3 & 9 \\
+		0 & -18 & 10
+	\end{bmatrix} \overset{L_3 - 6L_2}{\implies} \begin{bmatrix}
+		2 & 4 & -1 \\
+		0 & -3 & 9 \\
+		0 & 0 & -35
+	\end{bmatrix}
+	$$
+	
+	$$
+	\begin{bmatrix}
+		3 \\
+		-5 \\
+		-10
+	\end{bmatrix} \overset{L_3 - 6L_2}{\implies} \begin{bmatrix}
+		3 \\
+		-5 \\
+		20
+	\end{bmatrix}
+	$$.
+	
+	Nós ficamos agora com um sistema triangular superior $Ux = c$, que é explicitamente:
+	
+	$$
+	\begin{bmatrix}
+		2 & 4 & -1 \\
+		0 & -3 & 9 \\
+		0 & 0 & -35
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1 \\
+		x_2 \\
+		x_3
+	\end{bmatrix}
+	\begin{bmatrix}
+		3 \\
+		-5 \\
+		20
+	\end{bmatrix}
+	$$
+	
+	Estamos prontos para fazer a retrossubstituição, que é feita da última linha para a primeira:
+	
+	$$
+	-35x_3 = 20 \implies x_3 = -\dfrac{20}{35} \implies x_3 = -\dfrac{4}{7}.
+	$$
+	
+	$$
+	-3x_2 + 9x_3 = -3x_2 - 9\cdot\dfrac{4}{7} = -5 \implies -3x_2 = \dfrac{1}{7} \implies x_2 = -\dfrac{1}{21}.
+	$$
+	
+	\begin{align*}
+	2x_1 + 4x_2 - x_3 = 2x_1 - 4\cdot\dfrac{1}{21} + \dfrac{4}{7} = 3 &\implies 2x_1 - \dfrac{4}{21} + \dfrac{12}{21} = 3 \implies 2x_1 + \dfrac{8}{21} = \dfrac{63}{21}\\ &\implies 2x_1 = \dfrac{55}{21} \implies x_1 = \dfrac{55}{42}.
+	\end{align*}
+	
+	Deste modo, a solução do sistema $Ax = b$ é $x = \begin{bmatrix}
+		\frac{55}{42} \\
+		-\frac{1}{21} \\
+		-\frac{4}{7}
+	\end{bmatrix} = \dfrac{1}{42}\begin{bmatrix}
+		55 \\
+		-2 \\
+		-24
+	\end{bmatrix}$.
+	
+	\qed
+\end{Example}
+
+Por sua vez, nós não precisamos, a cada passo do escalonamento, aplicar as operações separadamente em $A$ e em $b$: podemos considerar a matriz aumentada
+
+$$
+[A \quad b] = \begin{bmatrix}
+	| & | & & | & | \\
+	a_1 & a_2 & \cdots & a_n & b \\
+	| & | & & | & |
+\end{bmatrix}
+$$
+e, desta forma, aplicar todas as operações simultaneamente em $A$ e em $b$.
+
+Um fato interessante que nós não demonstraremos aqui, e que não será muito importante por agora, mas que no futuro o será, tem a ver com o número de operações que o processo de eliminação faz.
+
+\begin{Theorem}
+	Seja $Ax = b$ um sistema linear sendo $A$ uma matriz quadrada $n\times n$. Então, o processo de escalonamento possui complexidade temporal $O(n^3)$ e o processo de retrossubstituição possui complexidade temporal $O(n^2)$.
+\end{Theorem}
+
+Este resultado é melhor explicado em \cite{strang2006linear}.
+
+\section{Multiplicação de Matrizes}
+
+No capítulo anterior, nós aprendemos a multiplicar uma matriz por um vetor. Agora, nós estamos interessados em estender aquele conceito de modo a conseguirmos multiplicar uma matriz por outra matriz.
+
+Recordando o que nós fizemos anteriormente, sejam $A$ uma matriz $m\times n$ e $x$ um vetor $n\times 1$. Há duas formas de realizar esta multiplicação: a primeira consiste em multiplicar cada linha de $A$ por $x$. A segunda consiste em enxergar $Ax$ como uma combinação linear das colunas de $A$, multiplicando cada coordenada de $x$ pela respectiva coluna de $A$, e somando os vetores resultantes das multiplicações.
+
+Olhando para esta segunda forma, se $x = \begin{bmatrix}
+	x_1 \\
+	x_2 \\
+	\vdots \\
+	x_n
+\end{bmatrix}$ e $A = \begin{bmatrix}
+	| & | & & | \\
+	a_1 & a_2 & \cdots & a_n \\
+	| & | & & |
+\end{bmatrix}$, onde cada $a_i$ representa o $i$-ésimo vetor-coluna de $A$, então podemos escrever matematicamente
+
+$$
+Ax = x_1a_1 + x_2a_2 + \cdots + x_na_n,
+$$
+onde $Ax$ é um vetor $m\times 1$.
+
+Suponha então que nós temos uma matriz $A_{m\times n}$ e uma matriz $B_{n\times p}$. Nós podemos enxergar a multiplicação $AB$ como a multiplicação de $A$ por cada coluna de $B$. E isso nós já sabemos fazer. Considere $b_j$ como a $j$-ésima coluna da matriz $B$. Definamos $b_j$ como
+
+$$
+b_j = \begin{bmatrix}
+	b_{1j} \\
+	b_{2j}  \\
+	\vdots \\
+	b_{nj}
+\end{bmatrix}
+$$
+Então,
+
+$$
+Ab_j = b_{1j}a_1 + b_{2j}a_2 + \cdots + b_{nj}a_n,
+$$
+e podemos definir a multiplicação $AB$ como uma nova matriz $C_{m\times p}$ tal que:
+
+$$
+C = AB = A\begin{bmatrix}
+	| & | & & | \\
+	b_1 & b_2 & \cdots & b_p \\
+	| & | & & |
+\end{bmatrix} = \begin{bmatrix}
+	| & | & & | \\
+	Ab_1 & Ab_2 & \cdots & Ab_p \\
+	| & | & & |
+\end{bmatrix}.
+$$
+
+Algo importantíssimo deve ser dito neste momento: para que a multiplicação $AB$ faça sentido, o número de colunas de $A$ necessariamente precisa ser igual ao número de linhas de $B$. Como nós veremos futuramente, uma matriz é uma forma de representar uma transformação linear, ou seja, uma matriz é uma função. Se $A$ é uma matriz $m\times n$, então a sua representação como uma função é $A:\mathbb{R}^n\to\mathbb{R}^m$, e se $B$ é uma matriz $n\times p$, então a sua representação como uma função é $B:\mathbb{R}^p\to\mathbb{R}^n$. Na prática, multiplicar duas matrizes é realizar uma composição de funções e, por isso, as dimensões devem estar corretas.
+
+Com a definição que nós demos para a multiplicação $AB$, nós chegamos à fórmula que sempre usaremos quando fizermos multiplicação matricial.
+
+\begin{Theorem}
+	Sejam $A$ uma matriz $m\times n$ e $B$ uma matriz $n\times p$. Então, o elemento $c_{ij}$ da matriz $C = AB$ pode ser calculado como
+	
+	$$
+	c_{ij} = \sum\limits_{k = 1}^{n} a_{ik}b_{kj} = (\text{linha $i$ de $A$})\cdot(\text{coluna $j$ de $B$}).
+	$$
+\end{Theorem}
+
+\begin{Proof}
+	Por definição, 
+	
+	$$
+	c_{ij} = (Ab_j)_i = (b_{1j}a_1 + b_{2j}a_2 + ... + b_{nj}a_n)_i = \begin{bmatrix}
+		\text{linha $1$ de $A$}\cdot b_j \\
+		\text{linha $2$ de $A$}\cdot b_j \\
+		\vdots \\
+		\text{linha $m$ de $A$}\cdot b_j
+	\end{bmatrix}_i = (\text{linha $i$ de $A$})\cdot b_j = \sum\limits_{k = 1}^{n} a_{ik}b_{kj}.
+	$$
+	
+	\qed
+\end{Proof}
+
+% Detalhar mais a demonstração.
