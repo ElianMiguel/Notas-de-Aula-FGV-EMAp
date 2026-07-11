@@ -446,3 +446,162 @@ Vamos agora enunciar e demonstrar algumas propriedades da multiplicação de mat
 	\qed
 \end{Proof}
 
+\begin{Theorem}[Distributividade à Esquerda]
+	Sejam $A$ e $B$ duas matrizes $m\times n$ e $C$ uma matriz $p\times m$. Então, $C(A + B) = CA + CB$.
+\end{Theorem}
+
+\begin{Proof}
+	Vamos calcular $C(A + B)$. Por definição, $(A + B)_{ij} = a_{ij} + b_{ij}$. Assim sendo, nós temos que:
+	
+	$$
+	[C(A + B)]_{ij} = \sum\limits_{k = 1}^{m} c_{ik}(a_{kj} + b_{kj}) = \sum\limits_{k = 1}^{m} (c_{ik}a_{kj} + c_{ik}b_{kj}) = \sum\limits_{k = 1}^{m} c_{ik}a_{kj} + \sum\limits_{k = 1}^{m} c_{ik}b_{kj} = (CA + CB)_{ij}.
+	$$
+	
+	Logo, $C(A + B) = CA + CB$, como queríamos provar.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}(Distributividade à Direita)
+	Sejam $A$ e $B$ duas matrizes $m\times n$, e $C$ uma matriz $n\times p$. Então, $(A + B)C = AC + BC$.
+\end{Theorem}
+
+\begin{Proof}
+	Vamos calcular $(A + B)C$. Por definição, $(A + B)_{ij} = a_{ij} + b_{ij}$. Assim sendo, nós temos que:
+	
+	$$
+	[(A + B)C]_{ij} = \sum\limits_{k = 1}^n (a_{ik} + b_{ik})c_{kj} = \sum\limits_{k = 1}^{n} (a_{ik}c_{kj} + b_{ik}c_{kj}) = \sum\limits_{k = 1}^{n} a_{ik}c_{kj} + \sum\limits_{k = 1}^{n} b_{ik}c_{kj} = (AC + BC)_{ij}.
+	$$
+	
+	Logo, $(A + B)C = AC + BC$, como queríamos provar.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Associatividade da Adição]
+	Sejam $A$, $B$ e $C$ três matrizes $n\times n$. Então, $(A + B) + C = A + (B + C)$.
+\end{Theorem}
+
+\begin{Proof}
+	Nós temos que:
+	
+	$$
+	[(A + B) + C]_{ij} = (a_{ij} + b_{ij}) + c_{ij} = a_{ij} + (b_{ij} + c_{ij}) = [A + (B + C)]_{ij}.
+	$$
+	
+	Logo, $(A + B) + C = A + (B + C)$.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Associatividade da Multiplicação]
+	Sejam $A_{l\times m}$, $B_{m\times n}$ e $C_{n\times p}$ três matrizes. Então, $A(BC) = (AB)C$.  
+\end{Theorem}
+
+\begin{Proof}
+	Primeiramente, vamos calcular $[A(BC)]_{ij}$. Por definição, nós temos:
+	
+	$$
+	[A(BC)]_{ij} = \sum\limits_{k = 1}^{m} a_{ik} (BC)_{kj} = \sum\limits_{k = 1}^{m} a_{ik} \sum\limits_{l = 1}^{n} b_{km
+	l}c_{lj} = \sum\limits_{k = 1}^{m}\sum\limits_{l = 1}^{n} a_{ik}b_{kl}c_{lj}.
+	$$
+	
+	Agora, nós vamos calcular $[(AB)C]_{ij}$. Por definição, nós temos:
+	
+	$$
+	[(AB)C]_{ij} = \sum\limits_{k = 1}^{n} (AB)_{ik} c_{kj} = \sum\limits_{k = 1}^{n}\sum\limits_{l = 1}^{m} a_{il}b_{lk}c_{kj}.
+	$$
+	Perceba que, trocando a ordem dos somatórios nesta expressão (o que é permitido, pois as somas são finitas), nós obtemos:
+	
+	$$
+	[(AB)C]_{ij} = \sum\limits_{l = 1}^{m}\sum\limits_{k = 1}^{n} a_{il}b_{lk}c_{kj},
+	$$
+	que é exatamente a mesma expressão (apenas com os índices trocados, o que não altera nada neste caso) que $[A(BC)]_{ij}$.
+	
+	Logo, $A(BC) = (AB)C$, como queríamos demonstrar.
+	
+	\qed
+\end{Proof}
+
+% Melhorar notação dos índices
+
+\section{Eliminação com Matrizes}
+
+Como nós já sabemos multiplicar matrizes, a nossa intenção agora é descrever o processo de eliminação unicamente utilizando matrizes. De fato, nós já sabemos fazer eliminação em uma matriz: basta fazer subtrações de linhas, utilizando o multiplicador correto e, se necessário, fazer permutações (nós ainda não fizemos nenhum exemplo, mas o faremos em breve). No entanto, é mais interessante descrever todo este processo utilizando matrizes.
+
+Primeiramente, vamos definir o conceito de matriz identidade:
+
+\begin{Definition}[Matriz Identidade]
+	Seja $I$ uma matriz quadrada $n\times n$ tal que:
+	
+	$$
+	I_{ij} = \begin{cases}
+		1, \textbf{~se $i = j$} \\
+		0, \textbf{~se $i\neq j$}
+	\end{cases}.
+	$$
+	
+	Então, $I$ é denominada \textbf{matriz identidade}.
+\end{Definition}
+
+Esta matriz recebe este nome porque é o elemento neutro da multiplicação matricial. Uma propriedade interessante sobre a comutatividade da multiplicação matricial é a seguinte:
+
+\begin{Theorem}
+	Sejam $I$ a matriz identidade $n\times n$ e $c\in\mathbb{R}$ um escalar qualquer. Então, as matrizes da forma $cI$ (incluindo a matriz $I$) são as únicas matrizes que comutam com todas as matrizes $n\times n$.
+\end{Theorem}
+
+\begin{Proof}
+	Seja $A$ uma matriz $n\times n$ que comutam com todas as matrizes $n\times n$. Então, particularmente, $A$ comuta com a matriz $F_{ij}$, definida como tendo entrada $1$ na posição $ij$, e $0$ em todas as outras posições. Ou seja, $AF_{ij} = F_{ij}A$.
+	
+	Vamos primeiro analisar o que acontece quando calculamos a posição $ij$ das duas multiplicações:
+	
+	$$
+	(AF_{ij})_{ij} = \sum\limits_{k = 1}^{n} a_{ik}(F_{ij})_{kj} = a_{ii}(F_{ij})_{ij} = a_{ii}\cdot 1 = a_{ii}.
+	$$
+	
+	$$
+	(F_{ij}A)_{ij} = \sum\limits_{k = 1}^{n} (F_{ij})_{ik}a_{kj} = (F_{ij})_{ij}a_{jj} = 1\cdot a_{jj} = a_{jj}.
+	$$
+	
+	Pela comutatividade, $a_{ii} = a_{jj}$. Logo, todos os elementos da diagonal de $A$ correspondem a uma constante.
+	
+	Agora, vamos analisar o que acontece quando calculamos a posição $il$ das duas multiplicações, onde $l\neq j$:
+	
+	$$
+	(AF_{ij})_{il} = \sum\limits_{k = 1}^{n} a_{ik}(F_{ij})_{kl}.
+	$$
+	
+	Como $l\neq j$ sempre, segue que todos os valores de $(F_{ij})_{kl}$ considerados no somatório acima serão iguais a zero, logo, $(AF_{ij})_{il} = 0$.
+	
+	Por outro lado:
+	
+	$$
+	(F_{ij}A)_{il} = \sum\limits_{k = 1}^n	(F_{ij})_{ik}a_{kl} = (F_{ij})_{ij}a_{jl} = 1\cdot a_{jl} = a_{jl}.
+	$$
+	
+	Logo, $a_{jl} = 0$. Ou seja, todos os elementos fora da diagonal principal de $A$ são iguais a $0$.
+	
+	Assim sendo, $A = cI$, como queríamos provar.
+	
+	\qed
+\end{Proof}
+
+Vamos agora definir as matrizes elementares, que nós usaremos para descrever o processo de eliminação:
+
+\begin{Definition}[Matriz Elementar]
+	Seja $E_{ij}(l)$ uma matriz $n\times n$ que subtrai $n$ vezes a linha $j$ da linha $i$. Chamamos esta matriz de \textbf{matriz elementar}, ou \textbf{matriz de eliminação}.
+\end{Definition}
+
+A matriz elementar é basicamente a matriz identidade, porém com a entrada $-l$ na posição $ij$.
+
+\begin{Example}
+	Considere a matriz $E_{21}(l)$ de um sistema linear $3\times 3$. Então, nós temos que:
+	
+	$$
+	E_{21}(l) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		-l & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	$$
+\end{Example}
