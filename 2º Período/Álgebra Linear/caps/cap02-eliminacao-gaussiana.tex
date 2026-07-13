@@ -894,3 +894,229 @@ $$
 	I & | & A^{-1}
 \end{bmatrix}
 $$
+
+De um modo mais detalhado, nós iniciamos o processo construindo uma matriz aumentada $\begin{bmatrix}
+	A & | & I
+\end{bmatrix}$, onde $I$ é a matriz identidade $n\times n$. Em seguida, nós aplicamos os passos da eliminação de modo a obter, no bloco esquerdo, uma matriz triangular superior $U$. Ficamos, assim, com a matriz aumentada $\begin{bmatrix}
+	U & | & C
+\end{bmatrix}$, onde $C$ é uma matriz $n\times n$ intermediária. Por fim, nós aplicamos um processo de eliminação acima da diagonal de $U$, e fazemos divisões nas linhas se for necessário, de modo a obter a matriz identidade $I$ no bloco esquerdo da matriz aumentada, e a matriz que fica no bloco direito é a inversa de $A$. Ou seja, ao final, nós obtemos $\begin{bmatrix}
+	I & | & A^{-1}
+\end{bmatrix}$.
+
+\begin{Example}
+	Seja $A = \begin{bmatrix}
+		2 & 8 \\
+		4 & 3
+	\end{bmatrix}$. Para achar a matriz inversa $A^{-1}$, nós fazemos o seguinte processo:
+
+	\begin{align*}
+		\begin{bmatrix}
+			2 & 8 & | & 1 & 0 \\
+			4 & 3 & | & 0 & 1
+		\end{bmatrix} & \overset{L_2 - 2L_1}{\implies} \begin{bmatrix}
+			2 & 8 & | & 1 & 0 \\
+			0 & -13 & | & -2 & 1
+		\end{bmatrix} \overset{L_1 / 2}{\implies}
+		\begin{bmatrix}
+			1 & 4 & | & 1/2 & 0 \\
+			0 & -13 & | & -2 & 1
+		\end{bmatrix} \\ & \overset{L_2 / -13}{\implies}
+		\begin{bmatrix}
+			1 & 4 & | & 1/2 & 0 \\
+			0 & 1 & | & 2/13 & -1/13
+		\end{bmatrix} \overset{L_1 - 4L_2}{\implies}
+		\begin{bmatrix}
+			1 & 0 & | & -3/26 & 8/26 \\
+			0 & 1 & | & 4/26 & -2/26
+		\end{bmatrix}
+	\end{align*}
+	
+	Assim sendo, $A^{-1} = -\dfrac{1}{26}\begin{bmatrix}
+		3 & -8 \\
+		-4 & 2
+	\end{bmatrix}$.
+\end{Example}
+
+Agora que nós já sabemos encontrar a inversa de uma matriz, vamos enunciar e demonstrar algumas de suas propriedades:
+
+\begin{Theorem}[Unicidade da Inversa]
+	Seja $A$ uma matriz $n\times n$ invertível. Então, a sua inversa é única.
+\end{Theorem}
+
+\begin{Proof}
+	Sejam $B$ e $C$ inversas de $A$. Então, $BA = AB = I$ e $CA = AC = I$. Assim sendo, $BA = AC = I$. Ao multiplicar $C$ à direita de $A$, nós obtemos $BAC = B(AC) = BI = B$. Ao mesmo tempo, porém, $BAC = (BA)C = IC = C$. Logo, $B = C$.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}
+	Se existe $x\neq 0$ tal que $Ax = 0$, então $A$ não possui inversa.
+\end{Theorem}
+
+\begin{Proof}
+	Suponha, por absurdo, que $A$ possui inversa, dada por $A^{-1}$. Então:
+	$$
+	Ax = 0 \implies A^{-1}Ax = A^{-1}0 \implies Ix = 0 \implies x = 0.
+	$$
+	
+	Isto é um absurdo, dado que $x\neq 0$ por hipótese. Logo, $A$ não possui inversa.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Inversa de uma matriz $2\times 2$]
+	Seja $A = \begin{bmatrix}
+		a & b \\
+		c & d
+	\end{bmatrix}$ uma matriz invertível. Então, $A^{-1} = \dfrac{1}{ad - bc}\begin{bmatrix}
+		d & -b \\
+		-c & a
+	\end{bmatrix}$.
+\end{Theorem}
+
+\begin{Proof}
+	Vamos calcular $AA^{-1}$, e mostrar que o resultado é igual a $I$:
+	
+	$$
+	AA^{-1} = \dfrac{1}{ad - bc}\begin{bmatrix}
+		a & b \\
+		c & d
+	\end{bmatrix}
+	\begin{bmatrix}
+		d & -b \\
+		-c & a
+	\end{bmatrix} = \dfrac{1}{ad - bc}
+	\begin{bmatrix}
+		ad - bc & 0 \\
+		0 & ad - bc
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		1 & 0 \\
+		0 & 1
+	\end{bmatrix} = I.
+	$$
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Inversa da Multiplicação]
+	Sejam $A$ e $B$ duas matrizes $n\times n$ invertíveis. Então, $(AB)^{-1} = B^{-1}A^{-1}$.
+\end{Theorem}
+
+\begin{Proof}
+	Vamos calcular o produto matricial $AB(B^{-1}A^{-1})$. Nós temos que:
+	
+	$$
+	AB(B^{-1}A^{-1}) = A(BB^{-1})A^{-1} = AIA^{-1} = AA^{-1} = I
+	$$.
+	
+	Agora, nós vamos calcular o produto matricial $(B^{-1}A^{-1})AB$. Nós temos que:
+	
+	$$
+	(B^{-1}A^{-1})AB = B^{-1}(A^{-1}A)B = B^{-1}IB = B^{-1}B = I
+	$$.
+	
+	Logo, $(AB)^{-1} = B^{-1}A^{-1}$.
+	
+	\qed
+\end{Proof}
+
+Para a próxima propriedade, nós vamos definir o conceito de matriz diagonal:
+
+\begin{Definition}[Matriz Diagonal]
+	Seja $D$ uma matriz tal que $D_{ij} = 0$ se $i\neq j$. Então, $D$ é chamada uma \textbf{matriz diagonal}.
+\end{Definition}
+
+\begin{Theorem}[Inversa de uma Matriz Diagonal]
+	Seja $D = \begin{bmatrix}
+		d_1 & 0 & \cdots & 0 \\
+		0 & d_2 & \cdots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & d_n
+	\end{bmatrix}$, com $d_i\neq 0$ para todo $i\in\{1, \cdots n\}$. Então, $D^{-1} = \begin{bmatrix}
+		1/d_1 & 0 & \cdots & 0 \\
+		0 & 1/d_2 & \cdots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & 1/d_n
+	\end{bmatrix}$.
+\end{Theorem}
+
+\begin{Proof}
+	Vamos calcular $DD^{-1}$:
+	
+	$$
+	\begin{bmatrix}
+		d_1 & 0 & \cdots & 0 \\
+		0 & d_2 & \cdots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & d_n
+	\end{bmatrix}
+	\begin{bmatrix}
+		1/d_1 & 0 & \cdots & 0 \\
+		0 & 1/d_2 & \cdots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & 1/d_n
+	\end{bmatrix} =
+	\begin{bmatrix}
+		1 & 0 & \cdots & 0 \\
+		0 & 1 & \cdots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & 1
+	\end{bmatrix} = I
+	$$.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Solução do Sistema Linear $Ax = b$]
+	Seja $A$ uma matriz $n\times n$ invertível. Então, a solução do sistema linear $Ax = b$ é dada por $x = A^{-1}b$.
+\end{Theorem}
+
+\begin{Proof}
+	Seja $A$ uma matriz $n\times n$ tal que $Ax = b$, cuja inversa existe e é dada por $A^{-1}$. Então, podemos multiplicar os dois lados da equação à esquerda por $A^{-1}$. Nós obtemos:
+	
+	$$
+	Ax = b \implies A^{-1}Ax = A^{-1}b \implies Ix = A^{-1}b \implies x = A^{-1}b.
+	$$
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Inversa de uma Matriz Triangular]
+	Seja $L$ uma matriz triangular inferior com diagonal não-zero. Então, $L^{-1}$ é uma matriz triangular inferior com diagonal não-zero (o mesmo vale para matriz triangular superior).
+\end{Theorem}
+
+\begin{Proof}
+	Seja $L$ uma matriz triangular inferior $n\times n$ com todos os elementos da diagonal principal diferentes de zero. Então, queremos encontrar a matriz inversa $X = L^{-1}$ tal que $LX = I$. Ou seja, nós podemos resolver $n$ sistemas lineares da forma $Lx_j = e_j$.
+	
+	Vamos analisar os elementos $x_{ij}$ da coluna $x_j$ da matriz $X$. Quando $i < j$, nós temos:
+	
+	$$
+	l_{11}x_1j = 0 \implies x_{1j} = 0
+	$$
+	
+	$$
+	l_{21}x_{1j} + l_{22}x_{2j} = 0 \implies x_{2j} = 0
+	$$
+	
+	$$
+	\vdots
+	$$
+	
+	$$
+	l_{n1}x_{1j} + l_{n2}x_{2j} + \cdots + l_{nn}x_{nj} = 0 \implies x_{nj} = 0
+	$$
+	
+	Logo, $x_{ij} = 0$ quando $i < j$.
+	
+	Quando $i = j$, a equação correspondente à linha $j$ é:
+	
+	$$
+	\sum\limits_{k = 1}^{j - 1} l_{jk}x_{kj} + l_{jj}x_{jj} = e_{jj}
+	$$
+	Como $x_{ij} = 0$ quando $i < j$, resta apenas o termo $l_{jj}x_{jj} = 1 \implies x_{jj} = \dfrac{1}{l_{jj}}$. Ou seja, os elementos da diagonal de $L^{-1}$ são diferentes de zero.
+	
+	Para provar a mesma propriedade para matrizes triangulares superior, basta usar o mesmo raciocínio.
+	
+	\qed
+\end{Proof}
