@@ -525,6 +525,32 @@ Vamos agora enunciar e demonstrar algumas propriedades da multiplicação de mat
 
 % Melhorar notação dos índices
 
+\begin{Theorem}[Multiplicação de Matrizes Triangulares]
+	Sejam $L_1$ e $L_2$ duas matrizes $n\times n$ triangulares inferior. Então, $L_1L_2$ também é uma matriz triangular inferior (o mesmo vale para matrizes triangulares superior).
+\end{Theorem}
+
+\begin{Proof}
+	Sejam $L_1$ e $L_2$ duas matrizes triangulares inferior. Vejamos o que acontece com o elemento $ij$ da matriz $L_1L_2$, quando $i < j$:
+	
+	$$
+	(L_1L_2)_{ij} = \sum\limits_{k = 1}^{n} (L_1)_{ik}(L_2)_{kj}.
+	$$
+	
+	Quando $k > 1$, $(L_1)_{ik} = 0$. Quando $k = 1$, $(L_2)_{kj} = 0$. Logo, $(L_1L_2)_{ij} = 0$ quando $i < j$. Assim sendo, segue que $L_1L_2$ é uma matriz triangular inferior. Para demonstrar a propriedade das matrizes triangulares superior, basta usar o mesmo argumento com $i > j$.
+	
+	\qed
+\end{Proof}
+
+Por fim, vamos definir o conceito de potência de matrizes:
+
+\begin{Definition}[Potências]
+	Seja $A$ uma matriz $n\times n$. Então, definimos $A^p$ como:
+	
+	$$
+	A^p = \underbrace{AAA\cdots A}_{p\text{ vezes}}.
+	$$
+\end{Definition}
+
 \section{Eliminação com Matrizes}
 
 Como nós já sabemos multiplicar matrizes, a nossa intenção agora é descrever o processo de eliminação unicamente utilizando matrizes. De fato, nós já sabemos fazer eliminação em uma matriz: basta fazer subtrações de linhas, utilizando o multiplicador correto e, se necessário, fazer permutações (nós ainda não fizemos nenhum exemplo, mas o faremos em breve). No entanto, é mais interessante descrever todo este processo utilizando matrizes.
@@ -605,3 +631,266 @@ A matriz elementar é basicamente a matriz identidade, porém com a entrada $-l$
 	\end{bmatrix}
 	$$
 \end{Example}
+
+Vamos ver um exemplo de como as matrizes elementares atuam na prática:
+
+\begin{Example}
+	Considere a matriz $A = \begin{bmatrix}
+		1 & 0 & 2 \\
+		3 & 4 & -5 \\
+		4 & 4 & 7
+	\end{bmatrix}$. Queremos encontrar a matriz triangular superior $U$ resultante do processo de escalonamento.
+	
+	Em primeiro lugar, o nosso primeiro pivô é $1$, e o multiplicador é $3$. Assim sendo, faremos $L_2 - 3L_1$. Assim sendo, a nossa primeira matriz elementar é a matriz:
+	
+	$$
+	E_{21}(3) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		-3 & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	$$.
+	
+	Multiplicando $E_{21}(3)$ à esquerda por $A$, nós obtemos:
+	
+	$$
+	E_{21}(3)A = \begin{bmatrix}
+		1 & 0 & 0 \\
+		-3 & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 & 0 & 2 \\
+		3 & 4 & -5 \\
+		4 & 4 & 7
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		1 & 0 & 2 \\
+		0 & 4 & -11 \\
+		4 & 4 & 7
+	\end{bmatrix}.
+	$$
+	
+	Agora, o nosso pivô continua sendo $1$, mas o multiplicador é $4$. Então, nós faremos $L_3 - 4L_1$. A nossa segunda matriz elementar é a matriz:
+	
+	$$
+	E_{31}(4) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		-4 & 0 & 1
+	\end{bmatrix}
+	$$
+	
+	Multiplicando $E_{31}(4)$ à esquerda por $E_{21}(3)A$, nós obtemos:
+	
+	$$
+	E_{31}(4)E_{21}(3)A = \begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		-4 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 & 0 & 2 \\
+		0 & 4 & -11 \\
+		4 & 4 & 7
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		1 & 0 & 2 \\
+		0 & 4 & -11 \\
+		0 & 4 & -1
+	\end{bmatrix}
+	$$
+	
+	Agora, o nosso pivô é $4$, e o nosso multiplicador é $4$. Assim sendo, nós faremos $L_3 - L_2$. A nossa terceira matriz elementar é a matriz:
+	
+	$$
+	E_{32}(1) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & -1 & 1
+	\end{bmatrix}
+	$$
+	
+	Multiplicando $E_{32}(1)$ à esquerda por $E_{31}(4)E_{21}(3)A$, nós obtemos:
+	
+	$$
+	E_{32}(1)E_{31}(4)E_{21}(3)A = \begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & -1 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 & 0 & 2 \\
+		0 & 4 & -11 \\
+		0 & 4 & -1
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		1 & 0 & 2 \\
+		0 & 4 & -11 \\
+		0 & 0 & 10
+	\end{bmatrix}.
+	$$
+	
+	No final, nós obtivemos $E_{32}(1)E_{31}(4)E_{21}(3)A = U$.
+\end{Example}
+
+Perceba que, ao multiplicar as matrizes elementares pela matriz $A$ na ordem correta (ou seja, cada nova matriz elementar é multiplicada à esquerda), nós conseguimos descrever o processo de eliminação apenas utilizando matrizes. 
+
+Mais do que isso: como na seção anterior nós provamos que a multiplicação de matrizes triangulares superior (inferior) é uma matriz triangular superior (inferior), nós podemos escrever $E_{32}(1)E_{31}(4)E_{21}(3) = E$, onde $E$ é uma matriz triangular superior.
+
+Fazendo isso, nós obtemos uma equação matricial $EA = U$, de onde surgirá a nossa primeira fatoração de matrizes, $A = LU$, onde $L$ é a matriz inversa de $E$ (que nós definiremos em breve).
+
+\section{Matrizes de Permutação}
+
+Até agora, nós focamos apenas nos sistemas lineares que podem ser resolvidos sem troca de linhas ou de colunas. No entanto, nem sempre isto é possível. Um exemplo disso é o seguinte sistema:
+
+$$
+\begin{cases}
+	3y = 9 \\
+	x + 2y = 6
+\end{cases}
+$$
+
+Neste caso, para observarmos o procedimento padrão da Eliminação Gaussiana, nós trocamos a linha $1$ com a linha $2$ (indicamos esta operação por $L_1\leftrightarrow L_2$). Utilizando a notação matricial, nós fazemos:
+
+$$
+\begin{bmatrix}
+	0 & 3 \\
+	1 & 2
+\end{bmatrix}\overset{L_1\leftrightarrow L_2}{\implies} \begin{bmatrix}
+	1 & 2 \\
+	0 & 3
+\end{bmatrix}
+$$
+
+Assim como na seção anterior, nós estamos interessados em descrever este processo usando matrizes. Então, nós podemos um tipo especial de matriz que realiza esta operação: as matrizes de permutação.
+
+\begin{Definition}[Matriz de Permutação]
+	Uma \textbf{matriz de permutação} $P$ é definida como a matriz identidade com as linhas (ou colunas) que serão trocadas permutadas. 
+\end{Definition}
+
+\begin{Example}
+	Suponha que nós temos um sistema linear $3\times 3$, no qual nós precisamos trocar a linha $1$ com a linha $2$. Então, a matriz de permutação $P$ que realiza esta troca é:
+	
+	$$
+	P = \begin{bmatrix}
+		0 & 1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	$$
+\end{Example}
+
+\begin{Example}
+	Suponha que nós temos um sistema linear $4\times 4$, no qual precisamos trocar a linha $2$ com a linha $4$. Então, a matriz de permutação $P$ que realiza esta troca é:
+	
+	$$
+	P = \begin{bmatrix}
+		1 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 1 \\
+		0 & 0 & 1 & 0 \\
+		0 & 1 & 0 & 0
+	\end{bmatrix}
+	$$
+\end{Example}
+
+Aqui é necessário um certo cuidado: se nós queremos trocar linhas, nós multiplicamos $P$ à esquerda de $A$ ($PA$). Se nós queremos trocar colunas, nós multiplicamos $P$ à direita de $A$ ($AP$).
+
+\section{Inversa de uma Matriz}
+
+O próximo conceito importante que definiremos é o de inversa de uma matriz. De fato, se nós temos um sistema linear $Ax = b$ com uma única solução, nós queremos ser capazes de escrever $x$ em termos de uma multiplicação matricial. A matriz inversa faz exatamente este papel.
+
+\begin{Definition}[Matriz Inversa]
+	Seja $A$ uma matriz quadrada $n\times n$. Dizemos que $C$ é uma \textbf{inversa} de $A$ se $AC = CA = I$. 
+\end{Definition}
+
+Para matrizes retangulares, é possível ter uma inversa à esquerda e outra inversa à direita em alguns casos. A notação que nós usaremos para denotar a inversa de uma matriz $A$ é $A^{-1}$. A rigor, ainda não deveríamos usar esta notação, porque não demonstramos ainda a unicidade da matriz inversa. Porém, até que o façamos, nós usaremos esta notação mesmo assim, supondo que a inversa é única (e ela é, como demonstraremos em breve).
+
+Uma inversa muito fácil é a inversa de uma matriz elementar: $E_{ij}(l)^{-1} = E_{ij}(-l)$.
+
+\begin{Example}
+	Considere a matriz $E_{21}(l)$ de um sistema linear $3\times 3$. Então:
+	$$
+	E_{21}(l) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		-l & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	$$
+	
+	$$
+	E_{21}(-l) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		l & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	$$
+	
+	$$
+	E_{21}(l)E_{21}(-l) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		-l & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		l & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix} = I
+	$$
+	
+	$$
+	E_{21}(-l)E_{21}(l) = 	\begin{bmatrix}
+		1 & 0 & 0 \\
+		l & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		-l & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix} = I
+	$$
+	
+	Logo, $E_{21}(l)^{-1} = E_{21}(-l)$.
+\end{Example}
+
+Apesar deste exemplo, nem sempre é uma tarefa fácil encontrar a inversa de uma matriz quando ela existe. Assim sendo, nós queremos encontrar um método que nos dê a capacidade de fazer isto para qualquer matriz invertível.
+
+E a ideia é usar a definição: dado que $A^{-1}$ é a matriz inversa de $A$ quando $AA^{-1} = A^{-1}A = I$, e que toda matriz pode ser vista como uma lista de vetores-coluna, encontrar a matriz inversa equivale a resolver vários sistemas lineares.
+
+Se denotarmos as colunas de $A^{-1}$ por $x_1, ..., x_n$, e as colunas de $I$ por $e_1, ..., e_n$, nós queremos resolver:
+
+$$
+A\begin{bmatrix}
+	| & | & & | \\
+	x_1 & x_2 & \cdots & x_n \\
+	| & | & & |
+\end{bmatrix} = \begin{bmatrix}
+    | & | & &  | \\
+    e_1 & e_2 & \cdots & e_n \\
+    | & | & & |
+\end{bmatrix}
+$$
+
+Isto equivale a resolver $n$ sistemas lineares da forma $Ax_i = e_i$, para $i\in\{1, ..., n\}$.
+
+Esta ideia nos leva ao processo de Eliminação de Gauss-Jordan: 
+
+$$
+\begin{bmatrix}
+	A & | & I
+\end{bmatrix} \implies \begin{bmatrix}
+	I & | & A^{-1}
+\end{bmatrix}
+$$
