@@ -1120,3 +1120,262 @@ Para a próxima propriedade, nós vamos definir o conceito de matriz diagonal:
 	
 	\qed
 \end{Proof}
+
+\begin{Theorem}[Existência da Inversa]
+	Seja $A$ uma matriz $n\times n$ qualquer. Então, $A^{-1}$ existe exatamente quando $A$ tem $n$ pivôs.
+\end{Theorem}
+
+\begin{Proof}
+	$\impliedby$ Suponha que $A$ possui $n$ pivôs. Então, existe uma matriz de eliminação $E$ tal que $EA = U$ com diagonal não-zero. Sabemos que a matriz $E$ é triangular inferior com $1$'s na diagonal. Do teorema anterior, nós sabemos que $U$ possui inversa. Assim sendo, multiplicando $U^{-1}$ a ambos os lados da equação, nós obtemos:
+	
+	$$
+	U^{-1}EA = U^{-1}U \implies (U^{-1}E)A = I \implies A^{-1} = U^{-1}E
+	$$.
+	Logo, $A^{-1}$ existe.
+	
+	$\implies$ Se $A$ possui inversa, então $AA^{-1} = I \implies (EA)A^{-1} = E$. Assim sendo, $\text{linha $i$ de $(EAA^{-1})$} = (\text{linha $i$ de $EA$})A^{-1} = \text{linha $i$ de $E$}$. Se a linha $i$ de $EA$ for nula, nós teremos um absurdo (pois a linha $i$ de $E$ não é nula, por hipótese). Por sua vez, se $A$ não tem $n$ pivôs, então pelo menos uma linha de $EA$ é zero, logo, $A$ possui exatamente $n$ pivôs.
+	
+	\qed
+\end{Proof}
+
+\section{Matrizes em Blocos}
+
+A última ideia que nós vamos apresentar neste capítulo, mas que já apareceu anteriormente, é a de dividir uma matriz em blocos. De fato, por vezes a estrutura de uma matriz permite que ela seja dividida em submatrizes menores que possuem, sozinhas, características que podem ser interessantes na hora de fazer cálculos. Um exemplo é o seguinte:
+
+\begin{Example}
+	Considere a matriz $A = \begin{bmatrix}
+		1 & 0 & 1 & 0 & 1 & 0 \\
+		0 & 1 & 0 & 1 & 0 & 1 \\
+		1 & 0 & 1 & 0 & 1 & 0 \\
+		0 & 1 & 0 & 1 & 0 & 1
+	\end{bmatrix}$. Nós podemos dividir esta matriz $A$ em blocos de matrizes identidade $2\times 2$, como a seguir:
+	
+	$$
+	A = \begin{bmatrix}
+		I_2 & I_2 & I_2 \\
+		I_2 & I_2 & I_2
+	\end{bmatrix}
+	$$.
+\end{Example}
+
+Assim como nós já sabemos multiplicar matrizes, nós podemos utilizar o mesmo raciocínio para multiplicar matrizes em blocos (nós não iremos demonstrar este fato, mas pense intuitivamente que todo número pode ser visto como uma matriz $1\times 1$, e esta é apenas uma extensão para blocos de matrizes que possuam as dimensões corretas entre si).
+
+A multiplicação em blocos é feita da mesma forma que a multiplicação normal de matrizes. Considere, por exemplo, $A = \begin{bmatrix}
+	A_{11} & A_{12} \\
+	A_{21} & A_{22}
+\end{bmatrix}$ e $\begin{bmatrix}
+	B_{11} & B_{12} \\
+	B_{21} & B_{22}
+\end{bmatrix}$. Considere ainda que as submatrizes possuem as dimensões compatíveis com a operação de multiplicação matricial. Então:
+
+$$
+(AB)_{11} = A_{11}B_{11} + A_{21}B_{21},
+$$
+e assim por diante.
+
+Assim como nós fazíamos eliminação olhando para cada elemento de uma matriz, nós podemos fazer eliminação por blocos também. Considere $M = \begin{bmatrix}
+	A & B \\
+	C & D
+\end{bmatrix}$, em que $A^{-1}$ existe. Se tomarmos $E = \begin{bmatrix}
+	I & 0 \\
+	-CA^{-1} & I
+\end{bmatrix}$, com as dimensões corretas, nós podemos fazer:
+
+$$
+EM = \begin{bmatrix}
+	A & B \\
+	0 & -CA^{-1}B + D
+\end{bmatrix},
+$$
+obtendo uma espécie de matriz triangular superior por blocos.
+
+\section{Exercícios}
+
+\textbf{Importante:} a maioria dos exercícios são baseados em \cite{lista1doguilherme}.
+
+\noindent $\mathbf{2.1)}$ Sejam $A = \begin{bmatrix}
+	1 & 0 & 4 \\
+	3 & -1 & 2 \\
+	2 & 5 & -13
+\end{bmatrix}$ e $b = \begin{bmatrix}
+	2 \\
+	4 \\
+	-8
+\end{bmatrix}$. Ache o vetor $x$ tal que $Ax = b$.
+
+$\\$
+$\mathbf{2.2)}$ Considere o seguinte sistema linear:
+
+$$
+\begin{cases}
+	ax + by = e \\
+	cx + dy = f
+\end{cases}
+$$
+
+Suponha que o primeiro pivô é $a$. A eliminação produz que fórmula para o segundo pivô? Verifique que o segundo pivô não existe se $ad = bc$. Supondo que os dois pivôs existam, resolva o sistema linear.
+
+$\\$
+$\mathbf{2.3)}$ Considere as duas matrizes $A = \begin{bmatrix}
+	a & b \\
+	c & d
+\end{bmatrix}$ e $B = \begin{bmatrix}
+	x & y \\
+	w & z
+\end{bmatrix}$. Calcule $AB$ e $BA$. É verdade que $AB = BA$ neste caso? Calcule também $A^2$ e $B^2$.
+
+$\\$
+$\mathbf{2.4)}$ Sejam $x = \begin{bmatrix}
+	x_1 \\
+	x_2 \\
+	x_3
+\end{bmatrix}$ e $y = \begin{bmatrix}
+	y_1 & y_2 & y_3
+\end{bmatrix}$. Calcule $xy$ e $yx$. Em seguida, calcule $(yx)xy$. Por que não podemos dizer que $(yx)xy = y(xx)y$?
+
+$\\$
+$\mathbf{2.5)}$ Ache a matriz de eliminação $E$ que reduz a matriz de Pascal em uma menor:
+
+$$
+E\begin{bmatrix}
+	1 & 0 & 0 & 0 \\
+	1 & 1 & 0 & 0 \\
+	1 & 2 & 1 & 0 \\
+	1 & 3 & 3 & 1
+\end{bmatrix} = \begin{bmatrix}
+	1 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0 \\
+	0 & 1 & 1 & 0 \\
+	0 & 1 & 2 & 1
+\end{bmatrix}.
+$$
+
+Qual matriz $M$ reduz a matriz de Pascal à matriz identidade?
+
+$\\$
+$\mathbf{2.6)}$ Para quais valores de $a$ o método de eliminação não dará $3$ pivôs?
+
+$$
+\begin{bmatrix}
+	a & 2 & 3 \\
+	a & a & 4 \\
+	a & a & a
+\end{bmatrix}.
+$$
+
+$\\$
+$\mathbf{2.7)}$ Suponha que $D$ é uma matriz diagonal $n\times n$ com $n$ pivôs. Quantas operações são necessárias para resolver o sistema linear $Dx = b$? E se nós tivermos uma matriz triangular superior $U$ com $n$ pivôs, quantas operações são necessárias para resolver o sistema $Ux = b$? (Para este exercício, suponha que não há troca de linhas ou de colunas).
+
+$\\$
+$\mathbf{2.8)}$ Considere a seguinte matriz:
+
+$$
+T = \begin{bmatrix}
+	1 & 2 & 0 & 0 & 0 \\
+	3 & 4 & 3 & 0 & 0 \\
+	0 & 8 & -2 & 4 & 0 \\
+	0 & 0 & 3 & 1 & 1 \\
+	0 & 0 & 0 & 2 & 3 
+\end{bmatrix}.
+$$
+
+Ache a matriz triangular superior $U$ resultante do processo de escalonamento de $T$.
+
+$\\$
+$\mathbf{2.9)}$ Resolva o seguinte sistema linear:
+
+$$
+\begin{bmatrix}
+	1 & 4 & 8 \\
+	2 & 8 & 12 \\
+	3 & 16 & -9
+\end{bmatrix}x = \begin{bmatrix}
+	2 \\
+	-1 \\
+	0
+\end{bmatrix}.
+$$
+
+Qual foi a matriz de permutação $P$ utilizada?
+
+$\\$
+$\mathbf{2.10)}$ Considere o vetor $x = \begin{bmatrix}
+	1 \\
+	2 \\
+	3 \\
+	4
+\end{bmatrix}$. Qual é a matriz de permutação $P$ tal que $Px = \begin{bmatrix}
+	4 \\
+	3 \\
+	2 \\
+	1
+\end{bmatrix}$?
+
+$\\$
+$\mathbf{2.11)}$ Considere as matrizes $A = \begin{bmatrix}
+	2 & 3 & 4 \\
+	1 & 2 & 3 \\
+	5 & 6 & 7
+\end{bmatrix}$ e $P = \begin{bmatrix}
+	0 & 1 & 0 \\
+	1 & 0 & 0 \\
+	0 & 0 & 1
+\end{bmatrix}$. Calcule $AP$ e $PA$. Qual é a diferença entre as duas multiplicações?
+
+$\\$
+$\mathbf{2.12)}$ Mostre que $(A + B)^2\neq A^2 + 2AB + B^2$. Qual é a fórmula correta?
+
+$\\$
+$\mathbf{2.13)}$ Usando o processo de Eliminação de Gauss-Jordan, encontre a inversa de 
+
+$$
+A = \begin{bmatrix}
+	2 & 3 & 0 \\
+	4 & -1 & 5 \\
+	3 & 2 & 7
+\end{bmatrix}.
+$$
+
+$\\$
+$\mathbf{2.14)}$ Use o método de Gauss-Jordan para encontrar a inversa da matriz triangular inferior:
+
+$$
+U = \begin{bmatrix}
+	1 & a & b \\
+	0 & 1 & c \\
+	0 & 0 & 1
+\end{bmatrix}
+$$
+
+$\\$
+$\mathbf{2.15)}$ Sejam $A$ e $B$ duas matrizes $n\times n$ tais que $A + B$ é invertível. Pode-se dizer que $(A + B)^{-1} = A^{-1} + B^{-1}$? Se sim, demonstre. Se não, mostre um contra-exemplo.
+
+$\\$
+$\mathbf{2.16)}$ Considere as matrizes em blocos $E = \begin{bmatrix}
+	I_2 & I_2 \\
+	I_2 & I_2
+\end{bmatrix}$ e $M = \begin{bmatrix}
+	A_{2\times 2} & B_{2\times 2} \\
+	C_{2\times 2} & D_{2\times 2}
+\end{bmatrix}$. Calcule $EM$ e $ME$. É possível dizer que $EM = ME$?
+
+$\\$
+$\mathbf{2.17)}$ Ache uma matriz não-zero $A$ tal que $A^2 = 0$ e uma matriz $B$ com $B^2\neq 0$ e $B^3 = 0$.
+
+$\\$
+$\mathbf{2.18)}$ Ache uma matriz $A_{3\times 3}$ diferente da matriz identidade e da matriz nula tal que $A^2 = A$.
+
+$\\$
+$\mathbf{2.19)}$ Verdadeiro ou falso (prove ou dê um contra-exemplo):
+
+a) Se $A^2$ está bem definida, então $A$ é quadrada.
+
+b) Se $AB$ e $BA$ estão bem definidas, então $A$ e $B$ são quadradas.
+
+c) Se $AB$ e $BA$ estão bem definidas, então $AB$ e $BA$ são quadradas.
+
+d) Se $AB = B$, então $A = I$.
+
+$\\$
+$\mathbf{2.20)}$ Prove que, se $L$ é uma matriz triangular inferior com $1$'s na diagonal, então a sua inversa $L^{-1}$ também é uma matriz triangular inferior com $1$'s na diagonal.
+
