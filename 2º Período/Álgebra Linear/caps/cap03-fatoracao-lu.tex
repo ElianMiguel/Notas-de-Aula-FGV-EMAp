@@ -1,0 +1,83 @@
+\chapter{Fatoração LU}
+\label{cap:fatoração-lu}
+
+\textbf{Importante:} Este capítulo é baseado em \cite{slide3doyuri}.
+
+No capítulo anterior, nós vimos que, dada uma matriz $A$ invertível, nós podemos encontrar uma matriz de eliminação $E$ tal que $EA = U$, onde $U$ é uma matriz triangular superior e $E$ é uma matriz triangular inferior. Isto nos sugere que, ao encontrar a matriz inversa de $E$, nós podemos escrever $A$ como a multiplicação de duas matrizes, uma triangular inferior e uma triangular superior. Esta é a ideia da fatoração LU, que nós desenvolveremos neste capítulo.
+
+\section{Fatoração LU}
+
+Antes de nós desenvolvermos as ideias para construir a fatoração LU, é necessário nós entendermos o que é uma fatoração matricial:
+
+\begin{Definition}[Fatoração]
+	Seja $A$ uma matriz qualquer. Uma \textbf{fatoração} de $A$ consiste em escrever $A$ como o produto de matrizes mais simples.
+\end{Definition}
+
+Ao longo destas notas de aula, nós veremos várias fatorações de matrizes. A primeira que nós veremos é a fatoração LU, e algumas de suas variantes. Mas antes, vamos falar um pouco sobre o porque fatorações são importantes. Muitas vezes, nós estamos interessados em descobrir quais são as propriedades de uma matriz, ou o que ela está fazendo quando é aplicada a um vetor. Assim sendo, nós podemos fatorar uma matriz em outras matrizes que possuam propriedades interessantes (como matrizes diagonais, triangulares, e outros tipos que ainda definiremos), de modo a compreender melhor a estrutura da matriz original.
+
+Dito isto, vamos desenvolver a ideia da fatoração LU através de um exemplo e, em seguida, vamos generalizar este conceito.
+
+\begin{Example}
+	Considere a matriz $A = \begin{bmatrix}
+		3 & 1 & 0 \\
+		6 & 4 & 1 \\
+		0 & 4 & 3
+	\end{bmatrix}$. Vamos começar a aplicar os passos da eliminação gaussiana a esta matriz. O nosso primeiro pivô é $3$, e o nosso primeiro multiplicador é $2$. Assim sendo, nós faremos $L_2 - 2L_1$. A matriz de eliminação deste passo é $E_{21}(2) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		-2 & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}$. Calculando $E_{21}(2)A$, nós obtemos:
+	
+	$$
+	E_{21}(2)A = \begin{bmatrix}
+		3 & 1 & 0 \\
+		0 & 2 & 1 \\
+		0 & 4 & 3
+	\end{bmatrix}.
+	$$
+	
+	Como o segundo multiplicador é $0$, não fazemos nada, e avançamos para o próximo passo. Agora, o nosso pivô é $2$ e o multiplicador é $2$. Assim sendo, nós faremos $L_3 - 2L_2$, obtendo $E_{32}(2) = \begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & -2 & 0
+	\end{bmatrix}$. Calculando $E_{32}(2)E_{21}(2)A$, nós obtemos:
+	
+	$$
+	E_{32}(2)E_{21}(2)A = \begin{bmatrix}
+		3 & 1 & 0 \\
+		0 & 2 & 1 \\
+		0 & 0 & 1
+	\end{bmatrix}
+	$$. 
+	
+	Neste passo, nós terminamos o processo de escalonamento. Vamos ver o que nós obtivemos: a partir da matriz $A$, nós construímos uma matriz $E = E_{32}(2)E_{21}(2)$ tal que $EA = U$, onde $E$ é uma matriz triangular inferior e $U$ é uma matriz triangular inferior.
+	
+	Podemos nos perguntar agora: o que acontece se multiplicarmos $E^{-1}$ dos dois lados da equação final? Do lado esquerdo, nós obtemos a matriz $A$. Do lado direito, nós obtemos $(E_{32}(2)E_{21}(2))^{-1}U$. Sabemos que a inversa de $AB$, quando existe, é igual a $B^{-1}A^{-1}$. Assim endo, vamos escrever a equação como um produto de inversas:
+	
+	$$
+	A = E_{21}(2)^{-1}E_{32}(2)^{-1}U.
+	$$
+	
+	No entanto, como nós vimos no capítulo anterior, a inversa de uma matriz de eliminação é muito fácil de se achar: nós obtemos a equação
+	
+	$$
+	A = E_{21}(-2)E_{32}(-2)U
+	$$
+	
+	Fazemos as contas, nós finalmente encontramos:
+	
+	$$
+	A = \begin{bmatrix}
+		1 & 0 & 0 \\
+		2 & 1 & 0 \\
+		0 & 2 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		3 & 1 & 0 \\
+		0 & 2 & 1 \\
+		0 & 0 & 1
+	\end{bmatrix}.
+	$$
+	
+	Assim sendo, nós conseguimos escrever $A$ como o produto de uma matriz triangular inferior e uma matriz triangular superior. Chamando $E^{-1}$ de $L$, nós obtemos que $A = LU$. Esta é a fatoração LU de $A$, onde $L$ é a inversa da matriz de eliminação, e $U$ é a matriz obtida ao final do processo de escalonamento.
+\end{Example}
