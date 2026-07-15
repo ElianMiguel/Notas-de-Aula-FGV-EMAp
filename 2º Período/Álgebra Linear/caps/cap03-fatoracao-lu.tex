@@ -1,13 +1,13 @@
-\chapter{Fatoração LU}
+\chapter{Fatoração $LU$}
 \label{cap:fatoração-lu}
 
 \textbf{Importante:} Este capítulo é baseado em \cite{slide3doyuri}.
 
-No capítulo anterior, nós vimos que, dada uma matriz $A$ invertível, nós podemos encontrar uma matriz de eliminação $E$ tal que $EA = U$, onde $U$ é uma matriz triangular superior e $E$ é uma matriz triangular inferior. Isto nos sugere que, ao encontrar a matriz inversa de $E$, nós podemos escrever $A$ como a multiplicação de duas matrizes, uma triangular inferior e uma triangular superior. Esta é a ideia da fatoração LU, que nós desenvolveremos neste capítulo.
+No capítulo anterior, nós vimos que, dada uma matriz $A$ invertível, nós podemos encontrar uma matriz de eliminação $E$ tal que $EA = U$, onde $U$ é uma matriz triangular superior e $E$ é uma matriz triangular inferior. Isto nos sugere que, ao encontrar a matriz inversa de $E$, nós podemos escrever $A$ como a multiplicação de duas matrizes, uma triangular inferior e uma triangular superior. Esta é a ideia da fatoração $LU$, que nós desenvolveremos neste capítulo.
 
-\section{Fatoração LU}
+\section{Fatoração $LU$}
 
-Antes de nós desenvolvermos as ideias para construir a fatoração LU, é necessário nós entendermos o que é uma fatoração matricial:
+Antes de nós desenvolvermos as ideias para construir a fatoração $LU$, é necessário nós entendermos o que é uma fatoração matricial:
 
 \begin{Definition}[Fatoração]
 	Seja $A$ uma matriz qualquer. Uma \textbf{fatoração} de $A$ consiste em escrever $A$ como o produto de matrizes mais simples.
@@ -15,7 +15,7 @@ Antes de nós desenvolvermos as ideias para construir a fatoração LU, é neces
 
 Ao longo destas notas de aula, nós veremos várias fatorações de matrizes. A primeira que nós veremos é a fatoração LU, e algumas de suas variantes. Mas antes, vamos falar um pouco sobre o porque fatorações são importantes. Muitas vezes, nós estamos interessados em descobrir quais são as propriedades de uma matriz, ou o que ela está fazendo quando é aplicada a um vetor. Assim sendo, nós podemos fatorar uma matriz em outras matrizes que possuam propriedades interessantes (como matrizes diagonais, triangulares, e outros tipos que ainda definiremos), de modo a compreender melhor a estrutura da matriz original.
 
-Dito isto, vamos desenvolver a ideia da fatoração LU através de um exemplo e, em seguida, vamos generalizar este conceito.
+Dito isto, vamos desenvolver a ideia da fatoração $LU$ através de um exemplo e, em seguida, vamos generalizar este conceito.
 
 \begin{Example}
 	Considere a matriz $A = \begin{bmatrix}
@@ -79,7 +79,7 @@ Dito isto, vamos desenvolver a ideia da fatoração LU através de um exemplo e,
 	\end{bmatrix}.
 	$$
 	
-	Assim sendo, nós conseguimos escrever $A$ como o produto de uma matriz triangular inferior e uma matriz triangular superior. Chamando $E^{-1}$ de $L$, nós obtemos que $A = LU$. Esta é a fatoração LU de $A$, onde $L$ é a inversa da matriz de eliminação, e $U$ é a matriz obtida ao final do processo de escalonamento.
+	Assim sendo, nós conseguimos escrever $A$ como o produto de uma matriz triangular inferior e uma matriz triangular superior. Chamando $E^{-1}$ de $L$, nós obtemos que $A = LU$. Esta é a fatoração $LU$ de $A$, onde $L$ é a inversa da matriz de eliminação, e $U$ é a matriz obtida ao final do processo de escalonamento.
 \end{Example}
 
 De uma maneira geral, suponha que nós temos uma matriz $A_{n\times n}$ invertível. Então, existe uma matriz $E$ de eliminação tal que $EA = U$. A matriz $E$, por construção, é dada por:
@@ -94,13 +94,13 @@ $$
 L = E^{-1} = E_{2, 1}^{-1}E_{3, 1}^{-1}...E_{n, 1}^{-1}E_{3, 2}^{-1}E_{4, 2}^{-1}...E_{n, 2}^{-1}...E_{n, n - 1}^{-1}.
 $$
 
-Deste modo, a fatoração LU de $A$ é dada por $A = LU$, onde $L$ é a matriz descrita acima, e $U$ é a matriz final resultante do processo de escalonamento.
+Deste modo, a fatoração $LU$ de $A$ é dada por $A = LU$, onde $L$ é a matriz descrita acima, e $U$ é a matriz final resultante do processo de escalonamento.
 
 Apesar de parecer ser muito complicado encontrar a matriz $L$, é algo incrivelmente simplesmente: os seus elementos abaixo da diagonal principal são simplesmente os multiplicadores da eliminação.
 
-\section{Fatoração LDU}
+\section{Fatoração $LDU$}
 
-A primeira variante da fatoração LU que nós veremos é a fatoração LDU, em que $D$ é a matriz diagonal com pivôs de $A$. Suponha que, após o processo de eliminação, nós conseguimos encontrar a fatoração LU de $A$, na qual $U = \begin{bmatrix}
+A primeira variante da fatoração $LU$ que nós veremos é a fatoração $LDU$, em que $D$ é a matriz diagonal com pivôs de $A$. Suponha que, após o processo de eliminação, nós conseguimos encontrar a fatoração $LU$ de $A$, na qual $U = \begin{bmatrix}
 	d_1 & u_{12} & u_{13} & \cdots & u_{1n} \\
 	0 & d_2 & u_{23} & \cdots & u_{2n} \\
 	\vdots & \vdots & \vdots & \ddots & \vdots \\
@@ -127,7 +127,7 @@ $$
 Ou seja, nós escrevemos $U$ como o produto de uma matriz diagonal e uma matriz triangular superior. Dessa forma, chamando a nova matriz triangular superior de $U$, nós temos que $A$ pode ser escrita como $A = LDU$.
 
 \begin{Example}
-	No exemplo que nós usamos para apresentar a fatoração LU, nós conseguimos obter a seguinte fatoração LDU:
+	No exemplo que nós usamos para apresentar a fatoração $LU$, nós conseguimos obter a seguinte fatoração $LDU$:
 	
 	$$
 	A = \begin{bmatrix}
@@ -148,20 +148,20 @@ Ou seja, nós escrevemos $U$ como o produto de uma matriz diagonal e uma matriz 
 	$$
 \end{Example}
 
-\section{Existência e Unicidade da Fatoração LU}
+\section{Existência e Unicidade da Fatoração $LU$}
 
-Nas seções anteriores, nós aprendemos a calcular a fatoração LU de uma matriz, e uma de suas variantes. No entanto, nós ainda não demonstramos a existência da fatoração LU. Nós o faremos agora, e também demonstraremos a sua unicidade.
+Nas seções anteriores, nós aprendemos a calcular a fatoração $LU$ de uma matriz, e uma de suas variantes. No entanto, nós ainda não demonstramos a existência da fatoração $LU$. Nós o faremos agora, e também demonstraremos a sua unicidade.
 
-\begin{Theorem}[Existência e Unicidade da Fatoração LU]
+\begin{Theorem}[Existência e Unicidade da Fatoração $LU$]
 	Seja $A$ uma matriz $n\times n$ invertível. Então, $A$ pode ser escrita de forma única como o produto de uma matriz triangular inferior $L$ com todos os elementos da diagonal iguais a $1$, e uma matriz triangular superior $U$.
 \end{Theorem}
 
 \begin{Proof}
-	\textbf{Existência:} Em primeiro lugar, demonstremos a existência da fatoração LU. Para fazer isto, considere uma matriz $A_{k\times k}$ invertível. Nós usaremos indução em $k$.
+	\textbf{Existência:} Em primeiro lugar, demonstremos a existência da fatoração $LU$. Para fazer isto, considere uma matriz $A_{k\times k}$ invertível. Nós usaremos indução em $k$.
 	
 	Para $k = 1$, seja $A_{1\times 1} = a$. Tomando $L = 1$ e $U = a$, nós temos que $A = 1\cdot a = LU$.
 	
-	Suponha que a fatoração LU existe quando $k = n - 1$. Vamos provar que ela existe para $k = n$:
+	Suponha que a fatoração $LU$ existe quando $k = n - 1$. Vamos provar que ela existe para $k = n$:
 	
 	Defina $A = \begin{bmatrix}
 		B_{n - 1 \times n - 1} & \begin{bmatrix}
@@ -236,10 +236,278 @@ Nas seções anteriores, nós aprendemos a calcular a fatoração LU de uma matr
 	L^{-1}LU = L^{-1}L\hat{U} \implies U = \hat{U}.
 	$$
 	
-	Logo, a fatoração LU é única.
+	Logo, a fatoração $LU$ é única.
 	
 	\qed
 \end{Proof}
 
-Um resultado que vem do processo de eliminação: se uma matriz $A$ é tal que $A = LU$, então o sistema $Ax = b$ vira $Ux = c = L^{-1}b$. No entanto, até agora, nós tratamos da fatoração LU unicamente no caso em que não há trocas de linhas ou de colunas. Se houver trocas de linhas, não é verdade que $A = LU$, mas é verdade que $PA = LU$, onde $P$ é a matriz de permutação que realiza as trocas.
+Um resultado que vem do processo de eliminação: se uma matriz $A$ é tal que $A = LU$, então o sistema $Ax = b$ vira $Ux = c = L^{-1}b$. No entanto, até agora, nós tratamos da fatoração $LU$ unicamente no caso em que não há trocas de linhas ou de colunas. Se houver trocas de linhas, não é verdade que $A = LU$, mas é verdade que $PA = LU$, onde $P$ é a matriz de permutação que realiza as trocas.
 
+\section{Transposta de uma Matriz}
+
+Nesta seção, nós vamos definir o conceito de matriz transposta, e provar algumas das suas propriedades.
+
+\begin{Definition}[Matriz Transposta]
+	Seja $A$ uma matriz $m\times n$ qualquer. Nós dizemos que $A^T$ é a \textbf{matriz transposta} de $A$ se $(A^T)_{ij} = A_{ji}$.
+\end{Definition}
+
+Vejamos um exemplo de matriz transposta:
+
+\begin{Example}
+	Seja $A = \begin{bmatrix}
+		2 & 1 \\
+		3 & 5 \\
+		4 & 8
+	\end{bmatrix}$. Então, a sua matriz transposta, $A^T$, é dada por $A^T = \begin{bmatrix}
+		2 & 3 & 4 \\
+		1 & 5 & 8
+	\end{bmatrix}$.
+\end{Example}
+
+Na prática, para encontrar a transposta de uma matriz, basta escrever cada coluna da matriz original como uma linha da matriz transposta.
+
+Vejamos agora algumas de suas propriedades:
+
+\begin{Theorem}[Transposta do Produto]
+	Sejam $A_{m\times n}$ e $B_{n\times p}$ duas matrizes quaisquer. Então, $(AB)^T = B^TA^T$.
+\end{Theorem}
+
+\begin{Proof}
+	Primeiramente, vamos calcular $(AB)^T_{ij}$:
+	
+	$$
+	(AB)^T_{ij} = (AB)_{ji} = \sum\limits_{k = 1}^{n} a_{jk}b_{ki}.
+	$$
+	Agora, vamos calcular $(B^TA^T)_{ij}$:
+	
+	$$
+	(B^TA^T)_{ij} = \sum\limits_{k = 1}^{n}(B^T)_{ik}(A^T)_{kj} = \sum\limits_{k = 1}^{n} b_{ki}a_{jk} = \sum\limits_{k = 1}^{n} a_{jk}b_{ki}.
+	$$
+	Logo, $(AB)^T = B^TA^T$.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Inversa da Transposta]
+	Seja $A_{n\times n}$ uma matriz invertível. Então, $(A^T)^{-1} = (A^{-1})^T$.
+\end{Theorem}
+
+\begin{Proof}
+	Seja $C = (A^{-1})^T$. Nós queremos verificar que $C$ é a inversa de $A$, ou seja, que $CA^T = I$. Para fazer isto, vamos calcular $CA^T$:
+	
+	$$
+	CA^T = (A^{-1})TA^T = (AA^{-1})^T = I^T = I.
+	$$
+	Logo, $C = (A^T)^{-1}$, ou seja, $(A^T)^{-1} = (A^{-1})^T$.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Transposta de uma Matriz Triangular]
+	Seja $L_{n\times n}$ uma matriz triangular inferior. Então, $L^T$ é uma matriz triangular superior.
+\end{Theorem}
+
+\begin{Proof}
+	Se $L$ é uma matriz triangular inferior, por definição, $L_{ij} = 0$ se $i < j$. Sabemos que $L^T_{ji} = L_{ij}$. Assim sendo, quando $i < j$, $L^T_{ji} = 0$, e como $j > i$, segue que $L^T$ é uma matriz triangular superior.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Transposta da Transposta]
+	Seja $A_{m\times n}$ uma matriz qualquer. Então, $(A^T)^T = A$.
+\end{Theorem}
+
+\begin{Proof}
+	Seja $C = A^T$. Então, $C^T_{ij} = C_{ji} = (A^T)_{ji} = A_{ij}$. Logo, $A = (A^T)^T$.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Produto Interno e Produto Externo]
+	Sejam $x$ e $y$ vetores-coluna $n\times 1$. Então, $x^Ty$ é o produto interno euclidiano de $x$ e $y$, e $xy^T$ é uma matriz cujas colunas são múltiplas de $x$.
+\end{Theorem}
+
+\begin{Proof}
+	Primeiramente, vamos calcular $x^Ty$:
+	
+	$$
+	x^Ty = \sum\limits_{k = 1}^{n} x^T_{1k}y_{k1} = \sum\limits_{k = 1}^{n} x_{k1}y_{k1} = \sum\limits_{k = 1}^{n} x_ky_k = x\cdot y.
+	$$
+	Agora, vamos calcular $xy^T$:
+	
+	$$
+	(xy^T)_{ij} = \sum\limits_{k = 1}^{n} x_{ik}y^T_{kj} = \sum\limits_{k = 1}^{n} x_{ik} y^{jk} = x_iy_j.
+	$$
+	
+	\qed
+\end{Proof}
+
+Para a próxima propriedade, nós vamos fazer uma convenção sobre a matriz de permutação: seja $e_i$ o $i$-ésimo vetor-coluna da matriz identidade $n\times n$. Então, uma matriz de permutação é dada por:
+
+$$
+P = \begin{bmatrix}
+	- & e_{p_1}^T & - \\
+	- & e_{p_2}^T & - \\
+	\vdots \\
+	- & e_{p_n}^T & -
+\end{bmatrix},
+$$
+onde $(p_1, p_2, \cdots, p_n)$ é uma permutação qualquer de $\{1, 2, \cdots, n\}$.
+
+\begin{Theorem}[Inversa da Permutação]
+	Seja $P_{n\times n}$ uma matriz de permutação. Então, $P^{-1} = P^T$.
+\end{Theorem}
+
+\begin{Proof}
+	Usando a definição que nós acabamos de dar, nós temos que:
+	
+	$$
+	P = \begin{bmatrix}
+		- & e_{p_1}^T & - \\
+		- & e_{p_2}^T & - \\
+		\vdots \\
+		- & e_{p_n}^T & -
+	\end{bmatrix} \text{ e } P^T = \begin{bmatrix}
+		| & | & & | \\
+		e_{p_1} & e_{p_2} & \cdots & e_{p_n} \\
+		| & | & & |
+	\end{bmatrix}.
+	$$
+	Assim sendo, nós temos que:
+	
+	$$
+	(PP^T)_{ij} = e_{p_i}^Te_{p_j} = \begin{cases}
+		0, \text{ se $i\neq j$} \\
+		1, \text{ se $i = j$}
+	\end{cases} = I_{ij}.
+	$$
+	Logo, $PP^T = I$.
+	
+	\qed
+\end{Proof}
+
+\section{Fatoração $LDL^T$}
+
+Vamos agora ver mais uma variante da fatoração $LU$. Antes, porém, vamos dar duas definições, das quais nós utilizaremos a primeira.
+
+\begin{Definition}[Matriz Simétrica]
+	Seja $A_{n\times n}$ uma matriz qualquer. Dizemos que $A$ é uma \textbf{matriz simétrica} se $A = A^T$.
+\end{Definition}
+
+\begin{Definition}[Matriz Anti-simétrica]
+	Seja $A_{n\times n}$ uma matriz qualquer. Dizemos que $A$ é uma \textbf{matriz anti-simétrica} se $A = -A^T$.
+\end{Definition}
+
+A variante que nós apresentaremos agora é para o caso em que $A$ é uma matriz simétrica. Considere que $A = LDU$, e que $A = A^T$.
+
+Então, nós temos que $A = LDU$ e $A^T = (LDU)^T = U^TD^TL^T$. Assim sendo, $LDU = U^TD^TL^T$. No entanto, $D^T = D$ (nós não provamos este fato, mas este será um dos exercícios, por agora, assumiremos que é verdade, o que, de fato, é bem intuitivo).
+
+Logo, $LDU = U^TDL^T$, em que $U^T$ é uma matriz triangular inferior, e $L^T$ é uma matriz triangular superior. Assim sendo, $L = U^T$ e $U = L^T$, e nós obtemos a seguinte fatoração de $A$: $A = LDL^T$.
+
+De fato, verificando o que acontece com $A^T$, nós temos que:
+
+$$
+A^T = (LDL^T)^T = LD^TL^T = LDL^T = A.
+$$
+
+\section{Fatoração $PLU$}
+
+Para finalizar as principais variantes da fatoração $LU$, nós vamos falar muito brevemente do caso em que há trocas de linhas durante o processo de eliminação.
+
+Suponha que, ao realizar a eliminação, nós precisamos fazer trocas de linhas descritas por uma matriz de permutação $P'$. Então, nós podemos escrever a fatoração $LU$ como:
+
+$$
+P'A = LU.
+$$
+
+Aplicando $P'^{-1}$ à esquerda de ambos os lados da equação, nós obtemos:
+
+$$
+P'^{-1}P'A = LU \implies A = P'^{-1}LU.
+$$
+
+Sabemos, porém, que $P'^{-1} = P'^T$, e que esta matriz é também uma matriz de permutação. Chamando $P'^T$ de $P$, nós obtemos uma fatoração $A = PLU$.
+
+É possível ainda encontrar outras variações da fatoração $LU$, mas todas seguem basicamente a mesma ideia das variações que nós apresentamos aqui.
+
+\section{Exercícios}
+
+\textbf{Importante:} vários dos exercícios são baseados em \cite{lista1doguilherme}.
+
+\noindent $\mathbf{3.1)}$ Calcule a fatoração $LU$ da seguinte matriz:
+
+$$
+A = \begin{bmatrix}
+	2 & 3 & 0 \\
+	4 & 1 & 3 \\
+	8 & 2 & 3
+\end{bmatrix}.
+$$
+Calcule também a sua fatoração $LDU$.
+
+$\\$
+$\mathbf{3.2)}$ Calcule a decomposição $LU$ da seguinte matriz simétrica:
+
+$$
+A = \begin{bmatrix}
+	a & a & a & a \\
+	a & b & b & b \\
+	a & b & c & c \\
+	a & b & c & d
+\end{bmatrix}
+$$
+Qual é a condição para que $A$ tenha quatro pivôs?
+
+$\\$
+$\mathbf{3.3)}$ Prove que, se $A$ e $B$ são duas matrizes $m\times n$, então $(A + B)^T = A^T + B^T$.
+
+$\\$
+$\mathbf{3.4)}$ Prove que, se $D$ é uma matriz diagonal, então $D^T = D$.
+
+$\\$
+$\mathbf{3.5)}$ Sejam $y$ um vetor-coluna $m\times 1$, e $A$ uma matriz $m\times n$. Prove que $y^TA$ é uma combinação linear das linhas de $A$.
+
+$\\$
+$\mathbf{3.6)}$ Ache uma matriz de permutação $P$ tal que $P$ é $3\times 3$, $P\neq I$ e $P^3 = I$.
+
+$\\$
+$\mathbf{3.7)}$ Considere uma matriz $A_{4\times 4}$. Suponha que, nesta ordem, foram feitas as seguintes operações (sempre em cima da matriz resultante da operação anterior): $L_3\leftrightarrow L_4$; $C_1\leftrightarrow C_2$; $L_1\leftrightarrow L_2$; $C_3\leftrightarrow C_4$; $L_2\leftrightarrow L_3$, em que $L_i$ indica a linha $i$, e $C_j$ indica a coluna $j$. Escreva a matriz final como $P_1AP_2$, onde $P_1$ e $P_2$ são duas matrizes de permutação.
+
+$\\$
+$\mathbf{3.8)}$ Seja $A$ uma matriz $4\times 4$. Quantas entradas de $A$ podem ser escolhidas de $A$ podem ser escolhidas independentemente caso $A$ seja
+
+a) simétrica ($A^T = A$)?
+
+b) anti-simétrica ($A^T = -A$)?
+
+$\\$
+$\mathbf{3.9)}$ Seja
+
+$$
+A = \begin{bmatrix}
+	1 & c & 0 \\
+	2 & 4 & 1 \\
+	3 & 5 & 1
+\end{bmatrix}.
+$$
+
+a) Qual é o número $c$ que leva o segundo pivô a ser $0$? O que podemos fazer para resolver este problema? Ainda é válido $A = LU$?
+
+b) Qual é o número $c$ que leva o terceiro pivô a ser $0$? É possível resolver este problema?
+
+$\\$
+$\mathbf{3.10)}$ Seja $A$ uma matriz $n\times n$ qualquer. Prove que sempre é possível escrever $A = B + C$, onde $B$ é uma matriz simétrica e $C$ é uma matriz anti-simétrica.
+
+$\\$
+$\mathbf{3.11)}$ (Desafio!) Uma matriz de Vandermonde de ordem $n\times n$ definida por $n$ pontos distintos $x_1, \cdots, x_n$ é definida como:
+
+$$
+V = \begin{bmatrix}
+	1 & x_1 & x_1^2 & \cdots & x_1^{n - 1} \\
+	1 & x_2 & x_2^2 & \cdots & x_2^{n - 1} \\
+	\vdots & \vdots & \vdots & \ddots & \vdots \\
+	1 & x_n & x_n^2 & \cdots & x_n^{n - 1}
+\end{bmatrix}.
+$$
+
+Encontre a decomposição $LU$ da matriz $V$.
