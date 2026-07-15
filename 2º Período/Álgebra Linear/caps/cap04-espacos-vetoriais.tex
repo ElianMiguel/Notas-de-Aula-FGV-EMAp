@@ -1,0 +1,313 @@
+\chapter{Espaços Vetoriais}
+\label{cap:espaços-vetoriais}
+
+\textbf{Importante:} este capítulo é baseado em \cite{slide4doyuri} e em \cite{axler2026}.
+
+Neste capítulo, nós vamos introduzir o conceito mais importante da Álgebra Linear, que é o de espaço vetorial. De fato, todas as operações que nós estávamos fazendo com vetores e com matrizes só fazem sentido porque existe uma estrutura algébrica na qual estes elementos existem. Ao mesmo tempo, com a definição qu vamos dar, nós finalmente seremos capazes de abordar a definição mais correta de vetor.
+
+\section{Espaços Vetoriais}
+
+Nos capítulos anteriores, nós estávamos trabalhando com vetores e matrizes sem pensar muito na estrutura à qual eles pertencem. No entanto, se nós queremos dar um embasamento teórico forte para o que estamos fazendo, nós precisamos dizer qual é a estrutura que faz as coisas funcionarem.
+
+Para isso, vamos definir formalmente o que é um espaço vetorial:
+
+\begin{Definition}[Espaço Vetorial]
+	Um conjunto $V$ é dito um \textbf{espaço vetorial} sobre $\mathbb{R}$ munido de adição e de multiplicação por escalar se possui as seguintes propriedades:
+	
+	\textbf{1) Comutatividade da Adição:} $u + v = v + u, \forall u, v \in V$.
+	
+	\textbf{2) Associatividade:} $(u + v) + w = u + (v + w)$ e $(ab)v = a(bv), \forall u, v, w \in V$ e $\forall a, b \in\mathbb{R}$.
+	
+	\textbf{3) Identidade Aditiva:} Existe um elemento $0\in V$ tal que $v + 0 = v, \forall v \in V$.
+	
+	\textbf{4) Inverso Aditivo:} Para todo $v\in V$, existe $w\in V$ tal que $v + w = 0$.
+	
+	\textbf{5) Identidade Multiplicativa:} $1v = v, \forall v\in V$.
+	
+	\textbf{6) Distributividade:} $a(u + v) = au + av$ e $(a + b)v = av + bv, \forall u, v \in V$ e $\forall a, b \in \mathbb{R}$.
+\end{Definition}
+
+\begin{Example}
+	Alguns exemplos de espaços vetoriais são:
+	
+	$\mathbf{1)}$ O conjunto $\mathbb{R}^n = \left\{\begin{bmatrix}
+		x_1 \\
+		x_2 \\
+		\vdots \\
+		x_n
+	\end{bmatrix}; x_i\in\mathbb{R}\right\}$.
+	
+	$\mathbf{2)}$ O conjunto $\mathbb{C}^n = \left\{\begin{bmatrix}
+		z_1 \\
+		z_2 \\
+		\vdots \\
+		z_n
+	\end{bmatrix}; z_i\in\mathbb{C}\right\}$.
+	
+	$\mathbf{3)}$ O conjunto $\mathbb{M}^{m\times n} = \left\{\begin{bmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{m1} & a_{m2} & \cdots & a_{mn}
+	\end{bmatrix}; a_{ij}\in\mathbb{R}\right\}$.
+	
+	$\mathbf{4)}$ O conjunto $\mathbb{R}^{\mathbb{R}} = \{f:\mathbb{R}\to\mathbb{R}; f(x)\in\mathbb{R}\}$.
+	
+	$\mathbf{5)}$ O conjunto $\mathcal{P}_n = \{p\in\mathbb{R}^{\mathbb{R}}; \exists a_0, a_1, \cdots, a_n\in\mathbb{R} \text{ t.q. } p(x) = a_0 + a_1x + a_2x^2 + \cdots + a_nx^n\}$.
+\end{Example}
+
+Tendo definido o conceito de espaço vetorial, nós podemos dar uma definição melhor de vetor:
+
+\begin{Definition}[Definição precisa de vetor]
+	Seja $V$ um espaço vetorial. Todo elemento $v\in V$ é chamado de \textbf{vetor}.
+\end{Definition}
+
+Com esta definição, nós não precisamos ficar restritos a pensar nos vetores como listas de números. Eles são os elementos de um espaço vetorial, qualquer que seja este espaço. Assim sendo, uma lista de números pode ser um vetor, uma matriz pode ser um vetor, uma função pode ser um vetor, e assim por diante. Tudo depende da forma como o espaço é definido, e se os seus elementos cumprem os axiomas de espaço vetorial.
+
+Para dar um exemplo de como se demonstra que um conjunto fechado sob adição e multiplicação por escalar é um espaço vetorial, vamos demonstrar que $\mathbb{R}^n$ é um espaço vetorial:
+
+\begin{Proposition}
+	Seja $\mathbb{R}^n$ o conjunto conforme definido acima. Então, sob as operações usuais de adição e de multiplicação por escalar, $\mathbb{R}^n$ é um espaço vetorial.
+\end{Proposition}
+
+\begin{Proof}
+	Vamos demonstrar que $\mathbb{R}^n$ satisfaz todos os axiomas de espaço vetorial:
+	
+	\textbf{1) Comutatividade da adição:} Sejam $u = \begin{bmatrix}
+		u_1 \\
+		\vdots \\
+		u_n
+	\end{bmatrix}$ e $v = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix}$ dois elementos de $\mathbb{R}^n$. Então:
+	
+	$$
+	u + v = \begin{bmatrix}
+		u_1 \\
+		\vdots \\
+		u_n
+	\end{bmatrix} + \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} = \begin{bmatrix}
+		u_1 + v_1 \\
+		\vdots \\
+		u_n + v_n
+	\end{bmatrix} = \begin{bmatrix}
+		v_1 + u_1 \\
+		\vdots \\
+		v_n + u_n
+	\end{bmatrix} = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} + \begin{bmatrix}
+		u_1 \\
+		\vdots \\
+		u_n
+	\end{bmatrix} = v + u.
+	$$ 
+	
+	\textbf{2) Associatividade:} Sejam $u = \begin{bmatrix}
+		u_1 \\
+		\vdots \\
+		u_n
+	\end{bmatrix}$, $v = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix}$ e $w = \begin{bmatrix}
+		w_1 \\
+		\vdots \\
+		w_n
+	\end{bmatrix}$ três elementos de $\mathbb{R}^n$. Então:
+	
+	$$
+	(u + v) + w = \begin{bmatrix}
+		u_1 + v_1 \\
+		\vdots \\
+		u_n + v_n
+	\end{bmatrix} + \begin{bmatrix}
+	w_1 \\
+	\vdots \\
+	w_n
+	\end{bmatrix} = \begin{bmatrix}
+		u_1 + v_1 + w_1 \\
+		\vdots \\
+		u_n + v_n + w_n
+	\end{bmatrix} = \begin{bmatrix}
+		u_1 \\
+		\vdots \\
+		u_n
+	\end{bmatrix} + \begin{bmatrix}
+		v_1 + w_1 \\
+		\vdots \\
+		v_n + w_n
+	\end{bmatrix} = u + (v + w).
+	$$
+	
+	Sejam $a, b\in\mathbb{R}$. Então:
+	
+	$$
+	(ab)v = ab\begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} = \begin{bmatrix}
+		abv_1 \\
+		\vdots \\
+		abv_n
+	\end{bmatrix} = a\begin{bmatrix}
+		bv_1 \\
+		\vdots \\
+		bv_n
+	\end{bmatrix} = a(bv).
+	$$
+	
+	\textbf{3) Identidade Aditiva:} Sejam $0\in\mathbb{R}^n$ definido por $0 = \begin{bmatrix}
+		0 \\
+		\vdots \\
+		0
+	\end{bmatrix}$ e $v\in\mathbb{R}^n$ definido por $v = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix}$. Então:
+	
+	$$
+	v + 0 = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} + \begin{bmatrix}
+	0 \\
+	\vdots \\
+	0
+	\end{bmatrix} = \begin{bmatrix}
+		v_1 + 0\\
+		\vdots \\
+		v_n + 0
+	\end{bmatrix} = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} = v.
+	$$
+	
+	\textbf{4) Inverso Aditivo:} Sejam $v = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix}$ e $w = \begin{bmatrix}
+		-v_1 \\
+		\vdots \\
+		-v_n
+	\end{bmatrix}$ dois elementos de $\mathbb{R}^n$. Então:
+	
+	$$
+	v + w = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} + \begin{bmatrix}
+		-v_1 \\
+		\vdots \\
+		-v_n
+	\end{bmatrix} = \begin{bmatrix}
+		v_1 - v_1 \\
+		\vdots \\
+		v_n - v_n
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		\vdots \\
+		0
+	\end{bmatrix} = 0.
+	$$
+	
+	\textbf{5) Identidade Multiplicativa:} Seja $v = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix}$ um elemento de $\mathbb{R}^n$. Então:
+	
+	$$
+	1v = 1\begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} = \begin{bmatrix}
+		1v_1 \\
+		\vdots \\
+		1v_n
+	\end{bmatrix} = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} = v.
+	$$
+	
+	\textbf{6) Distributividade:} Sejam $u = \begin{bmatrix}
+		u_1 \\
+		\vdots \\
+		u_n
+	\end{bmatrix}$ e $v = \begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix}$ dois elementos de $\mathbb{R}^n$, e $a, b\in\mathbb{R}$. Então:
+	
+	$$
+	a(u + v) = a\begin{bmatrix}
+		u_1 + v_1 \\
+		\vdots \\
+		u_n + v_n
+	\end{bmatrix} = \begin{bmatrix}
+		a(u_1 + v_1) \\
+		\vdots \\
+		a(u_n + v_n)
+	\end{bmatrix} = \begin{bmatrix}
+		au_1 + av_1 \\
+		\vdots \\
+		au_n + av_n
+	\end{bmatrix} = \begin{bmatrix}
+		au_1 \\
+		\vdots \\
+		au_n
+	\end{bmatrix} + \begin{bmatrix}
+		av_1 \\
+		\vdots \\
+		av_n
+	\end{bmatrix} = au + av.
+	$$
+	
+	$$
+	(a + b)v = (a + b)\begin{bmatrix}
+		v_1 \\
+		\vdots \\
+		v_n
+	\end{bmatrix} = \begin{bmatrix}
+		(a + b)v_1 \\
+		\vdots \\
+		(a + b)v_n
+	\end{bmatrix} = \begin{bmatrix}
+		av_1 + bv_1 \\
+		\vdots \\
+		av_n + bv_n
+	\end{bmatrix} = \begin{bmatrix}
+		av_1 \\
+		\vdots \\
+		av_n
+	\end{bmatrix} + \begin{bmatrix}
+		bv_1 \\
+		\vdots \\
+		bv_n
+	\end{bmatrix} = av + bv
+	$$.
+	
+	Logo, o conjunto $\mathbb{R}^n$ é um espaço vetorial.
+	
+	\qed
+\end{Proof}
