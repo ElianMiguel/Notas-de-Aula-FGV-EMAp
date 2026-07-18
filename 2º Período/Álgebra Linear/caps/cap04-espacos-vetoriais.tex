@@ -311,3 +311,76 @@ Para dar um exemplo de como se demonstra que um conjunto fechado sob adição e 
 	
 	\qed
 \end{Proof}
+
+\section{Subespaços Vetoriais}
+
+Muitas vezes, no estudo de Álgebra Linear, nós não estamos preocupados com a análise do espaço inteiro, mas sim de um (ou mais) pedaços dele que seguem as mesmas regras de um espaço vetorial. Para fazer isso, nós vamos agora definir o conceito de subespaço vetorial:
+
+\begin{Definition}[Subespaço Vetorial]
+	Um conjunto $U\subset V$ é dito um \textbf{subespaço vetorial} se, dados $u, v\in U$ e $\alpha, \beta\in\mathbb{R}$, então
+	
+	$$
+	\alpha u + \beta v \in U.
+	$$
+\end{Definition}
+
+Em outras palavras, um conjunto $U$ contido em um espaço vetorial $V$ é dito um subespaço se for fechado para combinações lineares. Uma facilidade de subespaços vetoriais é o fato de que, para demonstrar que um conjunto é um subespaço, basta demonstrar a propriedade do fechamento. De fato, se nós temos um subconjunto de um espaço vetorial, nós já sabemos que os 6 (ou 8, dependendo da contagem) axiomas de um espaço vetorial são necessariamente satisfeitos. Não é preciso demonstrar todos eles novamente, basta se preocupar com o fechamento sob combinações lineares.
+
+Para dar alguns exemplos de subespaços vetoriais, vamos considerar o espaço que nós mais trabalharemos neste curso: o $\mathbb{R}^n$.
+
+\begin{Example}
+	Considere o espaço $\mathbb{R}^n$. Então, alguns dos seus subespaços são os conjuntos:
+	
+	$\mathbf{1)}$ O conjunto $U = \{0\}$ (ou seja, a origem).
+	
+	$\mathbf{2)}$ O conjunto $U = \{\alpha u; \alpha\in\mathbb{R}\}$ (ou seja, uma reta).
+	
+	$\mathbf{3)}$ O conjunto $U = \{\alpha u + \beta v; \alpha,\beta\in\mathbb{R}\}$ (ou seja, um plano).
+	
+	$\mathbf{4)}$ O conjunto $U = \{\alpha u + \beta v + \gamma w; \alpha,\beta,\gamma\in\mathbb{R}\}$ (ou seja, um hiperplano).
+\end{Example}
+
+Para dar um exemplo de demonstração, vamos demonstrar que uma reta em $\mathbb{R}^n$ é um subespaço de $\mathbb{R}^n$.
+
+\begin{Proposition}
+	Seja $U = \{\alpha u; \alpha\in\mathbb{R}\}$ um subconjunto de $\mathbb{R}^n$. Então, $U$ é um subespaço vetorial de $\mathbb{R}^n$.
+\end{Proposition}
+
+\begin{Proof}
+	Sejam $x$ e $y$ elementos de $U$. Então, $x = \alpha u$ e $y = \beta u$. Tomemos $\alpha'$ e $\beta'$ dois escalares em $\mathbb{R}$. Então:
+	
+	$$
+	\alpha'x + \beta'y = \alpha'\alpha u + \beta'\beta u = (\alpha'\alpha + \beta'\beta)u \in U.
+	$$
+	Logo, $U$ é um subespaço vetorial de $\mathbb{R}^n$.
+	
+	\qed
+\end{Proof}
+
+\section{Transformações Lineares}
+
+Nesta seção, nós iremos apresentar brevemente o conceito de transformação linear. Este é um dos conceitos mais importantes da Álgebra Linear, porque de fato, nós não queremos passar o tempo todo tentando provar que um conjunto é um espaço vetorial: nós queremos poder relacionar um ou mais espaços através de funções, e transformar vetores entre os espaços.
+
+Por ser um conceito tão importante, nós dedicaremos o próximo capítulo inteiramente às transformações lineares, onde nós revisitaremos a sua definição e falaremos melhor das suas propriedades. Por agora, no entanto, nós faremos apenas a definição de transformação linear e daremos alguns exemplos:
+
+\begin{Definition}[Transformação Linear]
+	Sejam $U$ e $V$ dois espaços vetoriais. Então, a função $T:U\to V$ é dita uma \textbf{transformação linear} se:
+	
+	$\mathbf{1)} T(x + y) = T(x) + T(y);$
+	
+	$\mathbf{2)} T(\alpha x) = \alpha T(x),$
+	$\\$
+	onde $x,y\in U$ e $\alpha\in\mathbb{R}$.
+\end{Definition}.
+
+\begin{Example}
+	Alguns exemplos de transformações lineares são:
+	
+	$\mathbf{1)}$ Considere a transformação $T:\mathbb{R}^n\to\mathbb{R}^m$ definida como $T(x) = Ax$, onde $A$ é uma matriz $m\times n$. Então, $T$ é uma transformação linear.
+	
+	$\mathbf{2)}$ Considere a transformação $D:\mathcal{P}_n\to\mathcal{P}_{n - 1}$ definida como $D(p) = p'$. Então, $D$ é uma transformação linear.
+	
+	$\mathbf{3)}$ Considere a transformação $I:\mathbb{R}^n\to\mathbb{R}^n$ definida como $I(x) = x$. Então, $I$ é uma transformação linear.
+\end{Example}
+
+No próximo capítulo, nós falaremos melhor sobre este conceito, e também trataremos da demonstração de que uma transformação é linear. Penso, no entanto, que já é interessante apresentar o conceito de transformação linear por um motivo simples: matrizes são uma forma de representar transformações lineares, como nós veremos em breve. Assim sendo, quando nós falarmos, por exemplo, do espaço coluna de uma matriz, nós poderemos já pensar neste espaço como sendo a imagem da matriz, e quando nós falarmos do espaço nulo de uma matriz, nós já poderemos pensar neste espaço como sendo o núcleo de uma transformação linear.
