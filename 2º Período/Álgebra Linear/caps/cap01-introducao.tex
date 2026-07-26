@@ -1,7 +1,7 @@
 \chapter{Introdução à Álgebra Linear}
 \label{cap:introdução}
 
-Estas notas de aula destinam-se aos estudantes da FGV-EMAp que estão cursando a disciplina "Álgebra Linear", com o Prof. Guilherme Tegoni Goedert. Álgebra Linear é uma disciplina considerada difícil pela maioria dos estudantes. É a primeira vez em que as ideias atingem um nível muito alto de abstração. Ao mesmo tempo, porém, e justamente por isso, é uma das áreas mais fascinantes e importantes da Matemática.
+Estas notas de aula destinam-se aos estudantes da FGV-EMAp que estão cursando a disciplina ``Álgebra Linear'', com o Prof. Guilherme Tegoni Goedert. Álgebra Linear é uma disciplina considerada difícil pela maioria dos estudantes. É a primeira vez em que as ideias atingem um nível muito alto de abstração. Ao mesmo tempo, porém, e justamente por isso, é uma das áreas mais fascinantes e importantes da Matemática.
 
 De fato, algumas das suas aplicações são:
 
@@ -19,7 +19,7 @@ Através destas notas de aula, eu pretendo ajudar os estudantes a entenderem tod
 
 \textbf{Importante:} este capítulo é baseado em \cite{slide1doyuri}.
 
-Em Álgebra Linear, nós estamos interessados em um problema principal, que é a base de todo o ferramental teórico que será desenvolvido: "Como podemos resolver um sistema linear de $m$ equações e $n$ variáveis? Quando é possível fazer isto?".
+Em Álgebra Linear, nós estamos interessados em um problema principal, que é a base de todo o ferramental teórico que será desenvolvido: ``Como podemos resolver um sistema linear de $m$ equações e $n$ variáveis? Quando é possível fazer isto?''.
 
 Para responder a esta pergunta, é necessário primeiramente definir o que é um sistema linear:
 
@@ -53,9 +53,9 @@ $$
 \end{figure}
 
 
-Resolver este sistema não é uma tarefa difícil: da primeira equação, sabemos que $y = -\dfrac{x}{2}$. Da segunda equação, sabemos que $y = 2x - 5$. A solução procurada é exatamente o ponto $P$ em que as duas retas se intersectam (neste caso, $P = (2, -1)$). No entanto, esta abordagem nos revela um modo de pensar, ao qual chamaremos de \textbf{"row picture"}: estamos olhando para as linhas do sistema linear. Em uma representação geométrica, esta abordagem se preocupa com o que as equações representam geometricamente (neste caso, duas retas em $\mathbb{R}^2$ que se interceptam em um único ponto).
+Resolver este sistema não é uma tarefa difícil: da primeira equação, sabemos que $y = -\dfrac{x}{2}$. Da segunda equação, sabemos que $y = 2x - 5$. A solução procurada é exatamente o ponto $P$ em que as duas retas se intersectam (neste caso, $P = (2, -1)$). No entanto, esta abordagem nos revela um modo de pensar, ao qual chamaremos de \textbf{``row picture''}: estamos olhando para as linhas do sistema linear. Em uma representação geométrica, esta abordagem se preocupa com o que as equações representam geometricamente (neste caso, duas retas em $\mathbb{R}^2$ que se interceptam em um único ponto).
 
-Por outro lado, existem uma abordagem mais interessante à qual chamaremos de \textbf{"column picture"}, na qual olharemos para o sistema linear como uma combinação linear de vetores-coluna. No entanto, nós ainda não introduzimos os conceitos de "vetor" e de "combinação linear". Nós o faremos agora de uma maneira provisória (pois, de fato, uma definição formal de vetor só poderá ser dada quando introduzirmos o conceito de espaço vetorial).
+Por outro lado, existem uma abordagem mais interessante à qual chamaremos de \textbf{``column picture''}, na qual olharemos para o sistema linear como uma combinação linear de vetores-coluna. No entanto, nós ainda não introduzimos os conceitos de ``vetor'' e de ``combinação linear''. Nós o faremos agora de uma maneira provisória (pois, de fato, uma definição formal de vetor só poderá ser dada quando introduzirmos o conceito de espaço vetorial).
 
 \begin{Definition}[Definição provisória de vetor]
 	Um \textbf{vetor} pode ser visto como uma lista de números sobre os quais podemos fazer duas operações: soma e multiplicação por escalar.
@@ -134,7 +134,7 @@ $$
 \end{cases}.
 $$
 
-Ao invés de olhar para o sistema por uma abordagem em linha, nós podemos analisar este sistema como uma combinação linear dos vetores-coluna de coeficientes , que produz um novo vetor-coluna. Isto deve ter parecido confuso em palavras, então vamos ilustrar:
+Ao invés de olhar para o sistema por uma abordagem em linha, nós podemos analisar este sistema como uma combinação linear dos vetores-coluna de coeficientes, que produz um novo vetor-coluna. Isto deve ter parecido confuso em palavras, então vamos ilustrar:
 
 Sabemos que $x$ e $y$ são escalares, que ainda não sabemos quem são. Por outro lado, na primeira equação, $x$ é multiplicado por $1$, e na segunda equação, $x$ é multiplicado por 2. Como vimos acima, isso pode ser representado por multiplicação do escalar $x$ pelo vetor $\begin{bmatrix} 1 \\ 2 \end{bmatrix}$. Usando um raciocínio semelhante para $y$, nós obtemos a multiplicação do escalar $y$ pelo vetor $\begin{bmatrix} 2 \\ -1 \end{bmatrix}$. Olhando para o lado direito da equação, o vetor $\begin{bmatrix} 0 \\ 5 \end{bmatrix}$ pode ser escrito como uma combinação linear dos vetores $\begin{bmatrix} 1 \\ 2 \end{bmatrix}$ e $\begin{bmatrix} 2 \\ -1 \end{bmatrix}$.
 
@@ -144,7 +144,7 @@ $$
 x\begin{bmatrix} 1 \\ 2 \end{bmatrix} + y\begin{bmatrix} 2 \\ -1 \end{bmatrix} = \begin{bmatrix} 0 \\ 5 \end{bmatrix}.
 $$
 
-Esta é exatamente a abordagem "column picture" do sistema linear: ele pode ser visto como uma combinação linear de vetores-coluna. E, de fato, esta abordagem é mais fácil de enxergar do que a abordagem "row picture", pois não é geometricamente fácil olhar para um plano em $\mathbb{R}^6$, ou para uma reta em $\mathbb{R}^{729}$.
+Esta é exatamente a abordagem ``column picture'' do sistema linear: ele pode ser visto como uma combinação linear de vetores-coluna. E, de fato, esta abordagem é mais fácil de enxergar do que a abordagem ``row picture'', pois não é geometricamente fácil olhar para um plano em $\mathbb{R}^6$, ou para uma reta em $\mathbb{R}^{729}$.
 
 \section{Representação Matricial de Sistemas Lineares}
 

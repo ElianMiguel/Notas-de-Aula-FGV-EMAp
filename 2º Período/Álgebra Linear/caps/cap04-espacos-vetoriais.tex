@@ -338,6 +338,8 @@ Para dar alguns exemplos de subespaços vetoriais, vamos considerar o espaço qu
 	$\mathbf{3)}$ O conjunto $U = \{\alpha u + \beta v; \alpha,\beta\in\mathbb{R}\}$ (ou seja, um plano).
 	
 	$\mathbf{4)}$ O conjunto $U = \{\alpha u + \beta v + \gamma w; \alpha,\beta,\gamma\in\mathbb{R}\}$ (ou seja, um hiperplano).
+	
+	$\mathbf{5)}$ O conjunto $U = \mathbb{R}^n$ (ou seja, todo o espaço).
 \end{Example}
 
 Para dar um exemplo de demonstração, vamos demonstrar que uma reta em $\mathbb{R}^n$ é um subespaço de $\mathbb{R}^n$.
@@ -361,7 +363,7 @@ Para dar um exemplo de demonstração, vamos demonstrar que uma reta em $\mathbb
 
 Nesta seção, nós iremos apresentar brevemente o conceito de transformação linear. Este é um dos conceitos mais importantes da Álgebra Linear, porque de fato, nós não queremos passar o tempo todo tentando provar que um conjunto é um espaço vetorial: nós queremos poder relacionar um ou mais espaços através de funções, e transformar vetores entre os espaços.
 
-Por ser um conceito tão importante, nós dedicaremos o próximo capítulo inteiramente às transformações lineares, onde nós revisitaremos a sua definição e falaremos melhor das suas propriedades. Por agora, no entanto, nós faremos apenas a definição de transformação linear e daremos alguns exemplos:
+Por ser um conceito tão importante, nós dedicaremos um capítulo inteiro às transformações lineares, onde nós revisitaremos a sua definição e falaremos melhor das suas propriedades. Por agora, no entanto, nós faremos apenas a definição de transformação linear e daremos alguns exemplos:
 
 \begin{Definition}[Transformação Linear]
 	Sejam $U$ e $V$ dois espaços vetoriais. Então, a função $T:U\to V$ é dita uma \textbf{transformação linear} se:
@@ -383,4 +385,275 @@ Por ser um conceito tão importante, nós dedicaremos o próximo capítulo intei
 	$\mathbf{3)}$ Considere a transformação $I:\mathbb{R}^n\to\mathbb{R}^n$ definida como $I(x) = x$. Então, $I$ é uma transformação linear.
 \end{Example}
 
-No próximo capítulo, nós falaremos melhor sobre este conceito, e também trataremos da demonstração de que uma transformação é linear. Penso, no entanto, que já é interessante apresentar o conceito de transformação linear por um motivo simples: matrizes são uma forma de representar transformações lineares, como nós veremos em breve. Assim sendo, quando nós falarmos, por exemplo, do espaço coluna de uma matriz, nós poderemos já pensar neste espaço como sendo a imagem da matriz, e quando nós falarmos do espaço nulo de uma matriz, nós já poderemos pensar neste espaço como sendo o núcleo de uma transformação linear.
+No futuro, nós falaremos melhor sobre este conceito, e também trataremos da demonstração de que uma transformação é linear. Penso, no entanto, que já é interessante apresentar o conceito de transformação linear por um motivo simples: matrizes são uma forma de representar transformações lineares, como nós veremos em breve. Assim sendo, quando nós falarmos, por exemplo, do espaço coluna de uma matriz, nós poderemos já pensar neste espaço como sendo a imagem da matriz, e quando nós falarmos do espaço nulo de uma matriz, nós já poderemos pensar neste espaço como sendo o núcleo de uma transformação linear.
+
+\section{Propriedades dos Subespaços Vetoriais}
+
+Nós vamos iniciar esta seção com um fato cuja demonstração será um dos exercícios: todo subespaço vetorial é um espaço vetorial. Isto é, de fato, bastante intuitivo pois, se um certo conjunto $S$, fechado sob combinações lineares, é formado por elementos de um espaço vetorial, muito provavelmente ele deve ser, por si só, um espaço vetorial.
+
+Assim sendo, as propriedades comuns a todos os subespaços vetoriais que enunciaremos a seguir são válidas para qualquer espaço vetorial.
+
+\begin{Theorem}[Elemento neutro]
+	Todo subespaço vetorial contém o vetor $0$.
+\end{Theorem}
+
+\begin{Proof}
+	Seja $U$ um subespaço vetorial de $V$. Então, tomando $u\in U$ e $\alpha\in\mathbb{R}$, nós temos que $\alpha u\in U$. Assim sendo, tome $\alpha = 0$. Então, $0u = 0\in U$. Logo, $0\in U$.
+	
+	\qed
+\end{Proof}
+
+\begin{Theorem}[Interseção e união de dois subespaços vetoriais]
+	Sejam $V$ e $W$ dois subespaços vetoriais de $E$. Então:
+	
+	a) $V\cap W$ é um subespaço vetorial;
+	
+	b) $V\cup W$ nem sempre é um subespaço vetorial.
+\end{Theorem}
+
+\begin{Proof}
+	a) Sejam $v$ e $w$ dois elementos de $V\cap W$. Então, nós temos que $v\in V$ e $v\in W$. Também temos que $w\in V$ e $w\in W$. Assim sendo, $\alpha v + \beta w \in V$ (pois $V$ é um subespaço vetorial) e $\alpha v + \beta w \in W$ (pois $W$ é um subespaço vetorial). Logo, $\alpha v + \beta w \in V\cap W$ (pela definição de interseção entre conjuntos). Logo, $V\cap W$ é um subespaço vetorial.
+	
+	b) Para demonstrar que há casos em que $V\cup W$ não é um subespaço vetorial, basta encontrar um contra-exemplo. Assim sendo, considere $u\in\mathbb{R}^n$, e tome $V = \{\alpha u; \alpha\in\mathbb{R}\}$ e $W = \{\beta u; \beta\in\mathbb{R}\text{ e }\beta\neq\alpha\}$. Ao tomarmos o vetor $v = (\alpha + \beta)u$, que é uma combinação linear de um vetor em $V$ com um vetor em $W$, nós temos que $v$ não pertence a $V$ nem a $W$, a menos que $\alpha = 0$ ou $\beta = 0$. Logo, nem sempre $V\cup W$ é um subespaço vetorial.
+	
+	\qed
+\end{Proof}
+
+Para as próximas duas propriedades, nós definiremos um conjunto especial de vetores que será muito importante ao longo do curso.
+
+\begin{Definition}[span]
+	Seja $S = \{v_1, v_2, \cdots, v_k\}$ um conjunto de elementos de um subespaço vetorial $V$. Então, definimos o conjunto \textbf{span} como:
+	
+	$$
+	\operatorname{span}(S) = \{\alpha_1v_1 + \alpha_2v_2 + \cdots + \alpha_kv_k; \alpha_i\in\mathbb{R}\}.
+	$$
+\end{Definition}
+
+De forma resumida, $\operatorname{span}(S)$ é o conjunto de todas as combinações lineares dos elementos de $S$. Para dar um exemplo, considere que $S = \{e_1, e_2, e_3\}$, onde cada $e_i$ é um dos vetores canônicos de $\mathbb{R}^3$. Então, $\operatorname{span}(S) = \{\alpha_1e_1 + \alpha_2e_2 + \alpha_3e_3; \alpha_i\in\mathbb{R}\}$. Ou seja, $\operatorname{span}(S) = \mathbb{R}^3$.
+
+Intuitivamente, parece-nos que este conjunto especial é um subespaço vetorial. De fato, ele é, e nós o provamos agora, e também demonstraremos uma propriedade especial do conjunto gerador (\textit{span} significa gerador em inglês).
+
+\begin{Theorem}
+	Seja $S = \{v_1, v_2, \cdots, v_k\}$ um conjunto de vetores de um subespaço vetorial $V$. Então, $\operatorname{span}(S)$ é um subespaço vetorial de $V$.
+\end{Theorem}
+
+\begin{Proof}
+	Sejam $u$ e $v$ dois elementos de $\operatorname{span}(S)$, e sejam $\alpha, \beta\in\mathbb{R}$. Nós queremos provar que $\alpha u + \beta v\in\operatorname{span}(S)$. Para isto, nós sabemos que existem $a_1, a_2, \cdots, a_k\in\mathbb{R}$ e $b_1, b_2, \cdots, b_k\in\mathbb{R}$ tais que $u = \sum\limits_{i = 1}^{k} a_kv_k$ e $v = \sum\limits_{i = 1}^{k} b_kv_k$. Assim sendo:
+	
+	\begin{align*}
+		\alpha u + \beta v &= \alpha\sum\limits_{i = 1}^{k} a_kv_k + \beta\sum\limits_{i = 1}^{k} b_kv_k = \sum\limits_{i = 1}^{k} \alpha a_kv_k + \sum\limits_{i = 1}^{k} \beta b_kv_k \\ &= \sum\limits_{i = 1}^{k} (\alpha a_kv_k + \beta b_kv_k) = \sum\limits_{i = 1}^{k} (\alpha a_k + \beta b_k)v_k\in\operatorname{span}(S).
+	\end{align*}
+ 	
+ 	Logo, $\operatorname{span}(S)$ é um subespaço vetorial de $V$.
+ 	
+ 	\qed
+\end{Proof}
+
+\begin{Theorem}
+	Seja $S = \{v_1, v_2, \cdots, v_k\}$ um conjunto de vetores de um subespaço vetorial $V$. Então, $\operatorname{span}(S)$ é o menor subespaço vetorial que contém $S$.
+\end{Theorem}
+
+\begin{Proof}
+	Em primeiro lugar, vamos conferir o fato de que $S\subseteq\operatorname{span}(S)$. De fato, se tomarmos $\alpha_i = 1$ e $\alpha_j = 0$ para todo $i\neq j$ na definição de $\operatorname{span}(S)$, nós concluímos que $S\subseteq\operatorname{span}(S)$.
+	
+	Agora, precisamos provar que $\operatorname{span}(S)$ é o menor subespaço vetorial que contém $S$. Ou seja, precisamos provar que, dado qualquer subespaço vetorial $V$ tal que $S\subseteq V$, nós temos que $\operatorname{span}(S)\subseteq V$.
+	
+	Isto segue do fato que, se $S\subseteq V$, então $\alpha_1v_1 + \alpha_2v_2 + \cdots + \alpha_kv_k\in V, \forall\alpha_i\in\mathbb{R}$. Porém, $\alpha_1v_1 + \alpha_2v_2 + \cdots + \alpha_kv_k\in\operatorname{span}(S)$, pela definição. Logo, $\operatorname{span}(S)\subseteq V$.
+	
+	\qed
+\end{Proof}
+
+\section{Núcleo e Imagem de uma Matriz}
+
+Considere uma matriz $A_{m\times n}$ qualquer. Como nós vimos (mas ainda não demonstramos), nós podemos pensar em $A$ como uma transformação linear definida por:
+
+\begin{align*}
+	A:~&\mathbb{R}^n\to\mathbb{R}^m \\
+	&x\mapsto Ax
+\end{align*}.
+
+Isto quer dizer que uma matriz $m\times n$ é uma forma de representar uma função linear entre dois espaços vetoriais, em que $\mathbb{R}^n$ é o domínio e $\mathbb{R}^m$ é o contra-domínio da função. Por sua vez, quando nós estamos trabalhando com funções, muitas vezes nós estamos interessados em analisar subconjuntos específicos do domínio e do contradomínio. 
+
+O exemplo mais famoso e clássico deste fato é a imagem, que nada mais é do que um subconjunto do contradomínio cujos elementos são aqueles que foram associados a pelo menos um valor do domínio. Um outro conjunto que costuma ser muito importante, muito embora menos falado, é o conjunto dos zeros de uma função, que consiste em todos os valores do domínio para os quais a função, avaliada nestes valores, é igual a zero.
+
+Em Álgebra Linear não é diferente: nós estamos interessados também em estudar subconjuntos específicos das transformações lineares que fazem exatamente este papel: a imagem (que chamaremos, no caso das matrizes, de espaço coluna) e o núcleo (que corresponde ao conjunto dos zeros da transformação linear/matriz).
+
+\begin{Definition}[Núcleo de uma matriz]
+	Seja $A$ uma matriz $m\times n$ qualquer. Então, chamamos de \textbf{núcleo} da matriz $A$ ao conjunto:
+	
+	$$
+	N(A) = \{x\in\mathbb{R}^n; Ax = 0\}.
+	$$
+\end{Definition}
+
+Uma outra notação bastante comum para o núcleo de uma matriz $A$ é $\ker(A)$ (que vem da palavra $\mathit{kernel}$).
+
+\begin{Definition}[Imagem de uma matriz]
+	Seja $A$ uma matriz $m\times n$ qualquer. Então, chamamos de \textbf{imagem}, ou \textbf{espaço coluna} da matriz $A$ ao conjunto:
+	
+	$$
+	C(A) = \{Ax\in\mathbb{R}^m; x\in\mathbb{R}^n\}.
+	$$
+\end{Definition}
+
+Para o espaço coluna, uma outra notação pode ser $\operatorname{Im(A)}$, em referência à sua visão enquanto imagem de uma transformação linear.
+
+No capítulo sobre Transformações Lineares, nós iremos revisitar estes conceitos, estendendo-os para transformações lineares em geral. Via de regra, nestas notas de aula, quando falarmos em espaço coluna, nós estaremos olhando para o aspecto matricial, enquanto quando falarmos em imagem, enfatizaremos o aspecto funcional.
+
+A primeira coisa importante sobre estes dois conjuntos é o fato de que ambos são subespaços vetoriais.
+
+\begin{Proposition}
+	Seja $A$ uma matriz $m\times n$ qualquer. Então, $N(A)$ é um subespaço vetorial.
+\end{Proposition}
+
+\begin{Proof}
+	Sejam $x$ e $y$ dois elementos pertencentes a $N(A)$. Então, sabemos que $Ax = 0$ e que $Ay = 0$. Sabemos também que, pela definição, $N(A)\subseteq\mathbb{R}^n$. Considere então $\alpha, \beta\in\mathbb{R}$. Sabendo que $A$ é linear, vamos ver o que acontece com $\alpha x + \beta y$:
+	
+	$$
+	A(\alpha x + \beta y) = A(\alpha x) + A(\beta y) = \alpha(Ax) + \beta(Ay) = \alpha\cdot 0 + \beta\cdot 0 = 0 + 0 = 0.
+	$$
+	Logo, $\alpha x + \beta y\in N(A)$, logo $N(A)$ é um subespaço vetorial de $\mathbb{R}^n$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}
+	Seja $A$ uma matriz $m\times n$ qualquer. Então, $C(A)$ é um subespaço vetorial.
+\end{Proposition}
+
+\begin{Proof}
+	Sejam $u$ e $v$ dois elementos de $C(A)$. Então, pela definição, existem $x, y\in\mathbb{R}^n$ tais que $u = Ax$ e $v = Ay$. Sabemos também, pela definição, que $C(A)\subseteq\mathbb{R}^m$. Assim sendo, considere $\alpha, \beta\in\mathbb{R}$ quaisquer. Calculemos $\alpha u + \beta v$:
+	
+	$$
+	\alpha u + \beta v = \alpha (Ax) + \beta (Ay) = A(\alpha x) + A(\beta y) = A(\alpha x + \beta y)\in C(A).
+	$$
+	Logo, $C(A)$ é um subespaço vetorial de $\mathbb{R}^m$.
+	
+	\qed
+\end{Proof}
+
+O motivo pelo qual damos o nome de ``espaço coluna'' para a imagem de uma matriz $A$ é o fato de que $C(A)$ é o espaço vetorial criado com todas as combinações lineares das colunas de $A$ (ou, em linguagem matemática, $C(A) = \operatorname{span}(\{a_1, \cdots, a_n\})$).
+
+Daí decorre uma propriedade que é extremamente óbvia, mas que nós demonstraremos aqui:
+
+\begin{Proposition}
+	Sejam $A$ uma matriz $m\times n$ e $b$ um vetor $m\times 1$. Então, o sistema $Ax = b$ possui solução se, e somente se, $b\in C(A)$.
+\end{Proposition}
+
+\begin{Proof}
+	$\implies$ Suponha que o sistema $Ax = b$ possui solução. Então, existe um vetor $x\in\mathbb{R}^n$ tal que $Ax = b$. No entanto, sabemos que $Ax = x_1a_1 + x_2a_2 + \cdots + x_na_n$. Ou seja, $Ax\in\operatorname{span}(\{a_1, \cdots, a_n\})$. Logo, $b\in\operatorname{span}(\{a_1, \cdots, a_n\})$. Porém, como nós vimos, $C(A) = \operatorname{span}(\{a_1, \cdots, a_n\})$. Logo, $b\in C(A)$.
+	
+	$\impliedby$ Suponha que $b\in C(A)$. Então, $b$ pode ser escrito como $b = x_1a_1 + \cdots + x_na_n = Ax$. Logo, existe $x\in\mathbb{R}^n$ tal que $Ax = b$. Assim sendo, o sistema $Ax = b$ possui solução.
+	
+	\qed
+\end{Proof}
+
+Agora, vamos dar alguns exemplos simples do núcleo de uma matriz.
+
+\begin{Example}
+	Considere a matriz $A = \begin{bmatrix}
+		2 & 1 \\
+		4 & 2
+	\end{bmatrix}$. Queremos achar todos os vetores $x$ tais que $Ax = 0$. Assim sendo, considere $x = \begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix}$. Nós obtemos o seguinte sistema linear:
+	
+	$$
+	\begin{bmatrix}
+		2 & 1 \\
+		4 & 2
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}
+	\iff
+	\begin{bmatrix}
+		2 & 1 \\
+		0 & 0
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}
+	\iff
+	2x_1 + x_2 = 0.
+	$$
+	Ou seja, $N(A) = \{(x_1, x_2)^T; 2x_1 + x_2 = 0\}$. Também podemos escrever $x_2$ em função de $x_1$, obtendo $x_2 = -2x_1$. Fazendo isso, podemos considerar um vetor qualquer que satisfaça esta equação, como por exemplo $x = \begin{bmatrix}
+		1 \\
+		-2
+	\end{bmatrix}$, e dizer que $N(A) = \operatorname{span}\left(\left\{\begin{bmatrix}
+		1 \\
+		-2
+	\end{bmatrix}\right\}\right)$.
+\end{Example}
+
+\begin{Example}
+	Considere a matriz $A = \begin{bmatrix}
+		3 & 1 \\
+		0 & 2
+	\end{bmatrix}$. Nós queremos achar todos os vetores $x$ tais que $Ax = 0$. Nós temos que:
+	
+	$$
+	\begin{bmatrix}
+		3 & 1 \\
+		0 & 2
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}
+	\iff
+	x_1 = x_2 = 0.
+	$$
+	Logo, $N(A) = \left\{\begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}\right\}$.
+\end{Example}
+
+O primeiro exemplo nos motiva uma discussão interessante. Suponha que $A = LU$. Neste caso, nós estamos considerando uma espécie de ``fatoração $LU$ extendida'', em que a matriz $U$ pode conter linhas inteiras de zeros. Neste caso:
+
+$$
+Ax = 0 \iff LUx = 0 \iff Ux = 0.
+$$
+
+Ou seja, $N(A) = N(U)$.
+
+Por outro lado, não é verdade que $C(A) = C(U)$. Suponha que $Ax = b$, com $b\neq 0$. Então, $LUx = b\iff Ux = L^{-1}b = c$. Assim sendo, $C(A)\neq C(U)$.
+
+Ainda nos referindo ao mesmo exemplo, nós temos que $C(A) = \operatorname{span}\left(\left\{\begin{bmatrix}
+	2 \\
+	4
+\end{bmatrix}, \begin{bmatrix}
+	1 \\
+	2
+\end{bmatrix}\right\}\right) = \operatorname{span}\left(\left\{\begin{bmatrix}
+	1 \\
+	2
+\end{bmatrix}\right\}\right)$ (lembre-se que $(2, 4)^T = 2(1, 2)^T$). Por outro lado, $C(U) = \operatorname{span}\left(\left\{\begin{bmatrix}
+	2 \\
+	0
+\end{bmatrix}, \begin{bmatrix}
+	1 \\
+	0
+\end{bmatrix}\right\}\right) = \operatorname{span}\left(\left\{\begin{bmatrix}
+	1 \\
+	0
+\end{bmatrix}\right\}\right)$. Logo, $C(A)\neq C(U)$.
