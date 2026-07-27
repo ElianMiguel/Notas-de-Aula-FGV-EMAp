@@ -864,7 +864,7 @@ Compare a matriz $N'$ com a matriz $R'$. As duas primeiras linhas de $N'$ formam
 	onde $P$ é a matriz de permutação que troca as linhas de $N$ correspondentes às colunas de $R$ que foram permutadas.
 \end{Definition}
 
-A matriz núcleo recebe este nome por um motivo muito simples: os seus vetores-coluna são exatamente os vetores que geram o núcleo de $A$. Então, se nós queremos encontrar o núcleo de uma matriz $A$, nós podemos simplesmente encontrar a sua forma escalonada reduzida $R$, e montar a matriz núcleo $N$.
+A matriz núcleo recebe este nome por um motivo muito simples: os seus vetores-coluna geram o núcleo de $A$. Então, se nós queremos encontrar o núcleo de uma matriz $A$, nós podemos simplesmente encontrar a sua forma escalonada reduzida $R$, e montar a matriz núcleo $N$.
 
 Vamos fazer mais um exemplo:
 
@@ -1025,5 +1025,120 @@ $$
 x = x_p + \alpha_1 n_1 + \alpha_2 n_2 + \cdots + \alpha_{n - r} n_{n - r}.
 $$
 
-O vetor $x_n$, escrito desta forma, é chamado de \textbf{solução geral} do sistema, e o vetor $x$, composto pela soma da solução particular com a solução geral, é chamado de \textbf{solução completa} do sistema.
+Cada vetor $n_i$ é chamado de \textbf{solução especial} do sistema. Por sua vez, o vetor $x_n$, escrito desta forma, é chamado de \textbf{solução geral} do sistema, e o vetor $x$, composto pela soma da solução particular com a solução geral, é chamado de \textbf{solução completa} do sistema.
+
+\section{Exercícios}
+
+\textbf{Importante:} alguns dos exercícios são baseados em \cite{lista1doguilherme}, em \cite{slide4doyuri} e em \cite{axler2026}.
+
+\noindent $\mathbf{4.1)}$ Demonstre que o conjunto $\mathbb{C}^n$, munido das operações de soma e de multiplicação por escalar usuais, é um espaço vetorial.
+
+$\\$
+$\mathbf{4.2)}$ Demonstre que o conjunto $\mathbb{R}^\mathbb{R}$, munido das operações de soma e de multiplicação por escalar usuais, é um espaço vetorial.
+
+$\\$
+$\mathbf{4.3)}$ Demonstre que o conjunto $\mathcal{P}_n$, munido das operações usuais de soma e de multiplicação por escalar, é um subespaço vetorial de $\mathbb{R}^\mathbb{R}$.
+
+$\\$
+$\mathbf{4.4)}$ Seja $A$ uma matriz $m\times n$ qualquer. Demonstre que a transformação $T:\mathbb{R}^n\to\mathbb{R}^m$ definida por $T(x) = Ax$ é linear.
+
+$\\$
+$\mathbf{4.5)}$ Seja $A$ uma matriz $m\times n$, e considere o conjunto
+
+$$
+S = \{x\in\mathbb{R}^n; Ax = b\}.
+$$
+
+Prove que, se $b\neq 0$, então $S$ não é um subespaço vetorial.
+
+$\\$
+$\mathbf{4.6)}$  Sejam $b_1$, $b_2$ e $b_3$ três vetores diferentes em $\mathbb{R}^m$. Como podemos construir uma matriz $A_{m\times n}$ tal que $Ax = b_1$ e $Ax = b_2$ tenham solução, mas $Ax = b_3$ não tenha? Isto é sempre possível?
+
+$\\$
+$\mathbf{4.7)}$ Determine o núcleo e o espaço coluna de $A = \begin{bmatrix}
+	2 & 5 & 8 \\
+	4 & 7 & 10 \\
+	8 & 14 & 20
+\end{bmatrix}$.
+
+$\\$
+$\mathbf{4.8)}$ Considere a decomposição $A = S + T$, onde $S$ é uma matriz simétrica e $T$ é uma matriz antissimétrica. Prove que, se $x\in N(A)$, então $x\in N(S)$ se, e somente se $x\in N(T)$.
+
+$\\$
+$\mathbf{4.9)}$ Sejam $S$ e $T$ dois subespaços de um espaço vetorial $V$.
+
+a) Defina $S + T = \{s + t; s\in S \text{ e } t\in T\}$. Mostre que $S + T$ é um subespaço vetorial.
+
+b) Defina $S\cup T = \{x; x\in S \text{ ou } x\in T\}$. Prove que $S\cup T$ é um subespaço vetorial se, e somente se, $S\subseteq T$ ou $T\subseteq S$.
+
+c) Se $S$ e $T$ são retas em $\mathbb{R}^3$, o que são $S + T$ e $S\cup T$?
+
+$\\$
+$\mathbf{4.10)}$ Sejam $A$ uma matriz $m\times n$ e $P$ uma matriz de permutação $m\times m$. Prove que $N(A) = N(PA)$.
+
+$\\$
+$\mathbf{4.11)}$ Sejam $A$ uma matriz $m\times n$ e $P$ uma matriz de permutação $n\times n$. Mostre que, em geral, $N(A)\neq N(AP)$.
+
+$\\$
+$\mathbf{4.12)}$ Como o núcleo $N(C)$ é relacionado aos núcleos $N(A)$ e $N(B)$, onde $C = \begin{bmatrix}
+	A \\
+	B
+\end{bmatrix}$?
+
+$\\$
+$\mathbf{4.13)}$ Considere a matriz
+
+$$
+A = \begin{bmatrix}
+	1 & 5 & 7 & 9 \\
+	0 & 4 & 1 & 7 \\
+	2 & -2 & 11 & -3
+\end{bmatrix}.
+$$
+
+a) Ache a sua forma escalonada reduzida.
+
+b) Encontre uma solução especial para $Ax = 0$.
+
+c) Seja $x_p$ uma solução particular de $Ax = b$. Qual é a solução completa do sistema?
+
+$\\$
+$\mathbf{4.14}$ Se $A_{4\times 4}$ é uma matriz inversível, descreva todos os vetores no núcleo da matriz $B = \begin{bmatrix}
+	A & A
+\end{bmatrix}$ (que é $4\times 8$)?
+
+$\\$
+$\mathbf{4.15)}$ Sejam $A = \begin{bmatrix}
+	1 & 5 & 10 & 4\\
+	2 & 3 & 2 & 8\\
+	4 & 8 & 7 & 1
+\end{bmatrix}$, $x = \begin{bmatrix}
+	x_1 \\
+	x_2 \\
+	x_3 \\
+	x_4
+\end{bmatrix}$ e $b = \begin{bmatrix}
+	b_1 \\
+	b_2 \\
+	b_3
+\end{bmatrix}$. Quais condições precisam ser satisfeitas para que o sistema $Ax = b$ possua solução?
+
+$\\$
+$\mathbf{4.16)}$ Seja $A = \begin{bmatrix}
+	1 & 2 \\
+	3 & 8
+\end{bmatrix}$. Qual é o núcleo de $B = \begin{bmatrix}
+	A \\
+	2A
+\end{bmatrix}$? E qual é o núcleo de $C = \begin{bmatrix}
+	A & 2A
+\end{bmatrix}$?
+
+$\\$
+$\mathbf{4.17)}$ Suponha que $Ax = b$ e $Cx = b$ tenham as mesmas soluções completas para todo $b$. Podemos concluir que $A = C$?
+
+$\\$
+$\mathbf{4.18)}$ Seja $A$ uma matriz $m\times n$ qualquer. Demonstre que os vetores-coluna da matriz núcleo $N$ geram $N(A)$.
+
+
 
