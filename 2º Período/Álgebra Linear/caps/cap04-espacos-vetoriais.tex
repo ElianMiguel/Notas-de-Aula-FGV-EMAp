@@ -864,19 +864,7 @@ Compare a matriz $N'$ com a matriz $R'$. As duas primeiras linhas de $N'$ formam
 	onde $P$ é a matriz de permutação que troca as linhas de $N$ correspondentes às colunas de $R$ que foram permutadas.
 \end{Definition}
 
-A matriz núcleo recebe este nome por um motivo muito simples: os seus vetores-coluna são exatamente os vetores que geram o núcleo de $A$. De fato, se nós consideramos $R' = \begin{bmatrix}
-	I & F \\
-	0 & 0
-\end{bmatrix}$ e $N' = \begin{bmatrix}
-	-F \\
-	I
-\end{bmatrix}$, então $R'N' = \begin{bmatrix}
-	F - F \\
-	0
-\end{bmatrix} = \begin{bmatrix}
-	0 \\
-	0
-\end{bmatrix} = 0$. Ao permutarmos as linhas de $N'$ de modo a obter $N$, e permutarmos as colunas correspondentes de $R'$ de modo a obter $R$, nós obtemos $RN = (R'P)(PN') = R'(PP)N' = R'P^2N' = R'(P^2N') = R'N' = 0$.
+A matriz núcleo recebe este nome por um motivo muito simples: os seus vetores-coluna são exatamente os vetores que geram o núcleo de $A$. Então, se nós queremos encontrar o núcleo de uma matriz $A$, nós podemos simplesmente encontrar a sua forma escalonada reduzida $R$, e montar a matriz núcleo $N$.
 
 Vamos fazer mais um exemplo:
 
