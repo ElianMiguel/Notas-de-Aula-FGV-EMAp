@@ -268,9 +268,9 @@ Na prática, para encontrar a transposta de uma matriz, basta escrever cada colu
 
 Vejamos agora algumas de suas propriedades:
 
-\begin{Theorem}[Transposta do Produto]
+\begin{Proposition}[Transposta do Produto]
 	Sejam $A_{m\times n}$ e $B_{n\times p}$ duas matrizes quaisquer. Então, $(AB)^T = B^TA^T$.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Primeiramente, vamos calcular $(AB)^T_{ij}$:
@@ -288,9 +288,9 @@ Vejamos agora algumas de suas propriedades:
 	\qed
 \end{Proof}
 
-\begin{Theorem}[Inversa da Transposta]
+\begin{Proposition}[Inversa da Transposta]
 	Seja $A_{n\times n}$ uma matriz invertível. Então, $(A^T)^{-1} = (A^{-1})^T$.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Seja $C = (A^{-1})^T$. Nós queremos verificar que $C$ é a inversa de $A$, ou seja, que $CA^T = I$. Para fazer isto, vamos calcular $CA^T$:
@@ -303,9 +303,9 @@ Vejamos agora algumas de suas propriedades:
 	\qed
 \end{Proof}
 
-\begin{Theorem}[Transposta de uma Matriz Triangular]
+\begin{Proposition}[Transposta de uma Matriz Triangular]
 	Seja $L_{n\times n}$ uma matriz triangular inferior. Então, $L^T$ é uma matriz triangular superior.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Se $L$ é uma matriz triangular inferior, por definição, $L_{ij} = 0$ se $i < j$. Sabemos que $L^T_{ji} = L_{ij}$. Assim sendo, quando $i < j$, $L^T_{ji} = 0$, e como $j > i$, segue que $L^T$ é uma matriz triangular superior.
@@ -313,9 +313,9 @@ Vejamos agora algumas de suas propriedades:
 	\qed
 \end{Proof}
 
-\begin{Theorem}[Transposta da Transposta]
+\begin{Proposition}[Transposta da Transposta]
 	Seja $A_{m\times n}$ uma matriz qualquer. Então, $(A^T)^T = A$.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Seja $C = A^T$. Então, $C^T_{ij} = C_{ji} = (A^T)_{ji} = A_{ij}$. Logo, $A = (A^T)^T$.
@@ -323,9 +323,9 @@ Vejamos agora algumas de suas propriedades:
 	\qed
 \end{Proof}
 
-\begin{Theorem}[Produto Interno e Produto Externo]
+\begin{Proposition}[Produto Interno e Produto Externo]
 	Sejam $x$ e $y$ vetores-coluna $n\times 1$. Então, $x^Ty$ é o produto interno euclidiano de $x$ e $y$, e $xy^T$ é uma matriz cujas colunas são múltiplas de $x$.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Primeiramente, vamos calcular $x^Ty$:
@@ -354,9 +354,9 @@ P = \begin{bmatrix}
 $$
 onde $(p_1, p_2, \cdots, p_n)$ é uma permutação qualquer de $\{1, 2, \cdots, n\}$.
 
-\begin{Theorem}[Inversa da Permutação]
+\begin{Proposition}[Inversa da Permutação]
 	Seja $P_{n\times n}$ uma matriz de permutação. Então, $P^{-1} = P^T$.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Usando a definição que nós acabamos de dar, nós temos que:
@@ -503,10 +503,11 @@ $\mathbf{3.11)}$ (Desafio!) Uma matriz de Vandermonde de ordem $n\times n$ defin
 
 $$
 V = \begin{bmatrix}
-	1 & x_1 & x_1^2 & \cdots & x_1^{n - 1} \\
-	1 & x_2 & x_2^2 & \cdots & x_2^{n - 1} \\
+	1 & 1 & 1 & \cdots & 1 \\
+	x_1 & x_2 & x_3 & \cdots & x_n \\
+	x_1^2 & x_2^2 & x_3^2 & \cdots & x_n^2 \\
 	\vdots & \vdots & \vdots & \ddots & \vdots \\
-	1 & x_n & x_n^2 & \cdots & x_n^{n - 1}
+	x_1^{n - 1} & x_2^{n - 1} & x_3^{n - 1} & \cdots & x_n^{n - 1}
 \end{bmatrix}.
 $$
 

@@ -393,9 +393,9 @@ Nós vamos iniciar esta seção com um fato cuja demonstração será um dos exe
 
 Assim sendo, as propriedades comuns a todos os subespaços vetoriais que enunciaremos a seguir são válidas para qualquer espaço vetorial.
 
-\begin{Theorem}[Elemento neutro]
+\begin{Proposition}[Elemento neutro]
 	Todo subespaço vetorial contém o vetor $0$.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Seja $U$ um subespaço vetorial de $V$. Então, tomando $u\in U$ e $\alpha\in\mathbb{R}$, nós temos que $\alpha u\in U$. Assim sendo, tome $\alpha = 0$. Então, $0u = 0\in U$. Logo, $0\in U$.
@@ -403,13 +403,13 @@ Assim sendo, as propriedades comuns a todos os subespaços vetoriais que enuncia
 	\qed
 \end{Proof}
 
-\begin{Theorem}[Interseção e união de dois subespaços vetoriais]
+\begin{Proposition}[Interseção e união de dois subespaços vetoriais]
 	Sejam $V$ e $W$ dois subespaços vetoriais de $E$. Então:
 	
 	a) $V\cap W$ é um subespaço vetorial;
 	
 	b) $V\cup W$ nem sempre é um subespaço vetorial.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	a) Sejam $v$ e $w$ dois elementos de $V\cap W$. Então, nós temos que $v\in V$ e $v\in W$. Também temos que $w\in V$ e $w\in W$. Assim sendo, $\alpha v + \beta w \in V$ (pois $V$ é um subespaço vetorial) e $\alpha v + \beta w \in W$ (pois $W$ é um subespaço vetorial). Logo, $\alpha v + \beta w \in V\cap W$ (pela definição de interseção entre conjuntos). Logo, $V\cap W$ é um subespaço vetorial.
@@ -433,9 +433,9 @@ De forma resumida, $\operatorname{span}(S)$ é o conjunto de todas as combinaç�
 
 Intuitivamente, parece-nos que este conjunto especial é um subespaço vetorial. De fato, ele é, e nós o provamos agora, e também demonstraremos uma propriedade especial do conjunto gerador (\textit{span} significa gerador em inglês).
 
-\begin{Theorem}
+\begin{Proposition}
 	Seja $S = \{v_1, v_2, \cdots, v_k\}$ um conjunto de vetores de um subespaço vetorial $V$. Então, $\operatorname{span}(S)$ é um subespaço vetorial de $V$.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Sejam $u$ e $v$ dois elementos de $\operatorname{span}(S)$, e sejam $\alpha, \beta\in\mathbb{R}$. Nós queremos provar que $\alpha u + \beta v\in\operatorname{span}(S)$. Para isto, nós sabemos que existem $a_1, a_2, \cdots, a_k\in\mathbb{R}$ e $b_1, b_2, \cdots, b_k\in\mathbb{R}$ tais que $u = \sum\limits_{i = 1}^{k} a_kv_k$ e $v = \sum\limits_{i = 1}^{k} b_kv_k$. Assim sendo:
@@ -449,9 +449,9 @@ Intuitivamente, parece-nos que este conjunto especial é um subespaço vetorial.
  	\qed
 \end{Proof}
 
-\begin{Theorem}
+\begin{Proposition}
 	Seja $S = \{v_1, v_2, \cdots, v_k\}$ um conjunto de vetores de um subespaço vetorial $V$. Então, $\operatorname{span}(S)$ é o menor subespaço vetorial que contém $S$.
-\end{Theorem}
+\end{Proposition}
 
 \begin{Proof}
 	Em primeiro lugar, vamos conferir o fato de que $S\subseteq\operatorname{span}(S)$. De fato, se tomarmos $\alpha_i = 1$ e $\alpha_j = 0$ para todo $i\neq j$ na definição de $\operatorname{span}(S)$, nós concluímos que $S\subseteq\operatorname{span}(S)$.
@@ -638,7 +638,7 @@ Ou seja, $N(A) = N(U)$.
 
 Por outro lado, não é verdade que $C(A) = C(U)$. Suponha que $Ax = b$, com $b\neq 0$. Então, $LUx = b\iff Ux = L^{-1}b = c$. Assim sendo, $C(A)\neq C(U)$.
 
-Ainda nos referindo ao mesmo exemplo, nós temos que $C(A) = \operatorname{span}\left(\left\{\begin{bmatrix}
+Ainda nos referindo ao primeiro exemplo desta seção, nós temos que $C(A) = \operatorname{span}\left(\left\{\begin{bmatrix}
 	2 \\
 	4
 \end{bmatrix}, \begin{bmatrix}
@@ -657,3 +657,385 @@ Ainda nos referindo ao mesmo exemplo, nós temos que $C(A) = \operatorname{span}
 	1 \\
 	0
 \end{bmatrix}\right\}\right)$. Logo, $C(A)\neq C(U)$.
+
+\section{Forma Escalonada de uma Matriz}
+
+Considere agora uma matriz $A_{m\times n}$ qualquer. Estamos ainda interessados no problema de encontrar o núcleo de $A$. Como nós vimos na seção anterior, dada uma qualquer $B_{n\times n}$, se $U$ é a matriz triangular superior resultante do processo de eliminação de $B$, então $N(B) = N(U)$ (lembrando que, neste caso, nós estamos considerando que a fatoração $LU$ pode ser estendida para o caso em que $B$ não é invertível).
+
+Por sua vez, suponha que nós aplicamos o processo de eliminação à matriz $A$. Como $A$ não é uma matriz quadrada, nós não encontraremos uma matriz triangular superior no final. No entanto, nós poderemos encontrar uma certa matriz $U$ que muito parecida com uma matriz triangular superior, embora seja retangular. Também neste caso, é verdade que $N(A) = N(U)$. Vamos fazer um exemplo para enxergar melhor esta situação:
+
+\begin{Example}
+	Seja $A = \begin{bmatrix}
+		1 & 2 & 2 & 2 \\
+		2 & 4 & 6 & 8 \\
+		3 & 6 & 8 & 10
+	\end{bmatrix}$. Aplicando os passos da eliminação, nós obtemos:
+	
+	$$
+	A\overset{\substack{L_2 - 2L_1 \\ L_3 - 3L_1}}{\implies}
+	\begin{bmatrix}
+		1 & 2 & 2 & 2 \\
+		0 & 0 & 2 & 4 \\
+		0 & 0 & 2 & 4
+	\end{bmatrix}\overset{L_3 - L_2}{\implies}
+	\begin{bmatrix}
+		1 & 2 & 2 & 2 \\
+		0 & 0 & 2 & 4 \\
+		0 & 0 & 0 & 0
+	\end{bmatrix} = U.
+	$$
+\end{Example}
+
+Usando este exemplo, nós temos que a matriz $A$ possui dois pivôs: $1$ e $2$. Na matriz $U$, eles estão, respectivamente, na primeira e na terceira colunas. Nós podemos continuar o processo de eliminação a partir de $U$ de modo que todos os pivôs sejam iguais a $1$ e que todos os elementos acima dos pivôs sejam iguais a $0$. No nosso exemplo, nós podemos continuar este processo da seguinte forma:
+
+$$
+U\overset{L_2/2}{\implies}
+\begin{bmatrix}
+	1 & 2 & 2 & 2 \\
+	0 & 0 & 1 & 2 \\
+	0 & 0 & 0 & 0
+\end{bmatrix}\overset{L_1 - 2L_2}{\implies}
+\begin{bmatrix}
+	1 & 2 & 0 & -2 \\
+	0 & 0 & 1 & 2 \\
+	0 & 0 & 0 & 0
+\end{bmatrix} = R
+$$.
+
+Esta matriz $R$ recebe um nome especial, que definiremos a seguir:
+
+\begin{Definition}[Forma escalonada reduzida]
+	Seja $A$ uma matriz $m\times n$ qualquer. Suponha que, ao aplicar o processo de eliminação a $A$, nós obtemos uma certa matriz $U$ com $k$ pivôs e, em seguida, nós continuamos o processo de eliminação de modo a tornar cada um dos pivôs igual a $1$ e a produzir zeros nos elementos acima dos pivôs, obtendo, ao final, uma matriz $R$. A esta matriz $R$ nós damos o nome de \textbf{forma escalonada reduzida} de $A$.
+\end{Definition}
+
+Nós ainda podemos fazer permutações de colunas, de modo a obter uma forma especial para $R$. No nosso exemplo, isto é feito da seguinte forma:
+
+$$
+R\overset{C_2\leftrightarrow C_3}{\implies}
+\begin{bmatrix}
+	1 & 0 & 2 & -2 \\
+	0 & 1 & 0 & 2 \\
+	0 & 0 & 0 & 0
+\end{bmatrix} = \begin{bmatrix}
+	I & F \\
+	0 & 0
+\end{bmatrix} = R'.
+$$
+
+O que torna $R'$ especial é a sua estrutura: ela é uma matriz por blocos, cujas primeiras colunas contêm os pivôs, e cujas últimas colunas não possuem pivôs.
+
+Nós damos nomes especiais a estes tipos de colunas: uma coluna com pivô é chamada de \textbf{coluna pivô} e uma coluna sem pivô é chamada de \textbf{coluna livre}.
+
+A grande importância do que estamos fazendo se deve ao seguinte fato:
+
+\begin{Proposition}
+	Seja $A$ uma matriz $m\times n$ qualquer, e $R$ a sua forma escalonada reduzida. Então, $N(A) = N(R)$.
+\end{Proposition}
+
+\begin{Proof}
+	Seja $E$ a matriz $m\times m$ tal que $EA = R$. Então, nós temos que:
+	
+	$$
+	Ax = 0 \iff EAx = E0 \iff (EA)x = 0 \iff Rx = 0.
+	$$
+	
+	Logo, $N(A) = N(R)$.
+	
+	\qed
+\end{Proof}
+
+Assim sendo, nós podemos encontrar o núcleo de $A$ resolvendo o sistema linear $Rx = 0$.
+
+No nosso exemplo, isto equivale a:
+
+$$
+\begin{bmatrix}
+	1 & 2 & 0 & -2 \\
+	0 & 0 & 1 & 2 \\
+	0 & 0 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+	x_1 \\
+	x_2 \\
+	x_3 \\
+	x_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+	0 \\
+	0 \\
+	0
+\end{bmatrix}
+$$
+
+Isto equivale ao seguinte sistema de equações:
+
+$$
+\begin{cases}
+	x_1 + 2x_2 + 0x_3 - 2x_4 = 0\\
+	x_3 + 2x_4 = 0
+\end{cases}.
+$$
+
+Como se pode perceber facilmente, este sistema possui infinitas soluções. Assim sendo, se nós queremos achar vetores no núcleo, é conveniente utilizar uma escolha que facilite os cálculos. Uma boa escolha é colocar $1$ em uma das variáveis livres e $0$ nas outras variáveis livres, repetindo este processo até termos colocado $1$ em todas as variáveis livres.
+
+No nosso exemplo, isto equivale a:
+
+$\mathbf{1)}$ Colocando $1$ na primeira variável livre e $0$ nas outras (ou seja, $x_2 = 1$ e $x_4 = 0$):
+
+$$
+\begin{cases}
+	x_1 + 2 = 0 \\
+	x_3 = 0
+\end{cases}
+\implies
+\begin{cases}
+	x_1 = -2 \\
+	x_3 = 0
+\end{cases}
+$$
+
+$\mathbf{2)}$  Colocando $1$ na segunda variável livre e $0$ nas outras (ou seja, $x_4 = 1$ e $x_2 = 0$):
+
+$$
+\begin{cases}
+	x_1 - 2 = 0 \\
+	x_3 + 2 = 0
+\end{cases}
+\implies
+\begin{cases}
+	x_1 = 2 \\
+	x_3 = -2
+\end{cases}
+$$
+
+Do primeiro caso, nós obtivemos o vetor $\begin{bmatrix}
+	-2 \\
+	1 \\
+	0 \\
+	0
+\end{bmatrix}$. Do segundo caso, nós obtivemos o vetor $\begin{bmatrix}
+	2 \\
+	0 \\
+	-2 \\
+	1
+\end{bmatrix}$. Assim sendo, nós concluímos que:
+
+$$
+N(A) = N(R) = \operatorname{span}\left(\left\{\begin{bmatrix}
+	-2 \\
+	1 \\
+	0 \\
+	0
+\end{bmatrix}, \begin{bmatrix}
+2 \\
+0 \\
+-2 \\
+1
+\end{bmatrix}\right\}\right).
+$$
+
+A partir deste exemplo, vamos construir uma matriz especial que facilitará profundamente os nossos cálculos. Considere $N = \begin{bmatrix}
+	-2 & 2 \\
+	1 & 0 \\
+	0 & -2 \\
+	0 & 1
+\end{bmatrix}$. Fazendo a permutação das linhas $2$ e $3$, nós obtemos:
+$$
+N' = \begin{bmatrix}
+	-2 & 2 \\
+	0 & -2 \\
+	1 & 0 \\
+	0 & 1
+\end{bmatrix}.
+$$
+
+Compare a matriz $N'$ com a matriz $R'$. As duas primeiras linhas de $N'$ formam exatamente a matriz $-F$. Assim sendo, nós podemos fazer a seguinte definição:
+
+\begin{Definition}[Matriz núcleo]
+	Sejam $A_{m\times n}$ uma matriz qualquer, $R$ a sua forma escalonada reduzida e $R'$ a matriz em blocos formada após as permutações necessárias das colunas de $R$. Se nós definimos $N'$ como $N' = \begin{bmatrix}
+		-F \\
+		I
+	\end{bmatrix}$, então a \textbf{matriz núcleo} $N$ é definida como:
+	
+	$$
+	N = PN',
+	$$
+	onde $P$ é a matriz de permutação que troca as linhas de $N$ correspondentes às colunas de $R$ que foram permutadas.
+\end{Definition}
+
+A matriz núcleo recebe este nome por um motivo muito simples: os seus vetores-coluna são exatamente os vetores que geram o núcleo de $A$. De fato, se nós consideramos $R' = \begin{bmatrix}
+	I & F \\
+	0 & 0
+\end{bmatrix}$ e $N' = \begin{bmatrix}
+	-F \\
+	I
+\end{bmatrix}$, então $R'N' = \begin{bmatrix}
+	F - F \\
+	0
+\end{bmatrix} = \begin{bmatrix}
+	0 \\
+	0
+\end{bmatrix} = 0$. Ao permutarmos as linhas de $N'$ de modo a obter $N$, e permutarmos as colunas correspondentes de $R'$ de modo a obter $R$, nós obtemos $RN = (R'P)(PN') = R'(PP)N' = R'P^2N' = R'(P^2N') = R'N' = 0$.
+
+Vamos fazer mais um exemplo:
+
+\begin{Example}
+	Seja $A = \begin{bmatrix}
+		1 & 2 & 3
+	\end{bmatrix}$. Então, nós temos que $A$ já está na forma escalonada reduzida $R$ e também que, neste caso, $R = R'$. Assim sendo, o único pivô de $A$ está na primeira coluna, e as outras duas colunas são colunas livres. Nós temos, neste caso, que $F = \begin{bmatrix}
+		2 & 3
+	\end{bmatrix}$. Assim sendo, a matriz núcleo $N$, que neste caso é igual a $N'$, é dada por:
+	
+	$$
+	N = \begin{bmatrix}
+		-F \\
+		I
+	\end{bmatrix} = \begin{bmatrix}
+		-2 & -3 \\
+		1 & 0 \\
+		0 & 1
+	\end{bmatrix}.
+	$$
+	Assim sendo, nós temos que:
+	
+	$$
+	N(A) = \operatorname{span}\left(\left\{\begin{bmatrix}
+		-2 \\
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		-3 \\
+		0 \\
+		1
+	\end{bmatrix}\right\}\right).
+	$$
+\end{Example}
+
+Algo importante que este exemplo nos mostra é o fato de que a matriz identidade da matriz $N'$ não é a mesma matriz que aparece em $R'$. E de fato, para que todas as contas que nós fizemos até agora sejam válidas, é necessário que todas as matrizes que compõem $R'$ e $N'$ sejam dimensionalmente compatíveis.
+
+Assim sendo, seja $r$ o número de pivôs de $A$ (que ganhará uma definição própria mais adiante). Nós temos que o número de colunas livres é dado por $n - r$. Desta forma, nós temos que:
+
+$$
+R' = \begin{bmatrix}
+	I_{r\times r} & F_{r\times(n - r)} \\
+	0_{(m - r)\times r} & 0_{(m - r)\times(n - r)}
+\end{bmatrix}
+$$
+
+$$
+N' = \begin{bmatrix}
+	-F_{r\times(n - r)} \\
+	I_{(n - r)\times(n - r)}
+\end{bmatrix}.
+$$
+
+Para terminar esta seção, vamos falar sobre um tipo especial de matrizes. Suponha que $A$ é uma matriz $m\times n$ tal que $r = 1$. Neste caso, nós temos que toda coluna é um múltiplo da coluna pivô, e que toda linha é um múltiplo da linha pivô. Assim sendo, nós podemos escrever $A = uv^T$, em que $u\in\mathbb{R}^m$ e $v\in\mathbb{R}^n$. Uma matriz deste tipo é chamada de \textbf{matriz de posto 1}.
+
+Uma propriedade deste tipo de matrizes é a seguinte:
+
+\begin{Proposition}
+	Seja $A_{m\times n}$ uma matriz tal que $A = uv^T$, onde $u\in\mathbb{R}^m$ e $v\in\mathbb{R}^n$. Então, $N(A) = \{x\in\mathbb{R}^n; v^Tx = 0\}$.
+\end{Proposition}
+
+\begin{Proof}
+	Queremos achar todos os vetores $x\in\mathbb{R}^n$ tais que $Ax = 0$. Nós temos que:
+	
+	$$
+	Ax = 0 \iff (uv^T)x = 0 \iff u(v^Tx) = 0 \iff v^Tx = 0.
+	$$
+	Logo, $N(A) = \{x\in\mathbb{R}^n; v^Tx = 0\}$.
+	
+	\qed
+\end{Proof}
+
+\section{Soluções de Sistemas Lineares}
+
+Vamos voltar agora à discussão do problema fundamental. Dado um sistema linear $Ax = b$, onde $A$ é uma matriz $m\times n$, nós queremos se existem e quais são as soluções do sistema. E, para a discussão das condições de existência, nós podemos montar um critério rápido baseado na forma escalonada reduzida de $A$.
+
+Dado um sistema linear $Ax = b$, podemos seguir o seguinte passo a passo:
+
+$\mathbf{1)}$ Montar a matriz aumentada $\begin{bmatrix}
+	A & b
+\end{bmatrix}$;
+
+$\mathbf{2)}$ Fazer as eliminações e as permutações, transformando-a em $\begin{bmatrix}
+	R' = c
+\end{bmatrix}$
+
+$\mathbf{3)}$ Zerar os elementos de $c$ que correspondem às linhas de zeros de $R'$.
+
+Ao executar este último passo, as condições para a existência de $x$ tal que $Ax = b$ aparecem naturalmente. De uma maneira mais explícita, suponha que, após o passo $2$, nós obtivemos o sistema $R'x = c$, descrito em blocos da seguinte forma:
+
+$$
+\begin{bmatrix}
+	I & F \\
+	0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+	x_{r} \\
+	x_{n - r}
+\end{bmatrix}
+=
+\begin{bmatrix}
+	c_{r} \\
+	c_{m - r}
+\end{bmatrix}.
+$$
+
+Realizando a multiplicação do lado esquerdo da equação, nós obtemos:
+
+$$
+\begin{bmatrix}
+	x_{r} + Fx_{n - r} \\
+	0
+\end{bmatrix}
+=
+\begin{bmatrix}
+	c_{r} \\
+	c_{m - r}
+\end{bmatrix},
+$$
+de modo que:
+
+$$
+\begin{cases}
+	x_{r} + Fx_{n - r} = c_{r} \\
+	c_{m - r} = 0
+\end{cases}.
+$$
+
+Isto nos dá um método para achar uma \textbf{solução particular} de $Ax = b$, caso a condição $c_{m - r} = 0$ seja satisfeita. Para acharmos tal solução particular, basta escolher $x_{n - r} = 0$, obtendo $x_{r} = c_{r}$. Assim sendo, podemos dizer que $x_{p}$ é uma solução particular de $Ax = b$ definindo:
+
+$$
+x_{p} = \begin{bmatrix}
+	c_{r} \\
+	0
+\end{bmatrix}.
+$$
+
+A partir desta ideia de solução particular, nós temos um importante resultado:
+
+\begin{Theorem}
+	Seja $Ax = b$ um sistema linear possível. Então, toda solução de $Ax = b$ pode ser escrita como $x = x_p + x_n$, onde $x_p$ é uma solução particular e $x_n\in N(A)$.
+\end{Theorem}
+
+\begin{Proof}
+	Seja $x$ qualquer outra solução de $Ax = b$. Nós já sabemos que $Ax_p = b$. Assim sendo, nós temos que:
+	
+	$$
+	A(x - x_p) = Ax - Ax_p = b - b = 0.
+	$$
+	Logo, $x - x_p\in N(A)$. Ou seja, existe $x_n\in N(A)$ tal que $x_n = x - x_p$, e portanto, $x = x_p + x_n$.
+	
+	\qed
+\end{Proof}
+
+De um modo geral, se $n_1, n_2, \cdots, n_{n - r}$ são as colunas da matriz núcleo $N$ de $A$., nós temos que $x_n = \alpha_1 n_1 + \alpha_2 n_2 + \cdots + \alpha_{n - r} n_{n - r}$, o que implica que:
+
+$$
+x = x_p + \alpha_1 n_1 + \alpha_2 n_2 + \cdots + \alpha_{n - r} n_{n - r}.
+$$
+
+O vetor $x_n$, escrito desta forma, é chamado de \textbf{solução geral} do sistema, e o vetor $x$, composto pela soma da solução particular com a solução geral, é chamado de \textbf{solução completa} do sistema.
+
