@@ -197,3 +197,242 @@ Na prática, isto quer dizer que qualquer vetor $w\in V$ pode ser escrito como u
 	$\mathbf{2)}$ $v_1, v_2, \cdots, v_n$ geram $V$.
 \end{Definition}
 
+Uma vez que nós definimos o conceito de base, seria muito bom se, dada uma base $\{v_1, v_2, \cdots, v_n\}$ para $V$, todo vetor de $V$ fosse representado de forma única nesta base. Isto acontece, e nós o demonstraremos agora:
+
+\begin{Proposition}
+	Se $\{v_1, v_2, \cdots, v_n\}$ é uma base para $V$, então para qualquer $u\in V$, existem únicos $\alpha_1, \alpha_2, \cdots, \alpha_n\in\mathbb{R}$ tais que $u = \sum\limits_{i = 1}^{n} \alpha_ix_i$.
+\end{Proposition}
+
+\begin{Proof}
+	Nós precisamos provar duas coisas: a existência e a unicidade. A existência segue diretamente da definição de span. Vamos, então, demonstrar a unicidade.
+	
+	Seja $u\in V$, e suponha que existem dois conjuntos de coordenadas, $\alpha_1, \alpha_2, \cdots, \alpha_n\in\mathbb{R}$ e $\beta_1, \beta_2, \cdots, \beta_n\in\mathbb{R}$ tais que $u = \alpha_1v_1 + \alpha_2v_2 + \cdots + \alpha_nv_n$ e $u = \beta_1v_1 + \beta_2v_2 + \cdots + \beta_nv_n$. Então, ao fazermos $u - u$, nós obtemos:
+	
+	$$
+	0 = (\alpha_1 - \beta_1)v_1 + (\alpha_2 - \beta_2)v_2 + \cdots + (\alpha_n - \beta_n)v_n.
+	$$
+	Como os todos os $v_i$'s formam uma base, por definição eles são LI. Assim sendo:
+	
+	$$
+	\alpha_1 - \beta_1 = \alpha_2 - \beta_2 = \cdots = \alpha_n - \beta_n = 0 \iff \alpha_1 = \beta_1, \alpha_2 = \beta_2, \cdots, \alpha_n = \beta_n.
+	$$
+	
+	\qed
+\end{Proof}
+
+Vamos dar alguns exemplos de base em $\mathbb{R}^2$:
+
+\begin{Example}
+	Considere o espaço vetorial $\mathbb{R}^2$. Alguns exemplos de base neste espaço são:
+	
+	$\mathbf{1)}$ A base canônica: $\{e_1, e_2\} = \left\{\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		0 \\
+		1
+	\end{bmatrix}\right\}$;
+	
+	$\mathbf{2)}$ O conjunto: $\left\{\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		1 \\
+		1
+	\end{bmatrix}\right\}$;
+	
+	$\mathbf{3)}$ O conjunto: $\left\{\begin{bmatrix}
+		1 \\
+		2
+	\end{bmatrix}, \begin{bmatrix}
+		3 \\
+		5
+	\end{bmatrix}\right\}$.
+\end{Example}
+
+Um outro exemplo interessante está em $\mathcal{P}_n$:
+
+\begin{Example}
+	Considere o espaço dos polinômios de grau menor ou igual a $n$ (denotado por $\mathcal{P}_n$). Então, o conjunto $\{1, x, x^2, \cdots, x^n\}$ é considerado a base canônica de $\mathcal{P}_n$.
+\end{Example}
+
+Note que, dado um espaço vetorial, a base não é única. Qualquer conjunto de vetores que sejam linearmente independentes e que gere o espaço é uma base.
+
+\section{Dimensão de um Espaço Vetorial}
+
+Nesta seção, nós apresentaremos o conceito de dimensão de um espaço vetorial. Para fazer isto, no entanto, primeiro nós vamos demonstrar um teorema que permite falar em dimensão de um espaço.
+
+\begin{Theorem}[Teorema da Dimensão]
+	Se $\{v_1, v_2, \cdots, v_n\}$ e $\{u_1, u_2, \cdots, u_k\}$ são bases de um espaço vetorial $V$, então $n = k$.
+\end{Theorem}
+
+\begin{Proof}
+	A demonstração deste teorema se dará em duas partes. Como nós queremos provar que $n = k$, nós devemos provar que $n\leq k$ e que $n\geq k$ ao mesmo tempo.
+	
+	Primeiro, vamos provar que $n\leq k$. Suponha, por absurdo, que $n > k$. Então, para cada $i\in\{1, \cdots, n\}$, nós temos que $v_i\in\operatorname{span}(\{u_1, \cdots, u_k\})$. Assim sendo,
+	
+	$$
+	v_i = a_{i1}u_1 + a_{i2}u_2 + \cdots + a_{ik}u_k = \sum\limits_{j = 1}^{k} a_{ij}u_j.
+	$$
+	Com isso, nós temos uma matriz $A_{n\times k}$ com $n > k$. Deste modo, $A$ tem mais linhas do que colunas, o que implica que a matriz $R'$ possui linhas de zeros. Assim sendo, existe $y\neq 0$ em $\mathbb{R}^n$ tal que $y^TA = 0$. Considere:
+	
+	$$
+	\sum\limits_{i = 1}^{n} y_iv_i = \sum\limits_{i = 1}^{n} y_i\left(\sum\limits_{j = 1}^{k}a_{ij}u_j\right) = \sum\limits_{j = 1}^{k} u_j\left(\sum\limits_{i = 1}^{n}y_ia_{ij}\right) = \sum\limits_{j = 1}^{k}u_j (y^TA)_j = 0.
+	$$
+	Isso implica que o conjunto $\{u_1, \cdots, u_k\}$ é LD, um absurdo. Logo, devemos ter $n\leq k$.
+	
+	Agora, nós vamos provar que $n\geq k$. Suponha, por absurdo, que $k > n$. Então, para cada $i\in\{1, \cdots, k\}$, nós temos que $u_i\in\operatorname{span}(\{v_1, \cdots, v_n\})$ Assim sendo,
+	
+	$$
+	u_i  = a_{i1}v_1 + a_{i2}v_2 + \cdots + a_{in}v_n = \sum\limits_{j = 1}^{n} a_{ij}v_j.
+	$$
+	Com isso, nós temos uma matriz $A_{k\times n}$ com $k > n$. Deste modo, $A$ tem mais linhas do que colunas, o que implica que a matriz $R'$ possui linhas de zeros. Assim sendo, existe $y\neq 0$ em $\mathbb{R}^k$ tal que $y^TA = 0$. Considere:
+	
+	$$
+	\sum\limits_{i = 1}^{k} y_iu_i = \sum\limits_{i = 1}^{k} y_i \left(\sum\limits_{j = 1}^{n} a_{ij}v_j\right) = \sum\limits_{j = 1}^{n} v_j \left(\sum\limits_{i = 1}^{k} y_ia_{ij}\right) = \sum\limits_{j = 1}^{n} v_j (y^TA)_j = 0.
+	$$
+	Isso implica que o conjunto $\{v_1, \cdots, v_n\}$ é LD, um absurdo. Logo, devemos ter $n\geq k$.
+	
+	Como $n\leq k$ e $n\geq k$ ao mesmo tempo, segue que $n = k$.
+	
+	\qed
+\end{Proof}
+
+Agora que nós sabemos que todas as bases de um mesmo espaço vetorial possuem a mesma quantidade de vetores, nós podemos formalizar o conceito de dimensão:
+
+\begin{Definition}[Dimensão de um espaço vetorial]
+	Seja $\{v_1, v_2, \cdots, v_n\}$ uma base para $V$. Então, nós chamamos o número $n$ de \textbf{dimensão} de $V$, e escrevemos $\dim V = n$.
+\end{Definition}
+
+Do Teorema da Dimensão, segue um corolário:
+
+\begin{Corolary}
+	Se $\dim V = n$, então $n + 1$ vetores em $V$ são linearmente dependentes.
+\end{Corolary}
+
+\begin{Proof}
+	Sem perda de generalidade, podemos supor que o conjunto de $n + 1$ vetores é da forma $\{v_1, \cdots, v_n, v_{n + 1}\}$, onde $\{v_1, \cdots, v_n\}$ é uma base para $V$. Segue então que:
+	
+	$$
+	v_{n + 1} = \alpha_1v_1 + \cdots + \alpha_nv_n.
+	$$
+	Ou seja:
+	
+	$$
+	\alpha_1v_1 + \cdots + \alpha_nv_n - v_{n + 1} = 0.
+	$$
+	Ou seja, nós achamos uma combinação linear não-trivial do $0$ usando $v_1, \cdots, v_{n + 1}$. Logo, o conjunto $\{v_1, \cdots, v_{n + 1}\}$ é LD.
+	
+	\qed
+\end{Proof}
+
+Tendo analisado o que acontece com um conjunto de vetores de tamanho maior do que a dimensão de um espaço vetorial, vamos ver o que acontece quando temos um conjunto de vetores menor do que a dimensão do espaço. Especificamente, nós vamos considerar que tal conjunto é LI, e chegar à conclusão de que ele pode ser estendido até obtermos uma base. Este é o Teorema da Extensão:
+
+\begin{Theorem}[Teorema da Extensão]
+	Seja $V$ um espaço vetorial com $\dim V = n$ e $\{v_1, \cdots, v_k\}$ um conjunto LI em $V$, com $k < n$. Então, existem $\{v_{k + 1}, \cdots, v_n\}$ LI tal que $\{v_1, \cdots, v_n\}$ é uma base de $V$.
+\end{Theorem}
+
+\begin{Proof}
+	Como $\{v_1, \cdots, v_k\}$ é um conjunto LI, e $k < n$, nós temos que $\{v_1, \cdots, v_k\}$ não gera $V$. Isto significa que $\operatorname{span}(\{v_1, \cdots, v_k\})\subsetneq V$, ou seja, existe $v_{k + 1}\in V$ tal que $v_{k + 1}\notin\operatorname{span}(\{v_1, \cdots, v_k\})$. Então, se considerarmos o conjunto $\{v_1, \cdots, v_k, v_{k + 1}\}$, ele será LI. 
+	
+	Se $k + 1 = n$, nós temos um conjunto de $n$ vetores LI que gera todo o espaço, e portanto, temos uma base. Por outro lado, se $k + 1 < n$, basta repetir o procedimento até chegarmos em um conjunto LI de $n$ vetores que gera todo o espaço (ou seja, até obtermos uma base).
+	
+	\qed
+\end{Proof}
+
+Deste teorema segue um corolário:
+
+\begin{Corolary}
+	Se $\dim V = n$, qualquer conjunto de $n$ vetores $LI$ é uma base para $V$.
+\end{Corolary}
+
+Agora, demonstraremos mais um importante teorema que descreve a ação de uma matriz invertível sobre um conjunto LI de vetores.
+
+\begin{Theorem}
+	Seja $B$ uma matriz quadrada $m\times m$ invertível. Se $\{v_1, \cdots, v_k\}$ é um conjunto LI, então o mesmo é verdade para o conjunto $\{Bv_1, \cdots, Bv_k\}$.
+\end{Theorem}
+
+\begin{Proof}
+	Considere a matriz $V$ definida por:
+	
+	$$
+	V = \begin{bmatrix}
+		| & & | \\
+		v_1 & \cdots & v_k \\
+		| & & |
+	\end{bmatrix}_{m\times k}.
+	$$
+	Como as colunas de $V$ são LI por hipótese, nós temos que $N(V) = \{0\}$. Considere agora a matriz $BV$ definida por:
+	
+	$$
+	BV = \begin{bmatrix}
+		| & & | \\
+		Bv_1 & \cdots & Bv_k \\
+		| & & |
+	\end{bmatrix}.
+	$$
+	Nós queremos analisar $N(BV)$. Em primeiro lugar, vamos provar que $N(V)\subseteq N(BV)$. De fato, nós temos que:
+	
+	$$
+	x\in N(V)\iff Vx = 0\implies BVx = 0\implies x\in N(BV).
+	$$
+	Agora, nós vamos provar que $N(BV)\subseteq N(V)$. Precisamente agora nós iremos usar o fato de que $B$ é invertível. Nós temos que:
+	
+	$$
+	x\in N(BV)\iff BVx = 0\implies B^{-1}BVx = B^{-1}0\implies Vx = 0\implies x\in N(V).
+	$$
+	Logo, $N(V) = N(BV)$. Como, porém, as colunas de $V$ são LI, segue que $N(V) = \{0\}$. Logo, $N(BV) = \{0\}$ e, portanto, as colunas de $BV$ também são LI.
+	
+	\qed
+\end{Proof}
+
+Este teorema (e um outro que garante que, se as colunas de $V$ são LD, então as colunas de $BV$ também são LD, e que será um dos exercícios) é o que fundamenta uma demonstração que nós fizemos no capítulo anterior: $N(A) = N(R)$. Isto acontece porque a matriz $E$ que realiza a eliminação é invertível.
+
+\section{Base e Dimensão para os Quatro Subespaços Fundamentais}
+
+Voltamos agora aos quatro subespaços fundamentais. O teorema anterior nos permitirá construir uma base e determinar a dimensão deles.
+
+De fato, uma das consequências deste teorema é o fato de que as colunas pivôs da forma escalonada $R$ são LI e, portanto, as mesmas colunas de $A$ são LI e, de igual modo, como as colunas livres de $R$ são combinações lineares das colunas pivôs, o mesmo é verdade para as colunas livres de $A$.
+
+Assim sendo, nós chegamos à seguinte conclusão:
+
+\begin{Proposition}[Base para $C(A)$]
+	Seja $A$ uma matriz $m\times n$ tal que $\{a_1, \cdots, a_r\}$ são as suas colunas pivôs. Então:
+	
+	$$
+	C(A) = \operatorname{span}(\{a_1, \cdots, a_r\})
+	$$
+	e
+	
+	$$
+	\dim C(A) = r.
+	$$
+\end{Proposition}
+
+Por sua vez, encontrar uma base e a dimensão de $C(A^T)$ também é algo bem simples:
+
+\begin{Proposition}[Base para $C(A^T)$]
+	Seja $A$ uma matriz $m\times n$ tal que $\{b_1^T, \cdots, b_r^T\}$ são as suas linhas pivôs. Então:
+	
+	$$
+	C(A^T) = \operatorname{span}(\{b_1^T, \cdots, b_r^T\})
+	$$
+	e
+	
+	$$
+	\dim C(A^T) = r.
+	$$
+\end{Proposition}
+
+\begin{Proof}
+	Nós temos que:
+	
+	\begin{align*}
+		C(A^T) &= \operatorname{span}(\{\text{linhas de $A$}\}) = \operatorname{span}(\{\text{linhas de $R$}\}) \\ &= \operatorname{span}(\{\text{linhas pivôs de $R$}\}) = \operatorname{span}(\{\text{linhas pivôs de $A$}\}).
+	\end{align*}
+	
+	Como são $r$ as linhas de pivôs de $A$, segue que $\dim C(A^T) = r$.
+	\qed
+\end{Proof}
+
+Note que, neste caso, as linhas pivôs de $R$ também formam uma base para $C(A^T)$. Por outro lado, como $C(A)\neq C(R)$, não se pode dizer que as colunas pivôs de $R$ formam uma base para $C(A)$. Isto ocorre porque as operações elementares que nós fazemos em $A$ alteram a relação espacial entre as suas colunas, mas isto não ocorre nas linhas. Por consequência, nós podemos dizer que $C(A^T) = C(R^T)$.
