@@ -1,7 +1,7 @@
 \chapter{Os Quatro Subespaços Fundamentais}
 \label{cap:subespacos-fundamentais}
 
-\textbf{Importante:} este capítulo é baseado em \cite{slide4doyuri} e em \cite{axler2026}.
+\textbf{Importante:} este capítulo é baseado em \cite{slide4doyuri}.
 
 Neste capítulo, nós iremos desenvolver mais profundamente os conceitos relacionados a espaços vetoriais, e apresentar os quatro subespaços fundamentais de uma matriz. Além disso, nós iremos enunciar um teorema muito importante, que os relaciona entre si: o Teorema do Posto (que será generalizado no próximo capítulo para toda transformação linear).
 
@@ -187,7 +187,7 @@ No capítulo anterior, nós definimos o conjunto \textit{span} como sendo o conj
 	Sejam $v_1, v_2, \cdots, v_n$ vetores tais que $\operatorname{span}(\{v_1, v_2, \cdots, v_n\}) = V$. Então, dizemos que $v_1, v_2, \cdots, v_n$ \textbf{geram} $V$.
 \end{Definition}
 
-Na prática, isto quer dizer que qualquer vetor $w\in V$ pode ser escrito como uma combinação linear de $v_1, v_2, \cdot, v_n$. No entanto, note que nós não dissemos que $v_1, v)_2, \cdots, v_n$ são LI. De fato, isto não é uma condição necessária para que um grupo de vetores gere um espaço ou um subespaço vetorial. Os geradores podem ser LD. Porém, muitas vezes nós estamos interessados no caso em que os vetores geradores são LI. Eles são o menor grupo de vetores que gera um espaço, e isso é algo especial. Assim sendo, nós podemos definir o conceito de base:
+Na prática, isto quer dizer que qualquer vetor $w\in V$ pode ser escrito como uma combinação linear de $v_1, v_2, \cdot, v_n$. No entanto, note que nós não dissemos que $v_1, v_2, \cdots, v_n$ são LI. De fato, isto não é uma condição necessária para que um grupo de vetores gere um espaço ou um subespaço vetorial. Os geradores podem ser LD. Porém, muitas vezes nós estamos interessados no caso em que os vetores geradores são LI. Eles são o menor grupo de vetores que gera um espaço, e isso é algo especial. Assim sendo, nós podemos definir o conceito de base:
 
 \begin{Definition}[Base de um espaço vetorial]
 	O conjunto de vetores $\{v_1, v_2, \cdots, v_n\}$ é dito uma \textbf{base} para $V$ se:
@@ -388,7 +388,7 @@ Agora, demonstraremos mais um importante teorema que descreve a ação de uma ma
 
 Este teorema (e um outro que garante que, se as colunas de $V$ são LD, então as colunas de $BV$ também são LD, e que será um dos exercícios) é o que fundamenta uma demonstração que nós fizemos no capítulo anterior: $N(A) = N(R)$. Isto acontece porque a matriz $E$ que realiza a eliminação é invertível.
 
-\section{Base e Dimensão para os Quatro Subespaços Fundamentais}
+\section{Base e Dimensão de $C(A)$ e $C(A^T)$}
 
 Voltamos agora aos quatro subespaços fundamentais. O teorema anterior nos permitirá construir uma base e determinar a dimensão deles.
 
@@ -396,7 +396,7 @@ De fato, uma das consequências deste teorema é o fato de que as colunas pivôs
 
 Assim sendo, nós chegamos à seguinte conclusão:
 
-\begin{Proposition}[Base para $C(A)$]
+\begin{Theorem}[Base e Dimensão de $C(A)$]
 	Seja $A$ uma matriz $m\times n$ tal que $\{a_1, \cdots, a_r\}$ são as suas colunas pivôs. Então:
 	
 	$$
@@ -407,11 +407,11 @@ Assim sendo, nós chegamos à seguinte conclusão:
 	$$
 	\dim C(A) = r.
 	$$
-\end{Proposition}
+\end{Theorem}
 
 Por sua vez, encontrar uma base e a dimensão de $C(A^T)$ também é algo bem simples:
 
-\begin{Proposition}[Base para $C(A^T)$]
+\begin{Theorem}[Base e Dimensão de $C(A^T)$]
 	Seja $A$ uma matriz $m\times n$ tal que $\{b_1^T, \cdots, b_r^T\}$ são as suas linhas pivôs. Então:
 	
 	$$
@@ -422,7 +422,7 @@ Por sua vez, encontrar uma base e a dimensão de $C(A^T)$ também é algo bem si
 	$$
 	\dim C(A^T) = r.
 	$$
-\end{Proposition}
+\end{Theorem}
 
 \begin{Proof}
 	Nós temos que:
@@ -436,3 +436,534 @@ Por sua vez, encontrar uma base e a dimensão de $C(A^T)$ também é algo bem si
 \end{Proof}
 
 Note que, neste caso, as linhas pivôs de $R$ também formam uma base para $C(A^T)$. Por outro lado, como $C(A)\neq C(R)$, não se pode dizer que as colunas pivôs de $R$ formam uma base para $C(A)$. Isto ocorre porque as operações elementares que nós fazemos em $A$ alteram a relação espacial entre as suas colunas, mas isto não ocorre nas linhas. Por consequência, nós podemos dizer que $C(A^T) = C(R^T)$.
+
+\section{Base e Dimensão de $N(A)$}
+
+Para encontrarmos uma base para $N(A)$, o trabalho é um bem maior do que para o espaço das colunas ou o das linhas. Vamos desenvolvê-lo agora.
+
+Seja $\{v_1, \cdots, v_r\}$ uma base para $C(A)\subset\mathbb{R}^m$ e considere $x_i\in\mathbb{R}^n$ tal que $Ax_i = v_i$, para $i\in\{1, \cdots, r\}$.
+
+\begin{Lemma}\label{lemma-5.6.1}
+	O conjunto $\{x_1, \cdots, x_r\}$ é LI.
+\end{Lemma}
+
+\begin{Proof}
+	De fato, se $\alpha_1x_1 + \cdots + \alpha_rx_r = 0$, então $A(\alpha_1x_1 + \cdots + \alpha_rx_r) = A0 = 0$. Daí segue, pela linearidade de $A$, que $\alpha_1Ax_1 + \cdots + \alpha_rAx_r = 0$. Como nós temos que $Ax_i = v_i$, segue que $\alpha_1v_1 + \cdots + \alpha_rv_r = 0$ e, como $\{v_1, \cdots, v_r\}$ é uma base para $C(A)$, então, $\alpha_1 = \cdots = \alpha_r = 0$.
+	
+	\qed
+\end{Proof}
+
+Dado que $\{x_1, \cdots, x_r\}$ é LI, pelo Teorema da Extensão, que existem $\{x_{r + 1}, \cdots, x_n\}$ tais que $\{x_1, \cdots x_n\}$ é uma base para $\mathbb{R}^n$.
+
+Note também que $Ax_i\in\operatorname{span}(\{v_1, \cdots, v_r\})$, para $i\in\{r + 1, \cdots, n\}$. Assim sendo, escrevamos:
+
+$$
+Ax_i = \alpha_{1i}v_1 + \cdots + \alpha_{ri}v_r = \alpha_{1i}Ax_1 + \cdots + \alpha_{ri}Ax_r = A(\alpha_{1i}x_1 + \cdots + \alpha_{ri}x_r).
+$$
+
+Definindo $x_i' = x_i - (\alpha_{1i}x_1 + \cdots + \alpha_{ri}x_r)$, nós temos o seguinte resultado:
+
+\begin{Lemma}
+	O vetor $x_i'$ pertence a $N(A)$.
+\end{Lemma}
+
+\begin{Proof}
+	De fato, $Ax_i' = Ax_i - A(\alpha_{1i}x_1 + \cdots + \alpha_{ri}x_r) = Ax_i - Ax_i = 0$. Logo, $x_i'\in N(A)$.
+	
+	\qed
+\end{Proof}
+
+Com este resultado, nós concluímos que o conjunto $\{x_{r + 1}', \cdots, x_n'\}$ é LI.
+
+\begin{Lemma}
+	O conjunto $\{x_{r + 1}', \cdots, x_n'\}$ é LI.
+\end{Lemma}
+
+\begin{Proof}
+	Nós queremos provar que $c_{r + 1}x_{r + 1}' + \cdots + c_{n}'x_n' = 0\implies c_{r + 1} = \cdots = c_n = 0$. De fato, esta soma é igual a:
+	
+	\begin{align*}
+		&c_{r + 1}[x_{r + 1} - (\alpha_{1, r + 1}x_1 + \cdots + \alpha_{r, r + 1}x_r)] \\
+		+ &c_{r + 2}[x_{r + 2} - (\alpha_{1, r + 2}x_1 + \cdots + \alpha_{r, r + 2}x_r)] + \\
+		&\vdots \\
+		+ &c_n[x_n - (\alpha_{1, n}x_1 + \cdots + \alpha_{r, n}x_r)] = 0.
+	\end{align*}
+	Desenvolvendo esta soma, nós obtemos:
+	
+	\begin{align*}
+		&c_{r + 1}x_{r + 1} + \cdots + c_nx_n + \\
+		+ &x_1(- c_{r + 1}\alpha_{1, r + 1} - c_{r + 2}\alpha_{1, r + 2} - \cdots - c_n\alpha_{1, n}) + \\
+		+ &x_2(- c_{r + 1}\alpha_{2, r + 1} - c_{r + 2}\alpha_{2, r + 2} - \cdots - c_n\alpha_{2, n}) + \\
+		&\vdots \\
+		+ &x_r(- c_{r + 1}\alpha_{r, r + 1} - c_{r + 2}\alpha_{r, r + 2} - \cdots - c_n\alpha_{r, n}) = 0.
+	\end{align*}
+	Como o conjunto $\{x_1, \cdots, x_n\}$ é LI, segue que $c_{r + 1} = \cdots = c_n = 0$.
+	
+	\qed
+\end{Proof}
+
+Nós sabemos que $\dim\mathbb{R}^n = n$. Assim sendo, nós queremos mostrar que $\{x_1, \cdots, x_r, x_{r + 1}', \cdots, x_n'\}$ é uma base de $\mathbb{R}^n$.
+
+\begin{Lemma}
+	O conjunto $\{x_1, \cdots, x_r, x_{r + 1}', \cdots, x_n'\}$ forma uma base para $\mathbb{R}^n$.
+\end{Lemma}
+
+\begin{Proof}
+	Pelo corolário do Teorema da Dimensão, segue que nós precisamos unicamente provar que este conjunto é LI. Ou seja, queremos provar que:
+	
+	$$
+	\beta_1x_1 + \cdots + \beta_rx_r + \beta_{r + 1}x_{r + 1}' + \cdots + \beta_nx_n' = 0\implies\beta_1 = \cdots = \beta_n.
+	$$
+	Reescrevendo a soma, nós obtemos:
+	
+	\begin{align*}
+		&\beta_1x_1 + \cdots + \beta_rx_r + \\
+		+ &\beta_{r + 1}[x_{r + 1} - (\alpha_{1, r + 1}x_1 + \cdots + \alpha_{r, r + 1}x_r)] + \\
+		+ &\beta_{r + 2}[x_{r + 2} - (\alpha_{1, r + 2}x_1 + \cdots + \alpha_{r, r + 2}x_r)] + \\
+		&\vdots \\
+		+ &\beta_n[x_n - (\alpha_{1, n}x_1 + \cdots + \alpha_{r, n}x_r)] = 0.
+	\end{align*}
+	Nós podemos rearranjar a soma, obtendo:
+	
+	\begin{align*}
+		&\canceltozero{\beta_{r + 1}}x_{r + 1} + \cdots + \canceltozero{\beta_n}x_n + \\
+		+ &(\canceltozero{\beta_1} - \canceltozero{\beta_{r + 1}}\alpha_{1, r + 1} - \canceltozero{\beta_{r + 2}}\alpha_{1, r + 2} - \cdots - \canceltozero{\beta_n}\alpha_{1, n})x_1 + \\
+		&\vdots \\
+		+ &(\canceltozero{\beta_r} - \canceltozero{\beta_{r + 1}}\alpha_{r, r + 1} - \canceltozero{\beta_{r + 2}}\alpha_{r, r + 2} - \cdots - \canceltozero{\beta_n}\alpha_{r, n})x_r = 0.
+	\end{align*}
+	Os cancelamentos que nós fizemos foram baseados no fato de que o conjunto $\{x_1, \cdots, x_n\}$ é LI. De fato, da primeira linha nós obtemos que $\beta_{r + 1} = \cdots = \beta_n = 0$ e, consequentemente, nas demais linhas nós temos $\beta_1 = \cdots = \beta_r = 0$. Assim sendo, nós temos que $\beta_1 = \cdots = \beta_r = \beta_{r + 1} = \cdots = \beta_n = 0$.
+	
+	\qed
+\end{Proof}
+
+Finalmente, nós podemos demonstrar a última coisa que falta para nós enunciarmos formalmente o teorema sobre a base de $N(A)$.
+
+\begin{Lemma}
+	$N(A) = \operatorname{span}(\{x_{r + 1}', \cdots, x_n'\})$.
+\end{Lemma}
+
+\begin{Proof}
+	$\implies$ Suponha que $x\in N(A)\subseteq\mathbb{R}^n$. Então, podemos escrever $x$ como:
+	
+	$$
+	x = \alpha_1x_1 + \cdots + \alpha_rx_r + \alpha_{r + 1}x_{r + 1}' + \cdots + \alpha_nx_n'.
+	$$
+	Além disso, como $Ax = 0$, nós temos que:
+	
+	$$
+	0 = \alpha_1Ax_1 + \cdots + \alpha_rAx_r + \alpha_{r + 1}\canceltozero{Ax_{r + 1}'} + \cdots + \alpha_n\canceltozero{Ax_n'}.
+	$$
+	Assim sendo, segue que:
+	
+	$$
+	\alpha_1v_1 + \cdots + \alpha_rv_r = 0
+	$$
+	e, como o conjunto $\{v_1, \cdots, v_r\}$ é LI, segue que:
+	
+	$$
+	\alpha_1 = \cdots = \alpha_r.
+	$$
+	Assim sendo, nós temos que:
+	
+	$$
+	x = \alpha_{r + 1}x_{r + 1}' + \cdots + \alpha_nx_n'.
+	$$
+	Logo, $x\in\operatorname{span}(\{x_{r + 1}', \cdots, x_n'\})$.
+	
+	$\impliedby$ Suponha que $x\in\operatorname{span}(\{x_{r + 1}', \cdots, x_n'\})$. Ao calcular $Ax$, nós obtemos:
+	
+	$$
+	Ax = \alpha_{r + 1}Ax_{r + 1}' + \cdots + \alpha_nAx_n'.
+	$$
+	Porém, cada $Ax_i'$, para $i\in\{r + 1, \cdots, n\}$, é igual a zero. Logo, $Ax = 0$, o que significa que $x\in N(A)$. Portanto, $N(A) = \operatorname{span}(\{x_{r + 1}', \cdots, x_n'\})$.
+	
+	\qed
+\end{Proof}
+
+Assim sendo, podemos chegar à seguinte conclusão:
+
+\begin{Theorem}[Base e Dimensão de $N(A)$]
+	Seja $A$ uma matriz $m\times n$, e considere o conjunto $\{x_{r + 1}', \cdots, x_n'\}$, com $x_i' = x_i - (\alpha_{1i}x_1 + \cdots + \alpha_{ri}x_r)$. Então, $\{x_{r + 1}', \cdots, x_n'\}$ é uma base para $N(A)$ e $\dim N(A) = n - r$.
+\end{Theorem}
+
+\begin{Proof}
+	Segue diretamente de tudo o que fizemos até agora nesta seção, e particularmente, dos 5 lemas anteriores.
+	
+	\qed
+\end{Proof}
+
+Muito embora nós tenhamos tido todo este trabalho para determinar uma base para $N(A)$, existe uma outra base que é muito mais fácil de se encontrar: tal base é a das colunas da matriz núcleo. No entanto, a grande utilidade da teoria que nós desenvolvemos aqui é o grande teorema do curso: o Teorema do Posto (chamado também de Teorema do Núcleo e da Imagem no contexto de transformações lineares).
+
+\begin{Theorem}[Teorema do Posto]
+	Seja $A$ uma matriz $m\times n$ qualquer. Então:
+	
+	$$
+	\dim C(A) + \dim N(A) = n.
+	$$
+\end{Theorem}
+
+A demonstração deste teorema consiste basicamente no passo a passo que nós fizemos anteriormente. Nós demonstramos que $\dim C(A) = r$, e também demonstramos que $\dim N(A) = n - r$. Somando as dimensões, nós obtemos $\dim C(A) = \dim N(A) = r + n - r = n$. Assim sendo, nós focaremos um pouco na sua interpretação.
+
+Lembre-se de que toda matriz é, na verdade, uma forma de se representar uma transformação linear. Assim sendo, uma matriz $A_{m\times n}$ pode ser vista como uma função $A:\mathbb{R}^n\to\mathbb{R}^m$ tal que $A(x) = Ax$. O que o Teorema do Posto (ou o Teorema do Núcleo e da Imagem, como eu gosto mais de chamar) nos diz é que a soma da dimensão da imagem de $A$ com a dimensão do núcleo de $A$ é igual à dimensão do domínio de $A$. Ou seja, o núcleo nos revela o quanto a matriz (ou a transformação linear) está próxima de ser injetiva (nós falaremos melhor disso no próximo capítulo). Se $\dim N(A) = 0$, a transformação é injetiva. Se $\dim N(A) = n$ (um caso muito extremo, atingido apenas pela matriz $0$), então todos os vetores são mapeados por $A$ no vetor $0\in\mathbb{R}^m$. É o extremo oposto do que seria uma função injetiva.
+
+\section{Base e Dimensão de $N(A^T)$}
+
+Para concluir a análise da base e da dimensão dos quatro subespaços fundamentais, nós vamos agora encontrar uma base para $N(A^T)$ e a sua dimensão. Encontrar a dimensão de $N(A^T)$ é uma tarefa bem simples: nós sabemos que $\dim C(A^T)$. Logo, pelo Teorema do Posto, nós temos que $\dim N(A^T) = m - \dim C(A^T) = m - r$.
+
+Assim sendo, vamos nos concentrar agora em encontrar uma base para $N(A^T)$. Em primeiro lugar, recordemo-nos de que as linhas de $R$ são combinações lineares das linhas de $A$, e vice-versa. Assim sendo, existe uma matriz $E$ que transforma $A$ na sua forma escalonada reduzida permutada $R$ atuando nas linhas de $A$. Ou seja, existe $E$ tal que $EA = R$.
+
+Suponha então que $A$ é uma matriz $m\times n$ com posto $r$. Então, $E$ é uma matriz $m\times m$ que definiremos em termos dos seus vetores linha da seguinte forma:
+
+$$
+E = \begin{bmatrix}
+	- & v_1^T & - \\
+	& \vdots & \\
+	- & v_m^T & -
+\end{bmatrix}.
+$$
+
+Multiplicando $E$ à esquerda de $A$, nós obtemos:
+
+$$
+EA = \begin{bmatrix}
+	- & v_1^TA & - \\
+	& \vdots & \\
+	- & v_m^TA & -
+\end{bmatrix} = R.
+$$
+
+Nós sabemos que $E$ é invertível. Assim sendo, todas as colunas de $E$ são LI e todas as linhas de $E$ são LI. Sabemos também que as últimas $m - r$ linhas de $R$ são iguais a $0$. Assim sendo, nós temos que $v_i^TA = 0$, para todo $i\in\{r + 1, \cdots, m\}$. Logo, $v_i\in N(A^T)$, para todo $i\in\{r + 1, \cdots m\}$. Como os $v_i$'s são linearmente independentes, e este conjunto possui $m - r$ vetores, segue que $\{v_{r + 1}, \cdots, v_m\}$ formam uma base para $N(A^T)$.
+
+Vamos resumir toda esta discussão em um teorema:
+
+\begin{Theorem}[Base e Dimensão de $N(A^T)$]
+	Sejam $A$ uma matriz $m\times n$ com posto $r$, e $E$ a matriz tal que $EA = R$. Considere o conjunto $\{v_{r + 1}, \cdots, v_m\}$ formado pelos $m - r$ últimos vetores-linha de $E$. Então, $\{v_{r + 1}, \cdots, v_m\}$ é uma base para $N(A^T)$, e $\dim N(A^T) = m - r$.
+\end{Theorem}
+
+Após tantas informações ao longo das últimas três seções, façamos um exemplo para clarear melhor as ideias.
+
+\begin{Example}
+	Considere a matriz $A = \begin{bmatrix}
+		0 & 1 & 2 & 3 & 4 \\
+		0 & 1 & 2 & 4 & 6 \\
+		0 & 0 & 0 & 1 & 2
+	\end{bmatrix}$. Nós queremos encontrar bases para os quatro subespaços fundamentais de $A$. Para isto, em primeiro lugar, vamos aplicar o processo de escalonamento de modo a obter a matriz $R$:
+	
+	$$
+	\begin{bmatrix}
+		0 & 1 & 2 & 3 & 4 \\
+		0 & 1 & 2 & 4 & 6 \\
+		0 & 0 & 0 & 1 & 2
+	\end{bmatrix}\overset{L_2 - L_1}{\implies}\begin{bmatrix}
+		0 & 1 & 2 & 3 & 4 \\
+		0 & 0 & 0 & 1 & 2 \\
+		0 & 0 & 0 & 1 & 2
+	\end{bmatrix}\overset{L_3 - L_2}{\implies}\begin{bmatrix}
+		0 & 1 & 2 & 3 & 4 \\
+		0 & 0 & 0 & 1 & 2 \\
+		0 & 0 & 0 & 0 & 0
+	\end{bmatrix}\overset{L_1 - 3L_2}{\implies}\begin{bmatrix}
+		0 & 1 & 2 & 0 & -2 \\
+		0 & 0 & 0 & 1 & 2 \\
+		0 & 0 & 0 & 0 & 0
+	\end{bmatrix} = R.
+	$$
+	
+	Nós temos exatamente $2$ colunas pivôs (a 2ª e a 4ª) e exatamente $3$ colunas livres (a 1ª, a 3ª e a 5ª). Tendo achado a forma escalonada de $A$, vamos agora encontrar bases para os subespaços fundamentais.
+	
+	$\mathbf{1)}$ Base para $C(A)$: pode ser formada pelas colunas pivôs de $A$. Assim sendo:
+	
+	$$
+	\text{Base para $C(A)$} = \left\{\begin{bmatrix}
+		1 \\
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		3 \\
+		4 \\
+		1
+	\end{bmatrix}\right\}.
+	$$
+	
+	$\mathbf{2)}$ Base para $C(A^T)$: pode ser formada pelas linhas pivôs de $A$. Assim sendo:
+	
+	$$
+	\text{Base para $C(A^T)$} = \left\{\begin{bmatrix}
+		0 \\
+		1 \\
+		2 \\
+		3 \\
+		4
+	\end{bmatrix}, \begin{bmatrix}
+		0 \\
+		1 \\
+		2 \\
+		4 \\
+		6
+	\end{bmatrix}\right\}.
+	$$
+	
+	$\mathbf{3)}$ Base para $N(A)$: em primeiro lugar, vamos achar a matriz $R'$. Primeiro, nós permutamos as colunas $1$ e $2$. Em seguida, permutamos as novas colunas $3$ e $4$ e, em seguida, permutamos as colunas $2$ e $3$ (as permutações são feitas de modo a preservar a ordem original das colunas livres). Assim, nós obtemos:
+	
+	$$
+	R' = \begin{bmatrix}
+		1 & 0 & 0 & 2 & -2 \\
+		0 & 1 & 0 & 0 & 2 \\
+		0 & 0 & 0 & 0 & 0
+	\end{bmatrix}.
+	$$
+	
+	Assim sendo, a matriz $F$ é dada por:
+	
+	$$
+	F = \begin{bmatrix}
+		0 & 2 & -2 \\
+		0 & 0 & 2
+	\end{bmatrix}.
+	$$
+	
+	Podemos, agora, montar a matriz núcleo. Vamos fazer isto passo a passo, retomando as permutações que foram feitas, da última para a primeira:
+	
+	$$
+	\begin{bmatrix}
+		0 & -2 & 2 \\
+		0 & 0 & -2 \\
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}\overset{L_2\leftrightarrow L_3}{\implies}\begin{bmatrix}
+		0 & -2 & 2 \\
+		1 & 0 & 0 \\
+		0 & 0 & -2 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}\overset{L_3\leftrightarrow L_4}{\implies}\begin{bmatrix}
+		0 & -2 & 2 \\
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & -2 \\
+		0 & 0 & 1
+	\end{bmatrix}\overset{L_1\leftrightarrow L_2}{\implies}\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & -2 & 2 \\
+		0 & 1 & 0 \\
+		0 & 0 & -2 \\
+		0 & 0 & 1
+	\end{bmatrix} = N.
+	$$
+	
+	Assim sendo, uma base para $N(A)$ é dada pelas colunas de $N$, da seguinte forma:
+	
+	$$
+	\text{Base para $N(A)$} = \left\{\begin{bmatrix}
+		1 \\
+		0 \\
+		0 \\
+		0 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		0 \\
+		-2 \\
+		1 \\
+		0 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		0 \\
+		2 \\
+		0 \\
+		-2 \\
+		1
+	\end{bmatrix}\right\}.
+	$$
+	
+	$\mathbf{4)}$ Base para $N(A^T)$: nós podemos perceber que, durante o processo de escalonamento, nós já obtivemos uma matriz $U$ com zeros na última linha antes de chegar a $R$. Recordando:
+	
+	$$
+	U = \begin{bmatrix}
+		0 & 1 & 2 & 3 & 4 \\
+		0 & 0 & 0 & 1 & 2 \\
+		0 & 0 & 0 & 0 & 0
+	\end{bmatrix}.
+	$$
+	
+	Assim sendo, se nós considerarmos a matriz $\tilde{E} = L^{-1}$ tal que $\tilde{E}A = U$ (ou, igualmente, $A = LU$), nós podemos tomar a última linha de $\tilde{E}$ como base para $N(A^T)$.
+	
+	A matriz $L$ é dada por:
+	
+	$$
+	L = \begin{bmatrix}
+		1 & 0 & 0 \\
+		1 & 1 & 0 \\
+		0 & 1 & 1
+	\end{bmatrix}.
+	$$
+	
+	A sua inversa, $L^{-1}$, é dada por:
+	
+	$$
+	L^{-1} = \tilde{E} = \begin{bmatrix}
+		1 & 0 & 0 \\
+		-1 & 1 & 0 \\
+		1 & -1 & 1
+	\end{bmatrix}.
+	$$
+	
+	Para confirmar que esta é, de fato, a matriz inversa de $L$, nós podemos simplesmente multiplicar as matrizes de eliminação que atuam sobre $A$. É, na verdade, mais fácil fazer isto do que achar a inversa de $L$. Tendo achado a matriz $\tilde{E}$, nós temos que:
+	
+	$$
+	\text{Base para $N(A^T)$} = \left\{\begin{bmatrix}
+		1 \\
+		-1 \\
+		1
+	\end{bmatrix}\right\}.
+	$$
+\end{Example}
+
+\section{Resumo sobre os Quatro Subespaços Fundamentais}
+
+Nesta seção, nós vamos fazer uma tabela que resume toda a discussão que nós tivemos sobre os quatro subespaços fundamentais.
+
+\begin{table}[ht]
+	\centering
+	\renewcommand{\arraystretch}{1.8} % Aumenta o espaçamento vertical das linhas
+	\begin{tabular}{|M{2cm}|M{2.5cm}|M{3cm}|M{3cm}|M{3.5cm}|}
+		\hline
+		& $r = m = n$ & $r = n < m$ & $r = m < n$ & $r < m \;,\; r < n$ \\ \hline
+		
+		$R'$ & $I$ & 
+		$\begin{bmatrix} I_{n \times n} \\ 0_{m-n \times n} \end{bmatrix}$ & 
+		$\begin{bmatrix} I_{m \times m} & F_{m \times n-m} \end{bmatrix}$ & 
+		$\begin{bmatrix} I_{r \times r} & F_{r \times n-r} \\ 0_{m-r \times r} & 0_{m-r \times n-r} \end{bmatrix}$ \\ \hline
+		
+		\makecell{\# sols. de \\ $Ax = b$} & 1 & 
+		\makecell{0 ou 1} & 
+		infinitas soluções & 
+		0 ou infinitas \\ \hline
+		
+		$\dim C(A)$   & $n$ & $n < m$ & $m$   & $r < m$ \\ \hline
+		$\dim N(A)$   & $0$ & $0 = n - r$ & $n - m$ & $n - r$ \\ \hline
+		$\dim C(A^T)$ & $n$ & $r = n$ & $m < n$ & $r < n$ \\ \hline
+		$\dim N(A^T)$ & $0$ & $m - r = m - n$ & $0$ & $m - r$ \\ \hline
+		
+		bases & 
+		\makecell[l]{{\tiny $C(A)$: colunas (pivôs)} \\ {\tiny de $A$, ou $\{e_1, \dots, e_n\}$} \\ {\tiny já que $C(A) = \mathbb{R}^n$} \\ {\tiny $C(A^T)$: mesma coisa} \\ {\tiny $N(A)$ e $N(A^T)$ não} \\ {\tiny tem base}} & 
+		\makecell[l]{{\tiny $C(A)$: colunas $A$} \\ {\tiny $C(A^T)$: linhas pivôs} \\ {\tiny de $A$, pode ser $\{e_1, \dots, e_n\}$} \\ {\tiny já que $C(A^T) = \mathbb{R}^n$} \\ {\tiny $N(A)$ não tem base} \\ {\tiny $N(A^T) = \{v_{n+1}, \dots, v_m\}$}} & \makecell[l]{{\tiny $C(A)$: colunas} \\ {\tiny pivôs de $A$ ou} \\ {\tiny $\{e_1, \dots, e_m\}$} \\ {\tiny $C(A^T)$: linhas $A$} \\ {\tiny $N(A)$: colunas} \\ {\tiny de $N$} \\ {\tiny $N(A^T)$: não tem}} & \makecell[l]{{\tiny $C(A)$: colunas pivôs $A$} \\ {\tiny $C(A^T)$: linhas pivôs $A$} \\ {\tiny $N(A)$: cols. de $N$} \\\\ {\tiny $N(A^T)$: $m-r$ últimos} \\ {\tiny linhas da matriz elim.}} \\ \hline
+	\end{tabular}
+\end{table}
+
+\section{Exercícios}
+
+\textbf{Importante:} alguns dos exercícios são baseados em \cite{lista1doguilherme} e em \cite{slide4doyuri}.
+
+\noindent $\mathbf{5.1)}$ Seja $A = \begin{bmatrix}
+	1 & 2 & 3 & 4 & 5 \\
+	1 & 3 & 5 & 7 & 9 \\
+	1 & 3 & 6 & 10 & 15
+\end{bmatrix}$. Determine o posto de $A$. Determine as dimensões dos quatro subespaços fundamentais de $A$ e, em seguida, encontre bases para eles.
+
+$\\$
+$\mathbf{5.2)}$ Ache matrizes $A_1$ e $A_2$ não triviais tais que $\operatorname{posto}(A_1B) = 1$ e $\operatorname{posto}(A_2B) = 0$ para $B = \begin{bmatrix}
+	1 & 1 \\
+	1 & 1
+\end{bmatrix}$.
+
+$\\$
+$\mathbf{5.3)}$ Seja $r(A)$ o posto da matriz $A$.
+
+a) Prove que, dadas duas matrizes $A_{m\times n}$ e $B_{n\times p}$, $r(AB)\leq\min\{r(A), r(B)\}$.
+
+b) Prove que, dadas duas matrizes $A$ e $B$ $n\times n$ quaisquer, $r(A + B)\leq r(A) + r(B)$.
+
+c) Prove que, dada uma matriz $A_{m\times n}$ qualquer, $r(A) = r(A^T)$.
+
+$\\$
+$\mathbf{5.4)}$ Suponha que a coluna $j$ de $B$ é uma combinação linear das colunas anteriores de $B$.
+
+a) Mostre que a coluna $j$ de $AB$ é uma combinação linear das colunas anteriores de $AB$.
+
+b) Conclua que $\operatorname{posto}(AB)\leq\operatorname{posto}(B)$.
+
+c) Os itens anteriores nos dão $\operatorname{posto}(B^TA^T)\leq\operatorname{posto}(A^T)$. É possível concluir que $\operatorname{posto}(AB)\leq\operatorname{posto}(A)$?
+
+$\\$
+$\mathbf{5.5)}$ Suponha que $A$ e $B$ são matrizes quadradas e $AB = I$. Prove que $\operatorname{posto}(A) = n$. Conclua que $B$ precisa ser a inversa (de ambos lados) de $A$. Então, $BA = I$.
+
+$\\$
+$\mathbf{5.6)}$ Seja $A$ uma matriz $m\times n$ com posto $r$. Suponha que existem $b$ tais que $Ax = b$ não tenha solução.
+
+a) Escreva todas as desigualdades ($<$ e $\leq$) que os números $m$, $n$ e $r$ precisam satisfazer.
+
+b) Como podemos concluir que $A^Tx = 0$ tem solução fora $x = 0$?
+
+$\\$
+$\mathbf{5.7)}$ Considere o conjunto $S$ definido por:
+
+$$
+S = \{x\in\mathbb{R}^n; x = (x_1, 2x_1, 3x_1, \cdots, nx_1)^T\}.
+$$
+
+a) Prove que $S$ é um subespaço vetorial.
+
+b) Determine a dimensão de $S$.
+
+c) Encontre uma base para $S$.
+
+d) Estenda a base de $S$ para encontrar uma base para $\mathbb{R}^n$.
+
+$\\$
+$\mathbf{5.8)}$ Demonstre que, se $v_1, v_2, \cdots, v_n$ são linearmente independentes em um espaço $V$, então $v_1 + v_2, v_2 + v_3, \cdots, v_n + v_1$ são linearmente independentes se, e somente se, $n$ é um número ímpar.
+
+$\\$
+$\mathbf{5.9)}$ Seja $B$ uma matriz invertível. Demonstre que, se $\{v_1, \cdots, v_k\}$ é LD, então o mesmo é verdade para $\{Bv_1, \cdots, Bv_k\}$.
+
+$\\$
+$\mathbf{5.10)}$ Sejam $S$ e $T$ dois subespaços vetoriais, com bases $\{s_1, \cdots, s_m\}$ e $\{t_1, \cdots, t_n\}$, respectivamente. Defina o subespaço $S + T$ como:
+
+$$
+S + T = \{s + t; s\in S \text{ e } t\in T\}.
+$$
+Sabendo que $S\cap T = \{0\}$, determine uma base para $S + T$, e a sua dimensão.
+
+$\\$
+$\mathbf{5.11)}$ Construa uma matriz cujo espaço coluna contenha $(1, 1, 5)^T$ e $(0, 3, 1)^T$ e cujo núcleo contenha $(1, 1, 2)^T$.
+
+$\\$
+$\mathbf{5.12)}$ Construa uma matriz cujo núcleo contenha todos os múltiplos de $(4, 3, 2, 1)^T$.
+
+$\\$
+$\mathbf{5.13)}$ Sem calcular $A$, ache uma base para os quatro espaços fundamentais:
+
+$$
+A = \begin{bmatrix}
+	1 & 0 & 0 \\
+	6 & 1 & 0 \\
+	9 & 8 & 1
+\end{bmatrix}
+\begin{bmatrix}
+	1 & 2 & 3 & 4 \\
+	0 & 1 & 2 & 3 \\
+	0 & 0 & 1 & 2
+\end{bmatrix}.
+$$
+
+$\\$
+$\mathbf{5.14)}$ A equação $A^Tx = w$ tem solução quando $w$ está em qual dos quatro subespaços?  Quando a solução é única (condição sobre algum dos quatro subespaços)?
+
+$\\$
+$\mathbf{5.15)}$ Seja $A$ uma matriz $m\times n$. Demonstre que $C(A) = N(A)$ se, e somente se as três seguintes afirmações são cumpridas: $m = n$, $\operatorname{posto}(A) = \dfrac{n}{2}$ e $A^2 = 0$.
+
+$\\$
+$\mathbf{5.16)}$ Sejam $A$ e $B$ matrizes $m\times n$ com os mesmos quatro subespaços fundamentais. Se ambas estão na sua forma escalonada reduzida, prove que $F$ e $G$ são iguais, onde:
+
+$$
+A = \begin{bmatrix}
+	I & F \\
+	0 & 0
+\end{bmatrix}\text{ e } B = \begin{bmatrix}
+	I & G \\
+	0 & 0
+\end{bmatrix}.
+$$
+
+$\\$
+$\mathbf{5.17)}$ Seja $v\in\mathbb{R}^n$, e considere a matriz $H = I - \dfrac{vv^T}{||v||^2}$. Determine o posto de $H$.
