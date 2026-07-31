@@ -1,0 +1,204 @@
+\chapter{Transformações Lineares}
+\label{cap:transformações-lineares}
+
+\textbf{Importante:} este capítulo é baseado em: \cite{slide8doyuri} e em \cite{axler2026}.
+
+No capítulo $4$, nós introduzimos o conceito de transformação linear, e demos uma breve motivação. Agora, nós vamos desenvolver melhor este conceito e nos aprofundar em alguns dos seus principais aspectos.
+
+\section{Transformações Lineares}
+
+Para começar, novamente nós vamos escrever a definição de transformação linear.
+
+\begin{Definition}[Transformação Linear]
+	Sejam $U$ e $V$ dois espaços vetoriais. Dizemos que $T:U\to V$ é uma \textbf{transformação linear} se:
+	
+	$\mathbf{1)}$ $T(u + v) = T(u) + T(v)$;
+	
+	$\mathbf{2)}$ $T(\alpha u) = \alpha T(u)$,
+	$\\$
+	para $u,v\in U$ e $\alpha\in\mathbb{R}$.
+\end{Definition}
+
+Na prática, nós podemos reunir estas duas condições em uma única condição: uma transformação $T:U\to V$ é linear se, e somente se, $T(\alpha u + \beta v) = \alpha T(u) + \beta T(v)$, para $u, v\in U$ e $\alpha, \beta\in\mathbb{R}$. Em resumo, uma transformação é dita linear quando é linear.
+
+Uma primeira propriedade que nós podemos enunciar e provar se refere à aplicação de uma transformação linear no vetor $0$.
+
+\begin{Proposition}
+	Seja $T:U\to V$ uma transformação linear. Então, $T(0) = 0$.
+\end{Proposition}
+
+\begin{Proof}
+	Seja $0\in U$. Então, $T(0) = T(0\cdot u) = 0T(u) = 0\in V$.
+	
+	\qed
+\end{Proof}
+
+Vamos agora ver alguns exemplos de transformações lineares:
+
+\begin{Example}
+	Alguns exemplos de transformações lineares são:
+	
+	$\mathbf{1)}$ A transformação $I:\mathbb{R}^n\to\mathbb{R}^n$ definida por $I(x) = x$ é linear.
+	
+	$\mathbf{2)}$ A transformação $T:\mathbb{R}^n\to\mathbb{R}^m$ definida por $T(x) = Ax$, onde $A$ é uma matriz $m\times n$, é linear.
+	
+	$\mathbf{3)}$ A transformação $D:\mathcal{P}_n\to\mathcal{P}_n$, definida por $D(p) = p'$, é linear.
+	
+	$\mathbf{4)}$ A transformação $T:\mathbb{R}^2\to\mathbb{R}^2$, definida por $T(x, y) = (y, x)$ é linear.
+\end{Example}
+
+Vamos também ver alguns exemplos de transformações não-lineares:
+
+\begin{Example}
+	Alguns exemplos de transformações não-lineares são:
+	
+	$\mathbf{1)}$ A transformação $T:\mathbb{R}^n\to\mathbb{R}^n$ definida por $T(x) = x + b$, onde $b\neq 0$, não é linear.
+	
+	$\mathbf{2)}$ A transformação $T:\mathbb{R}^n\to\mathbb{R}$, definida por $T(x) = ||x||$, não é linear.
+	
+	$\mathbf{3)}$ A transformação $T:\mathbb{R}^2\to\mathbb{R}$, definida por $T(x, y) = x^2 + y^2$ não é linear.
+	
+	$\mathbf{4)}$ A transformação $T:\mathbb{R}\to\mathbb{R}^2$, definida por $T(x) = (x, x + 2)^T$ não é linear.
+\end{Example}
+
+Para demonstrar que uma transformação é linear, basta demonstrarmos que a transformação cumpre todos os requisitos da definição. Para exemplificar, demonstraremos que a transformação $T:\mathbb{R}^n\to\mathbb{R}^m$, definida por $T(x) = Ax$, com $A$ sendo uma matriz $m\times n$, é linear.
+
+\begin{Proposition}
+	Considere a transformação $T:\mathbb{R}^n\to\mathbb{R}^m$ definida por $T(x) = Ax$, onde $A$ é uma matriz $m\times n$. Então, $T$ é uma transformação linear.
+\end{Proposition}
+
+\begin{Proof}
+	Sejam $x, y\in\mathbb{R}^n$ e $\alpha\in\mathbb{R}$. Então:
+	
+	\begin{align*}
+		T(x + y) = A(x + y) &= \sum\limits_{i = 1}^{m}\sum\limits_{j = 1}^n a_{ij}(x_j + y_j) = \sum\limits_{i = 1}^{m}\sum\limits_{j = 1}^{n} (a_{ij}x_j + a_{ij}y_j) \\ &= \sum\limits_{i = 1}^{m}\sum\limits_{j = 1}^{n} a_{ij}x_j + \sum\limits_{i = 1}^{m}\sum\limits_{j = 1}^{n} a_{ij}y_j \\ &= Ax + Ay.
+	\end{align*}
+	
+	$$
+	T(\alpha x) = A(\alpha x) = \sum\limits_{i = 1}^{m}\sum\limits_{j = 1}^{n}\alpha a_{ij}x_j = \alpha\sum\limits_{i = 1}^{m}\sum\limits_{j = 1}^{n} a_{ij}x_j = \alpha Ax.
+	$$
+	Logo, $T$ é uma transformação linear.
+	
+	\qed
+\end{Proof}
+
+Agora, para exemplificar, nós demonstraremos que a transformação $T:\mathbb{R^n}\to\mathbb{R}$ definida por $T(x) = ||x||$ não é linear.
+
+\begin{Proposition}
+	Considere a transformação $T:\mathbb{R}^n\to\mathbb{R}$ definida por $T(x) = ||x||$. Então, $T$ não é uma transformação linear.
+\end{Proposition}
+
+\begin{Proof}
+	Sejam $x, y\in\mathbb{R}^n$. Então, nós temos que:
+	
+	$$
+	T(x + y) = ||x + y||\leq ||x|| + ||y||.
+	$$
+	Logo, $T$ não é uma transformação linear.
+	
+	\qed
+\end{Proof}
+
+Um dos modos mais fáceis de se demonstrar que $T:U\to V$ não é uma transformação linear ocorre no caso em que $T(0)\neq 0$. Neste caso, é imediato que $T$ não é uma transformação linear. No entanto, existem transformações não-lineares $T$ tais que $T(0) = 0$ e, neste caso, é necessário analisar as condições da definição de transformação linear.
+
+\section{Núcleo e Imagem de uma Transformação Linear}
+
+Nos $2$ capítulos anteriores, nós definimos o núcleo e o espaço coluna de uma matriz. Agora, nós estenderemos este conceito para uma transformação linear qualquer. Na prática, as definições são as mesmas, porém agora nós estamos lidando com um contexto mais geral de transformações lineares.
+
+\begin{Definition}[Núcleo de uma transformação linear]
+	Seja $T:U\to V$ uma transformação linear qualquer. Então, definimos o núcleo de $T$ como o conjunto:
+	
+	$$
+	N(T) = \{v\in V; T(v) = 0\}.
+	$$
+\end{Definition}
+
+\begin{Definition}[Imagem de uma transformação linear]
+	Seja $T:U\to V$ uma transformação linear qualquer. Então, definimos a imagem de $T$ como o conjunto:
+	
+	$$
+	Im(T) = \{T(v); v\in V\}.
+	$$
+\end{Definition}
+
+Pela linearidade deste tipo de transformações, é imediato o fato de que $N(T)$ e $Im(T)$ são subespaços vetoriais. A demonstração é a mesma que no contexto do núcleo e do espaço coluna de uma matriz.
+
+Tendo definido estes conceitos, vamos agora definir o conceito de injetividade, e relacioná-lo com o núcleo e de uma transformação.
+
+\begin{Definition}[Injetividade]
+	Seja $T:U\to V$ uma transformação linear. Dizemos que $T$ é \textbf{injetiva} se $T(u) = T(v)$ implica em $u = v$.
+\end{Definition}
+
+Nós poderíamos substituir a definição da seguinte forma: $T$ é injetiva se $u\neq v$ implica em $T(u)\neq T(v)$. Ou seja, entradas diferentes produzem saídas diferentes.
+
+A injetividade de uma transformação linear está diretamente relacionada com o seu núcleo, como nós veremos a seguir:
+
+\begin{Proposition}
+	Seja $T:U\to V$ uma transformação linear. Então, $T$ é injetiva se, e somente se, $N(T) = \{0\}$.
+\end{Proposition}
+
+\begin{Proof}
+	$\implies$ Suponha que $T$ é injetiva. Nós queremos provar que $N(T) = \{0\}$. Nós sabemos que $\{0\}\subseteq N(T)$ (afinal, $T(0) = 0$). Para provar a inclusão na outra direção, suponha que $v\in N(T)$. Então:
+	
+	$$
+	T(v) = 0 = T(0).
+	$$
+	Pela injetividade de $T$, segue que $T(v) = T(0)\iff v = 0$. Logo, $N(T)\subseteq\{0\}$. Portanto, $N(T) = \{0\}$.
+	
+	$\impliedby$ Suponha agora que $N(T) = \{0\}$. Nós queremos provar que $T$ é injetiva. Para isso, sejam $u, v\in U$ e suponha que $T(u) = T(v)$. Então:
+	
+	$$
+	T(u) - T(v) = T(u - v) = 0.
+	$$
+	
+	Assim sendo, $u - v\in N(T) = \{0\}$. Logo, $u - v = 0$, o que implica que $u = v$. Assim sendo, $T$ é injetiva.
+	
+	\qed
+\end{Proof}
+
+Esta discussão formaliza o que nós já havíamos comentado no capítulo anterior: o núcleo de uma transformação linear mede a sua injetividade. Conhecendo o núcleo, nós sabemos o quão próxima ou distante está uma transformação linear de ser injetiva. Particularmente, se a transformação for $0:U\to V$ definida como $0(x) = 0, \forall x\in U$, então todos os vetores em $U$ pertencem a $N(0)$ e, neste caso, nós temos a máxima distância que uma transformação linear pode estar de ser injetiva.
+
+Agora, nós vamos definir a sobrejetividade de uma transformação linear:
+
+\begin{Definition}
+	Seja $T:U\to V$ uma transformação linear. Dizemos que $T$ é sobrejetiva se $Im(T) = V$.
+\end{Definition}
+
+Ou seja, se para cada elemento $v\in V$, existir pelo menos um elemento $u\in U$ tal que $T(u) = v$, a transformação é sobrejetiva. Note que a sobrejetividade depende do contra-domínio de $T$. Suponha, por exemplo, que nós definimos o operador derivada como $D:\mathcal{P}_n\to\mathcal{P}_n$ tal que $D(p) = p'$. Esta transformação não é sobrejetiva, pois, por exemplo, o polinômio $x^n$ não está em $Im(D)$. Por sua vez, se nós definimos o operador derivada como $D:\mathcal{P}_n\to\mathcal{P}_{n + 1}$ tal que $D(p) = p'$, então a transformação passa a ser sobrejetiva, pois a sua imagem corresponde ao contra-domínio inteiro.
+
+Um resultado que nós já tínhamos para as matrizes, mas que também é válido para toda e qualquer transformação linear em espaços vetoriais de dimensão finita, é o seguinte:
+
+\begin{Theorem}[Teorema do Núcleo e da Imagem]
+	Seja $T:U\to V$ uma transformação linear. Então:
+	
+	$$
+	\dim U = \dim N(T) + \dim Im(T).
+	$$
+\end{Theorem}
+
+Este teorema é basicamente o Teorema do Posto, só que agora nós estamos olhando para transformações lineares em geral.
+
+
+\section{Matriz de uma Transformação Linear}
+Deixemos de lado a injetividade e a sobrejetividade por um momento. Queremos agora responder a uma outra pergunta: ``Se $\dim U = n$, quanto precisamos conhecer da transformação linear $T:U\to V$ para sabermos $T(u)$ para todo $u\in U$?''. A esta pergunta, nós respondemos com o seguinte teorema:
+
+\begin{Theorem}
+	Seja $\{u_1, \cdots, u_n\}$ uma base de $U$. Então,
+	
+	$$
+	T(u) = x_1T(u_1) + \cdots + x_nT(u_n),
+	$$
+	onde $u = x_1u_1 + \cdots + x_nu_n$, com $x_i\in\mathbb{R}$.
+\end{Theorem}
+
+\begin{Proof}
+	Nós sabemos que $\{u_1, \cdots, u_n\}$ é uma base para $U$. Assim sendo, nós temos que, para todo $u\in U$, existem únicos $x_1, \cdots, x_n$ reais tais que $u = x_1u_1 + \cdots + x_nu_n$. Assim sendo:
+	
+	$$
+	T(u) = T(x_1u_1 + \cdots + x_nu_n) = T(x_1u_1) + \cdots + T(x_nu_n) = x_1T(u_1) + \cdots + x_nT(u_n).
+	$$
+	
+	\qed
+\end{Proof}
+
+Em resumo, o que este teorema nos diz é que, se nós queremos saber como uma transformação linear age sobre todos os vetores do seu domínio, basta saber como ela age sobre os vetores de uma base do seu domínio, dado que qualquer outro vetor neste espaço é uma combinação linear dos vetores da base.
