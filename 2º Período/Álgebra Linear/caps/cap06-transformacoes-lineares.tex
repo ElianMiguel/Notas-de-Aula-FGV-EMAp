@@ -202,3 +202,389 @@ Deixemos de lado a injetividade e a sobrejetividade por um momento. Queremos ago
 \end{Proof}
 
 Em resumo, o que este teorema nos diz é que, se nós queremos saber como uma transformação linear age sobre todos os vetores do seu domínio, basta saber como ela age sobre os vetores de uma base do seu domínio, dado que qualquer outro vetor neste espaço é uma combinação linear dos vetores da base.
+
+Por sua vez, mantendo $\{u_1, \cdots, u_n\}$ como uma base de $U$, e supondo que $\dim V = m$ e que $\{v_1, \cdots, v_m\}$ é uma base para $V$, nós podemos escrever:
+
+$$
+T(u_j) = a_{1j}v_1 + \cdots + a_{mj}v_m,
+$$
+para $j\in\{1, \cdots, n\}$. Assim sendo, nós temos que:
+
+$$
+T(u) = \sum\limits_{j = 1}^{n} x_jT(u_j) = \sum\limits_{j = 1}^n x_j\sum\limits_{i = 1}^{m} a_{ij}v_i = \sum\limits_{i = 1}^{m}\left(\sum\limits_{j = 1}^{n} a_{ij}x_j\right)v_i = \sum\limits_{i = 1}^{m}(Ax)_iv_i.
+$$
+
+Isso quer dizer que, dadas duas bases $\{u_1, \cdots, u_n\}$ para $U$ e $\{v_1, \cdots, v_m\}$ para $V$, existe uma matriz $A$ tal que $T:U\to V$ pode ser definida como:
+
+$$
+T(u) = \sum\limits_{i = 1}^{m} (Ax)_iv_i.
+$$
+
+Nós chamamos a matriz $A$ de \textbf{matriz da transformação linear $T$ relativa às bases $\{u_1, \cdots, u_n\}$ e $\{v_1, \cdots, v_m\}$}.
+
+Disto segue o seguinte resultado:
+
+\begin{Proposition}
+	Seja $T:\mathbb{R}^n\to\mathbb{R}^m$ uma transformação linear, e considere as bases canônicas para o domínio e para o contradomínio. Então, $T(x) = Ax$.
+\end{Proposition}
+
+\begin{Proof}
+	Nós temos que o vetor $u\in\mathbb{R}^n$ pode ser escrito, na base canônica, como:
+	
+	$$
+	u = x_1e_1 + \cdots + x_ne_n = x.
+	$$
+	Assim sendo, nós temos que:
+	
+	$$
+	T(u) = T(x) = \sum\limits_{i = 1}^{m} (Ax)_ie_i = \sum\limits_{i = 1}^{m} (Ax)_i = Ax.
+	$$
+	Logo, $T(x) = Ax$.
+	
+	\qed
+\end{Proof}
+
+Vamos considerar um exemplo simples:
+
+\begin{Example}
+	Considere a transformação linear $T:\mathbb{R}^3\to\mathbb{R}^2$ definida como $T(x, y, z) = (x + y, y + z)$, em que $\left\{\begin{bmatrix}
+		1 \\
+		0 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		1 \\
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}\right\}$ é uma base para $\mathbb{R}^3$ e $\left\{\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		2 \\
+		3
+	\end{bmatrix}\right\}$ é uma base para $\mathbb{R}^2$. Nós queremos encontrar a matriz $A$ da transformação linear $T$ nestas bases. Para isto, nós devemos calcular a transformação em cada vetor da base do domínio, e escrever os resultados como combinações lineares dos vetores da base do contradomínio. Os coeficientes dessas combinações lineares formarão as colunas da matriz $A$.
+	
+	Primeiramente, nós temos que:
+	
+	$$
+	T\left(\begin{bmatrix}
+		1 \\
+		0 \\
+		0
+	\end{bmatrix}\right) = \begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix} = 1\cdot\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix} + 0\cdot\begin{bmatrix}
+		2 \\
+		3
+	\end{bmatrix}.
+	$$
+	Neste caso, é fácil encontrar os coeficientes:
+	
+	$$
+	T\left(\begin{bmatrix}
+		1 \\
+		0 \\
+		0
+	\end{bmatrix}\right) = 1\cdot\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix} + 0\cdot\begin{bmatrix}
+		2 \\
+		3
+	\end{bmatrix}.
+	$$
+	
+	Em seguida, calculamos:
+	
+	$$
+	T\left(\begin{bmatrix}
+		1 \\
+		1 \\
+		0
+	\end{bmatrix}\right) = \begin{bmatrix}
+		2 \\
+		1
+	\end{bmatrix}.
+	$$
+	Para encontrar os coeficientes, resolvemos o seguinte sistema linear:
+	
+	$$
+	\begin{cases}
+		x + 2y = 2 \\
+		3y = 1
+	\end{cases}
+	$$
+	Assim sendo, $y = \dfrac{1}{3}$ e $x = \dfrac{4}{3}$. Logo:
+	
+	$$
+	T\left(\begin{bmatrix}
+		1 \\
+		1 \\
+		0
+	\end{bmatrix}\right) = \dfrac{4}{3}\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix} + \dfrac{1}{3}\begin{bmatrix}
+		2 \\
+		3
+	\end{bmatrix}.
+	$$
+	
+	Por fim, nós calculamos:
+	
+	$$
+	T\left(\begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}\right) = \begin{bmatrix}
+		2 \\
+		2
+	\end{bmatrix}.
+	$$
+	Para achar os coeficientes, nós resolvemos o seguinte sistema linear:
+	
+	$$
+	\begin{cases}
+		x + 2y = 2 \\
+		y = 2
+	\end{cases}
+	$$
+	Assim sendo, $y = 2$ e $x = -2$. Logo:
+	
+	$$
+	T\left(\begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}\right) = -2\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix} + 2\begin{bmatrix}
+		2 \\
+		3
+	\end{bmatrix}.
+	$$
+	
+	Assim sendo, a matriz $A$ relativa às bases dadas é:
+	
+	$$
+	A = \begin{bmatrix}
+		1 & 4/3 & -2 \\
+		0 & 1/3 & 2
+	\end{bmatrix}.
+	$$
+\end{Example}
+
+\section{Composição de Transformações Lineares}
+
+Na seção anterior, nós aprendemos que transformações lineares podem ser representadas por matrizes quando nós conhecemos uma base para o domínio e uma base para o contradomínio. Assim sendo, é razoável que a multiplicação de matrizes tenha um significado em termos das transformações lineares que elas representam. Para isto, nós vamos apresentar o conceito de composição de transformações lineares.
+
+\begin{Definition}[Composição de duas transformações lineares]
+	Sejam $T_1:V\to W$ e $T_2:U\to V$ duas transformações lineares. Então, a \textbf{composição} de $T_1$ com $T_2$ é definida como:
+	
+	\begin{align*}
+		T_1\circ T_2: ~&U\to W \\
+		&x\mapsto T_1(T_2(x))
+	\end{align*}
+\end{Definition}
+
+Com este conceito em mãos, nós podemos enunciar e demonstrar o fato que relaciona a composição de transformações lineares com a multiplicação de matrizes:
+
+\begin{Theorem}
+	Sejam $T_1:V\to W$ e $T_2:U\to V$ duas transformações lineares com matrizes $A$ e $B$, respectivamente. Suponha ainda que $\dim U = n$, $\dim V = m$ e $\dim W = p$. Então:
+	
+	$$
+	(T_1\circ T_2)(u) = ABu.
+	$$
+\end{Theorem}
+
+\begin{Proof}
+	Sejam $\{u_1, \cdots, u_n\}$, $\{v_1, \cdots v_m\}$ e $\{w_1, \cdots, w_p\}$ bases, respectivamente, para $U$, $V$ e $W$. Então:
+	
+	$$
+	T_1(v) = \sum\limits_{i = 1}^{m}\sum\limits_{k = 1}^{p} a_{ki}y_iw_k,
+	$$
+	onde $v = \sum\limits_{i = 1}^{m} y_iv_i$, e:
+	
+	$$
+	T_2(u) = \sum\limits_{j = 1}^{n}\sum\limits_{i = 1}^{m} b_{ij}x_jv_i,
+	$$
+	onde $u = \sum\limits_{j = 1}^{n} x_ju_j$.
+	
+	Denote por $C$ a matriz de $T_1\circ T_2: U\to W$. Queremos provar que $C = AB$. Sabemos que:
+	
+	$$
+	(T_1\circ T_2)(u) = \sum\limits_{j = 1}^{n}\sum\limits_{k = 1}^{p} c_{kj}x_jw_j.
+	$$
+	Como $T_2(u) = \sum\limits_{j = 1}^{n}\sum\limits_{i = 1}^{m} b_{ij}x_jv_i$, invertendo a ordem dos somatórios nós obtemos:
+	
+	$$
+	T_2(u) = \sum\limits_{i = 1}^{m}\sum\limits_{j = 1}^{n} b_{ij}x_jv_i = \sum\limits_{i = 1}^{m} y_iv_i,
+	$$
+	com $y_i = \sum\limits_{j = 1}^{n} b_{ij}x_j = (Bx)_i$.
+	
+	Assim sendo, segue que:
+	
+	\begin{align*}
+		(T_1\circ T_2)(u) = T_1(T_2(u)) &= \sum\limits_{i = 1}^{m}\sum\limits_{k = 1}^{p} a_{ki}y_iw_k = \sum\limits_{i = 1}^{m}\sum\limits_{k = 1}^{p} a_{ki}\left(\sum\limits_{j = 1}^{n} b_{ij}x_j\right)w_k \\ &= \sum\limits_{j = 1}^{n}\sum\limits_{k = 1}^{p}\left(\sum\limits_{i = 1}^{m} a_{ki}b_{ij}\right) x_jw_k.
+	\end{align*}
+	
+	Logo, $c_{kj} = \sum\limits_{i = 1}^{m}a_{ki}b_{ij}$, o que ocorre se, e somente se, $C = AB$.
+	
+	\qed
+\end{Proof}
+
+Isto explica, por exemplo, a regra das dimensões na multiplicação de matrizes. Também explica o motivo pelo qual a fórmula da multiplicação de matrizes é como é, e não, por exemplo, uma multiplicação elemento a elemento: porque uma multiplicação de matrizes é uma forma de representar uma composição de transformações lineares.
+
+\section{Bijeções e Isomorfismos}
+
+Nesta seção, nós introduziremos alguns conceitos novos envolvendo transformações lineares e espaços vetoriais. Há algumas seções, nós definimos os conceitos de injetividade e sobrejetividade. No entanto, um caso muito importante ocorre quando a transformação linear é injetiva e sobrejetiva ao mesmo tempo.
+
+\begin{Definition}[Bijetividade]
+	Suponha que $T:U\to V$ é uma transformação, ao mesmo tempo, injetiva e sobrejetiva. Dizemos então que $T$ é \textbf{bijetiva}.
+\end{Definition}
+
+Assim como existem matrizes que são invertíveis, nós podemos dizer que existem transformações lineares invertíveis. Vamos definir formalmente este conceito:
+
+\begin{Definition}[Inversa de uma transformação linear]
+	Seja $T:U\to V$ uma transformação linear tal que existe uma transformação linear $S:V\to U$ que satisfaz as seguintes propriedades:
+	
+	$\mathbf{1)}$ $S\circ T = I:U\to U$;
+	
+	$\mathbf{2)}$ $T\circ S = I:V\to V$.
+	$\\$
+	Então, dizemos que $S$ é uma \textbf{inversa} da transformação $T$, e dizemos que $T$ é \textbf{invertível}.
+\end{Definition}
+
+Agora, nós provaremos o resultado que nós permite falar em ``a inversa'' de uma transformação linear.
+
+\begin{Proposition}[Unicidade da inversa de uma transformação linear]
+	Seja $T:U\to V$ uma transformação linear invertível. Então, a inversa de $T$ é única.
+\end{Proposition}
+
+\begin{Proof}
+	Suponha que $S_1$ e $S_2$ são inversas de $T$. Então:
+	
+	$$
+	S_1 = S_1\circ I = S_1\circ(T\circ S_2) = (S_1\circ T)\circ S_2 = I\circ S_2 = S_2.
+	$$
+	Logo, $S_1 = S_2$.
+	
+	\qed
+\end{Proof}
+
+Neste caso, como a inversa de uma transformação linear invertível $T$ é única, nós a denotamos por $T^{-1}$.
+
+Um fato bastante intuitivo sobre a invertibilidade de uma transformação linear é o seguinte:
+
+\begin{Theorem}
+	Seja $T:U\to V$ uma transformação linear. Então, $T$ é invertível se, e somente se, $T$ é bijetora.
+\end{Theorem}
+
+\begin{Proof}
+	$\implies$ Suponha que $T$ é invertível. Devemos mostrar que $T$ é bijetora, ou seja, devemos mostrar que $T$ é injetora e sobrejetora. Para mostrar que $T$ é injetora, suponha que $u, v\in U$ são tais que $T(u) = T(v)$. Então:
+	
+	$$
+	u = T^{-1}T(u) = T^{-1}T(v) = v,
+	$$
+	logo $u = v$. Assim sendo, $T$ é injetora.
+	
+	Para mostrar que $T$ é sobrejetora, seja $v\in V$. Então, $v = T(T^{-1}(v))$, o que mostra que $v\in Im(T)$. Logo, $Im(T) = V$, ou seja, $T$ é sobrejetora.
+	
+	Logo, $T$ é bijetora.
+	
+	$\impliedby$ Suponha que $T$ é bijetora. Nós queremos provar que $T$ é invertível. Para isso, para cada $v\in V$, defina $S(v)$ como o único elemento de $V$ tal que $T(S(v)) = v$ (a existência e a unicidade deste elemento vem da bijetividade de $T$, assumida por hipótese). A definição de $S$ implica que $T\circ S = I:V\to V$.
+	
+	Para provar que $S\circ T = I:U\to U$, seja $u\in U$. Então:
+	
+	$$
+	T((S\circ T)(u)) = (T\circ S)(T(u)) = I(T(u)) = T(u).
+	$$
+	
+	Esta equação implica que $(S\circ T)(u) = u$ (pela injetividade de $T$), logo $S\circ T = I:U\to U$.
+	
+	Para completar a prova, devemos mostrar que $S$ é uma transformação linear. Para fazer isto, suponha que $v_1, v_2\in V$. Então:
+	
+	$$
+	T(S(v_1) + S(v_2)) = T(S(v_1)) + T(S(v_2)) = v_1 + v_2.
+	$$
+	Pela injetividade de $T$, segue que $S(v_1) + S(v_2)$ é o único elemento de $U$ que $T$ leva em $v_1 + v_2$. Pela definição de $S$, segue que $S(v_1 + v_2) = S(v_1) + S(v_2)$.
+	
+	Agora, sejam $v\in V$ e $\alpha\in\mathbb{R}$. Então:
+	
+	$$
+	T(\alpha S(v)) = \alpha T(S(v)) = \alpha v.
+	$$
+	
+	Assim sendo, $\alpha S(v)$ é o único elemento de $U$ que $T$ leva em $\alpha v$. Logo, pela definição de $S$, segue que $S(\alpha v) = \alpha S(v)$.
+	
+	Portanto, $S$ é uma transformação linear e, como também é a inversa de $T$, segue que $T$ é invertível.
+	
+	\qed
+\end{Proof}
+
+Agora, nós vamos introduzir uma ideia muito interessante que permite relacionar certos espaços vetoriais.
+
+\begin{Definition}[Isomorfismo]
+	Seja $T:U\to V$ uma transformação linear invertível. Dizemos que $T$ é um \textbf{isomorfismo} entre $U$ e $V$, e dizemos que $U$ e $V$ são \textbf{isomorfos}.
+\end{Definition}
+
+Se $U$ e $V$ são dois espaços vetoriais isomorfos, nós usamos a seguinte notação: $U\cong V$. Na prática, é muito intuitivo saber quando dois espaços vetoriais são isomorfos: basta olhar para as suas dimensões.
+
+\begin{Theorem}
+	Sejam $U$ e $V$ dois espaços vetoriais. Então, $U\cong V$ se, e somente se, $\dim U = \dim V$.
+\end{Theorem}
+
+\begin{Proof}
+	$\implies$ Suponha que $U\cong V$. Então, existe um isomorfismo $T:U\to V$. Como $T$ é invertível, nós temos que $N(T) = \{0\}$ e $Im(T) = V$. Assim sendo, $\dim N(T) = 0$ e $\dim Im(T) = \dim V$. Pelo Teorema do Núcleo e da Imagem, nós temos que:
+	
+	$$
+	\dim U = \dim N(T) + \dim Im(T)\implies \dim U = 0 + \dim V \implies \dim U = \dim V.
+	$$
+	
+	$\impliedby$ Suponha que $\dim U = \dim V$. Sejam $\{u_1, \cdots, u_n\}$ e $\{v_1, \cdots, v_n\}$ bases para $U$ e $V$, respectivamente. Definamos $T:U\to V$ como:
+	
+	$$
+	T(c_1u_1 + \cdots + c_nu_n) = c_1v_1 + \cdots + c_nv_n.
+	$$
+	Então, $T$ é uma transformação linear bem-definida porque $\{u_1, \cdots, u_n\}$ é uma base de $U$. Igualmente, $T$ é sobrejetiva porque $\operatorname{span}(\{v_1, \cdots, v_n\}) = V$. Finalmente, $N(T) = \{0\}$ porque $\{v_1, \cdots, v_n\}$ é linearmente independente. Assim sendo, $T$ é injetiva. Logo, $T$ é bijetora e, portanto, é um isomorfismo. Assim sendo, $U\cong V$.
+	
+	\qed
+\end{Proof}
+
+Um exemplo muito intuitivo de espaços vetoriais isomorfos é o seguinte:
+
+\begin{Example}
+	Considere os espaços vetoriais $\mathbb{R}^2$ e $\mathbb{C}$ (ambos definidos sobre $\mathbb{R}$, nestas notas de aula, a menos que se fale o contrário, nós estamos sempre considerando isto, mas num contexto mais geral, esta observação é muito importante, dado que apenas dois espaços definidos sobre um mesmo corpo podem ser isomorfos). Então, $\mathbb{R}^2\cong\mathbb{C}$. De fato, o conjunto $\left\{\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		0 \\
+		1
+	\end{bmatrix}\right\}$ é uma base para $\mathbb{R}^2$, e o conjunto $\{1, i\}$ é uma base para $\mathbb{C}$. Logo, ambos os espaços possuem dimensão igual a $2$ e, pelo teorema anterior, segue que $\mathbb{R}^2\cong\mathbb{C}$. 
+	
+	Um isomorfismo explícito entre estes dois espaços é a transformação linear $T:\mathbb{R}^2\to\mathbb{C}$ definida por:
+	
+	$$
+	T(x, y) = x + iy.
+	$$
+	Podemos demonstrar facilmente que esta transformação é bijetiva e, portanto, é um isomorfismo.
+\end{Example}
+
+Na prática, um isomorfismo entre dois espaços é uma transformação que preserva soma e multiplicação por escalar. Isso pode ser usado para demonstrar que uma transformação é um isomorfismo, se for mais fácil.
+
+Por fim, vamos fazer a última definição desta seção, que se refere ao contexto em que o isomorfismo acontece entre dois espaços iguais:
+
+\begin{Definition}[Automorfismo]
+	Suponha que a transformação linear $T:U\to U$ é um isomorfismo. Neste caso, dizemos que $T$ é um \textbf{automorfismo}.
+\end{Definition}
+
+Um exemplo muito simples de automorfismo é a transformação identidade $I:\mathbb{R}^n\to\mathbb{R}^n$, definida por $I(x) = x$. Esta transformação é claramente bijetora e, portanto, é um isomorfismo de $\mathbb{R}^n$ em $\mathbb{R}^n$. Logo, é um automorfismo.
