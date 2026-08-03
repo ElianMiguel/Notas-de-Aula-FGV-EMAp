@@ -588,3 +588,182 @@ Por fim, vamos fazer a última definição desta seção, que se refere ao conte
 \end{Definition}
 
 Um exemplo muito simples de automorfismo é a transformação identidade $I:\mathbb{R}^n\to\mathbb{R}^n$, definida por $I(x) = x$. Esta transformação é claramente bijetora e, portanto, é um isomorfismo de $\mathbb{R}^n$ em $\mathbb{R}^n$. Logo, é um automorfismo.
+
+\section{Coordenadas e Mudança de Bases}
+
+Após termos feito um breve passeio por bijeções e isomorfismos, vamos voltar à ideia de representação matricial de transformações lineares. Quando nós fizemos um exemplo sobre este tema, nós usamos duas bases diferentes da base canônica. É mais fácil fazer isto usando a base canônica, porque não é necessário resolver nenhum sistema linear para encontrar as entradas da matriz. Porém, é muito importante saber trabalhar com bases diferentes (sobretudo em alguns problemas mais aplicados, como o de interpolação polinomial, que nós veremos mais profundamente em Álgebra Linear Numérica). É o que nós faremos de um modo mais sistemático neste capítulo.
+
+Os coeficientes que nós procurávamos naquele exemplo serão precisamente a definição que nós faremos agora:
+
+\begin{Definition}[Coordenadas]
+	Seja $U$ um espaço vetorial com $\dim U = n$, e seja $\mathcal{U} = \{u_1, \cdots, u_n\}$ uma base para $U$. Sabemos que, para cada $u\in U$, existem únicos escalares $x = \begin{bmatrix}
+		x_1 \\
+		x_2 \\
+		\vdots \\
+		x_n
+	\end{bmatrix}$ tais que $u = x_1u_1 + x_2u_2 + \cdots + x_nu_n$. Então, nós definimos $x$ como as \textbf{coordenadas} de $u$ na base $\mathcal{U}$, e escrevemos:
+	
+	$$
+	[u]_\mathcal{U} = x.
+	$$
+\end{Definition}
+
+Uma propriedade interessante, muito embora seja muito intuitiva, é a linearidade das coordenadas:
+
+\begin{Proposition}
+	Sejam $U$ um espaço vetorial com $\dim U = n$ e base $\mathcal{U} = \{u_1, \cdots, u_n\}$, e $u, v\in U$. Então:
+	
+	$$
+	[\alpha u + v]_\mathcal{U} = \alpha[u]_\mathcal{U} + [v]_\mathcal{U}.
+	$$
+\end{Proposition}
+
+\begin{Proof}
+	Considere $u = x_1u_1 + \cdots + x_nu_n$, com $[u]_\mathcal{U} = x$, e $v = y_1u_1 + \cdots + y_nu_n$, com $[v]_\mathcal{U} = y$. Então:
+	
+	\begin{align*}
+		\alpha u + v &= \alpha(x_1u_1 + \cdots + x_nu_n) + y_1u_1 + \cdots + y_nu_n = (\alpha x_1 + y_1)u_1 + \cdots + (\alpha x_n + y_n)u_n \\ &\implies [\alpha u + v]_\mathcal{U} = \alpha x + y = \alpha [u]_\mathcal{U} + [v]_\mathcal{U}.
+	\end{align*}
+	
+	\qed
+\end{Proof}
+
+Nós usamos este conceito de coordenadas para empregar o seguinte raciocínio: se $T: U\to V$ é uma transformação linear, então denotamos:
+
+$$
+[T]_\mathcal{U} = A = \begin{bmatrix}
+	| & | & & | \\
+	[T(u_1)]_\mathcal{U} & [T(u_2)]_\mathcal{U} & \cdots & [T(u_n)]_\mathcal{U} \\
+	| & | & & |
+\end{bmatrix}.
+$$
+
+Se $\dim U = n$ e $\dim V = m$, então esta matriz é $m\times n$. Em suma, é o que nós fizemos quando estávamos falando da representação matricial de uma transformação linear com relação a uma base do domínio e a uma base do contradomínio. A grande diferença entre uma transformação linear e a sua representação matricial é que uma transformação linear não depende de coordenadas, mas a sua representação matricial sim.
+
+Fixadas uma base para o domínio e uma para o contradomínio, a representação matricial de uma transformação linear é única. E como é bem fácil trabalhar com matrizes, isto ajuda a facilitar as contas.
+
+Uma propriedade desta representação de uma transformação linear é a seguinte:
+
+\begin{Proposition}
+	Seja $T:U\to V$ uma transformação linear. Então:
+	
+	$$
+	[T(u)]_\mathcal{U} = [T]_\mathcal{U}[u]_\mathcal{U}.
+	$$
+\end{Proposition}
+
+\begin{Proof}
+	Nós sabemos que $T(u) = T\left(\sum\limits_{i = 1}^{n} x_iu_i\right)$, onde $x = [u]_\mathcal{U}$. Como $T$ é uma transformação linear, segue que $T\left(\sum\limits_{i = 1}^{n} x_iu_i\right) = \sum\limits_{i = 1}^{n} x_iT(u_i)$. Assim sendo, nós obtemos:
+	
+	$$
+	[T(u)]_\mathcal{U} = \sum\limits_{i = 1}^{n} x_i[T(u_i)]_\mathcal{U} = [T]_\mathcal{U}[u]_\mathcal{U},
+	$$
+	já que $[T(u_i)]_\mathcal{U}$ corresponde às colunas de $[T]_\mathcal{U}$.
+	
+	\qed
+\end{Proof}
+
+Isto confirma a nossa ideia de que existe uma correspondência entre aplicar uma transformação linear a um vetor e multiplicar uma matriz por um vetor.
+
+Mas agora, nós sabemos que um mesmo espaço vetorial pode possuir muitas bases diferentes. Então, como podemos fazer uma mudança de bases dentro de um espaço vetorial? Se praticamente tudo o que estamos fazendo envolve matrizes, neste caso não é diferente: nós encontraremos uma matriz que realiza este tipo de transformação.
+
+Sejam $\mathcal{U} = \{u_1, \cdots, u_n\}$ e $\mathcal{V} = \{v_1, \cdots, v_n\}$ duas bases do espaço vetorial $U$. Nós vamos verificar que:
+
+$$
+P = \begin{bmatrix}
+	| & | & & | \\
+	[u_1]_\mathcal{V} & [u_2]_\mathcal{V} & \cdots & [u_n]_\mathcal{V} \\
+	| & | & & |
+\end{bmatrix}
+$$
+muda os vetores na base $\mathcal{U}$ para a base $\mathcal{V}$. (ou seja, $[u]_\mathcal{V} = P[u]_\mathcal{U}$).
+
+De fato, sejam $x = [u]_\mathcal{U}$, $y = [u]_\mathcal{V}$ e $p_j = [u_j]_\mathcal{V}$. Então, $u = \sum\limits_{j = 1}^{n} x_ju_j$. No entanto, na base $\mathcal{V}$, $u_j = \sum\limits_{i = 1}^{n} p_{ij}v_i$. Assim sendo:
+
+$$
+u = \sum\limits_{j = 1}^{n} x_j\sum\limits_{i = 1}^{n} p_{ij}v_i = \sum\limits_{i = 1}^{n}\left(\sum\limits_{j = 1}^{n}p_{ij}x_j\right)v_i = \sum\limits_{i = 1}^{n} y_iv_i.
+$$
+
+Logo, $y = Px$, ou seja, $[u]_\mathcal{V} = P[u]_\mathcal{U}$. Por consequência, segue que $[u]_\mathcal{U} = P^{-1}[u]_\mathcal{V}$.
+
+Por meio desta discussão, podemos chegar à seguinte conclusão:
+
+\begin{Theorem}
+	Seja $T:U\to U$ uma transformação linear e considere $A = [T]_\mathcal{U}$ e $B = [T]_\mathcal{V}$. Então, $A = P^{-1}BP$.
+\end{Theorem}
+
+\begin{Proof}
+	Nós temos que:
+	
+	\begin{align*}
+		(P^{-1}BP)[u]_\mathcal{U} &= P^{-1}B(P[u])_\mathcal{U} = P^{-1}[T]_\mathcal{V}[u]_\mathcal{V} = P^{-1}[T(u)]_\mathcal{V}\\ &= [T(u)]_\mathcal{U} = [T]_\mathcal{U}[u]_\mathcal{U} = A[u]_\mathcal{U}.
+	\end{align*} 
+	Logo, $A = P^{-1}BP$.
+	
+	\qed
+\end{Proof}
+
+Vamos fazer um exemplo bem simples para encerrar a parte teórica deste capítulo:
+
+\begin{Example}
+	Sejam $\mathcal{U} = \left\{\begin{bmatrix}
+		2 \\
+		3
+	\end{bmatrix}, \begin{bmatrix}
+		4 \\
+		5
+	\end{bmatrix}\right\} = \{u_1, u_2\}$ e $\mathcal{V} = \left\{\begin{bmatrix}
+		-1 \\
+		1
+	\end{bmatrix}, \begin{bmatrix}
+		1 \\
+		1
+	\end{bmatrix} = \{v_1, v_2\}\right\}$ duas bases para $\mathbb{R}^2$. Então, a matriz que faz a mudança de base de $\mathcal{U}$ para $\mathcal{V}$ é:
+	
+	$$
+	P = \begin{bmatrix}
+		| & | \\
+		[u_1]_\mathcal{V} & [u_2]_\mathcal{V} \\
+		| & |
+	\end{bmatrix}.
+	$$
+	
+	Primeiro, nós obtemos o sistema:
+	$$
+	\begin{bmatrix}
+		-1 & 1 \\
+		1 & 1
+	\end{bmatrix}x = \begin{bmatrix}
+		2 \\
+		3
+	\end{bmatrix}
+	$$.
+	
+	Resolvendo, nós obtemos $x = \begin{bmatrix}
+		1/2 \\
+		5/2
+	\end{bmatrix}$, que corresponde à primeira coluna de $P$. 
+	
+	Agora, nós obtemos o sistema:
+	
+	$$
+	\begin{bmatrix}
+		-1 & 1 \\
+		1 & 1
+	\end{bmatrix}x = \begin{bmatrix}
+		4 \\
+		5
+	\end{bmatrix},
+	$$
+	que, resolvendo, nos dá $x = \begin{bmatrix}
+		1/2 \\
+		9/2
+	\end{bmatrix}$. Logo, a matriz de mudança de base $P$ é:
+	
+	$$
+	P = \begin{bmatrix}
+		1/2 & 1/2 \\
+		5/2 & 9/2
+	\end{bmatrix}.
+	$$
+\end{Example}
