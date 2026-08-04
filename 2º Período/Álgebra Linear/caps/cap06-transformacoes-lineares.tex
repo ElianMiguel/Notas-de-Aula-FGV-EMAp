@@ -767,3 +767,122 @@ Vamos fazer um exemplo bem simples para encerrar a parte teórica deste capítul
 	\end{bmatrix}.
 	$$
 \end{Example}
+
+\section{Exercícios}
+\textbf{Importante:} Alguns dos exercícios são baseados em \cite{axler2026}.
+
+\noindent $\mathbf{6.1)}$ Considere a transformação $T:\mathbb{R}\to\mathbb{R}^3$ definida por:
+
+$$
+T(x) = (x, 2x, 3x)^T.
+$$
+Esta transformação é linear? Demonstre a sua resposta. E se trocarmos a última coordenada por $x + 1$?
+
+$\\$
+$\mathbf{6.2)}$ Prove que a transformação $T:\mathcal{P}_n\to\mathbb{R}$, definida como:
+
+$$
+T(p) = \displaystyle \int_{0}^{1} p(x) \,dx
+$$
+é uma transformação linear.
+
+$\\$
+$\mathbf{6.3)}$ Por que a transformação $T:\mathcal{P}_n\to\mathcal{P}_{n + 1}$, definida por:
+
+$$
+T(p) = \int p(x) \, dx
+$$
+não é linear?
+
+$\\$
+$\mathbf{6.4)}$ Considere a transformação linear $T:\mathbb{R}^3\to\mathbb{R}^2$, dada por:
+
+$$
+T(x, y, z) = (2x + 3y, y - z)^T.
+$$
+Encontre $N(T)$ e $Im(T)$.
+
+$\\$
+$\mathbf{6.5)}$ Considere a transformação linear $T:\mathcal{P}_n\to\mathcal{P}_{n + 1}$ definida por:
+
+$$
+T(p) = \displaystyle \int_{0}^{x} p(t) \,dt.
+$$
+Encontre o núcleo e a imagem de $T$. Esta transformação é injetiva? Ela é sobrejetiva?
+
+$\\$
+$\mathbf{6.6)}$ Suponha que $V$ e $W$ são dois espaços vetoriais tais que $\dim V > \dim W$. Prove que nenhuma transformação linear $T:V\to W$ é injetiva.
+
+$\\$
+$\mathbf{6.7)}$ Suponha que $V$ e $W$ são dois espaços vetoriais tais que $\dim V < \dim W$. Prove que nenhuma transformação linear $T:V\to W$ é sobrejetiva.
+
+$\\$
+$\mathbf{6.8)}$ Considere a transformação linear $D:\mathcal{P}_{n}\to\mathcal{P}_{n - 1}$ definida por:
+
+$$
+D(p) = p'.
+$$
+Encontre a matriz de $D$ com relação às bases canônicas.
+
+$\\$
+$\mathbf{6.9)}$ Considere uma transformação linear $T:V\to V$ qualquer. Prove que a transformação $T^n:V\to V$, definida como:
+
+$$
+T^n(x) = \underbrace{T\circ T\circ\cdots\circ T}_{n\text{ vezes }}
+$$
+é linear. Prove ainda que, se $A$ é a matriz de $T$ em relação à base canônica, então $A^n$ é a matriz de $T^n$ em relação à base canônica.
+
+$\\$
+$\mathbf{6.10)}$ Considere a transformação linear $T:\mathbb{R}^2\to\mathbb{R}^2$ definida como:
+
+$$
+T(x, y) = (x + y, x - y)^T.
+$$
+Esta transformação é bijetiva? Se sim, encontre a sua inversa $T^{-1}$.
+
+$\\$
+$\mathbf{6.11)}$ Prove que $\mathcal{P}_n\cong\mathbb{R}^{n + 1}$ de duas formas:
+
+a) Demonstrando que ambos os espaços possuem mesma dimensão.
+
+b) Exibindo um isomorfismo explícito entre os dois espaços (é necessário demonstrar que a transformação linear em questão é um isomorfismo).
+
+$\\$
+$\mathbf{6.12)}$ Demonstre que $\mathbb{R}^n\cong\mathbb{C}^m$ se, e somente se, $n = 2m$.
+
+$\\$
+$\mathbf{6.13)}$ Demonstre que $\mathbb{R}^{m\times n}\cong\mathbb{R}^{mn}$ exibindo um isomorfismo explícito entre os dois espaços.
+
+$\\$
+$\mathbf{6.14)}$ Demonstre que a transformação linear $T:\mathbb{R}^2\to\mathbb{R}^2$ definida como:
+
+$$
+T(x, y) = (y, x)^T
+$$
+é um automorfismo. O que esta transformação representa geometricamente?
+
+$\\$
+$\mathbf{6.15)}$ Considere as duas seguintes bases para $\mathbb{R}^2$: $\mathcal{U} = \left\{\begin{bmatrix}
+	1 \\
+	1
+\end{bmatrix}, \begin{bmatrix}
+	2 \\
+	0
+\end{bmatrix}\right\}$ e $\mathcal{V} = \left\{\begin{bmatrix}
+	1 \\
+	5
+\end{bmatrix}, \begin{bmatrix}
+	2 \\
+	3
+\end{bmatrix}\right\}$.
+
+a) Ache a matriz de $T(x, y) = (2x - y, x + 3y)^T$ em relação às bases $\mathcal{U}$ e $\mathcal{V}$.
+
+b) Encontre a matriz $P$ que realiza a mudança de base de $\mathcal{U}$ para $\mathcal{V}$.
+
+c) Considere o vetor $[x]_\mathcal{U} = \begin{bmatrix}
+	5 \\
+	3
+\end{bmatrix}$. Encontre $[x]_\mathcal{V}$.
+
+d) Determine $[T]_\mathcal{U}$ e, utilizando a matriz de mudança de base, determine $[T]_\mathcal{V}$.
