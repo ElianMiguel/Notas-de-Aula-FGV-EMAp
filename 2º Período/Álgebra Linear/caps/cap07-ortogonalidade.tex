@@ -1,0 +1,199 @@
+\chapter{Ortogonalidade}
+\label{cap:ortogonalidade}
+
+\textbf{Importante:} Este capítulo é baseado em \cite{slide5doyuri}, \cite{ruggiero2021algebra} e em \cite{trefethen1997numerical}.
+
+Tendo entendido em qual espaço residem os vetores, e como acontecem as transformações entre eles, vamos agora discutir a questão da ortogonalidade. Em $\mathbb{R}^2$ é uma ideia muito simples: dois vetores são ortogonais quando o ângulo entre eles é $90^\circ$. Mas como podemos dizer que dois vetores são ortogonais em $\mathbb{R}^n$, para um $n$ qualquer, ou em espaços mais abstratos, como $\mathcal{P}_n$? Mais ainda, será que nós podemos dizer que dois subespaços vetoriais são ortogonais entre si? É o que estudaremos com maior detalhe neste capítulo.
+
+\section{Norma e Produto Interno}
+
+Antes de definirmos o conceito de ortogonalidade, nós vamos definir formalmente os conceitos de produto interno. Lembre-se que, no primeiro capítulo, nós definimos o produto interno euclidiano e a norma euclidiana, mas dissemos que aquele era apenas um produto interno e que esta era apenas uma norma. Tendo, porém, definido o conceito de espaço vetorial, nós estamos prontos para conceituar formalmente o produto interno e a norma como funções. Primeiramente, vamos definir o produto interno:
+
+\begin{Definition}[Produto Interno]
+	Seja $V$ um espaço vetorial definido sobre o corpo $\mathbb{R}$. Um \textbf{produto interno} é uma função $\langle\cdot, \cdot\rangle:V\times V\to\mathbb{R}$ tal que, para quaisquer $u, v, w\in V$, todas as seguintes propriedades são satisfeitas:
+	
+	$\mathbf{1)}$\textbf{Simetria:} $\langle u, v\rangle = \langle v, u\rangle$.
+	
+	$\mathbf{2)}$\textbf{Positividade Definida:} $\langle v, v\rangle\geq 0$, com $\langle v, v\rangle = 0\iff v = 0$.
+	
+	$\mathbf{3)}$\textbf{Distributividade:} $\langle u + v, w\rangle = \langle u, w\rangle + \langle v, w\rangle$.
+	
+	$\mathbf{4)}$\textbf{Homogeneidade:} $\langle \lambda u, v\rangle = \lambda\langle u, v\rangle$, para todo $\lambda\in\mathbb{R}$.
+\end{Definition}
+
+O exemplo mais famoso de produto interno é o produto interno euclidiano, aquele que nós definimos no primeiro capítulo com a notação $u\cdot v$ (ou $u^Tv$), para $u,v\in\mathbb{R}^n$ (notações estas que utilizaremos ao longo de todo o texto, pois o produto interno em que estamos interessados é o euclidiano). Um outro exemplo, porém, é o seguinte:
+
+\begin{Example}
+	Sejam $p$ e $q$ dois polinômios em $\mathcal{P}_n$. Um produto interno (não o provaremos) possível entre $p$ e $q$ é dado por:
+	
+	$$
+	\langle p, q\rangle = \displaystyle\int_{-1}^{1} p(x)q(x)  \,dx.	
+	$$
+\end{Example}
+
+Agora, nós definiremos formalmente o conceito de norma:
+
+\begin{Definition}[Norma]
+	Seja $V$ um espaço vetorial definido sobre o corpo $\mathbb{R}$. Uma \textbf{norma} é uma função $||\cdot||:V\to\mathbb{R}$ tal que, para quaisquer $u, v\in V$, todas as seguintes propriedades são satisfeitas:
+	
+	$\mathbf{1)}$\textbf{Positividade Definida:} $||u||\geq 0$, e $||u|| = 0\iff u = 0$.
+	
+	$\mathbf{2)}$\textbf{Homogeneidade Absoluta:} $||\alpha u|| = |\alpha|||u||$, para todo $\alpha\in\mathbb{R}$.
+	
+	$\mathbf{3)}$\textbf{Desigualdade Triangular:} $||u + v||\leq||u|| + ||v||$.
+\end{Definition}
+
+O exemplo mais conhecido de norma é a norma euclidiana em $\mathbb{R}^n$. Na verdade, ela é um caso particular da definição que faremos a seguir (e que não usaremos para mais nada neste curso, a não ser para aumentar a lista de exercícios do capítulo):
+
+\begin{Definition}[Norma-$p$]
+	Seja $v\in\mathbb{R}^n$. Definimos a \textbf{norma-$p$} de $v$ como:
+	
+	$$
+	||v||_p = \left(\sum\limits_{i = 1}^{n} |v_i|^p\right)^{\frac{1}{p}}, 1\leq p <\infty.
+	$$
+\end{Definition}
+
+A norma euclidiana nada mais é do que a norma-$2$ de um vetor em $\mathbb{R}^n$. A norma-$1$, a título de curiosidade, é conhecida como a ``norma de Manhattan'', ou ``métrica do táxi''. E, é claro, podemos definir outras normas, como, por exemplo, a norma-$\infty$. No entanto, neste curso, estaremos preocupados apenas com a norma euclidiana (ou norma-$2$) de um vetor em $\mathbb{R}^n$.
+
+Um ponto interessante de se notar é o fato de que a norma se parece muito com o produto interno. De fato, existem espaços vetoriais que não possuem norma, e existem espaços vetoriais que não possuem produto interno. Nos espaços que possuem um produto interno, tal função induz uma norma, porém nem toda norma provém de um produto interno (mesmo nestes espaços). E, de igual modo, um espaço vetorial que possui norma pode não possuir um produto interno.
+
+Mas não se preocupem com este fato, eu apenas o escrevi para mostrar alguns fatos mais avançados de Álgebra Linear. Nas nossas notas de aula, nós trabalharemos essencialmente com a norma euclidiana e o produto interno euclidiano (a não ser nos exercícios, que por vezes podem trazer coisas mais interessantes).
+
+\section{Ortogonalidade}
+
+Agora sim, vamos ao que interessa. A partir deste capítulo, toda vez que falarmos em norma e em produto interno nós estaremos interessados especificamente na norma e produto interno euclidianos, em espaços vetoriais euclidianos.
+
+Em $\mathbb{R}^2$, é muito fácil pensar de forma geométrica na ortogonalidade entre dois vetores. Analisamos apenas o ângulo entre eles, e se for um ângulo reto, eles são ortogonais. Em $\mathbb{R}^3$, ainda é fácil pensar nesta noção, mas já não é algo tão intuitivo. Em $\mathbb{R}^n$, com $n\geq 4$, é pior ainda. Nem conseguimos imaginar geometricamente o que está acontecendo. Assim sendo, nós precisamos definir ortogonalidade entre vetores de um modo tal que não olhemos para o ângulo entre os vetores, e sim unicamente para os vetores. É o que nós faremos agora:
+
+\begin{Definition}[Vetores ortogonais]
+	Seja $V$ um espaço vetorial, com $u,v\in V$. Dizemos que $u$ e $v$ são \textbf{ortogonais} se $v^Tu = 0$, e escrevemos $v\perp u$.
+\end{Definition}
+
+Um fato importante é o seguinte: $||u||^2 = u^Tu = u\cdot u$. Com estas definições em mãos, nós conseguimos demonstrar o Teorema de Pitágoras em um espaço real $n$-dimensional.
+
+\begin{Theorem}[Teorema de Pitágoras]
+	Sejam $u$ e $v$ dois vetores ortogonais em $\mathbb{R}^n$. Então, $||v + u||^2 = ||v||^2 + ||u||^2$.
+\end{Theorem}
+
+\begin{Proof}
+	Pela definição do produto interno euclidiano, nós temos que:
+	
+	$$
+	||v + u||^2 = (v + u)^T(v + u) = (v^T + u^T)(v + u) = v^Tv + v^Tu + u^Tv + u^Tu = v^Tv + 2u^Tv + u^Tu.
+	$$
+	
+	Como $u$ e $v$ são ortogonais, segue que $u^Tv = 0$. Assim sendo, nós temos que:
+	
+	$$
+	||v + u||^2 = v^Tv + u^Tu = ||v||^2 + ||u||^2.
+	$$
+	
+	\qed
+\end{Proof}
+
+Para não ficarmos unicamente no mundo abstrato dos espaços vetoriais, vamos fazer uma ilustração geométrica que ajudará a compreender melhor as ideias:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{imgs/alglin-06-pitagoras}
+	\caption[Teorema de Pitágoras]{Teorema de Pitágoras (arquivo pessoal)}
+	\label{fig:alglin-06-pitagoras}
+\end{figure}
+
+Tendo definido a ortogonalidade entre dois vetores, nós podemos começar a pensar na ortogonalidade entre dois subespaços vetoriais. A ideia é muito simples: dois subespaços serão ortogonais se todos os vetores de um subespaço forem ortogonais a todos os vetores do outro subespaço. Definindo isto formalmente:
+
+\begin{Definition}[Subespaços vetoriais ortogonais]
+	Sejam $U$ e $V$ dois subespaços vetoriais de $E$. Dizemos que $U$ é \textbf{ortogonal} a $V$ se $u\perp v$ para todos $u\in U$ e $v\in V$, e escrevemos $U\perp V$.
+\end{Definition}
+
+Uma consequência direta desta definição é o seguinte fato:
+
+\begin{Proposition}
+	Sejam $U$ e $V$ dois subespaços vetoriais de $E$ tais que $U\perp V$. Então, $w\in U\cap V$ se, e somente se, $w = 0$.
+\end{Proposition}
+
+\begin{Proof}
+	$\implies$ Suponha que $w\in U\cap V$. Então, $w\in U$ e $w\in V$. Como $U\perp V$, nós temos que $w^Tw = 0$. Ou seja, $||w||^2 = 0$. No entanto, isto acontece se, e somente se, $w = 0$.
+	
+	$\impliedby$ Suponha que $w = 0$. Como $U$ e $V$ são subespaços vetoriais, segue que $w\in U$ e $w\in V$. Logo, $w\in U\cap V$.
+	
+	\qed
+\end{Proof}
+
+Vamos mostrar alguns exemplos simples que podem ser visualizados geometricamente:
+
+\begin{Example}
+	Considere $E = \mathbb{R}^2$. Então, dadas as retas $U = \{(x, x)^T; x\in\mathbb{R}\}$ e $V = \{(x, -x)^T; x\in\mathbb{R}\}$, nós temos que $U\perp V$. De fato, todo vetor de $U$ é da forma $u = \begin{bmatrix}
+		a \\
+		a
+	\end{bmatrix}$, e todo vetor de $V$ é da forma $v = \begin{bmatrix}
+		b \\
+		-b
+	\end{bmatrix}$. Calculando $u^Tv$, nós obtemos:
+	
+	$$
+	u^Tv = ab + a(-b) - ab - ab = 0.
+	$$
+	Logo, todo vetor de $U$ é ortogonal a todo vetor de $V$. Assim sendo, segue que $U\perp V$.
+\end{Example}
+
+A figura a seguir ilustra este exemplo:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{imgs/alglin-07-ortogonalidade-em-r2}
+	\caption[Ortogonalidade em $\mathbb{R}^2$]{Ortogonalidade em $\mathbb{R}^2$ (arquivo pessoal)}
+	\label{fig:alglin-07-ortogonalidade-em-r2}
+\end{figure}
+
+\begin{Example}
+	Considere $E = \mathbb{R}^3$. Então, dados o plano $U = \{(x, y, 0)^T; x,y\in\mathbb{R}\}$ e a reta $V = \{(0, 0, z)^T; z\in\mathbb{R}\}$, nós temos que $U\perp V$. De fato, todo vetor de $U$ é da forma $u = \begin{bmatrix}
+		a \\
+		b \\
+		0
+	\end{bmatrix}$ e todo vetor de $v = \begin{bmatrix}
+		0 \\
+		0 \\
+		c
+	\end{bmatrix}$. Calculando $u^Tv$, nós obtemos:
+	
+	$$
+	u^Tv = a\cdot 0 + b\cdot 0 + 0\cdot c = 0.
+	$$
+	Logo, todo vetor de $U$ é ortogonal a todo vetor de $V$. Assim sendo, segue que $U\perp V$.
+\end{Example}
+
+A figura a seguir ilustra este exemplo:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{imgs/alglin-08-ortogonalidade-em-r3}
+	\caption[Ortogonalidade em $\mathbb{R}^3$]{Ortogonalidade em $\mathbb{R}^3$ (arquivo pessoal)}
+	\label{fig:alglin-08-ortogonalidade-em-r3}
+\end{figure}
+
+Vamos agora nos voltar para os quatro subespaços fundamentais de uma matriz. No capítulo 4, nós estudamos as suas dimensões e, agora, nós estudaremos as relações de ortogonalidade entre eles. Unindo as suas relações de dimensão e de ortogonalidade, nós obtemos o que foi popularizado por Gilbert Strang como ``Teorema Fundamental da Álgebra Linear''. Como, porém, aqui eu quero tratar apenas sobre as relações de ortogonalidade, eu ainda não darei este nome e, no final do capítulo, eu enunciarei as duas partes do Teorema Fundamental da Álgebra Linear (sem fazer a sua demonstração, pois já a teremos feito em diferentes partes destas notas de aula).
+
+\begin{Theorem}[Teorema Fundamental da Ortogonalidade]
+	Seja $A$ uma matriz $m\times n$ qualquer. Então, $N(A)\perp C(A^T)$ e $C(A)\perp N(A^T)$.
+\end{Theorem}
+
+\begin{Proof}
+	Primeiro, nós queremos demonstrar que $N(A)\perp C(A^T)$. Para isso, seja $w\in C(A^T)$. Então, existe $y\in\mathbb{R}^m$ tal que $w = A^Ty$. Assim sendo, tomando $x\in N(A)$ qualquer, nós temos que:
+	
+	$$
+	x^Tw = x^TA^Ty =(Ax)^Ty = 0^Ty = 0.
+	$$
+	Logo, $N(A)\perp C(A^T)$.
+	
+	Agora, nós queremos demonstrar que $C(A)\perp N(A^T)$. Mas isto segue diretamente do primeiro fato. Nós temos que:
+	
+	$$
+	N(A^T)\perp C((A^T)^T) = C(A).
+	$$
+	Logo, $N(A^T)\perp C(A)$.
+	
+	\qed
+\end{Proof}
+
+
