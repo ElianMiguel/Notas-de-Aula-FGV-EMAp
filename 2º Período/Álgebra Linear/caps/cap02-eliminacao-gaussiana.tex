@@ -515,16 +515,14 @@ Vamos agora enunciar e demonstrar algumas propriedades da multiplicação de mat
 	Perceba que, trocando a ordem dos somatórios nesta expressão (o que é permitido, pois as somas são finitas), nós obtemos:
 	
 	$$
-	[(AB)C]_{ij} = \sum\limits_{l = 1}^{m}\sum\limits_{k = 1}^{n} a_{il}b_{lk}c_{kj},
+	[(AB)C]_{ij} = \sum\limits_{l = 1}^{m}\sum\limits_{k = 1}^{n} a_{il}b_{lk}c_{kj} = \sum\limits_{l = 1}^{m} a_{il} (BC)_{lj},
 	$$
-	que é exatamente a mesma expressão (apenas com os índices trocados, o que não altera nada neste caso) que $[A(BC)]_{ij}$.
+	que é exatamente a expressão correspondente a $[A(BC)]_{ij}$.
 	
 	Logo, $A(BC) = (AB)C$, como queríamos demonstrar.
 	
 	\qed
 \end{Proof}
-
-% Melhorar notação dos índices
 
 \begin{Proposition}[Multiplicação de Matrizes Triangulares]
 	Sejam $L_1$ e $L_2$ duas matrizes $n\times n$ triangulares inferior. Então, $L_1L_2$ também é uma matriz triangular inferior (o mesmo vale para matrizes triangulares superior).
