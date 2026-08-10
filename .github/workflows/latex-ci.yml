@@ -20,4 +20,5 @@ jobs:
         with:
           root_file: main.tex
           working_directory: "2º Período/Álgebra Linear"
+          compiler: pdflatex
           args: "-interaction=nonstopmode -halt-on-error"
