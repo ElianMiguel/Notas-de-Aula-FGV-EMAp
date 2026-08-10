@@ -537,7 +537,7 @@ Vamos agora enunciar e demonstrar algumas propriedades da multiplicação de mat
 	(L_1L_2)_{ij} = \sum\limits_{k = 1}^{n} (L_1)_{ik}(L_2)_{kj}.
 	$$
 	
-	Quando $k > 1$, $(L_1)_{ik} = 0$. Quando $k = 1$, $(L_2)_{kj} = 0$. Logo, $(L_1L_2)_{ij} = 0$ quando $i < j$. Assim sendo, segue que $L_1L_2$ é uma matriz triangular inferior. Para demonstrar a propriedade das matrizes triangulares superior, basta usar o mesmo argumento com $i > j$.
+	Quando $k > i$, $(L_1)_{ik} = 0$. Quando $k \leq i$, como $i < j$, temos $k < j$ e portanto $(L_2)_{kj} = 0$. Logo, $(L_1L_2)_{ij} = 0$ quando $i < j$. Assim sendo, segue que $L_1L_2$ é uma matriz triangular inferior. Para demonstrar a propriedade das matrizes triangulares superior, basta usar o mesmo argumento com $i > j$.
 	
 	\qed
 \end{Proof}
