@@ -638,25 +638,17 @@ Ou seja, $N(A) = N(U)$.
 
 Por outro lado, não é verdade que $C(A) = C(U)$. Suponha que $Ax = b$, com $b\neq 0$. Então, $LUx = b\iff Ux = L^{-1}b = c$. Assim sendo, $C(A)\neq C(U)$.
 
-Ainda nos referindo ao primeiro exemplo desta seção, nós temos que $C(A) = \operatorname{span}\left(\left\{\begin{bmatrix}
-	2 \\
-	4
-\end{bmatrix}, \begin{bmatrix}
-	1 \\
-	2
-\end{bmatrix}\right\}\right) = \operatorname{span}\left(\left\{\begin{bmatrix}
-	1 \\
-	2
-\end{bmatrix}\right\}\right)$ (lembre-se que $(2, 4)^T = 2(1, 2)^T$). Por outro lado, $C(U) = \operatorname{span}\left(\left\{\begin{bmatrix}
-	2 \\
-	0
-\end{bmatrix}, \begin{bmatrix}
-	1 \\
-	0
-\end{bmatrix}\right\}\right) = \operatorname{span}\left(\left\{\begin{bmatrix}
-	1 \\
-	0
-\end{bmatrix}\right\}\right)$. Logo, $C(A)\neq C(U)$.
+Ainda nos referindo ao primeiro exemplo desta seção ($A = \begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix}$ com $U = \begin{bmatrix} 2 & 1 \\ 0 & 0 \end{bmatrix}$), nós temos que:
+
+$$
+C(A) = \operatorname{span}\left(\left\{\begin{bmatrix} 2 \\ 4 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \end{bmatrix}\right\}\right) = \operatorname{span}\left(\left\{\begin{bmatrix} 1 \\ 2 \end{bmatrix}\right\}\right)
+$$
+(lembre-se que $(2, 4)^T = 2(1, 2)^T$). Por outro lado,
+
+$$
+C(U) = \operatorname{span}\left(\left\{\begin{bmatrix} 2 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}\right\}\right) = \operatorname{span}\left(\left\{\begin{bmatrix} 1 \\ 0 \end{bmatrix}\right\}\right).
+$$
+Logo, $C(A)\neq C(U)$.
 
 \section{Forma Escalonada de uma Matriz}
 

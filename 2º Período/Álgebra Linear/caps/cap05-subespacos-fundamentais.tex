@@ -512,7 +512,7 @@ Nós sabemos que $\dim\mathbb{R}^n = n$. Assim sendo, nós queremos mostrar que 
 	Pelo corolário do Teorema da Dimensão, segue que nós precisamos unicamente provar que este conjunto é LI. Ou seja, queremos provar que:
 	
 	$$
-	\beta_1x_1 + \cdots + \beta_rx_r + \beta_{r + 1}x_{r + 1}' + \cdots + \beta_nx_n' = 0\implies\beta_1 = \cdots = \beta_n.
+	\beta_1x_1 + \cdots + \beta_rx_r + \beta_{r + 1}x_{r + 1}' + \cdots + \beta_nx_n' = 0\implies\beta_1 = \cdots = \beta_n = 0.
 	$$
 	Reescrevendo a soma, nós obtemos:
 	
@@ -650,23 +650,26 @@ Após tantas informações ao longo das últimas três seções, façamos um exe
 	\end{bmatrix}$. Nós queremos encontrar bases para os quatro subespaços fundamentais de $A$. Para isto, em primeiro lugar, vamos aplicar o processo de escalonamento de modo a obter a matriz $R$:
 	
 	$$
-	\begin{bmatrix}
-		0 & 1 & 2 & 3 & 4 \\
-		0 & 1 & 2 & 4 & 6 \\
-		0 & 0 & 0 & 1 & 2
-	\end{bmatrix}\overset{L_2 - L_1}{\implies}\begin{bmatrix}
-		0 & 1 & 2 & 3 & 4 \\
-		0 & 0 & 0 & 1 & 2 \\
-		0 & 0 & 0 & 1 & 2
-	\end{bmatrix}\overset{L_3 - L_2}{\implies}\begin{bmatrix}
-		0 & 1 & 2 & 3 & 4 \\
-		0 & 0 & 0 & 1 & 2 \\
-		0 & 0 & 0 & 0 & 0
-	\end{bmatrix}\overset{L_1 - 3L_2}{\implies}\begin{bmatrix}
-		0 & 1 & 2 & 0 & -2 \\
-		0 & 0 & 0 & 1 & 2 \\
-		0 & 0 & 0 & 0 & 0
-	\end{bmatrix} = R.
+	\begin{aligned}
+		&\begin{bmatrix}
+			0 & 1 & 2 & 3 & 4 \\
+			0 & 1 & 2 & 4 & 6 \\
+			0 & 0 & 0 & 1 & 2
+		\end{bmatrix}\overset{L_2 - L_1}{\implies}\begin{bmatrix}
+			0 & 1 & 2 & 3 & 4 \\
+			0 & 0 & 0 & 1 & 2 \\
+			0 & 0 & 0 & 1 & 2
+		\end{bmatrix}\overset{L_3 - L_2}{\implies}\begin{bmatrix}
+			0 & 1 & 2 & 3 & 4 \\
+			0 & 0 & 0 & 1 & 2 \\
+			0 & 0 & 0 & 0 & 0
+		\end{bmatrix} \\
+		&\overset{L_1 - 3L_2}{\implies}\begin{bmatrix}
+			0 & 1 & 2 & 0 & -2 \\
+			0 & 0 & 0 & 1 & 2 \\
+			0 & 0 & 0 & 0 & 0
+		\end{bmatrix} = R.
+	\end{aligned}
 	$$
 	
 	Nós temos exatamente $2$ colunas pivôs (a 2ª e a 4ª) e exatamente $3$ colunas livres (a 1ª, a 3ª e a 5ª). Tendo achado a forma escalonada de $A$, vamos agora encontrar bases para os subespaços fundamentais.

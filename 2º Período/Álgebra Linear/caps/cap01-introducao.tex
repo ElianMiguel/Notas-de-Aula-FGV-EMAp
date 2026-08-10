@@ -77,7 +77,7 @@ $$
 
 Quando nós representamos os vetores como acima, tais vetores são chamados de \textbf{vetores-coluna}. De igual modo, se representarmos um vetor em uma linha (por exemplo, $\begin{bmatrix} 2 & 10 & -5 & 11 & 3 \end{bmatrix}$), nós o chamaremos de \textbf{vetor-linha}. Na maior parte do tempo, nós consideraremos que um vetor $v$ é um vetor-coluna (e que $v^T$ é um vetor-linha, mas não se preocupem com esta notação agora, no momento certo nós a introduziremos).
 
-Pensemos em dois vetores $x$ e $y$ em $\mathbb{R}^3$, definidos por $x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}$ e $\begin{bmatrix} y_1 \\ y_2 \\ y_3 \end{bmatrix}$. Seja ainda $\alpha\in\mathbb{R}$ um escalar. Então, nós definimos a soma $x + y$ por:
+Pensemos em dois vetores $x$ e $y$ em $\mathbb{R}^3$, definidos por $x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}$ e $y = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \end{bmatrix}$. Seja ainda $\alpha\in\mathbb{R}$ um escalar. Então, nós definimos a soma $x + y$ por:
 
 $$
 x + y = \begin{bmatrix}
@@ -163,9 +163,7 @@ Por sua vez, há uma outra forma ainda (e a mais importante) de se representar u
 	$$
 \end{Definition}
 
-Nós chamamos de $a_{ij}$ ao elemento que está na linha $i$ e na coluna $j$ da matriz.
-
-% Definir matriz quadrada
+Nós chamamos de $a_{ij}$ ao elemento que está na linha $i$ e na coluna $j$ da matriz. Se $m = n$, a matriz $A$ é dita \textbf{quadrada}.
 
 Voltemos para o sistema linear com o qual estávamos trabalhando. Primeiramente, nós tínhamos entendido o sistema como elementos geométricos em $\mathbb{R}^2$ (row picture). Em seguida, nós entendemos o sistema como uma combinação linear de vetores-coluna (column picture). Agora, nós queremos dar um passo além e entender o sistema como a multiplicação de uma matriz por um vetor. Ou seja, queremos poder dizer que:
 
@@ -294,9 +292,7 @@ Nós vamos agora definir uma importante operação entre vetores: o produto inte
 	$$
 \end{Definition}
 
-Duas propriedades importantes do produto interno euclidiano são a simetria ($x\cdot y = y\cdot x$) e a linearidade ($(\alpha x + z) \cdot y = \alpha(x\cdot y) + z\cdot y$).
-
-% Definir melhor a linearidade
+Duas propriedades importantes do produto interno euclidiano são a simetria ($x\cdot y = y\cdot x$) e a linearidade no primeiro argumento ($(\alpha x + \beta z) \cdot y = \alpha(x\cdot y) + \beta(z\cdot y)$, para escalares $\alpha, \beta$).
 
 Assim, como nós definimos o produto interno euclidiano, nós podemos definir a norma euclidiana. De maneira equivalente, a norma euclidiana é apenas \textbf{uma} norma. Porém, é a que nós utilizaremos neste curso. No momento oportuno, nós faremos a definição geral de produto interno e de norma.
 
@@ -377,6 +373,10 @@ Nesta seção, nós enunciaremos e demonstraremos duas importantes desigualdades
 \end{Proposition}
 
 \begin{Proof}
+	Se $y = 0$, a igualdade $|x\cdot y| = 0 = ||x||||y||$ vale trivialmente. Suponha $y \neq 0$.
+	
+	 (Note que, embora a proposição anterior forneça uma interpretação geométrica via ângulo, a demonstração a seguir é puramente algébrica para evitar circularidade na definição de ângulo em $\mathbb{R}^n$).
+	
 	Seja $\lambda\in\mathbb{R}$ um escalar qualquer. Então, sabemos que $0\leq ||x - \lambda y||^2$ (pela definição de norma euclidiana). Por sua vez, nós temos que:
 	
 	$$

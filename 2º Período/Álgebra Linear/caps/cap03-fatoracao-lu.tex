@@ -1,11 +1,11 @@
-\chapter{Fatoração $LU$}
+\chapter{Fatoração \texorpdfstring{$LU$}{LU}}
 \label{cap:fatoração-lu}
 
 \textbf{Importante:} Este capítulo é baseado em \cite{slide3doyuri}.
 
 No capítulo anterior, nós vimos que, dada uma matriz $A$ invertível, nós podemos encontrar uma matriz de eliminação $E$ tal que $EA = U$, onde $U$ é uma matriz triangular superior e $E$ é uma matriz triangular inferior. Isto nos sugere que, ao encontrar a matriz inversa de $E$, nós podemos escrever $A$ como a multiplicação de duas matrizes, uma triangular inferior e uma triangular superior. Esta é a ideia da fatoração $LU$, que nós desenvolveremos neste capítulo.
 
-\section{Fatoração $LU$}
+\section{Fatoração \texorpdfstring{$LU$}{LU}}
 
 Antes de nós desenvolvermos as ideias para construir a fatoração $LU$, é necessário nós entendermos o que é uma fatoração matricial:
 
@@ -39,7 +39,7 @@ Dito isto, vamos desenvolver a ideia da fatoração $LU$ através de um exemplo 
 	Como o segundo multiplicador é $0$, não fazemos nada, e avançamos para o próximo passo. Agora, o nosso pivô é $2$ e o multiplicador é $2$. Assim sendo, nós faremos $L_3 - 2L_2$, obtendo $E_{32}(2) = \begin{bmatrix}
 		1 & 0 & 0 \\
 		0 & 1 & 0 \\
-		0 & -2 & 0
+		0 & -2 & 1
 	\end{bmatrix}$. Calculando $E_{32}(2)E_{21}(2)A$, nós obtemos:
 	
 	$$
@@ -50,9 +50,9 @@ Dito isto, vamos desenvolver a ideia da fatoração $LU$ através de um exemplo 
 	\end{bmatrix}
 	$$. 
 	
-	Neste passo, nós terminamos o processo de escalonamento. Vamos ver o que nós obtivemos: a partir da matriz $A$, nós construímos uma matriz $E = E_{32}(2)E_{21}(2)$ tal que $EA = U$, onde $E$ é uma matriz triangular inferior e $U$ é uma matriz triangular inferior.
+	Neste passo, nós terminamos o processo de escalonamento. Vamos ver o que nós obtivemos: a partir da matriz $A$, nós construímos uma matriz $E = E_{32}(2)E_{21}(2)$ tal que $EA = U$, onde $E$ é uma matriz triangular inferior e $U$ é uma matriz triangular superior.
 	
-	Podemos nos perguntar agora: o que acontece se multiplicarmos $E^{-1}$ dos dois lados da equação final? Do lado esquerdo, nós obtemos a matriz $A$. Do lado direito, nós obtemos $(E_{32}(2)E_{21}(2))^{-1}U$. Sabemos que a inversa de $AB$, quando existe, é igual a $B^{-1}A^{-1}$. Assim endo, vamos escrever a equação como um produto de inversas:
+	Podemos nos perguntar agora: o que acontece se multiplicarmos $E^{-1}$ dos dois lados da equação final? Do lado esquerdo, nós obtemos a matriz $A$. Do lado direito, nós obtemos $(E_{32}(2)E_{21}(2))^{-1}U$. Sabemos que a inversa de $AB$, quando existe, é igual a $B^{-1}A^{-1}$. Assim sendo, vamos escrever a equação como um produto de inversas:
 	
 	$$
 	A = E_{21}(2)^{-1}E_{32}(2)^{-1}U.
@@ -98,7 +98,7 @@ Deste modo, a fatoração $LU$ de $A$ é dada por $A = LU$, onde $L$ é a matriz
 
 Apesar de parecer ser muito complicado encontrar a matriz $L$, é algo incrivelmente simplesmente: os seus elementos abaixo da diagonal principal são simplesmente os multiplicadores da eliminação.
 
-\section{Fatoração $LDU$}
+\section{Fatoração \texorpdfstring{$LDU$}{LDU}}
 
 A primeira variante da fatoração $LU$ que nós veremos é a fatoração $LDU$, em que $D$ é a matriz diagonal com pivôs de $A$. Suponha que, após o processo de eliminação, nós conseguimos encontrar a fatoração $LU$ de $A$, na qual $U = \begin{bmatrix}
 	d_1 & u_{12} & u_{13} & \cdots & u_{1n} \\
@@ -148,7 +148,7 @@ Ou seja, nós escrevemos $U$ como o produto de uma matriz diagonal e uma matriz 
 	$$
 \end{Example}
 
-\section{Existência e Unicidade da Fatoração $LU$}
+\section{Existência e Unicidade da Fatoração \texorpdfstring{$LU$}{LU}}
 
 Nas seções anteriores, nós aprendemos a calcular a fatoração $LU$ de uma matriz, e uma de suas variantes. No entanto, nós ainda não demonstramos a existência da fatoração $LU$. Nós o faremos agora, e também demonstraremos a sua unicidade.
 
@@ -386,7 +386,7 @@ onde $(p_1, p_2, \cdots, p_n)$ é uma permutação qualquer de $\{1, 2, \cdots, 
 	\qed
 \end{Proof}
 
-\section{Fatoração $LDL^T$}
+\section{Fatoração \texorpdfstring{$LDL^T$}{LDL^T}}
 
 Vamos agora ver mais uma variante da fatoração $LU$. Antes, porém, vamos dar duas definições, das quais nós utilizaremos a primeira.
 
@@ -410,7 +410,7 @@ $$
 A^T = (LDL^T)^T = LD^TL^T = LDL^T = A.
 $$
 
-\section{Fatoração $PLU$}
+\section{Fatoração \texorpdfstring{$PLU$}{PLU}}
 
 Para finalizar as principais variantes da fatoração $LU$, nós vamos falar muito brevemente do caso em que há trocas de linhas durante o processo de eliminação.
 
