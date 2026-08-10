@@ -52,7 +52,7 @@ Dito isto, vamos desenvolver a ideia da fatoração $LU$ através de um exemplo 
 	
 	Neste passo, nós terminamos o processo de escalonamento. Vamos ver o que nós obtivemos: a partir da matriz $A$, nós construímos uma matriz $E = E_{32}(2)E_{21}(2)$ tal que $EA = U$, onde $E$ é uma matriz triangular inferior e $U$ é uma matriz triangular superior.
 	
-	Podemos nos perguntar agora: o que acontece se multiplicarmos $E^{-1}$ dos dois lados da equação final? Do lado esquerdo, nós obtemos a matriz $A$. Do lado direito, nós obtemos $(E_{32}(2)E_{21}(2))^{-1}U$. Sabemos que a inversa de $AB$, quando existe, é igual a $B^{-1}A^{-1}$. Assim endo, vamos escrever a equação como um produto de inversas:
+	Podemos nos perguntar agora: o que acontece se multiplicarmos $E^{-1}$ dos dois lados da equação final? Do lado esquerdo, nós obtemos a matriz $A$. Do lado direito, nós obtemos $(E_{32}(2)E_{21}(2))^{-1}U$. Sabemos que a inversa de $AB$, quando existe, é igual a $B^{-1}A^{-1}$. Assim sendo, vamos escrever a equação como um produto de inversas:
 	
 	$$
 	A = E_{21}(2)^{-1}E_{32}(2)^{-1}U.
