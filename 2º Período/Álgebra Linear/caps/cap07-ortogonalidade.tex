@@ -199,4 +199,195 @@ Vamos agora nos voltar para os quatro subespaços fundamentais de uma matriz. No
 	\qed
 \end{Proof}
 
+\section{Complemento Ortogonal}
 
+Nesta seção, nós desenvolveremos o conceito de complemento ortogonal. O complemento ortogonal é muito simples: dado um subespaço vetorial $V$, o seu complemento ortogonal é um conjunto $W$ cujos vetores são ortogonais a $V$. Definindo de maneira mais formal:
+
+\begin{Definition}[Complemento ortogonal]
+	Seja $V$ um subespaço vetorial de $E$. Então, definimos o \textbf{complemento ortogonal} de $V$ como:
+	
+	$$
+	V^\perp = \{w\in E; w\perp V\}.
+	$$
+\end{Definition}
+
+O primeiro resultado a respeito do complemento ortogonal é bastante intuitivo: ele é também um subespaço vetorial.
+
+\begin{Proposition}
+	Seja $V$ um subespaço vetorial de $E$. Então, $V^\perp$ é também um subespaço vetorial de $E$.
+\end{Proposition}
+
+\begin{Proof}
+	Considere dois vetores $w_1, w_2\in V^\perp$ e dois escalares $\alpha, \beta\in\mathbb{R}$. Nós queremos provar que $\alpha w_1 + \beta w_2\in V^\perp$. Ou seja, queremos provar que, para todo $v\in V$, $\alpha w_1 + \beta w_2\perp v$. De fato, calculando $v^T(\alpha w_1 + \beta w_2)$, nós temos que:
+	
+	$$
+	v^T(\alpha w_1 + \beta w_2) = \alpha v^Tw_1 + \beta v^Tw_2 = \alpha\cdot 0 + \beta\cdot 0 = 0.
+	$$
+	Logo, nós temos que $\alpha w_1 + \beta w_2\perp v$ para todo $v\in V$, e portanto, $\alpha w_1 + \beta w_2\in V^\perp$.
+	
+	\qed
+\end{Proof}
+
+O fato de $V^\perp$ ser também um subespaço de $E$ nos sugere uma decomposição para qualquer vetor de $E$ que nós discutiremos no futuro. Mas vamos com calma, tudo tem o seu tempo certo. Por agora, vamos desenvolver mais alguns fatos sobre o complemento ortogonal de um subespaço, e depois estaremos prontos para falar melhor sobre isso.
+
+\begin{Proposition}
+	Seja $\{v_1, \cdots, v_k\}$ uma base para $V$. Então, $w\in V^\perp$, se, e somente se, $w\perp v_i$, para todo $i\in\{1, \cdots, k\}$.
+\end{Proposition}
+
+\begin{Proof}
+	$\implies$ É verdade diretamente da definição de $V^\perp$.
+	
+	$\impliedby$ Suponha que $w\perp v_i$, para todo $i\in\{1, \cdots, k\}$. Queremos provar que $w\perp\operatorname{span}(\{v_1, \cdots, v_k\}) = V$. De fato, seja $v\in\operatorname{span}(\{v_1, \cdots, v_k\})$. Então, existem $c_1, \cdots, c_k\in\mathbb{R}$ tais que $v = c_1v_1 + \cdots + c_kv_k$. Calculando $w^Tv$, nós temos:
+	
+	$$
+	w^Tv = w^T(c_1v_1 + \cdots + c_kv_k) = c_1w^Tv_1 + \cdots + c_kw^Tv_k = c_1\cdot 0 + \cdots + c_k\cdot 0 = 0. 
+	$$
+	Logo, pela definição, $w\in V^\perp$.
+	
+	\qed
+\end{Proof}
+
+Ainda considerando $\{v_1, \cdots, v_k\}$ como uma base para $V$, nós podemos, a partir deste conjunto, encontrar uma base para $V^\perp$. De fato, definamos
+
+$$
+A = \begin{bmatrix}
+	- & v_1^T & - \\
+	- & v_2^T & - \\
+	& \vdots & \\
+	- & v_k^T & -
+\end{bmatrix}.
+$$
+
+Suponha que $x\in N(A)$. Então, nós temos que
+
+$$
+\begin{bmatrix}
+	- & v_1^T & - \\
+	- & v_2^T & - \\
+	& \vdots & \\
+	- & v_k^T & -
+\end{bmatrix}x = 0,
+$$
+o que nos dá $v_i^Tx = 0$ para cada $v_i$. Logo, se $x\in N(A)$, então $x\in V^\perp$ e, reciprocamente, se $x\in V^\perp$, então $v_i^Tx = 0$ para cada $v_i$, e, portanto, $x\in N(A)$. Assim sendo, nós temos que $V^\perp = N(A)$ e, portanto, para encontrarmos uma base para $V^\perp$, basta encontrar uma base para $N(A)$. Nós já sabemos fazer isso: basta encontrar a matriz núcleo $N$.
+
+\begin{Example}
+	Seja $V = \operatorname{span}\left(\left\{\begin{bmatrix}
+		1 \\
+		0 \\
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		1 \\
+		2 \\
+		3 \\
+		4
+	\end{bmatrix}\right\}\right)$ um subespaço de $\mathbb{R}^4$. Como o conjunto $\left\{\begin{bmatrix}
+		1 \\
+		0 \\
+		1 \\
+		2
+	\end{bmatrix}, \begin{bmatrix}
+		1 \\
+		2 \\
+		3 \\
+		4
+	\end{bmatrix}\right\}$ é LI, nós temos que ele é uma base para $V$. Nós queremos encontrar uma base para $V^\perp$. Para fazer isto, definamos a matriz $A$ como:
+	
+	$$
+	A = \begin{bmatrix}
+		1 & 0 & 1 & 2 \\
+		1 & 2 & 3 & 4
+	\end{bmatrix}.
+	$$
+	Fazendo o processo de escalonamento, nós obtemos:
+	
+	$$
+	\begin{bmatrix}
+		1 & 0 & 1 & 2 \\
+		1 & 2 & 3 & 4
+	\end{bmatrix}\overset{L_2 - L_1}{\implies}\begin{bmatrix}
+		1 & 0 & 1 & 2 \\
+		0 & 2 & 2 & 2
+	\end{bmatrix}\overset{L_2/2}{\implies}\begin{bmatrix}
+		1 & 0 & 1 & 2 \\
+		0 & 1 & 1 & 1
+	\end{bmatrix} = R.
+	$$
+	Nós temos que $F = \begin{bmatrix}
+		1 & 2 \\
+		1 & 1
+	\end{bmatrix}$, e, como nós não fizemos nenhuma permutação entre colunas, $R = R'$ e $N = N'$. Assim sendo, a matriz núcleo é dada por:
+	
+	$$
+	N = \begin{bmatrix}
+		-1 & -2 \\
+		-1 & -1 \\
+		1 & 0 \\
+		0 & 1
+	\end{bmatrix}.
+	$$
+	Logo, o conjunto $\left\{\begin{bmatrix}
+		-1 \\
+		-1 \\
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		-2 \\
+		-1 \\
+		0 \\
+		1
+	\end{bmatrix}\right\}$ é uma base para $V^\perp$.
+\end{Example}
+
+Agora, nós vamos enunciar e demonstrar mais três proposições antes de chegarmos à tão sonhada decomposição ortogonal (este é nome da decomposição de que falamos anteriormente).
+
+\begin{Proposition}
+	Seja $V$ um subespaço vetorial de $E$. Então, $V\cap V^\perp = \{0\}$.
+\end{Proposition}
+
+\begin{Proof}
+	$\implies$ Considere um vetor $w$ tal que $w\in V\cap V^\perp$. Então, $w\in V$ e $w\in V^\perp$. Assim sendo, $w\perp w$, ou seja, $w^Tw = 0$. Segue que $||w||^2 = 0$, o que acontece se, e somente se, $w = 0$.
+	
+	$\impliedby$ Nós sabemos que, dado um subespaço qualquer $U$, $0\in U$. Assim sendo, como $V\cap V^\perp$ é um subespaço vetorial (em algum exercício anterior pede-se para provar este fato), nós temos que $0\in V\cap V^\perp$. Logo, $\{0\}\subseteq V\cap V^\perp$.
+	
+	Logo, $V\cap V^\perp = \{0\}$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}
+	Seja $V$ um subespaço vetorial de $E$. Então, $\dim V + \dim V^\perp = \dim E$.
+\end{Proposition}
+
+\begin{Proof}
+	Suponha que $\{v_1, \cdots, v_r\}$ é uma base para $V$, com $\dim V = r$ e $\dim E = n$. Então, como nós vimos anteriormente, nós temos que $V^\perp = N(A)$, onde
+	
+	$$
+	A = \begin{bmatrix}
+		- & v_1^T & - \\
+		- & v_2^T & - \\
+		& \vdots & \\
+		- & v_r^T & - \\
+	\end{bmatrix}.
+	$$
+	Assim sendo, nós temos que $\dim C(A^T) = r$ e, consequentemente, $\dim C(A) = r$ também. Logo, segue que $\dim N(A) = n - r$. Mas como $V^\perp = N(A)$, nós temos que $\dim V + \dim V^\perp = r + (n - r) = n = \dim E$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}
+	Seja $V$ um espaço vetorial de $E$. Então, $V = (V^\perp)^\perp$.
+\end{Proposition}
+
+\begin{Proof}
+	Primeiramente, nós vamos demonstrar que $V\subseteq(V^\perp)^\perp$. Para isso, tome $u\in V$. Por definição, para qualquer $v\in V^\perp$, nós temos que $u^Tv = 0$. Nós sabemos que o produto interno é simétrico por definição, logo, $u^Tv = v^Tu$. Como $u^Tv = 0$, segue que $v^Tu = 0$. Logo, nós temos que $u\perp V^\perp$. Portanto, $u\in(V^\perp)^\perp$. Assim sendo, $V\subseteq(V^\perp)^\perp$.
+	
+	Agora, nós queremos demonstrar que $(V^\perp)^\perp = V$. Para fazer isso, vamos usar as dimensões dos subespaços. Por um lado, nós temos que $\dim V + \dim V^\perp = \dim E$. Por outro lado, nós temos que $\dim V^\perp + \dim (V^\perp)^\perp = \dim E$. Assim sendo, nós temos que:
+	
+	$$
+	\dim V + \dim V^\perp = \dim V^\perp + \dim (V^\perp)^\perp \implies \dim V = \dim (V^\perp)^\perp.
+	$$
+	Como $V$ é um subespaço de $(V^\perp)^\perp$ (como nós demonstramos acima), e $V$ possui a mesma dimensão de $(V^\perp)^\perp$, segue que $V = (V^\perp)^\perp$.
+	
+	\qed
+\end{Proof}
