@@ -1,7 +1,7 @@
 \chapter{Ortogonalidade}
 \label{cap:ortogonalidade}
 
-\textbf{Importante:} Este capítulo é baseado em \cite{slide5doyuri}, \cite{ruggiero2021algebra} e em \cite{trefethen1997numerical}.
+\textbf{Importante:} Este capítulo é baseado em \cite{axler2026}, \cite{slide5doyuri}, \cite{ruggiero2021algebra} e em \cite{trefethen1997numerical}.
 
 Tendo entendido em qual espaço residem os vetores, e como acontecem as transformações entre eles, vamos agora discutir a questão da ortogonalidade. Em $\mathbb{R}^2$ é uma ideia muito simples: dois vetores são ortogonais quando o ângulo entre eles é $90^\circ$. Mas como podemos dizer que dois vetores são ortogonais em $\mathbb{R}^n$, para um $n$ qualquer, ou em espaços mais abstratos, como $\mathcal{P}_n$? Mais ainda, será que nós podemos dizer que dois subespaços vetoriais são ortogonais entre si? É o que estudaremos com maior detalhe neste capítulo.
 
@@ -391,3 +391,312 @@ Agora, nós vamos enunciar e demonstrar mais três proposições antes de chegar
 	
 	\qed
 \end{Proof}
+
+Estamos prontos para falar em decomposição ortogonal. Em exercícios anteriores, nós definimos e trabalhamos com a soma de dois subespaços. No entanto, a fim de formalizar melhor esta ideia, nós iremos definir este conceito novamente.
+
+\begin{Definition}[Soma de dois subespaços]
+	Sejam $V_1$ e $V_2$ dois subespaços vetoriais de $V$. Então, nós definimos a \textbf{soma} de $V_1$ e $V_2$ como:
+	
+	$$
+	V_1 + V_2 = \{v_1 + v_2; v_1\in V_1 \text{ e } v_2\in V_2\}.
+	$$
+\end{Definition}
+
+Como esta ideia nos sugere, este conceito pode ser estendido para a soma de $m$ subespaços de $V$, da seguinte forma:
+
+\begin{Definition}[Soma de $m$ subespaços]
+	Sejam $V_1, \cdots, V_m$ subespaços vetoriais de $V$. Então, nós definimos a \textbf{soma} de $V_1, \cdots, V_m$ como:
+	
+	$$
+	V_1 + \cdots + V_m = \{v_1 + \cdots + v_m; v_1\in V_1, \cdots, v_m\in V_m\}.
+	$$
+\end{Definition}
+
+No nosso caso, nós estamos preocupados especificamente com o caso $m = 2$. Mas antes de chegar ao que queremos, nós definiremos, ainda para uma quantidade qualquer de subespaços, a soma direta.
+
+\begin{Definition}[Soma direta]
+	Sejam $V_1, \cdots, V_m$ subespaços de $V$ tais que cada vetor de $V_1 + \cdots + V_m$ pode ser escrito de forma única como $v_1 + \cdots + v_m$. Então, dizemos que esta soma é uma \textbf{soma direta}, e a denotamos por $V_1\oplus\cdots\oplus V_m$.
+\end{Definition}
+
+Com estas coisas em mente, vamos agora enunciar e demonstrar o Teorema da Decomposição Ortogonal.
+
+\begin{Theorem}[Teorema da Decomposição Ortogonal]
+	Seja $V$ um subespaço vetorial de $E$. Então, todo vetor $x\in E$ pode ser escrito, de forma única, como $x = v + v^\perp$, onde $v\in V$ e $v^\perp\in V^\perp$.
+\end{Theorem}
+
+\begin{Proof}
+	\textbf{Existência:} Suponha que $\dim E = n$ e $\dim V = k$. Então, consideremos as bases $\{v_1, \cdots, v_k\}$ e $\{w_1, \cdots, w_{n - k}\}$ para $V$ e $V^\perp$, respectivamente. Nós provaremos que o conjunto $\{v_1, \cdots, v_k, w_1, \cdots, w_{n - k}\}$ é LI. De fato, tomemos
+	
+	$$
+	\alpha_1v_1 + \cdots + \alpha_kv_k + \alpha_{k + 1}w_1 + \cdots + \alpha_nw_{n-k} = 0.
+	$$ 
+	Nós temos que
+	
+	$$
+	\alpha_1v_1 + \cdots + \alpha_kv_k = -(\alpha_{k + 1}w_1 + \cdots + \alpha_nw_{n - k}).
+	$$ 
+	O lado esquerdo da equação pertence a $V$, e o lado direito da equação pertence a $V^\perp$. Logo, ambos os vetores pertencem a $V\cap V^\perp$. Mas nós sabemos que $V\cap V^\perp = \{0\}$. Logo:
+	
+	$$
+	\alpha_1v_1 + \cdots + \alpha_kv_k = 0
+	$$
+	e
+	
+	$$
+	\alpha_{k + 1}w_1 + \cdots + \alpha_nw_{n - k} = 0.
+	$$
+	Pela independência linear dos $v_i$'s e dos $w_i$'s, segue que:
+	
+	$$
+	\alpha_1 = \cdots = \alpha_k = \alpha_{k + 1} = \cdots = \alpha_n = 0.
+	$$
+	
+	Logo, o conjunto $\{v_1, \cdots, v_k, w_1, \cdots, w_{n - k}\}$ é LI. Mais do que isso, como este conjunto possui $n$ vetores e $\dim E = n$, ele é uma base para $E$. Assim sendo, para todo $x\in E$, existem $\alpha_1, \cdots, \alpha_k, \alpha_{k + 1}, \cdots, \alpha_n\in\mathbb{R}$ tais que:
+	
+	$$
+	x = \alpha_1v_1 + \cdots + \alpha_kv_k + \alpha_{k + 1}w_1 + \cdots + \alpha_nw_{n - k}.
+	$$
+	Ou seja, $x = v + v^\perp$.
+	
+	\textbf{Unicidade:} Suponha que existem $v_1, v_2\in V$ e $v_1^\perp, v_2^\perp\in V^\perp$ tais que
+	
+	$$
+	x = v_1 + v_1^\perp = v_2 + v_2^\perp.
+	$$
+	Então, segue que $v_1 - v_2 = v_2^\perp - v_1^\perp$. O primeiro vetor pertence a $V$ e o segundo vetor pertence a $V^\perp$. Logo, ambos os vetores pertencem a $V\cap V^\perp = \{0\}$. Ou seja, $v_1 - v_2 = 0$ e $v_2^\perp - v_1^\perp = 0$. Segue então que $v_1 = v_2$ e $v_1^\perp = v_2^\perp$.
+	
+	\qed
+\end{Proof}
+
+Do Teorema da Decomposição Ortogonal, segue imediatamente o seguinte corolário:
+
+\begin{Corolary}
+	Seja $V$ um subespaço vetorial de $E$. Então, $E = V\oplus V^\perp$.
+\end{Corolary}
+
+A grande importância que tem o Teorema da Decomposição Ortogonal é a ideia de projeção ortogonal, que desenvolveremos a partir da próxima seção. Mas, antes disso, façamos um exemplo para mostrar como podemos encontrar a decomposição ortogonal de um vetor dados um subespaço e o seu complemento ortogonal.
+
+\begin{Example}
+	Considere $x = \begin{bmatrix}
+		2 \\
+		5 \\
+		-1 \\
+		0
+	\end{bmatrix}$ e o subespaço vetorial $V = \operatorname{span}\left(\left\{\begin{bmatrix}
+		1 \\
+		0 \\
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		0 \\
+		1 \\
+		2 \\
+		4
+	\end{bmatrix}\right\}\right)$. Nós queremos encontrar os vetores $v\in V$ e $v^\perp\in V^\perp$ tais que $x = v + v^\perp$. Primeiramente, vamos encontrar uma base para $V^\perp$, sabendo que o conjunto $\left\{\begin{bmatrix}
+		1 \\
+		0 \\
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		0 \\
+		1 \\
+		2 \\
+		4
+	\end{bmatrix}\right\}$ é uma base para $V$. Montando a matriz $A$, nós temos:
+	
+	$$
+	A = \begin{bmatrix}
+		1 & 0 & 1 & 0 \\
+		0 & 1 & 2 & 4
+	\end{bmatrix}.
+	$$
+	A matriz $A$ já está na sua forma escalonada reduzida. Assim sendo, nós temos que:
+	
+	$$
+	N = \begin{bmatrix}
+		-1 & 0 \\
+		-2 & -4 \\
+		1 & 0 \\
+		0 & 1
+	\end{bmatrix}.
+	$$
+	Ou seja, $\left\{\begin{bmatrix}
+		-1 \\
+		-2 \\
+		1 \\
+		0
+	\end{bmatrix}, \begin{bmatrix}
+		0 \\
+		-4 \\
+		0 \\
+		1
+	\end{bmatrix}\right\}$ é uma base para $V^\perp$. Então, nós queremos encontrar escalares $a, b, c, d\in\mathbb{R}$ tais que:
+	
+	$$
+	\begin{bmatrix}
+		2 \\
+		5 \\
+		-1 \\
+		0
+	\end{bmatrix} = 
+	a\begin{bmatrix}
+		1 \\
+		0 \\
+		1 \\
+		0
+	\end{bmatrix} + b\begin{bmatrix}
+		0 \\
+		1 \\
+		2 \\
+		4
+	\end{bmatrix} + c\begin{bmatrix}
+		-1 \\
+		-2 \\
+		1 \\
+		0
+	\end{bmatrix} + d\begin{bmatrix}
+		0 \\
+		-4 \\
+		0 \\
+		1
+	\end{bmatrix}
+	$$
+	Isto equivale ao seguinte sistema linear:
+	
+	$$
+	\begin{bmatrix}
+		1 & 0 & -1 & 0 \\
+		0 & 1 & -2 & -4 \\
+		1 & 2 & 1 & 0 \\
+		0 & 4 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		a \\
+		b \\
+		c \\
+		d
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		2 \\
+		5 \\
+		-1 \\
+		0
+	\end{bmatrix}
+	$$
+	Resolvendo este sistema linear (nós não o faremos aqui, porque, a esta altura, certamente vocês já estão cansados de fazer isso, e eu também), nós obtemos:
+	
+	$$
+	\begin{bmatrix}
+		a \\
+		b \\
+		c \\
+		d
+	\end{bmatrix} = \begin{bmatrix}
+		15/38 \\
+		4/38 \\
+		-61/38 \\
+		-16/38
+	\end{bmatrix}.
+	$$
+	Assim sendo, o vetor $v$ é dado por:
+	
+	$$
+	v = a\begin{bmatrix}
+		1 \\
+		0 \\
+		1 \\
+		0
+	\end{bmatrix} + b\begin{bmatrix}
+		0 \\
+		1 \\
+		2 \\
+		4
+	\end{bmatrix} = \dfrac{15}{38}\begin{bmatrix}
+		1 \\
+		0 \\
+		1 \\
+		0
+	\end{bmatrix} + \dfrac{4}{38}\begin{bmatrix}
+		0 \\
+		1 \\
+		2 \\
+		4
+	\end{bmatrix} = \begin{bmatrix}
+		15/38 \\
+		4/38 \\
+		23/38 \\
+		16/38
+	\end{bmatrix},
+	$$
+	e o vetor $v^\perp$ é dado por:
+	
+	$$
+	v^\perp = c\begin{bmatrix}
+		-1 \\
+		-2 \\
+		1 \\
+		0
+	\end{bmatrix} + d\begin{bmatrix}
+		0 \\
+		-4 \\
+		0 \\
+		1
+	\end{bmatrix} = -\dfrac{61}{38}\begin{bmatrix}
+		-1 \\
+		-2 \\
+		1 \\
+		0
+	\end{bmatrix} + -\dfrac{16}{38}\begin{bmatrix}
+		0 \\
+		-4 \\
+		0 \\
+		1
+	\end{bmatrix} = \begin{bmatrix}
+		61/38 \\
+		186/38 \\
+		-61/38 \\
+		-16/38
+	\end{bmatrix}.
+	$$
+	Logo, a decomposição ortogonal de $x$ é:
+	
+	$$
+	\begin{bmatrix}
+		2 \\
+		5 \\
+		-1 \\
+		0
+	\end{bmatrix} = \begin{bmatrix}
+		15/38 \\
+		4/38 \\
+		23/38 \\
+		16/38
+	\end{bmatrix} + \begin{bmatrix}
+		61/38 \\
+		186/38 \\
+		-61/38 \\
+		-16/38
+	\end{bmatrix},
+	$$
+	ou, escrevendo de um jeito mais bonitinho,
+	
+	$$
+	\begin{bmatrix}
+		2 \\
+		5 \\
+		-1 \\
+		0
+	\end{bmatrix} = \dfrac{1}{38}\left(\begin{bmatrix}
+		15 \\
+		4 \\
+		23 \\
+		16
+	\end{bmatrix} + \begin{bmatrix}
+		61 \\
+		186 \\
+		-61 \\
+		-16
+	\end{bmatrix}\right).
+	$$
+\end{Example}
