@@ -98,7 +98,7 @@ Para não ficarmos unicamente no mundo abstrato dos espaços vetoriais, vamos fa
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\linewidth]{imgs/alglin-06-pitagoras}
+	\includegraphics[width=0.7\linewidth]{imgs/alglin-06-pitagoras}
 	\caption[Teorema de Pitágoras]{Teorema de Pitágoras (arquivo pessoal)}
 	\label{fig:alglin-06-pitagoras}
 \end{figure}
@@ -144,7 +144,7 @@ A figura a seguir ilustra este exemplo:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\linewidth]{imgs/alglin-07-ortogonalidade-em-r2}
+	\includegraphics[width=0.7\linewidth]{imgs/alglin-07-ortogonalidade-em-r2}
 	\caption[Ortogonalidade em $\mathbb{R}^2$]{Ortogonalidade em $\mathbb{R}^2$ (arquivo pessoal)}
 	\label{fig:alglin-07-ortogonalidade-em-r2}
 \end{figure}
@@ -170,7 +170,7 @@ A figura a seguir ilustra este exemplo:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\linewidth]{imgs/alglin-08-ortogonalidade-em-r3}
+	\includegraphics[width=0.7\linewidth]{imgs/alglin-08-ortogonalidade-em-r3}
 	\caption[Ortogonalidade em $\mathbb{R}^3$]{Ortogonalidade em $\mathbb{R}^3$ (arquivo pessoal)}
 	\label{fig:alglin-08-ortogonalidade-em-r3}
 \end{figure}
@@ -700,3 +700,262 @@ A grande importância que tem o Teorema da Decomposição Ortogonal é a ideia d
 	\end{bmatrix}\right).
 	$$
 \end{Example}
+
+\section{Matrizes de Projeção}
+
+Nesta seção, nós vamos falar sobre matrizes de projeção. Mais especificamente, nós estaremos em falar sobre projeção ortogonal. E a primeira pergunta natural é: ``por que nós queremos projetar?'' A resposta é muito simples: nem todo sistema linear $Ax = b$ possui solução. No entanto, o nosso grande objetivo é resolver $Ax = b$. Então, quando o sistema não tem solução, nós queremos encontrar algo que se pareça com uma solução. A projeção nos dá exatamente isso.
+
+Mas, para falar em projeção, nós precisamos primeiro entender o que é isso. Vamos começar com um caso mais simples, e depois estendemos a ideia para casos mais gerais.
+
+Considere $a$ e $b$ dois vetores em $\mathbb{R}^2$. Para a nossa discussão ficar interessante, considere que $a$ e $b$ são vetores LI. Vamos mostrar uma figura para esta ideia ficar mais clara:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{imgs/alglin-09-projecao-1}
+	\caption[Vetores LI em $\mathbb{R}^2$]{Vetores LI em $\mathbb{R}^2$ (arquivo pessoal)}
+	\label{fig:alglin-09-projecao-1}
+\end{figure}
+
+O vetor $a$ está em um subespaço vetorial $U$, enquanto o vetor $b$ não está neste subespaço. Nós desejamos projetar $b$ em $a$, ou seja, nós queremos encontrar um vetor $p\in U$ tal que $p = xa$, para algum $x\in\mathbb{R}$, de modo que $b$ pode ser escrito como $b = p + q$, para algum $q$ em outro subespaço. Existem muitas formas de fazer isso. Na verdade, existem infinitas formas. A própria escolha $p = a$ é uma opção (dado que $b = a + (b - a)$). Então, na prática, nós já achamos uma projeção de $b$ em $a$ (ou melhor dizendo, de $b$ no subespaço $U$).
+
+No entanto, dadas infinitas possíveis projeções, nós queremos encontrar uma projeção que seja melhor do que todas as outras. E ser melhor, no nosso caso, significa minimizar a distância entre $b$ e $p$. Ou seja, nós queremos encontrar um vetor $p$ tal que $||b - p||$ seja a menor possível. Intuitivamente (e, de maneira nada rigorosa), nós queremos um vetor $p$ que seja quase igual a $b$, só que pertencente ao subespaço $U$.
+
+E isto é algo bastante sugestivo: nós sabemos que, em $\mathbb{R}^2$ (e, na prática, em $\mathbb{R}^n$), a melhor forma de fazer isso é encontrar um vetor $p$ tal que $b - p$ seja ortogonal a $a$ (e a $p$ também, mas enfim). Ou seja, nós queremos encontrar um vetor $p$ tal que $a^T(b - p) = 0$. Novamente, vamos ver uma imagem para estas ideias ficarem mais claras:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{imgs/alglin-10-projecao-2}
+	\caption[Projeção ortogonal em $\mathbb{R}^2$]{Projeção ortogonal em $\mathbb{R}^2$ (arquivo pessoal)}
+	\label{fig:alglin-10-projecao-2}
+\end{figure}
+
+Vamos então procurar $p$. Nós sabemos que $p = xa$, onde $x$ é um escalar real. Então, nós precisamos determinar $x$ tal que $a^T(b - xa) = 0$. Façamos as contas:
+
+$$
+a^T(b - xa) = 0\iff a^Tb - xa^Ta = 0\iff xa^Ta = a^Tb\iff x = \dfrac{a^Tb}{a^Ta}.
+$$
+
+Logo, nós temos que $p = \dfrac{a^Tb}{a^Ta}a$. Como $\dfrac{a^Tb}{a^Ta}$ é um escalar, nós podemos escrever $p = a\dfrac{a^Tb}{a^Ta}$ e, pela associatividade, segue que $p = \dfrac{aa^T}{a^Ta}b$. No entanto, $\dfrac{aa^T}{a^Ta}$ é uma matriz de posto $1$. Denotando esta matriz por $P$, segue que este processo pode ser descrito matricialmente por $p = Pb$. A matriz $P$ pertence a uma classe especial de matrizes que nós chamamos de matrizes de projeção, e, neste caso, a uma classe mais especial ainda de matrizes que nós chamamos de matrizes de projeção ortogonal. Então, vamos definir formalmente estas duas classes de matrizes.
+
+\begin{Definition}[Matriz de projeção]
+	Uma matriz $P$ é dita uma \textbf{matriz de projeção} quando $P^2 = P$.
+\end{Definition}
+
+A intuição de $P^2 = P$ é muito simples. Se nós temos um vetor $x$, e aplicamos uma matriz de projeção $P$ nele, nós obtemos um certo vetor $Px$. Se nós aplicamos a mesma matriz de projeção a este vetor $Px$ (ou seja, fazemos $P^2x$), nós precisamos encontrar o mesmo vetor $Px$, já que um vetor projetado sobre si mesmo pela mesma matriz de projeção é igual ao próprio vetor. De $P^2 = P$, seguirá imediatamente que $P^n = P$ para qualquer $n\in\mathbb{N}$, o que condiz perfeitamente com a nossa intuição.
+
+\begin{Definition}[Matriz de projeção ortogonal]
+	Uma matriz $P$ é dita uma \textbf{matriz de projeção ortogonal} quando $P^2 = P$ e $P^T = P$.
+\end{Definition}
+
+Vamos, então, mostrar que a matriz de posto $1$ que nós encontramos anteriormente é, de fato, uma matriz de projeção ortogonal (generalizando para $\mathbb{R}^n$).
+
+\begin{Proposition}
+	Dados dois vetores $a,b\in\mathbb{R}^n$, a matriz $P = \dfrac{aa^T}{a^Ta}$ é uma matriz de projeção ortogonal.
+\end{Proposition}
+
+\begin{Proof}
+	Primeiro, vamos mostrar que $P^2 = P$. De fato:
+	
+	$$
+	P^2 = \dfrac{aa^T}{a^Ta}\cdot\dfrac{aa^T}{a^Ta} = \dfrac{a(a^Ta)a^T}{a^Taa^Ta} = \dfrac{(a^Ta)aa^T}{(a^Ta)a^Ta} = \dfrac{aa^T}{a^Ta} = P.
+	$$
+	Agora, nós vamos mostrar que $P^T = P$. De fato:
+	
+	$$
+	P^T = \left(\dfrac{aa^T}{a^Ta}\right)^T = \dfrac{(aa^T)^T}{a^Ta} = \dfrac{aa^T}{a^Ta} = P.
+	$$
+	Logo, $P$ é uma matriz de projeção ortogonal.
+	
+	\qed
+\end{Proof}
+
+Agora, nós vamos estender este conceito para um caso mais geral. Nós já sabemos projetar sobre uma reta. Agora, nós queremos aprender a projetar sobre um plano (ou, melhor ainda, sobre um hiperplano).
+
+Suponha que $\{a_1, \cdots, a_k\}$ é uma base para um certo hiperplano, e existe um certo vetor $b$ que não pertence a este hiperplano. Nós queremos encontrar $\{x_1, \cdots, x_k\}$ tais que o vetor $p$ projetado ortogonalmente possa ser escrito como $p = x_1a_1 + \cdots + x_ka_k$. Note que:
+
+$$
+x_1a_1 + \cdots + x_ka_k = \begin{bmatrix}
+	a_1 & a_2 & \cdots & a_k
+\end{bmatrix}x = Ax,
+$$
+com $x = \begin{bmatrix}
+	x_1 \\
+	x_2 \\
+	\vdots \\
+	x_k
+\end{bmatrix}$.
+
+Como o conjunto dos $a_i$'s é uma base para o hiperplano, nós podemos entendê-lo como o espaço coluna de $A$. A ideia agora é a mesma: nós queremos encontrar $x$ tal que $a_i^T(b - Ax) = 0$. Escrevendo esta fórmula de maneira matricial, isto equivale a $A^T(b - Ax) = 0$. Assim sendo, nós obtemos:
+
+$$
+A^T(b - Ax) = 0\iff A^Tb - A^TAx = 0\iff A^TAx = A^Tb.
+$$
+
+As equações $A^TAx = A^Tb$ são chamadas de equações normais. No caso em que $A^TA$ é invertível (e, por enquanto é, já que estamos considerando $A$ como sendo a matriz cujas colunas formam uma base para o hiperplano, mas, generalizando para qualquer $A$, poderia não ser), nós obtemos $x = (A^TA)^{-1}A^Tb$, e, como $p = Ax$, nós obtemos a matriz de projeção ortogonal $P = A(A^TA)^{-1}A^T$.
+
+Nós não provaremos que esta matriz é, de fato, uma matriz de projeção ortogonal, mas, como todo escritor meio preguiçoso gosta de fazer, e eu também, esta demonstração será um dos exercícios para o leitor.
+
+Existe um motivo a mais pelo qual projeções ortogonais são legais: todo vetor de um espaço $E$ pode ser escrito de forma única como a soma de um vetor em um certo subespaço $V$ com um vetor no complemento ortogonal $V^\perp$. Então, seja $x\in E$. Se nós encontramos a projeção ortogonal de $x$ sobre $V$, é muito fácil encontrar a sua projeção sobre $V^\perp$: basta fazer uma subtração.
+
+Mas vamos fazer isto de maneira formal: Considere uma matriz $A_{m\times n}$ tal que $A^TA$ é inversível. Nós sabemos que $C(A)\perp N(A^T)$, ou seja, $\dim C(A) + \dim N(A^T) = m$. Nós queremos projetar um certo vetor $b\in\mathbb{R}^m$ qualquer sobre $C(A)$ e também sobre $N(A^T)$. Suponha que $P$ é a matriz de projeção sobre $C(A)$. Então, pelo Teorema da Decomposição Ortogonal, nós temos que $b$ pode ser escrito de forma única como $b = Pb + p^\perp$, onde $p^\perp\in N(A^T)$. Resolvendo a equação, segue imediatamente que $p^\perp = b - Pb$. Sabemos, porém, que:
+
+$$
+b - Pb = Ib - Pb = (I - P)b.
+$$
+Logo, se $P$ projeta $b$ sobre $C(A)$, então a matriz $I - P$ projeta $b$ sobre $N(A^T)$. De fato, como falamos antes, conhecendo $b$ e $Pb$, encontrar a projeção de $b$ sobre $N(A^T)$ se resume a fazer uma subtração. Mas focar no aspecto matricial dessas operações: queremos provar que $I - P$ é uma matriz de projeção ortogonal.
+
+\begin{Proposition}
+	Sejam $A_{m\times n}$ uma matriz tal que $A^TA$ é invertível e $P$ a matriz de projeção ortogonal sobre $C(A)$. Então, $I - P$ é uma matriz de projeção ortogonal sobre $N(A^T)$.
+\end{Proposition}
+
+\begin{Proof}
+	Primeiro, nós vamos provar que $(I - P)^2 = I - P$. De fato:
+	
+	$$
+	(I - P)^2 = (I - P)(I - P) = I^2 -IP - PI + P^2 = I - 2P + P = I - P.
+	$$
+	Agora, nós vamos provar que $(I - P)^T = (I - P)$. De fato:
+	
+	$$
+	(I - P)^T = I^T - P^T = I - P.
+	$$
+	Finalmente, vamos provar que $I - P$ projeta sobre $N(A^T)$. Seja $b\in\mathbb{R}^m$ um vetor qualquer. Então:
+	
+	\begin{align*}
+		A^T((I - P)b) &= A^T(b - Pb) = A^Tb - A^TPb = A^Tb - A^T(A(A^TA)^{-1}A^T)b \\ &= A^Tb - (A^TA)(A^TA)^{-1}A^Tb = A^Tb - A^Tb = 0.
+	\end{align*}
+	Logo, $I - P$ é uma matriz de projeção ortogonal sobre $N(A^T)$.
+	
+	\qed
+\end{Proof}
+
+Para não ficarmos unicamente presos à teoria, vamos fazer um exemplo:
+
+\begin{Example}
+	Considere $A = \begin{bmatrix}
+		1 & 2 \\
+		3 & 2 \\
+		0 & 1
+	\end{bmatrix}$ e $b = \begin{bmatrix}
+		1 \\
+		0 \\
+		0
+	\end{bmatrix}$. Nós queremos encontrar o vetor $p$ que é a projeção ortogonal de $b$ sobre $C(A)$ e o vetor $p^\perp$ que é a projeção ortogonal de $b$ sobre $N(A^T)$. 
+	
+	Para encontrar $p$, nós não vamos achar $A(A^TA)^{-1}A^T$, pois não queremos inverter matrizes. Ao invés disso, usaremos as equações normais, resolveremos os sistemas lineares para encontrar $x$ e, por fim, calcularemos $p = Ax$. Recordando, as equações normais são dadas por $A^TAx = A^Tb$. Assim sendo, vamos calcular $A^TA$ e $A^Tb$:
+	
+	$$
+	A^TA = \begin{bmatrix}
+		1 & 3 & 0 \\
+		2 & 2 & 1
+	\end{bmatrix}\begin{bmatrix}
+		1 & 2 \\
+		3 & 2 \\
+		0 & 1
+	\end{bmatrix} = \begin{bmatrix}
+		10 & 8 \\
+		8 & 9
+	\end{bmatrix}
+	$$
+	
+	$$
+	A^Tb = \begin{bmatrix}
+		1 & 3 & 0 \\
+		2 & 2 & 1
+	\end{bmatrix}\begin{bmatrix}
+		1 \\
+		0 \\
+		0
+	\end{bmatrix} = \begin{bmatrix}
+		1 \\
+		2
+	\end{bmatrix}.
+	$$
+	Assim sendo, nós obtemos o sistema
+	
+	$$
+	\begin{bmatrix}
+		10 & 8 \\
+		8 & 9
+	\end{bmatrix}\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix} = \begin{bmatrix}
+		1 \\
+		2
+	\end{bmatrix}.
+	$$
+	A solução deste sistema é $x = \begin{bmatrix}
+		-7/26 \\
+		12/26
+	\end{bmatrix}$. Assim sendo, nós encontramos o vetor $p$ fazendo:
+	
+	$$
+	p = Ax = \begin{bmatrix}
+		1 & 2 \\
+		3 & 2 \\
+		0 & 1
+	\end{bmatrix}\begin{bmatrix}
+		-7/26 \\
+		12/26
+	\end{bmatrix} = \begin{bmatrix}
+		17/26 \\
+		3/26 \\
+		12/26
+	\end{bmatrix} = \dfrac{1}{26}\begin{bmatrix}
+		17 \\
+		3 \\
+		12
+	\end{bmatrix}.
+	$$
+	
+	Por sua vez, para achar a projeção ortogonal de $b$ sobre $N(A^T)$, basta fazer 
+	
+	$$
+	p^\perp = b - p = \begin{bmatrix}
+		1 \\
+		0 \\
+		0
+	\end{bmatrix} - \begin{bmatrix}
+		17/26 \\
+		3/26 \\
+		12/26
+	\end{bmatrix} = \begin{bmatrix}
+		9/26 \\
+		-3/26 \\
+		-12/26
+	\end{bmatrix} = \dfrac{1}{26}\begin{bmatrix}
+		9 \\
+		-3 \\
+		-12
+	\end{bmatrix}.
+	$$
+\end{Example}
+
+Em todas as proposições desta seção, nós estávamos considerando que $A^TA$ possui inversa. Agora, no entanto, nós precisamos determinar quando $A^TA$ possui inversa, para que as coisas funcionem como desejamos.
+
+\begin{Theorem}
+	Seja $A$ uma matriz $m\times n$. Então, $A^TA$ possui inversa se, e somente se, as colunas de $A$ são LI.
+\end{Theorem}
+
+\begin{Proof}
+	Nós queremos demonstrar que $N(A^TA) = N(A)$. 
+	
+	Primeiramente, provaremos que $N(A^TA)\subseteq N(A)$. De fato, $x\in N(A^TA)\iff A^TAx = 0$. Isto implica que
+	
+	$$
+	x^TA^TAx = 0\iff (Ax)^T(Ax) = 0\iff ||Ax||^2 = 0\iff Ax = 0.
+	$$
+	Logo, $x\in N(A)$.
+	
+	Agora, provaremos que $N(A)\subseteq N(A^TA)$. De fato:
+	
+	$$
+	x\in N(A)\iff Ax = 0\iff A^TAx = 0.
+	$$
+	Logo, $x\in N(A^TA)$.
+	
+	Assim sendo, $N(A^TA) = N(A)$ e, por consequência, $N(A^TA) = \{0\}\iff N(A) = \{0\}$.
+	
+	\qed
+\end{Proof}
