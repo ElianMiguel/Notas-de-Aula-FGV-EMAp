@@ -959,3 +959,260 @@ Em todas as proposições desta seção, nós estávamos considerando que $A^TA$
 	
 	\qed
 \end{Proof}
+
+\section{Mínimos Quadrados}
+
+Nesta seção, nós vamos desenvolver a primeira grande aplicação de Álgebra Linear. Como nós mencionamos anteriormente, quando o sistema $Ax = b$ não possui solução, nós queremos encontrar um vetor $\tilde{x}$ que esteja o mais próximo possível de ser uma solução do nosso sistema. Vamos adotar uma convenção a partir de agora: toda vez que falarmos em projeção, estaremos falando especificamente em projeção ortogonal.
+
+Vamos desenvolver esta ideia formalmente: considere o sistema $Ax = b$ tal que $b\notin C(A)$ (com $A$ uma matriz $m\times n$ tal que $m > n$). Este sistema linear não possui solução. No entanto, se nós projetarmos $b$ em $C(A)$, o sistema $A\tilde{x} = p$ possuirá solução. Neste caso, o vetor $\tilde{x}$ é ``quase'' uma solução para $Ax = b$. Ele é, na verdade, o vetor que está mais próximo de ser uma solução para $Ax = b$.
+
+Mas como nós medimos o que significa ``estar mais próximo de ser uma solução de $Ax = b$''? É muito simples: quando um sistema linear possui solução, e $x$ é essa solução, nós temos que $||Ax - b|| = 0$. Quando nós encontramos o vetor $\tilde{x}$ que é quase uma solução de um sistema sem solução, nós obtemos $\min_{x\in\mathbb{R}^n}||Ax - b||$. Como, no entanto, trabalhar diretamente com a norma costuma ser difícil, e a norma é sempre maior ou igual a zero, este problema é equivalente a um problema mais fácil:
+
+$$
+\min_{x\in\mathbb{R}^n} ||Ax - b||^2.
+$$
+
+Este problema é chamado \textbf{Problema de Mínimos Quadrados}. Ele é chamado assim porque nós estamos procurando o vetor $\tilde{x}$ que minimiza o quadrado da norma de $Ax - b$. O vetor $Ax - b$ é chamado de \textbf{resíduo}, e o escalar $||Ax - b||^2$ é chamado de \textbf{erro}.
+
+Vamos agora enunciar e demonstrar a solução do Problema de Mínimos Quadrados.
+
+\begin{Theorem}[Solução do Problema de Mínimos Quadrados]
+	Seja $Ax = b$ um sistema linear sem solução, com $A$ sendo uma matriz $m\times n$ tal que $A^TA$ é invertível. Então, a solução do Problema de Mínimos Quadrados é
+	
+	$$
+	\tilde{x} = (A^TA)^{-1}A^Tb.
+	$$
+\end{Theorem}
+
+\begin{Proof}
+	Pelo Teorema da Decomposição Ortogonal, nós podemos escrever $b = p + (b - p)$, onde $p\in C(A)$ é a projeção ortogonal de $b$ em $C(A)$ e $b - p\in N(A^T)$. Assim sendo, nós temos que $Ax - b = (Ax - p) + (b - p)$. Pelo Teorema de Pitágoras, nós temos que:
+	
+	$$
+	||Ax - b||^2 = ||Ax - p||^2 + ||b - p||^2.
+	$$
+	O nosso objetivo é minimizar $||Ax - b||^2$. Mas note que o termo $||b - p||^2$ não depende de $x$. Assim sendo, este problema equivale a minimizar $||Ax - p||^2$. O vetor $p$ está em $C(A)$, logo, basta achar $x$ tal que $Ax - p = 0$. Fazendo as contas, nós obtemos:
+	
+	$$
+	Ax - p = 0 \implies Ax = p\implies Ax = Pb\implies Ax = A(A^TA)^{-1}A^Tb.
+	$$
+	Escolhendo $\tilde{x} = (A^TA)^{-1}A^Tb$, nós obtemos $Ax - p = 0$. Logo, a solução de Mínimos Quadrados é $\tilde{x} = (A^TA)^{-1}A^Tb$.
+	
+	\qed
+\end{Proof}
+
+Um exemplo de aplicação direta deste conceito é quando, dado um conjunto de pontos, nós queremos encontrar uma reta que melhor se ajuste a eles (poderia ser uma outra função, mas a regressão linear é melhor para fazer contas na mão). Vamos, assim, fazer um exemplo:
+
+\begin{Example}
+	Considere o seguinte conjunto de dados: $\mathcal{D} = \{(0, 1), (1, 1), (2, 3)\}$. Nós queremos encontrar os coeficientes $C$ e $D$ tal que a reta $f(t) = C + Dt$ se ajusta da melhor forma possível aos dados do conjunto $\mathcal{D}$.
+	
+	Perceba que $f(t) = \begin{bmatrix}
+		1 & t
+	\end{bmatrix}\begin{bmatrix}
+		C \\
+		D
+	\end{bmatrix}$. Assim sendo, nós podemos considerar a matriz $A$ como:
+	
+	$$
+	A = \begin{bmatrix}
+		1 & t_1 \\
+		1 & t_2 \\
+		1 & t_3
+	\end{bmatrix},
+	$$
+	o vetor $x$ como:
+	
+	$$
+	x = \begin{bmatrix}
+		C \\
+		D
+	\end{bmatrix}
+	$$
+	e o vetor $b$ como:
+	
+	$$
+	b = \begin{bmatrix}
+		y_1 \\
+		y_2 \\
+		y_3
+	\end{bmatrix}.
+	$$
+	Na prática, isto quer dizer o seguinte: a matriz $A$ é a matriz dos dados de entrada aplicados a cada termo que compõe $f(t)$. O vetor $x$ é o vetor dos coeficientes que nós queremos encontrar, e o vetor $b$ é o vetor dos dados de saída do experimento. Para encontrar o vetor $\tilde{x}$, nós resolvemos as equações normais.
+	
+	Primeiramente, calculemos $A^TA$:
+	
+	$$
+	A^TA = \begin{bmatrix}
+		1 & 1 & 1 \\
+		0 & 1 & 2
+	\end{bmatrix}\begin{bmatrix}
+		1 & 0 \\
+		1 & 1 \\
+		1 & 2
+	\end{bmatrix} = \begin{bmatrix}
+		3 & 3 \\
+		3 & 5
+	\end{bmatrix}.
+	$$
+	Agora, calculemos $A^Tb$:
+	
+	$$
+	A^Tb = \begin{bmatrix}
+		1 & 1 & 1 \\
+		0 & 1 & 2
+	\end{bmatrix}\begin{bmatrix}
+		1 \\
+		1 \\
+		3
+	\end{bmatrix} = \begin{bmatrix}
+		5 \\
+		7
+	\end{bmatrix}.
+	$$
+	Agora, basta resolver o seguinte sistema linear:
+	
+	$$
+	\begin{bmatrix}
+		3 & 3 \\
+		3 & 5
+	\end{bmatrix}\begin{bmatrix}
+		C \\
+		D
+	\end{bmatrix} = \begin{bmatrix}
+		5 \\
+		7
+	\end{bmatrix}.
+	$$
+	Fazendo as contas, a solução deste sistema é $\tilde{x} = \begin{bmatrix}
+		2/3 \\
+		1
+	\end{bmatrix}$.
+	Logo, a reta que melhor se ajusta ao conjunto $\mathcal{D}$ é $f(t) = \dfrac{2}{3} + t$.
+\end{Example}
+
+Vamos mostrar uma imagem representando este exemplo:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{imgs/alglin-11-regressao-linear}
+	\caption[Regressão linear]{Regressão linear (arquivo pessoal)}
+	\label{fig:alglin-11-regressao-linear}
+\end{figure}
+
+
+De um modo geral, se nós temos um conjunto de dados $\mathcal{D} = \{(t_1, b_1), (t_2, b_2), \cdots, (t_m, b_m)\}$, e nós queremos ajustá-los por uma reta $f(t) = C + Dt$, nós temos que a matriz $A$ é dada por:
+
+$$
+A = \begin{bmatrix}
+	1 & t_1 \\
+	1 & t_2 \\
+	\vdots & \vdots \\
+	1 & t_m
+\end{bmatrix},
+$$
+o vetor $x$ é dado por:
+
+$$
+x = \begin{bmatrix}
+	C \\
+	D
+\end{bmatrix}
+$$
+e o vetor $b$ é dado por:
+
+$$
+b = \begin{bmatrix}
+	b_1 \\
+	b_2 \\
+	\vdots \\
+	b_m
+\end{bmatrix}.
+$$
+
+A partir daí, basta resolver as equações normais. Explicitamente, nós temos que:
+
+$$
+A^TA = \begin{bmatrix}
+	1 & 1 & \cdots & 1 \\
+	t_1 & t_2 & \cdots & t_m
+\end{bmatrix}\begin{bmatrix}
+	1 & t_1 \\
+	1 & t_2 \\
+	\vdots & \vdots \\
+	1 & t_m
+\end{bmatrix} = \begin{bmatrix}
+	m & \sum t_i \\
+	\sum t_i & \sum t_i^2
+\end{bmatrix}.
+$$
+
+e
+
+$$
+A^Tb = \begin{bmatrix}
+	1 & 1 & \cdots & 1\\
+	t_1 & t_2 & \cdots & t_m
+\end{bmatrix}\begin{bmatrix}
+	b_1 \\
+	b_2 \\
+	\vdots \\
+	b_m
+\end{bmatrix} = \begin{bmatrix}
+	\sum b_i \\
+	\sum t_ib_i
+\end{bmatrix}.
+$$
+Nós podemos transformar $A^TA$ em uma matriz diagonal definindo $s_i = t_i - \overline{t}$, onde $\overline{t} = \frac{1}{m}\sum\limits_{i = 1}^{m} t_i$. Assim sendo, nós obtemos:
+
+$$
+A^TA = \begin{bmatrix}
+	m & \sum s_i \\
+	\sum s_i & \sum s_i^2
+\end{bmatrix}.
+$$
+Nós temos, porém, que:
+
+$$
+\sum\limits_{i = 1}^{m} s_i = \sum\limits_{i = 1}^{m}(t_i - \overline{t}) = \sum\limits_{i = 1}^{m} t_i - \sum\limits_{i = 1}^{m}\overline{t} = \sum\limits_{i = 1}^{m} t_i - m\overline{t} = \sum\limits_{i = 1}^{m} t_i - \sum\limits_{i = 1}^{m} t_i = 0.
+$$
+Assim sendo, segue que:
+
+$$
+A^TA = \begin{bmatrix}
+	m & 0 \\
+	0 & \sum s_i^2
+\end{bmatrix}.
+$$
+
+Por sua vez, $A^Tb$ transforma-se em:
+
+$$
+A^Tb = \begin{bmatrix}
+	\sum b_i \\
+	\sum s_ib_i
+\end{bmatrix}.
+$$
+
+Nós obtemos, dessa forma, o sistema linear
+
+$$
+\begin{bmatrix}
+	m & 0 \\
+	0 & \sum s_i^2
+\end{bmatrix}\begin{bmatrix}
+	C \\
+	D
+\end{bmatrix} = \begin{bmatrix}
+	\sum b_i \\
+	\sum s_ib_i
+\end{bmatrix}
+$$
+e, fazendo um pouco de contas, nós obtemos que os coeficientes $C$ e $D$ são dados por:
+
+$$
+C = \frac{1}{m}\sum\limits_{i = 1}^{m} b_i = \overline{b}
+$$
+e
+
+$$
+D = \dfrac{\frac{1}{m}\sum\limits_{i = 1}^{m}(t_i - \overline{t})b_i}{\frac{1}{m}\sum\limits_{i = 1}^{m}(t_i - \overline{t})^2}.
+$$
