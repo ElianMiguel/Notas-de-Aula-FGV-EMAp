@@ -1216,3 +1216,201 @@ e
 $$
 D = \dfrac{\frac{1}{m}\sum\limits_{i = 1}^{m}(t_i - \overline{t})b_i}{\frac{1}{m}\sum\limits_{i = 1}^{m}(t_i - \overline{t})^2}.
 $$
+
+\section{Exercícios}
+\textbf{Importante:} Alguns dos exercícios são baseados em \cite{lista1doguilherme}, em \cite{axler2026} e em \cite{lista2doguilherme}.
+
+\noindent $\mathbf{7.1)}$ Sejam $x = (x_1, \cdots, x_n)^T$ e $y = (y_1, \cdots, y_n)^T$. Mostre que a função $\langle\cdot,\cdot\rangle:\mathbb{R}^n\times\mathbb{R}^n\to\mathbb{R}$, definida como:
+
+$$
+\langle x, y\rangle = x\cdot y = x^Ty = \sum\limits_{i = 1}^{n} x_iy_i
+$$
+é um produto interno.
+
+$\\$
+$\mathbf{7.2)}$ Sejam $p$ e $q$ dois polinômios em $\mathcal{P}_n$. Mostre que a função $\langle\cdot,\cdot\rangle:\mathcal{P}_n\times\mathcal{P}_n\to\mathbb{R}$, definida como:
+
+$$
+\langle p, q\rangle = \displaystyle\int_{-1}^{1} p(x)q(x) \,dx
+$$
+é um produto interno.
+
+$\\$
+$\mathbf{7.3)}$ Seja $x = (x_1, \cdots, x_n)^T$. Mostre que a função $||\cdot||:\mathbb{R}^n\to\mathbb{R}$, definida como:
+
+$$
+||x|| = \left(\sum\limits_{i = 1}^{n} x_i^2\right)^\frac{1}{2}
+$$
+é uma norma.
+
+$\\$
+$\mathbf{7.4)}$ Seja $x = (x_1, \cdots, x_n)^T$. Mostre que a função $||\cdot||_p:\mathbb{R}^n\to\mathbb{R}$, definida como:
+
+$$
+||x||_p = \left(\sum\limits_{i = 1}^{n} x_i^p\right)^\frac{1}{p}
+$$
+é uma norma, para $1\leq p <\infty$. Quando $0\leq p < 1$, esta função ainda é uma norma? Se sim, justifique; se não, quais axiomas não são satisfeitos?
+
+$\\$
+$\mathbf{7.5}$ Seja $x = (x_1, \cdots, x_n)^T$.
+
+a) Mostre que a função $||\cdot||:\mathbb{R}^n\to\mathbb{R}$, definida como:
+
+$$
+||x||_{\infty} = \max_{i} |x_i|
+$$
+é uma norma.
+
+b) Prove que $\lim\limits_{p\to\infty} ||x||_p = ||x||_{\infty}$.
+
+$\\$
+$\mathbf{7.6)}$ Seja $V$ um espaço vetorial real munido de um produto interno $\langle\cdot, \cdot\rangle$, e seja $||x|| = \sqrt{\langle x, x\rangle}$ para todo $x\in V$. Mostre que, dados $u,v\in V$ quaisquer, vale a identidade: 
+
+$$
+||u + v||^2 + ||u - v||^2 = 2||u||^2 + 2||v||^2.
+$$
+
+\textbf{Nota:} Esta identidade é conhecida como Regra do Paralelogramo, e é um resultado mais importante do que parece (e mais forte do que o que o exercício pede para provar): basicamente, é verdade que, se um espaço possui um produto interno, a norma induzida por ele satisfaz essa identidade e, reciprocamente, se um espaço normado satisfaz a Regra do Paralelogramo, então a norma vem de um produto interno. Neste exercício, vocês provarão somente a ida, e os mais curiosos podem tentar demonstrar a volta também, que é conhecida como Teorema de Jordan-von Neumann.
+
+$\\$
+$\mathbf{7.7)}$ Sejam $U$ e $V$ dois subespaços vetoriais de $E$. Prove que:
+
+$$
+\dim(U + V) = \dim U + \dim V - \dim(U - V).
+$$
+
+$\\$
+$\mathbf{7.8)}$ Considere o subespaço vetorial $U = \{(x, y, 2x, 3y)^T; x, y\in\mathbb{R}\}\subseteq\mathbb{R}^4$.
+
+a) Verifique que o vetor $x = (1, 2, 2, 6)^T\in U$.
+
+b) Encontre um vetor $y\in\mathbb{R}^4$ tal que $x^Ty = 0$.
+
+c) Determine um subespaço $V$ tal que $U\perp V$ e $y\in V$.
+
+d) Determine as dimensões de $U$ e $V$.
+
+e) Conclua que $\dim U + \dim V \leq \dim\mathbb{R}^4$.
+
+f) Generalize o item e) para qualquer espaço vetorial: prove que, se $E$ é um espaço vetorial, e $U$ e $V$ são dois subespaços de $E$ tais que $U\perp V$, então $\dim U + \dim V \leq \dim E$.
+
+$\\$
+$\mathbf{7.9)}$ Seja $V$ um subespaço vetorial de $E$. Prove que o complemento ortogonal de $V$ é único.
+
+$\\$
+$\mathbf{7.10)}$ Considere $E = \mathbb{R}^3$. Ache $S^\perp$ para os seguintes conjuntos:
+
+a) $S = \{0\}$.
+
+b) $S = \operatorname{span}\left\{\begin{bmatrix}
+	1 \\
+	1 \\
+	1
+\end{bmatrix}\right\}$.
+
+c) $S = \operatorname{span}\left\{\begin{bmatrix}
+	1 \\
+	1 \\
+	1
+\end{bmatrix}, \begin{bmatrix}
+	1 \\
+	1 \\
+	-1
+\end{bmatrix}\right\}$.
+
+d) $S = \left\{\begin{bmatrix}
+	1 \\
+	5 \\
+	1
+\end{bmatrix}, \begin{bmatrix}
+	2 \\
+	2 \\
+	2
+\end{bmatrix}\right\}$. Note que $S$ não é um subespaço, mas $S^\perp$ é.
+
+$\\$
+$\mathbf{7.11)}$ Suponha que $U$ é um subespaço de $E$. O que é $U + U$?
+
+$\\$
+$\mathbf{7.12)}$ Seja $V = \operatorname{span}\left\{\begin{bmatrix}
+	2 \\
+	0 \\
+	1 \\
+	3
+\end{bmatrix}, \begin{bmatrix}
+	5 \\
+	-1 \\
+	0 \\
+	9
+\end{bmatrix}\right\}$ um subespaço de $\mathbb{R}^4$, e considere o vetor $x = \begin{bmatrix}
+	0 \\
+	1 \\
+	2 \\
+	4
+\end{bmatrix}$. Encontre a decomposição ortogonal de $x$.
+
+$\\$
+$\mathbf{7.13)}$ Seja $V$ o plano $3x + 2y - z = 0$ em $\mathbb{R}^3$. Considere o vetor $v = \begin{bmatrix}
+	5 \\
+	4 \\
+	-1
+\end{bmatrix}$. Ache a decomposição ortogonal de $v$.
+
+$\\$
+$\mathbf{7.14)}$ Demonstre que nenhum par de planos $V$ e $W$ em $\mathbb{R}^3$ pode ser ortogonal.
+
+$\\$
+$\mathbf{7.15)}$ Seja $A_{m\times n}$ uma matriz tal que $A^TA$ é invertível. Prove que $P = A(A^TA)^{-1}A^T$ é uma matriz de projeção ortogonal.
+
+$\\$
+$\mathbf{7.16)}$ Seja $A$ uma matriz $4\times 3$ formada pelas primeiras $3$ colunas da matriz identidade $4\times 4$. Projete o vetor $b = (1, 2, 3, 4)^T$ no espaço coluna de $A$. Ache a matriz de projeção $P$.
+
+$\\$
+$\mathbf{7.17)}$ Seja $P$ uma matriz de projeção qualquer.
+
+a) Prove que $C(I - P) = N(P)$.
+
+b) Prove que $N(I - P) = C(P)$.
+
+c) Suponha agora que $P$ é uma matriz de projeção ortogonal. Prove que $N(P) = C(P)^\perp$.
+
+$\\$
+$\mathbf{7.18)}$ Projete $b$ sobre o espaço coluna de $A$ resolvendo $A^TA\hat{x} = A^Tb$ e $p = A\hat{x}$ para:
+
+a) $\begin{bmatrix}
+	1 & 0 \\
+	0 & 1 \\
+	1 & 1
+\end{bmatrix}$ e $\begin{bmatrix}
+	2 \\
+	5 \\
+	-1
+\end{bmatrix}$.
+
+b) $\begin{bmatrix}
+	1 & 1 \\
+	1 & 0 \\
+	1 & 1
+\end{bmatrix}$ e $\begin{bmatrix}
+	2 \\
+	-1 \\
+	6
+\end{bmatrix}$.
+
+c) $\begin{bmatrix}
+	1 & 0 \\
+	1 & 0 \\
+	1 & 1
+\end{bmatrix}$ e $\begin{bmatrix}
+	7 \\
+	-3 \\
+	4
+\end{bmatrix}$.
+
+$\\$
+$\mathbf{7.19)}$ Considere o conjunto de dados $\mathcal{D} = \{(1, 2), (2, 3), (5, -1)\}$. Encontre a solução de mínimos quadrados $\hat{x} = (C, D)^T$ tal que $y(t) = C + Dt$ é a reta que melhor se ajusta aos dados. Encontre também a projeção $p = A\hat{x}$. Quais dos quatro subespaços fundamentais contêm o vetor erro $e = b - p$? E o vetor $p$? E o vetor $\hat{x}$? Qual é o núcleo de $A$?
+
+$\\$
+$\mathbf{7.20)}$ (Desafio!) Reformule o problema de mínimos quadrados para ajustar a função $a + d\cos(t + \theta)$, onde $a, d, \theta$ são os coeficientes a serem calculados.
+
+
