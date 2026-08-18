@@ -1,0 +1,213 @@
+\chapter{Fatoração \texorpdfstring{$QR$}{QR}}
+\label{cap:fatoração-qr}
+
+\textbf{Importante:} este capítulo é baseado em \cite{slide5doyuri}.
+
+No capítulo anterior, nós trabalhamos com o conceito de ortogonalidade, e vimos uma das possíveis aplicações deste conceito. Agora, nós veremos como a noção de ortogonalidade induz uma fatoração, que é conhecida como ``Fatoração $QR$''. Mas, primeiro, vamos introduzir alguns novos conceitos, que nos levarão à fatoração desejada.
+
+\section{Vetores Ortonormais}
+
+Suponha que nós temos um certo conjunto de vetores $\{q_1, \cdots, q_k\}$. Nós dizemos que estes vetores são \textbf{ortogonais} se $q_i^Tq_j = 0, \forall i\neq j$. No entanto, nós podemos criar uma noção ainda mais forte do que a de ortogonalidade para este conjunto.
+
+\begin{Definition}[Vetores ortonormais]
+	Seja $\{q_1, \cdots, q_k\}$ um conjunto de vetores. Nós dizemos que estes vetores são \textbf{ortonormais} se:
+	
+	$$
+	q_i^Tq_j = \begin{cases}
+		1, \text{ se $i = j$} \\
+		0, \text{ se $i\neq j$}
+	\end{cases}.
+	$$
+\end{Definition}
+
+Em resumo, um conjunto de vetores ortonormais é tal que, dados dois vetores quaisquer diferentes entre si, eles são ortogonais e, além disso, a norma de todo vetor é igual a $1$. Uma notação diferente que nós poderíamos usar para expressar é o ``delta de Kronecker'', que definiremos a seguir:
+
+\begin{Definition}[Delta de Kronecker]
+	Definimos o \textbf{delta de Kronecker} como:
+	
+	$$
+	\delta_{ij} = \begin{cases}
+		1, \text{ se $i = j$} \\
+		0, \text{ se $i\neq j$}
+	\end{cases}.
+	$$
+\end{Definition}
+
+Usando esta notação, nós temos que, em um conjunto ortonormal de vetores, $q_i^Tq_j = \delta_{ij}$. O primeiro fato interessante que nós podemos provar, ainda em um conjunto ortogonal, e que, portanto, é válido para um conjunto ortonormal, é o seguinte:
+
+\begin{Proposition}
+	Seja $\{q_1, \cdots, q_k\}$ um conjunto de vetores ortogonais diferentes de zero. Então, este conjunto é LI.
+\end{Proposition}
+
+\begin{Proof}
+	Nós queremos provar que:
+	
+	$$
+	\alpha_1q_1 + \cdots + \alpha_kq_k = 0\implies \alpha_1 = \cdots = \alpha_k = 0.
+	$$
+	Calculando $q_i\cdot(\alpha_1q_1 + \cdots + \alpha_kq_k) = q_i\cdot0$, para qualquer $i\in\{1,\cdots, k\}$ nós temos que:
+	
+	$$
+	\alpha_1q_i\cdot q_1 + \cdots + \alpha_iq_i\cdot q_i + \cdots + \alpha_kq_i\cdot q_k = 0.
+	$$
+	Pela ortogonalidade dos vetores deste conjunto, segue que:
+	
+	$$
+	\alpha_i||q_i||^2 = 0
+	$$
+	e, como $||q_i||^2\neq 0$, segue que $\alpha_i = 0$, para todo $i\in\{1,\cdots, k\}$. Logo, o conjunto $\{q_1, \cdots, q_n\}$ é LI.
+	
+	\qed
+\end{Proof}
+
+A consequência mais importante deste fato é que, se nós temos um conjunto ortogonal de $n$ vetores em um espaço $E$ de dimensão $n$, então este conjunto forma uma base para $E$. De maneira ainda mais particular, se este conjunto é ortonormal, ele forma uma base ortonormal para $E$. E bases ortonormais são muito boas.
+
+De fato, seja $E$ um espaço vetorial tal que $\dim E = n$, e suponha que $\{q_1, \cdots, q_n\}$ forma uma base ortonormal para este espaço. Então, qualquer vetor $v\in E$ pode ser escrito como:
+
+$$
+v = \alpha_1q_1 + \cdots + \alpha_nq_n.
+$$
+Se nós calculamos o produto interno $q_i\cdot v$, nós obtemos:
+
+$$
+q_i\cdot v = \alpha_1q_i\cdot q_1 + \cdots + \alpha_iq_i\cdot q_i + \cdots +\alpha_nq_i\cdot q_n = \alpha_i||q_i||^2.
+$$
+Como, pela ortonormalidade do conjunto, $||q_i||^2 = 1$, segue que
+
+$$
+q_i\cdot v = \alpha_i.
+$$
+
+Ou seja, calcular o produto interno do $i$-ésimo vetor de uma base ortonormal com o vetor $v$ resulta na $i$-ésima coordenada de $v$ nesta base. Isto faz com que nós possamos escrever qualquer vetor nesta base como:
+
+$$
+v = \sum\limits_{i = 1}^{n} (v\cdot q_i)q_i.
+$$
+Precisamente esta fórmula (atribuída a Fourier) nos levará, no futuro, à ideia da fatoração $QR$.
+
+O principal exemplo de base ortonormal em $\mathbb{R}^n$ é a base canônica, que corresponde ao conjunto $\{e_1, \cdots, e_n\}$. De fato, fazendo as contas, nós vemos que $e_i^Te_j = 0$, se $i\neq j$, e $e_i^Te_i = 1$. Mas nós não precisamos nos prender à base canônica: dada uma base ortogonal $\{q_1, \cdots, q_n\}$ qualquer, o conjunto $\left\{\dfrac{q_1}{||q_1||}, \cdots, \dfrac{q_n}{||q_n||}\right\}$ é uma base ortonormal. Também esta noção de normalização, que nós tínhamos apresentado no capítulo 1, será importante, tanto para encontrar bases ortonormais, quando para encontrar uma fatoração QR de uma matriz.
+
+\section{Matrizes Ortogonais}
+
+A noção de vetores ortonormais nos leva à noção de matrizes ortogonais, que nós definiremos agora:
+
+\begin{Definition}[Matrizes ortogonais]
+	Seja $Q$ uma matriz tal que as suas colunas, dadas por $\{q_1, \cdots, q_n\}$, são ortonormais. Então, dizemos que $Q$ é uma \textbf{matriz ortogonal}.
+\end{Definition}
+
+Uma primeira coisa que é necessário pontuar: se uma certa matriz possui colunas ortogonais, \textbf{não necessariamente} esta matriz é ortogonal. Ela só é ortogonal se, além de ortogonais, as suas colunas forem ortonormais (sim, eu sei que vocês acham que essas matrizes deveriam se chamar ``matrizes ortonormais'', eu também acho, e eu acho que todo mundo acha, mas não é o nome que foi dado, então teremos que conviver com isso).
+
+Agora, nós veremos uma propriedade de certas matrizes ortogonais.
+
+\begin{Proposition}
+	Seja $Q$ uma matriz $m\times n$, com $m\geq n$ uma matriz tal que $Q^TQ = I$. Então, $Q$ é uma matriz ortogonal.
+\end{Proposition}
+
+\begin{Proof}
+	Definamos a matriz $Q$ como:
+	
+	$$
+	Q = \begin{bmatrix}
+		| & & | \\
+		q_1 & \cdots & q_n \\
+		| & & |
+	\end{bmatrix}.
+	$$
+	Nós temos que $Q^TQ$ é dada por:
+	
+	$$
+	Q^TQ = \begin{bmatrix}
+		- & q_1^T & - \\
+		& \vdots &  \\
+		- & q_n^T & -
+	\end{bmatrix}\begin{bmatrix}
+		| & & | \\
+		q_1 & \cdots & q_n \\
+		| & & |
+	\end{bmatrix} = \begin{bmatrix}
+		| & & | \\
+		e_1 & \cdots & e_n \\
+		| & & |
+	\end{bmatrix} = I.
+	$$
+	Nós temos que o elemento $ij$ da matriz identidade é dado por $q_i^Tq_j$. Sabemos, no entanto, que $I_{ij} = 1$, se $i = j$, e $I_{ij} = 0$, se $i\neq j$. Consequentemente, segue que:
+	
+	$$
+	q_i^Tq_j = \begin{cases}
+		1, \text{ se $i = j$} \\
+		0, \text{ se $i\neq j$}
+	\end{cases}.
+	$$
+	Logo, os vetores-coluna de $Q$ são ortonormais e, portanto, $Q$ é uma matriz ortogonal.
+	
+	\qed
+\end{Proof}
+
+No caso em que $Q$ é uma matriz quadrada, nós temos algo mais interessante ainda:
+
+\begin{Proposition}
+	Seja $Q$ uma matriz ortogonal quadrada $n\times n$. Então, $Q^TQ = QQ^T = I$, com $Q^{-1} = Q^T$. Reciprocamente, se $Q^TQ = QQ^T = I$, com $Q^{-1} = Q^T$, então $Q$ é uma matriz ortogonal quadrada.
+\end{Proposition}
+
+\begin{Proof}
+	$\implies$ Suponha que $Q$ é uma matriz ortogonal quadrada. Então, nós temos que $[Q^TQ]_{ij} = q_i^Tq_j$. Pela ortonormalidade dos $q_i$'s, segue diretamente que $Q^TQ = I$. Por outro lado, dado que $Q^TQ = I$, e que as colunas de $Q$ são LI (garantindo a existência de $Q^{-1}$), nós temos que:
+	
+	$$
+	Q^TQQ^{-1} = Q^{-1}\implies Q^T = Q^{-1}\implies QQ^T = I.
+	$$
+	
+	$\impliedby$ Suponha que $Q$ é uma matriz tal que $Q^TQ = QQ^T = I$, com, naturalmente, $Q^{-1} = Q^T$. Então, pela proposição anterior, segue imediatamente que $Q$ é uma matriz ortogonal.
+	
+	\qed
+\end{Proof}
+
+Uma consequência imediata desta última proposição é o fato de que, se $Q$ é uma matriz ortogonal quadrada, então $Q^T$ também é uma matriz ortogonal quadrada. Antes de vermos algumas propriedades sobre matrizes ortogonais, vamos ver alguns exemplos destas matrizes.
+
+\begin{Example}
+	Seja $P_{n\times n}$ uma matriz de permutação. Então, $P$ é uma matriz ortogonal. De fato, as colunas de $P$ são alguma permutação do conjunto $\{e_1, \cdots, e_n\}$ que, como vimos anteriormente, é um conjunto ortonormal. Isto também poderia ser visto por um fato que nós demonstramos anteriormente: $P^{-1} = P^T$. Particularmente, a matriz identidade $I_{n\times n}$ é uma matriz ortogonal.
+\end{Example}
+
+\begin{Example}
+	Seja $Q_{2\times 2}$ a matriz definida como:
+	
+	$$
+	Q = \begin{bmatrix}
+		\cos(\theta) & -\sin(\theta) \\
+		\sin(\theta) & \cos(\theta)
+	\end{bmatrix}.
+	$$
+	Então, $Q$ é uma matriz ortogonal. De fato, calculando as normas dos seus vetores-coluna, e o produto interno de uma coluna pela outra, nós vemos facilmente que esta matriz é ortogonal. O significado geométrico desta matriz é uma rotação de um vetor em $\mathbb{R}^2$ ao redor da origem por um ângulo $\theta$ no sentido trigonométrico.
+\end{Example}
+
+Vamos ver agora algumas propriedades das matrizes ortogonais:
+
+\begin{Proposition}
+	Seja $Q_{m\times n}$ uma matriz ortogonal com $m\geq n$. Então, $||Qx|| = ||x||$.
+\end{Proposition}
+
+\begin{Proof}
+	Vamos calcular o quadrado da norma de $||Qx||$:
+	
+	$$
+	||Qx||^2 = (Qx)^T(Qx) = x^TQ^TQx = x^Tx = ||x||^2.
+	$$
+	Logo, $||Qx|| = ||x||$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}
+	Seja $Q_{m\times n}$ uma matriz ortogonal com $m\geq n$. Então, a matriz de projeção ortogonal sobre $C(Q)$ é $P = QQ^T$.
+\end{Proposition}
+
+\begin{Proof}
+	Sabemos que, dada uma matriz $A$ com todas as colunas LI, a matriz de projeção ortogonal sobre $C(A)$ é $P = A(A^TA)^{-1}A^T$. Assim sendo, fazendo $A = Q$, nós temos:
+	
+	$$
+	P = Q(Q^TQ)^{-1}Q^T = QI^{-1}Q^T = QIQ^T = QQ^T.
+	$$
+	
+	\qed
+\end{Proof}
+
+Podemos perceber que, quando nós queremos projetar vetores sobre o espaço gerado pelas colunas de uma matriz ortogonal, encontrar a projeção fica significativamente mais fácil. E, igualmente, a fatoração $QR$ é baseada em uma matriz $Q$ ortogonal, e uma matriz $R$ que nós veremos depois como se comporta. Um dos exercícios deste capítulo relacionará o Problema de Mínimos Quadrados com a fatoração $QR$ de uma matriz $A$. Desde já, fica uma pergunta: será que o fato de uma matriz ortogonal aparecer na solução do Problema de Mínimos Quadrados o tornará mais fácil? Ou será que não?
