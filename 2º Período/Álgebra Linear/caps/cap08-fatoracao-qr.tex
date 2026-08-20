@@ -1,7 +1,7 @@
 \chapter{Fatoração \texorpdfstring{$QR$}{QR}}
 \label{cap:fatoração-qr}
 
-\textbf{Importante:} este capítulo é baseado em \cite{slide5doyuri}.
+\textbf{Importante:} este capítulo é baseado em \cite{slide5doyuri} e em \cite{lista2dealn}.
 
 No capítulo anterior, nós trabalhamos com o conceito de ortogonalidade, e vimos uma das possíveis aplicações deste conceito. Agora, nós veremos como a noção de ortogonalidade induz uma fatoração, que é conhecida como ``Fatoração $QR$''. Mas, primeiro, vamos introduzir alguns novos conceitos, que nos levarão à fatoração desejada.
 
@@ -211,3 +211,408 @@ Vamos ver agora algumas propriedades das matrizes ortogonais:
 \end{Proof}
 
 Podemos perceber que, quando nós queremos projetar vetores sobre o espaço gerado pelas colunas de uma matriz ortogonal, encontrar a projeção fica significativamente mais fácil. E, igualmente, a fatoração $QR$ é baseada em uma matriz $Q$ ortogonal, e uma matriz $R$ que nós veremos depois como se comporta. Um dos exercícios deste capítulo relacionará o Problema de Mínimos Quadrados com a fatoração $QR$ de uma matriz $A$. Desde já, fica uma pergunta: será que o fato de uma matriz ortogonal aparecer na solução do Problema de Mínimos Quadrados o tornará mais fácil? Ou será que não?
+
+\section{Processo de Gram-Schmidt}
+
+Nesta seção, nós desenvolveremos uma ferramenta para que, dada uma base para um subespaço vetorial, possamos encontrar uma base ortonormal para o mesmo subespaço. Em termos matriciais, dada uma matriz $A$ não-singular, queremos encontrar uma nova matriz cujo espaço coluna seja igual a $C(A)$, mas cujos vetores-coluna sejam ortonormais.
+
+Recordando, no capítulo $3$, nós desenvolvemos um processo que, dada uma matriz $A$ não singular, nós a transformávamos em uma matriz triangular superior, de modo a resolver sistemas lineares. Isto gerava uma fatoração $LU$, em que $L$ era uma matriz triangular inferior e $U$ era uma matriz triangular superior. Posteriormente, nós estendemos a fatoração $LU$ para o caso em que $A$ é uma matriz singular, fazendo com que a matriz $L$ pudesse ter linhas inteiras de zeros.
+
+Agora, nós faremos algo parecido, mas de modo que, a partir de uma matriz $A$ não-singular, possamos encontrar uma matriz ortogonal $Q$ tal que $C(Q) = C(A)$, e que induzirá uma fatoração $QR$. Tal fatoração, porém, pode ser estendida a matrizes não-singulares (muito embora o processo que desenvolveremos agora, chamado processo de Gram-Schmidt não lide de forma tão natural com este caso, mas um processo que desenvolveremos em um dos exercícios será a escolha natural para este caso).
+
+Assim como quando nós apresentamos o processo de eliminação gaussiana, vamos começar a mostrar o processo de Gram-Schmidt com dois vetores LI, e depois estendemos para o caso geral.
+
+Sejam $v_1$ e $v_2$ dois vetores LI. Nós queremos achar dois vetores $u_1$ e $u_2$ tais que $u_1\perp u_2$ e $\operatorname{span}(\{v_1, v_2\}) = \operatorname{span}(\{u_1, u_2\})$. Para garantir que eles geram o mesmo subespaço, vamos procurar $u_1$ e $u_2$ que sejam combinações lineares de $v_1$ e $v_2$.
+
+Nós podemos começar com $u_1 = v_1$. Para achar um vetor ortogonal a $u_1$ no plano gerado por $v_1$ e $v_2$, nós podemos projetar $v_2$ em $v_1$ e, se $p$ é esta projeção, nós consideramos $u_2 = v_2 - p$.
+
+Neste ponto, é legal definir formalmente uma notação para a projeção, para facilitar as nossas contas e, posteriormente, a discussão sobre o caso geral.
+
+\begin{Definition}[Projeção de $v$ em $u$]
+	Sejam $u$ e $v$ dois vetores em um espaço vetorial $E$. Nós definimos a \textbf{projeção de $v$ em $u$} como:
+	
+	$$
+	\operatorname{proj}_u(v) = \dfrac{u^Tv}{u^Tu}u.
+	$$
+\end{Definition}
+
+Assim sendo, o que nós fizemos até agora foi o seguinte algoritmo:
+
+$\mathbf{1)}$ Defina $u_1 = v_1$;
+
+$\mathbf{2)}$ Defina $u_2 = v_2 - \operatorname{proj}_{u_1}(v_2)$.
+
+$\\$
+Para completar o processo, normalizamos $u_1$ e $u_2$, ou seja, fazemos:
+
+$\mathbf{3)}$ Defina $q_1 = \dfrac{u_1}{||u_1||}$;
+
+$\mathbf{4)}$ Defina $q_2 = \dfrac{u_2}{||u_2||}$.
+
+De fato, nós podemos verificar que $u_1\cdot u_2 = 0$ (e, consequentemente, $q_1\cdot q_2 = 0$):
+
+\begin{align*}
+	u_1\cdot u_2 &= u_1^Tu_2 = v_1^T\left(v_2 - \dfrac{u_1^Tv_2}{u_1^Tu_1}u_1\right) = v_1^Tv_2 - \dfrac{v_1^Tv_2}{||v_1||^2}v_1^Tv_1 = v_1^Tv_2 - \dfrac{v_1^Tv_2}{||v_1||^2}||v_1||^2 \\ &= v_1^Tv_2 - v_1^Tv_2 = 0.
+\end{align*}
+
+Antes de prosseguirmos desenvolvendo a teoria, vamos fazer um exemplo para fixarmos bem estas ideias novas:
+
+\begin{Example}
+	Sejam $v_1 = \begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}$ e $v_2 = \begin{bmatrix}
+		1 \\
+		0 \\
+		2
+	\end{bmatrix}$ os geradores de um certo plano em $\mathbb{R}^3$. Nós queremos encontrar vetores $q_1$ e $q_2$ que formem uma base para este plano. Para isso, vamos usar encontrar dois vetores ortogonais $u_1$ e $u_2$ que gerem este mesmo plano por meio do processo de Gram-Schmidt e, em seguida, normalizá-los para encontrar $q_1$ e $q_2$.
+	
+	Primeiramente, nós definimos $u_1 = v_1$. Ou seja:
+	
+	$$
+	u_1 = \begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}.
+	$$
+	
+	Em seguida, nós definimos $u_2 = v_2 - \operatorname{proj}_{u_1}(v_2)$. A projeção é calculada como:
+	
+	$$
+	\operatorname{proj}_{u_1}(v_2) = \dfrac{u_1^Tv_2}{u_1^Tu_1}u_1.
+	$$
+	
+	Nós temos que:
+	
+	$$
+	u_1^Tv_2 = u_1\cdot v_2 = 1\cdot 1 + 1\cdot 0 + 1\cdot 2 = 3;
+	$$
+	
+	$$
+	u_1^Tu_1 = ||u_1||^2 = 1^2 + 1^2 + 1^2 = 3;
+	$$
+	
+	$$
+	\dfrac{u_1^Tv_2}{u_1^Tu_1} = \dfrac{3}{3} = 1;
+	$$
+	
+	$$
+	\dfrac{u_1^Tv_2}{u_1^Tu_1}u_1 = 1\cdot u_1 = u_1 = \begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}.
+	$$
+	
+	Assim sendo, nós temos que:
+	
+	$$
+	u_2 = v_2 - \operatorname{proj}_{u_1}(v_2) = \begin{bmatrix}
+		1 \\
+		0 \\
+		2
+	\end{bmatrix} - \begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		-1 \\
+		1
+	\end{bmatrix}.
+	$$
+	
+	Finalmente, para encontrar $q_1$ e $q_2$, nós fazemos:
+	
+	$$
+	q_1 = \dfrac{u_1}{||u_1||} = \dfrac{1}{\sqrt{3}}\begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}
+	$$
+	e 
+	
+	$$
+	q_2 = \dfrac{u_2}{||u_2||} = \dfrac{1}{\sqrt{2}}\begin{bmatrix}
+		0 \\
+		-1 \\
+		1
+	\end{bmatrix}.
+	$$
+	
+	Assim, o conjunto $\left\{\dfrac{1}{\sqrt{3}}\begin{bmatrix}
+		1 \\
+		1 \\
+		1
+	\end{bmatrix}, \dfrac{1}{\sqrt{2}}\begin{bmatrix}
+		0 \\
+		-1 \\
+		1
+	\end{bmatrix}\right\}$ forma uma base ortonormal para o plano gerado por $v_1$ e $v_2$.
+\end{Example}
+
+Suponha agora que nós começamos o processo com três vetores $v_1$, $v_2$ e $v_3$ LI. Nós precisamos criar $u_1$, $u_2$ e $u_3$ como combinações lineares de $v_1$, $v_2$ e $v_3$ tais que $u_1\cdot u_2 = 0$, $u_1\cdot u_3 = 0$ e $u_2\cdot u_3 = 0$. Para $u_1$ e $u_2$, basta repetir o procedimento anterior. Para $u_3$, nós podemos definir
+
+$$
+u_3 = v_3 - \operatorname{proj}_{u_1}(v_3) - \operatorname{proj}_{u_2}(v_3).
+$$
+
+Nós não vamos fazer as contas aqui, mas é possível mostrar que, definindo $u_3$ desta forma, nós garantimos que $u_1\cdot u_3 = 0$ e $u_2\cdot u_3 = 0$. A partir daí, $q_1$, $q_2$ e $q_3$ são obtidos normalizando $u_1$, $u_2$ e $u_3$.
+
+De maneira geral, nós podemos repetir este processo para $k$ vetores LI: basta definir cada $u_i$ como:
+
+$$
+u_i = v_i - \sum\limits_{j = 1}^{i - 1}\operatorname{proj}_{u_j}(v_i).
+$$
+
+Isto nos dá o seguinte algoritmo para realizar o processo de Gram-Schmidt:
+
+$\mathbf{1)}$ Defina $u_1 = v_1$;
+
+$\mathbf{2)}$ Para $i\in\{2, \cdots, k\}$, faça:
+
+$$
+u_i = v_i - \sum\limits_{j = 1}^{i - 1}\operatorname{proj}_{u_j}(v_i);
+$$
+
+$\mathbf{3)}$ Para $i\in\{1, \cdots, k\}$, defina:
+
+$$
+q_i = \dfrac{u_i}{||u_i||}.
+$$
+
+\section{Fatoração \texorpdfstring{$QR$}{QR}}
+
+Agora, nós estamos prontos para desenvolver a ideia principal deste capítulo. Por meio do processo de Gram-Schmidt, nós sabemos transformar uma matriz $A$ não-singular em uma matriz $Q$ ortogonal tal que $C(A) = C(Q)$.
+
+Se $A = \begin{bmatrix}
+	v_1 & v_2 & \cdots & v_n
+\end{bmatrix}$, nós temos que, após a aplicação de todos os passos do processo de Gram-Schmidt, nós obtemos uma matriz $Q = \begin{bmatrix}
+	q_1 & q_2 & \cdots & q_n
+\end{bmatrix}$, em que os vetores-coluna são ortonormais. Lembre-se, no entanto, que, como os $q_i$'s formam uma base para $C(A)$, então os $v_i$'s podem ser escritos como combinações lineares dos $q_i$'s. Especificamente, nós podemos fazer isso usando a seguinte fórmula:
+
+$$
+v_i = \sum\limits_{j = 1}^{i} (v_i^Tq_j)q_j.
+$$
+
+Esta fórmula vem do que discutimos na seção $8.1$ sobre como escrever um vetor qualquer em uma base ortonormal, juntamente com a forma com a qual os $q_i$'s foram definidos nesta seção. Aqueles que quiserem um tratamento mais rigoroso podem demonstrar formalmente o que eu estou falando.
+
+Como $(v_i^Tq_j)$ é um escalar, nós podemos reescrever a fórmula como:
+
+$$
+v_i = \sum\limits_{j = 1}^{i} q_j(v_i^Tq_j).
+$$
+
+Em notação matricial, isto equivale a uma fatoração $A = QR$, onde $Q$ é a matriz formada pelos vetores $q_j$, e $R$ é a matriz cujas entradas são formadas pelos $v_i^Tq_j$'s (note que eu não disse que a entrada $ij$ corresponde a $v_i^Tq_j$, eu disse que os $v_i^Tq_j$'s formam as entradas da matriz $R$).
+
+Vamos analisar isso com mais calma. Primeiramente, consideremos o caso $2\times 2$. Sejam $A = \begin{bmatrix}
+	v_1 & v_2
+\end{bmatrix}$, com $v_1$ e $v_2$ LI, e suponha que, após o processo de Gram-Schmidt, nós obtivemos uma matriz $Q = \begin{bmatrix}
+	q_1 & q_2
+\end{bmatrix}$. Como nós vimos, existe uma fatoração $A = QR$. Como podemos encontrar explicitamente a matriz $R$? Nós sabemos que, como $Q$ é uma matriz ortogonal, então $Q^TQ = I$. Multiplicando os dois lados da equação à esquerda por $Q^T$, nós obtemos:
+
+$$
+A = QR\implies Q^TA = Q^TQR\implies R = Q^TA.
+$$
+
+Ou seja, exibindo essas coisas explicitamente, nós temos que:
+
+$$
+R = \begin{bmatrix}
+	q_1^T \\
+	q_2^T
+\end{bmatrix}\begin{bmatrix}
+	v_1 & v_2
+\end{bmatrix} = \begin{bmatrix}
+	q_1^Tv_1 & q_1^Tv_2 \\
+	q_2^Tv_1 & q_2^Tv_2
+\end{bmatrix} = \begin{bmatrix}
+	v_1^Tq_1 & v_2^Tq_1 \\
+	v_1^Tq_2 & v_2^Tq_2
+\end{bmatrix}.
+$$
+
+Note uma coisa: $v_1^Tq_2 = 0$. De fato, $v_1^Tq_2 = v_1^T\dfrac{u_2}{||u_2||} = \dfrac{u_1^Tu_2}{||u_2||} = 0$. De fato, não só neste caso, mas também no caso geral, a matriz $R$ é triangular superior.
+
+Falando no caso geral, vamos exibir explicitamente a matriz $R$. Seja $A = \begin{bmatrix}
+	v_1 & v_2 & \cdots & v_n
+\end{bmatrix}$, em que os $v_i$'s são vetores LI. Após o processo de Gram-Schmidt, nós obtemos uma matriz $Q = \begin{bmatrix}
+	q_1 & q_2 & \cdots & q_n
+\end{bmatrix}$. Como $Q$ é uma matriz ortogonal, nós temos que a matriz $R$ é calculada como $R = Q^TA$. Explicitamente, nós temos:
+
+$$
+R = \begin{bmatrix}
+	q_1^T \\
+	q_2^T \\
+	\vdots \\
+	q_n^T
+\end{bmatrix}\begin{bmatrix}
+	v_1 & v_2 & \cdots & v_n
+\end{bmatrix} = \begin{bmatrix}
+	q_1^Tv_1 & q_1^Tv_2 & \cdots & q_1^Tv_n \\
+	q_2^Tv_1 & q_2^Tv_2 & \cdots & q_2^Tv_n \\
+	\vdots & \vdots & \ddots & \vdots \\
+	q_n^Tv_1 & q_n^Tv_2 & \cdots & q_n^Tv_n
+\end{bmatrix} = \begin{bmatrix}
+	v_1^Tq_1 & v_2^Tq_1 & \cdots & v_n^Tq_1 \\
+	v_1^Tq_2 & v_2^Tq_2 & \cdots & v_n^Tq_2 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	v_1^Tq_n & v_2^Tq_n & \cdots & v_n^Tq_n
+\end{bmatrix}.
+$$
+
+É possível mostrar (e nós não o faremos aqui, mas tentem pensar um pouco sobre isso) que, na matriz $R$, $v_i^Tq_j = 0, \forall i < j$. Assim sendo, nós temos que $R$ é uma matriz triangular superior. Ou seja, dada uma matriz $A$, nós temos que $A = QR$, onde $Q$ é uma matriz ortogonal e $R$ é uma matriz triangular superior. Assim sendo, na prática, nós temos:
+
+$$
+R = \begin{bmatrix}
+	v_1^Tq_1 & v_2^Tq_1 & \cdots & v_n^Tq_1 \\
+	0 & v_2^Tq_2 & \cdots & v_n^Tq_2 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	0 & 0 & \cdots & v_n^Tq_n
+\end{bmatrix}
+$$
+e
+
+$$
+A = \begin{bmatrix}
+	| & | & & | \\
+	q_1 & q_2 & \cdots & q_n \\
+	| & | & & |
+\end{bmatrix}\begin{bmatrix}
+	v_1^Tq_1 & v_2^Tq_1 & \cdots & v_n^Tq_1 \\
+	0 & v_2^Tq_2 & \cdots & v_n^Tq_2 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	0 & 0 & \cdots & v_n^Tq_n
+\end{bmatrix}
+$$.
+
+Uma coisa muito importante de se pensar é nas dimensões das matrizes que compõem a fatoração $QR$. Se $A$ é uma matriz $m\times n$, nós temos que $Q$ é uma matriz $m\times n$ e $R$ é uma matriz $n\times n$. No caso em que $A$ é uma matriz não-singular, também é possível encontrar uma fatoração $QR$, porém o método de Gram-Schmidt precisa ser modificado, ou é necessário utilizar outro método para ortonormalizar as colunas de $A$. Um método muito bom para isso é utilizar refletores de Householder (que já apareceram em exercícios d capítulos anteriores, e aparecerão novamente em um exercício deste capítulo, que servirá especificamente para discutir esta ideia).
+
+De fato, dada uma matriz $A_{m\times n}$ qualquer, é sempre possível encontrar uma fatoração $QR$, que não é única. Um teorema um tanto mais avançado diz que é possível garantir a unicidade da fatoração $QR$ se $A$ possuir colunas linearmente independentes e se adicionarmos uma restrição adicional, que é a de todas as entradas da diagonal da matriz $R$ serem elementos estritamente positivos. Mas não vamos nos preocupar com isso aqui.
+
+Um outro fato interessante são as variações da fatoração $QR$ de uma matriz $A$ qualquer. Se $A$ é uma matriz $m\times n$ com posto $r$, existe (no mínimo) uma fatoração $QR$ completa, em que $Q$ é $m\times m$ e $R$ é $m\times n$; (no mínimo) uma fatoração $QR$ reduzida, em que $Q$ é $m\times n$ e $R$ é $n\times n$; e (no mínimo) uma fatoração $QR$ compacta, em que $Q$ é $m\times r$ e $R$ é $r\times n$. No nosso caso, nós estamos trabalhando com a fatoração $QR$ reduzida de $A$, mas essas distinções não são uma preocupação para nós neste curso. Ainda assim, já é legal conhecer estas informações, porque, em outros cursos, elas serão importantes.
+
+Para encerrar a parte teórica deste exercício, vamos fazer um exemplo simples para mostrar, na prática, como encontrar a fatoração $QR$ de uma matriz.
+
+\begin{Example}
+	Considere a matriz $A = \begin{bmatrix}
+		1 & 8 \\
+		3 & 4
+	\end{bmatrix}$. Queremos encontrar matrizes $Q$ ortogonal e $R$ triangular superior tais que $A = QR$. Para isso, primeiramente nós encontraremos a matriz $Q$ usando o processo de Gram-Schmidt.
+	
+	Sejam $v_1 = \begin{bmatrix}
+		1 \\
+		3
+	\end{bmatrix}$ e $v_2 = \begin{bmatrix}
+		8 \\
+		4
+	\end{bmatrix}$. Definimos $u_1 = v_1 = \begin{bmatrix}
+		1 \\
+		3
+	\end{bmatrix}$ e calculamos $u_2$ como:
+	
+	$$
+	u_2 = v_2 - \operatorname{proj}_{u_1}(v_2) = v_2 - \dfrac{u_1^Tv_2}{u_1^Tu_1}u_1.
+	$$
+	
+	Calculando todos os termos da projeção:
+	
+	$$
+	u_1^Tv_2 = u_1\cdot v_2 = 1\cdot 8 + 3\cdot 4 = 20;
+	$$
+	
+	$$
+	u_1^Tu_1 = ||u_1||^2 = 1^2 + 3^2 = 10;
+	$$
+	
+	$$
+	\dfrac{u_1^Tv_2}{u_1^Tu_1} = \dfrac{20}{10} = 2;
+	$$
+	
+	$$
+	\operatorname{proj}_{u_1}(v_2) = \dfrac{u_1^Tv_2}{u_1^Tu_1}u_1 = 2\cdot\begin{bmatrix}
+		1 \\
+		3
+	\end{bmatrix} = \begin{bmatrix}
+		2 \\
+		6
+	\end{bmatrix}.
+	$$
+	
+	Assim sendo, nós temos que $u_2$ é dado por:
+	
+	$$
+	u_2 = v_2 - \operatorname{proj}_{u_1}(v_2) = \begin{bmatrix}
+		8 \\
+		4
+	\end{bmatrix} - \begin{bmatrix}
+		2 \\
+		6
+	\end{bmatrix} = \begin{bmatrix}
+		6 \\
+		-2
+	\end{bmatrix}.
+	$$
+	
+	Agora, nós vamos normalizar $u_1$ e $u_2$. Nós obtemos:
+	
+	$$
+	q_1 = \dfrac{u_1}{||u_1||} = \dfrac{1}{\sqrt{10}}\begin{bmatrix}
+		1 \\
+		3
+	\end{bmatrix}
+	$$
+	e
+	
+	$$
+	q_2 = \dfrac{u_2}{||u_2||} = \dfrac{1}{\sqrt{40}}\begin{bmatrix}
+		6 \\
+		-2
+	\end{bmatrix} = \dfrac{1}{2\sqrt{10}}\begin{bmatrix}
+		6 \\
+		-2
+	\end{bmatrix} = \dfrac{1}{\sqrt{10}}\begin{bmatrix}
+		3 \\
+		-1
+	\end{bmatrix}.
+	$$
+	
+	Assim sendo, nós encontramos a matriz $Q$, ela é dada por:
+	
+	$$
+	Q = \begin{bmatrix}
+		1/\sqrt{10} & 3/\sqrt{10} \\
+		3/\sqrt{10} & -1/\sqrt{10}
+	\end{bmatrix}.
+	$$
+	
+	Agora, nós vamos encontrar a matriz $R$, fazendo $R = Q^TA$. Nós temos que:
+	
+	$$
+	R = \begin{bmatrix}
+		1/\sqrt{10} & 3/\sqrt{10} \\
+		3/\sqrt{10} & -1/\sqrt{10}
+	\end{bmatrix}\begin{bmatrix}
+		1 & 8 \\
+		3 & 4
+	\end{bmatrix} = \begin{bmatrix}
+		10/\sqrt{10} & 20/\sqrt{10} \\
+		0 & 20/\sqrt{10}
+	\end{bmatrix}.
+	$$
+	
+	Assim sendo, nós temos que:
+	
+	$$
+	A = \begin{bmatrix}
+		1/\sqrt{10} & 3/\sqrt{10} \\
+		3/\sqrt{10} & -1/\sqrt{10}
+	\end{bmatrix}\begin{bmatrix}
+		10/\sqrt{10} & 20/\sqrt{10} \\
+		0 & 20/\sqrt{10}
+	\end{bmatrix}.
+	$$
+\end{Example}
