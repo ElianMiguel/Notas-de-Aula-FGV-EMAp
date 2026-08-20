@@ -11,7 +11,7 @@ obrigatórias e de algumas eletivas.
 ### 1º Período
 
 ### 2º Período
-- Álgebra Linear: [Notas de Aula](https://github.com/ElianMiguel/Notas-de-Aula-FGV-EMAp/blob/main/2%C2%BA%20Per%C3%ADodo/%C3%81lgebra%20Linear/main.pdf) (Cap.1 até a Seção 8.2)
+- Álgebra Linear: [Notas de Aula](https://github.com/ElianMiguel/Notas-de-Aula-FGV-EMAp/blob/main/2%C2%BA%20Per%C3%ADodo/%C3%81lgebra%20Linear/main.pdf) (Cap.1 até a Seção 8.4)
 
 ### 3º Período
 

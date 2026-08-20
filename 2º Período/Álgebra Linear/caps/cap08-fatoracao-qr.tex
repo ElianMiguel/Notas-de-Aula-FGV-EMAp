@@ -218,7 +218,7 @@ Nesta seção, nós desenvolveremos uma ferramenta para que, dada uma base para 
 
 Recordando, no capítulo $3$, nós desenvolvemos um processo que, dada uma matriz $A$ não singular, nós a transformávamos em uma matriz triangular superior, de modo a resolver sistemas lineares. Isto gerava uma fatoração $LU$, em que $L$ era uma matriz triangular inferior e $U$ era uma matriz triangular superior. Posteriormente, nós estendemos a fatoração $LU$ para o caso em que $A$ é uma matriz singular, fazendo com que a matriz $L$ pudesse ter linhas inteiras de zeros.
 
-Agora, nós faremos algo parecido, mas de modo que, a partir de uma matriz $A$ não-singular, possamos encontrar uma matriz ortogonal $Q$ tal que $C(Q) = C(A)$, e que induzirá uma fatoração $QR$. Tal fatoração, porém, pode ser estendida a matrizes não-singulares (muito embora o processo que desenvolveremos agora, chamado processo de Gram-Schmidt não lide de forma tão natural com este caso, mas um processo que desenvolveremos em um dos exercícios será a escolha natural para este caso).
+Agora, nós faremos algo parecido, mas de modo que, a partir de uma matriz $A$ não-singular, possamos encontrar uma matriz ortogonal $Q$ tal que $C(Q) = C(A)$, e que induzirá uma fatoração $QR$. Tal fatoração, porém, pode ser estendida a matrizes singulares (muito embora seja necessário fazer modificações no procedimento de Gram-Schmidt neste caso, ou encontrar outros mecanismos que sejam melhores para isso).
 
 Assim como quando nós apresentamos o processo de eliminação gaussiana, vamos começar a mostrar o processo de Gram-Schmidt com dois vetores LI, e depois estendemos para o caso geral.
 
@@ -489,7 +489,7 @@ A = \begin{bmatrix}
 \end{bmatrix}
 $$.
 
-Uma coisa muito importante de se pensar é nas dimensões das matrizes que compõem a fatoração $QR$. Se $A$ é uma matriz $m\times n$, nós temos que $Q$ é uma matriz $m\times n$ e $R$ é uma matriz $n\times n$. No caso em que $A$ é uma matriz não-singular, também é possível encontrar uma fatoração $QR$, porém o método de Gram-Schmidt precisa ser modificado, ou é necessário utilizar outro método para ortonormalizar as colunas de $A$. Um método muito bom para isso é utilizar refletores de Householder (que já apareceram em exercícios d capítulos anteriores, e aparecerão novamente em um exercício deste capítulo, que servirá especificamente para discutir esta ideia).
+Uma coisa muito importante de se pensar é nas dimensões das matrizes que compõem a fatoração $QR$. Se $A$ é uma matriz $m\times n$, nós temos que $Q$ é uma matriz $m\times n$ e $R$ é uma matriz $n\times n$. No caso em que $A$ é uma matriz singular, também é possível encontrar uma fatoração $QR$, porém o método de Gram-Schmidt precisa ser modificado, ou é necessário utilizar outro método para ortonormalizar as colunas de $A$. Nós não nos preocuparemos tanto com isso aqui.
 
 De fato, dada uma matriz $A_{m\times n}$ qualquer, é sempre possível encontrar uma fatoração $QR$, que não é única. Um teorema um tanto mais avançado diz que é possível garantir a unicidade da fatoração $QR$ se $A$ possuir colunas linearmente independentes e se adicionarmos uma restrição adicional, que é a de todas as entradas da diagonal da matriz $R$ serem elementos estritamente positivos. Mas não vamos nos preocupar com isso aqui.
 
