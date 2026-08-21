@@ -616,3 +616,110 @@ Para encerrar a parte teórica deste exercício, vamos fazer um exemplo simples 
 	\end{bmatrix}.
 	$$
 \end{Example}
+
+\section{Exercícios}
+\textbf{Importante:} alguns dos exercícios são baseados em \cite{lista2doguilherme} e em \cite{lista2dealn}.
+
+\noindent $\mathbf{8.1)}$ Seja $\{v_1, v_2, \cdots, v_n\}$ um conjunto LI de vetores. Quais condições os vetores $v_1, \cdots, v_n$ devem satisfazer para que o conjunto $\{v_1 + v_2, v_2 + v_3, \cdots, v_{n - 1} + v_n\}$ seja ortonormal?
+
+$\\$
+$\mathbf{8.2)}$ Seja $\{v_1, \cdots, v_n\}$ um conjunto LI de vetores. Quais condições os vetores $v_1, \cdots, v_n$ devem satisfazer para que o conjunto $\{v_1, v_1 + v_2, \cdots, v_1 + v_2 + \cdots + v_n\}$ seja ortonormal?
+
+$\\$
+$\mathbf{8.3)}$ Seja $Q_{m\times n}$, com $m\geq n$, uma matriz ortogonal. Prove, a partir da definição, que $QQ^T$ é uma matriz de projeção ortogonal (note que nós fizemos isso na seção 8.2, mas não foi pela definição de matriz de projeção ortogonal).
+
+$\\$
+$\mathbf{8.4)}$ Seja $Q_{n\times n}$ uma matriz ortogonal, e considere $u,v\in\mathbb{R}^n$. Prove que $||Qv - Qu|| = ||v - u||$.
+
+$\\$
+$\mathbf{8.5)}$ Seja $A_{n\times n}$ uma matriz ortogonal e triangular. Prove que $A$ é diagonal.
+
+$\\$
+$\mathbf{8.6)}$ Considere $U = \operatorname{span}\left(\left\{\begin{bmatrix}
+	2 \\
+	-3 \\
+	0 \\
+	1
+\end{bmatrix}, \begin{bmatrix}
+	4 \\
+	0 \\
+	-5 \\
+	0
+\end{bmatrix}\right\}\right)$. Encontre uma base ortonormal para $U$.
+
+$\\$
+$\mathbf{8.7)}$ Dados os vetores
+
+$$
+v_1 = \begin{bmatrix}
+	1 & -1 & 0 & 0
+\end{bmatrix}, ~v_2 = \begin{bmatrix}
+	0 & 1 & -1 & 0
+\end{bmatrix}\text{ e } v_3 = \begin{bmatrix}
+	0 & 0 & 1 & -1
+\end{bmatrix},
+$$
+use o método de Gram-Schmidt para achar uma base ortonormal que gera o mesmo espaço de $v_1$, $v_2$ e $v_3$.
+
+$\\$
+$\mathbf{8.8)}$ Considere a matriz
+
+$$
+A = \begin{bmatrix}
+	1 & 2 \\
+	2 & 4 \\
+	3 & 5
+\end{bmatrix}.
+$$
+Ache uma fatoração $QR$ de $A$.
+
+$\\$
+$\mathbf{8.9)}$ Considere a matriz
+
+$$
+A = \begin{bmatrix}
+	1 & -1 & 0 & 0 \\
+	-1 & 1 & -1 & 0 \\
+	0 & 1 & -1 & 1 \\
+	0 & 0 & -1 & 1
+\end{bmatrix}.
+$$
+Encontre uma fatoração $QR$ de $A$.
+
+$\\$
+$\mathbf{8.10)}$ Considere o Problema de Mínimos Quadrados usual: dada uma matriz $A_{m\times n}$ com posto completo nas colunas, com $m > n$ tal que $Ax = b$ não possui solução, queremos encontrar um vetor $\tilde{x}$ tal que $||A\tilde{x} - b||$ seja a menor possível. Como podemos encontrar a solução ótima em termos da fatoração $QR$ de $A$?
+
+$\\$
+$\mathbf{8.11)}$ (Desafio!) Seja $v\in\mathbb{R}^n$ um vetor não-nulo. Definimos a \textbf{matriz de Householder} associada a $v$ como a matriz $H_{\times n}$ dada por
+
+$$
+H = I - 2\dfrac{vv^T}{v^Tv},
+$$
+onde $I$ é a matriz identidade de ordem $n$.
+
+Seja $A_{n\times n}$ uma matriz invertível com colunas $a_1, \cdots, a_n$. Neste exercício, você irá mostrar que a matriz de Householder induz uma fatoração $A = QR$.
+
+a) Mostre que a matriz $H$ é simétrica e ortogonal.
+
+b) Dado o primeiro vetor coluna de $A$, $a_1\neq 0$, escolha $v = a_1 - \alpha e_1$, onde $e_1$ é o primeiro vetor da base canônica e $\alpha = \pm||a_1||$. Mostre que a matriz de Householder construída com este vetor $v$ transforma $a_1$ em um múltiplo de $e_1$, ou seja,
+
+$$
+H_1a_1 = \alpha_1e_1 = \begin{bmatrix}
+	\alpha_1 \\
+	0 \\
+	\vdots \\
+	0
+\end{bmatrix}.
+$$
+
+c) Utilizando o resultado do item b), descreva o formato da matriz produto $H_1A$. Em particular, mostre que ela pode ser escrita na forma de blocos:
+
+$$
+H_1A = \begin{bmatrix}
+	\alpha & \star \\
+	0 & A^{(1)}
+\end{bmatrix},
+$$
+onde $A^{(1)}$ é uma matriz de ordem $(n - 1)\times (n - 1)$ e $\star$ representa uma linha de coeficientes.
+
+d) Suponha, por hipótese de indução, que a matriz $A^{(1)}$ do item anterior pode ser reduzida a uma forma triangular superior usando $n - 2$ transformações de Householder de ordens decrescentes. Mostre que existem matrizes ortogonais $H_1, H_2, \cdots, H_{n - 1}$ tais que o produto $H_{n - 1}\cdots H_2H_1A = R$, onde $R$ é uma matriz triangular superior. Finalmente, conclua como obter a matriz $Q$ de forma que $A = QR$.
