@@ -226,7 +226,7 @@ Nas seções anteriores, nós aprendemos a calcular a fatoração $LU$ de uma ma
 	
 	Finalmente, da terceira equação, nós temos que $u_{nn} = a_{nn} - l_{n - 1}u_{n - 1}$. Nós temos que $a_{nn}$ já é conhecido, e $l_{n - 1}$ e $u_{n - 1}$ nós encontramos. Portanto, $u_{nn}$ também está bem definido. Logo, $A = LU$.
 	
-	\textbf{Unicidade:} Agora, considerando as mesmas hipóteses para $A$, nós vamos demonstrar a unicidade da fatoração $LU$. Suponha que $A = LU = \hat{L}\hat{U}$. Então, $I = L^{-1}LU^{-1} = L^{-1}\hat{L}\hat{U}U^{-1}$. Segue então que $\hat{U}U^{-1} = (L^{-1}\hat{L})^{-1} = \hat{L}^{-1}L$. 
+	\textbf{Unicidade:} Agora, considerando as mesmas hipóteses para $A$, nós vamos demonstrar a unicidade da fatoração $LU$. Suponha que $A = LU = \hat{L}\hat{U}$. Então, $I = L^{-1}LUU^{-1} = L^{-1}\hat{L}\hat{U}U^{-1}$. Segue então que $\hat{U}U^{-1} = (L^{-1}\hat{L})^{-1} = \hat{L}^{-1}L$. 
 	
 	Ou seja, dado que nós obtivemos uma igualdade entre uma matriz triangular superior e uma matriz triangular inferior, segue que $\hat{L}^{-1}L$ precisa ser diagonal, e, como por hipótese a diagonal de $L$ é composta por $1$'s, $\hat{L^{-1}}L$ possui diagonal apenas com $1$'s. Logo, $\hat{L^{-1}}L = I \implies L = \hat{L}$.
 	
