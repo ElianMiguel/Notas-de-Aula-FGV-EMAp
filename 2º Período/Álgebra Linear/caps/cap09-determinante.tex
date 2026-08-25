@@ -1,0 +1,81 @@
+\chapter{Determinante}
+\label{cap:determinante}
+
+\textbf{Importante:} este capítulo é baseado em \cite{slide6doyuri}.
+
+Neste capítulo, nós iremos introduzir formalmente o conceito de determinante. Este conceito costuma ser visto ainda no Ensino Médio, mas não de maneira tão formal como nós faremos aqui. Nós adotaremos uma abordagem axiomática, a partir da qual nós deduziremos todas as propriedades desta função. Na prática, o determinante é uma função que associa uma matriz quadrada a um número real, e que possui aplicações muito particulares em $\mathbb{R}^2$ e $\mathbb{R}^3$.
+
+\section{Determinante}
+
+Considere uma matriz quadrada $A_{n\times n}$ qualquer. A esta matriz, nós podemos associar um número, que é dado por algumas regras. Este número é o determinante, que nós definiremos a seguir:
+
+\begin{Definition}[Determinante]
+	Seja $A$ uma matriz quadrada $n\times n$, e sejam $a_1, \cdots, a_n$ as colunas de $A^T$ (ou seja, as linhas de $A$). Nós definimos o \textbf{determinante} de $A$ como uma função $\det:\mathbb{R}^{n\times n}\to\mathbb{R}$ que possui as seguintes três propriedades:
+	
+	$\mathbf{1)}$\textbf{Normalização:} $\det I = \det(e_1, \cdots, e_n) = 1$.
+	
+	$\mathbf{2)}$\textbf{Permutação:} $\det(a_1, a_2, \cdots, a_n) = -1\det(a_2, a_1, \cdots, a_n)$.
+	
+	$\mathbf{3)}$\textbf{Linearidade:} $\det(\lambda a_1 + b_1, a_2, \cdots, a_n) = \lambda\det(a_1, a_2, \cdots, a_n) + \det(b_1, a_2, \cdots, a_n)$.
+\end{Definition}
+
+A partir desta definição, nós podemos calcular, de maneira simples, o determinante de algumas matrizes $2\times 2$. Nós iremos ver três exemplos simples e, em seguida, encontramos uma fórmula geral para qualquer matriz $2\times 2$.
+
+\begin{Example}
+	Considere a matriz identidade $I = \begin{bmatrix}
+		1 & 0 \\
+		0 & 1
+	\end{bmatrix}$. Pela propriedade $1$, nós temos que $\det I = 1$.
+\end{Example}
+
+\begin{Example}
+	Considere a matriz de permutação $P = \begin{bmatrix}
+		0 & 1 \\
+		1 & 0
+	\end{bmatrix}$. Sabemos que $P$ corresponde a uma permutação das linhas de $I$. Logo, pela propriedade $2$, nós temos que $\det P = -1$.
+\end{Example}
+
+\begin{Example}
+	Considere a matriz $A = \begin{bmatrix}
+		a & b \\
+		a & b
+	\end{bmatrix}$. Se nós fazemos uma permutação nas linhas de $A$, nós obtemos $A' = \begin{bmatrix}
+		a & b \\
+		a & b
+	\end{bmatrix} = A$. Pela propriedade $2$, se $\det A = l$, segue que $l = -l$. Logo, $2l = 0$ e, portanto, $l = 0$. Logo, $\det A = 0$.
+\end{Example}
+
+Vamos agora enunciar e demonstrar uma fórmula para o determinante de qualquer matriz $2\times 2$.
+
+\begin{Proposition}
+	Seja $A = \begin{bmatrix}
+		a & b \\
+		c & d
+	\end{bmatrix}$. Então, $\det A = ad - bc$.
+\end{Proposition}
+
+\begin{Proof}
+	Sejam $a_1 = \begin{bmatrix}
+		a \\
+		b
+	\end{bmatrix}$ e $a_2 = \begin{bmatrix}
+		c \\
+		d
+	\end{bmatrix}$. Então, nós temos que:
+	
+	$$
+	\det A = \det(a_1, a_2) = \det(ae_1 + be_2, ce_1 + de_2).
+	$$
+	Pela linearidade do determinante, segue que:
+	
+	\begin{align*}
+		\det (A) &= a\det(e_1, ce_1 + de_2) + b\det(e_2, ce_1 + de_2) \\ &= a(c\det(e_1, e_1) + d\det(e_1, e_2)) + b(c\det(e_2, e_1) + d\det(e_2, e_2)).
+	\end{align*}
+	Como $\det(e_1, e_1) = 0$, $\det(e_2, e_2) = 0$, $\det(e_1, e_2) = 1$ e $\det(e_2, e_1) = -1$, segue que:
+	
+	$$
+	\det A = a(c\cdot 0 + d\cdot 1) + b(c\cdot(-1) + d\cdot 0) = ad - bc.
+	$$
+	
+	\qed
+\end{Proof}
