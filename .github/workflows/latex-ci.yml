@@ -16,13 +16,14 @@ jobs:
       has_changes: ${{ steps.set-matrix.outputs.has_changes }}
     steps:
       - name: Baixar código do repositório
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
+          fetch-tags: true
 
       - name: Verificar arquivos alterados
         id: changed-files
-        uses: tj-actions/changed-files@v45
+        uses: tj-actions/changed-files@v45.0.7
         with:
           dir_names: true
           json: true       
@@ -45,7 +46,6 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             echo "matrix=${FILTERED}" >> $GITHUB_OUTPUT
-            echo "true=true" # Apenas para consistência interna
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
 
@@ -60,7 +60,7 @@ jobs:
     
     steps:
       - name: Baixar código do repositório
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Compilar PDF da pasta ${{ matrix.directory }}
         uses: xu-cheng/latex-action@v3
@@ -69,5 +69,4 @@ jobs:
           working_directory: ${{ matrix.directory }}
           compiler: pdflatex
           args: "-interaction=nonstopmode -halt-on-error"
-
 

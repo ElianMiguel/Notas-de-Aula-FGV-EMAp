@@ -1,4 +1,0 @@
-\babel@toc {brazil}{}\relax 
-\contentsline {chapter}{\numberline {1}Fundamentos da Matemática}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}A Linguagem dos Conjuntos}{1}{section.1.1}%
-\contentsline {chapter}{Referências}{5}{Axiom.1.1.7}%
