@@ -1,0 +1,82 @@
+% ==============================================================================
+% 1. SISTEMA E CODIFICAÇÃO (Sempre no início)
+% ==============================================================================
+\usepackage[utf8]{inputenc}       % Suporte para acentuação direta
+\usepackage[T1]{fontenc}          % Codificação de fonte correta para português
+\usepackage[brazil]{babel}        % Tradução e hifenização em português
+\usepackage{indentfirst}          % Indenta o primeiro parágrafo de cada seção
+\usepackage{lmodern}              % Fonte Latin Modern (limpa e profissional)
+\usepackage{csquotes}             % Gerenciamento avançado de aspas e citações
+
+
+% ==============================================================================
+% 2. MATEMÁTICA E TEOREMAS
+% ==============================================================================
+\usepackage{amsmath}              % Recursos matemáticos avançados
+\usepackage{amsfonts}             % Fontes matemáticas
+\usepackage{amssymb}              % Símbolos matemáticos adicionais
+\usepackage{amsthm}               % Configuração de ambientes de teoremas
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{makecell} % Permite quebra de linhas nas células com \makecell{}
+
+\newcommand{\canceltozero}[1]{%
+	\tikz[baseline=(tocancel.base)]{
+		\node[inner sep=0pt, outer sep=0pt] (tocancel) {$#1$};
+		\draw[red, ->, thick] (tocancel.south west) -- ++(0.4,0.4) node[above right, inner sep=1pt, font=\scriptsize] {0};
+	}%
+}
+
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+% Configuração dos Teoremas (Traduzidos para o português)
+\newtheorem{Axiom}{Axioma}[section]
+\newtheorem{Conjecture}[Axiom]{Conjectura}
+\newtheorem{Definition}[Axiom]{Definição}
+\newtheorem{Theorem}[Axiom]{Teorema}
+\newtheorem*{Proof}{Demonstração}
+\newtheorem{Example}[Axiom]{Exemplo}
+\newtheorem{Corolary}[Axiom]{Corolário}
+\newtheorem{Proposition}[Axiom]{Proposição}
+\newtheorem{Lemma}[Axiom]{Lema}
+
+% ==============================================================================
+% 3. GRÁFICOS, CORES E DIAGRAMAÇÃO
+% ==============================================================================
+\usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry} % Margens padrão
+\usepackage{graphicx}             % Suporte para inserção de imagens e figuras
+\graphicspath{{imgs/}}         % Define a pasta padrão para buscar fotos/gráficos
+\usepackage{microtype}            % Melhora o espaçamento entre letras e evita hífens excessivos
+\usepackage{fancyhdr}             % Permite customizar cabeçalhos e rodapés
+\usepackage{float}                % Controle estrito de posição de elementos ([H])
+\usepackage{pgfplots}             % Criação de gráficos diretamente no LaTeX
+\pgfplotsset{compat=1.18}         % Boa prática: define a compatibilidade do pgfplots
+
+% ==============================================================================
+% 4. TABELAS AVANÇADAS
+% ==============================================================================
+\usepackage{booktabs}             % Linhas de tabela profissionais (\toprule, etc)
+\usepackage{multirow}             % Linhas múltiplas em tabelas
+\usepackage{tabularx}             % Tabelas com largura ajustável automática
+\usepackage{makecell}             % Quebras de linha e alinhamento dentro de células
+
+% ==============================================================================
+% 5. CÓDIGOS DE PROGRAMAÇÃO
+% ==============================================================================
+\usepackage{listings}             % Exibição de blocos de código fonte
+
+% ==============================================================================
+% 6. LINKS, URLs E REFERÊNCIAS (Sempre por último)
+% ==============================================================================
+\usepackage{url}                  % Formatação correta de links de internet
+\usepackage[num]{abntex2cite}     % Normas ABNT para citações
+\usepackage{hyperref}             % Transforma sumário, links e citações em hiperlinks clicáveis
+\hypersetup{
+	colorlinks=true,              % Ativa cores nos links em vez de caixas coloridas
+	linkcolor=blue,               % Cor dos links internos (sumário, figuras)
+	citecolor=green,              % Cor das citações bibliográficas
+	filecolor=magenta,            
+	urlcolor=cyan                 % Cor de links de sites externos
+}
+
+%\usepackage{glossaries}
