@@ -9,12 +9,11 @@ on:
       - main
 
 jobs:
-  # Primeiro Job: Descobre quais pastas foram alteradas e têm arquivos LaTeX
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps:set-matrix.outputs.matrix }}
-      has_changes: ${{ steps:set-matrix.outputs.has_changes }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      has_changes: ${{ steps.set-matrix.outputs.has_changes }}
     steps:
       - name: Baixar código do repositório
         uses: actions/checkout@v4
@@ -25,28 +24,20 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v45
         with:
-          dir_names: true # Retorna o nome das pastas alteradas, não os arquivos individuais
-          json: true       # Formata a saída em formato JSON para a Matrix
+          dir_names: true
+          json: true       
 
       - name: Filtrar pastas válidas
         id: set-matrix
         run: |
-          # Pega a lista de pastas alteradas
           CHANGED_DIRS='${{ steps.changed-files.outputs.all_changed_files }}'
           
-          # Se não houver mudanças, encerra
           if [ "$CHANGED_DIRS" == "[]" ] || [ -z "$CHANGED_DIRS" ]; then
             echo "matrix=[]" >> $GITHUB_OUTPUT
             echo "has_changes=false" >> $GITHUB_OUTPUT
             exit 0
           fi
 
-          # Filtra para manter apenas pastas que possuem um arquivo main.tex dentro
-          # e limpa caminhos ocultos do github como .github/workflows
-          VALID_DIRS=$(echo "$CHANGED_DIRS" | jq -c '[.[] | select(test("^\\.github") | not) | select(. as $dir | test(".*") and (input_filename == "main.tex" or true))]')
-          
-          # Nota: O bloco acima garante que pastas sem arquivos tex válidos sejam ignoradas.
-          # Vamos apenas passar as pastas limpas diretamente para simplificar o JSON:
           FILTERED=$(echo "$CHANGED_DIRS" | jq -c '[.[] | select(test("^\\.github") | not)]')
 
           if [ "$FILTERED" == "[]" ]; then
@@ -54,10 +45,10 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             echo "matrix=${FILTERED}" >> $GITHUB_OUTPUT
+            echo "true=true" # Apenas para consistência interna
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
 
-  # Segundo Job: Compila em paralelo APENAS as pastas que mudaram
   compile:
     needs: detect-changes
     if: needs.detect-changes.outputs.has_changes == 'true' && needs.detect-changes.outputs.matrix != '[]'
@@ -65,7 +56,7 @@ jobs:
     strategy:
       matrix:
         directory: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
-      fail-fast: false # Se uma disciplina falhar, não cancela a compilação das outras
+      fail-fast: false
     
     steps:
       - name: Baixar código do repositório
@@ -78,4 +69,5 @@ jobs:
           working_directory: ${{ matrix.directory }}
           compiler: pdflatex
           args: "-interaction=nonstopmode -halt-on-error"
+
 
