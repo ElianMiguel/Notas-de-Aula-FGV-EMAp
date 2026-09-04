@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+        directory: ${{ fromJson(format('{0}', needs.detect-changes.outputs.matrix)) }}
       fail-fast: false
     
     steps:
