@@ -79,3 +79,153 @@ Vamos agora enunciar e demonstrar uma fórmula para o determinante de qualquer m
 	
 	\qed
 \end{Proof}
+
+\section{Propriedades do Determinante}
+
+A partir dos axiomas que definem o determinante, nós podemos encontrar várias outras propriedades. Nesta seção, nós enunciaremos e demonstraremos algumas delas.
+
+\begin{Proposition}[Determinante da matriz de permutação]
+	Seja $P_{n\times n}$ uma matriz de uma permutação. Então, $\det P = (-1)^k$, onde $k$ é o número de linhas que $P$ troca.
+\end{Proposition}
+
+\begin{Proof}
+	Seja $\{i_1, i_2, \cdots, i_n\}$ uma permutação de $\{1, 2, \cdots, n\}$, com $k$ trocas de posição. Então:
+	
+	$$
+	\det P = \det(e_{i_1}, \cdots, e_{i_n}).
+	$$
+	Pela propriedade $2$, segue que
+	
+	$$
+	\det(e_{i_1}, \cdots, e_{i_n}) = (-1)^k\det I = (-1)^k.
+	$$
+	Logo, $\det P = (-1)^k$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Igualdade entre linhas]
+	Seja $A_{n\times n}$ uma matriz com duas linhas iguais. Então, $\det A = 0$.
+\end{Proposition}
+
+\begin{Proof}
+	Suponha, sem perda de generalidade, que a matriz $A$ é definida como:
+	
+	$$
+	A = \begin{bmatrix}
+		- & a_1^T & - \\
+		- & a_1^T & - \\
+		- & a_3^T & - \\
+		& \vdots & \\
+		- & a_n^T & -
+	\end{bmatrix}
+	$$
+	Então, por um lado, nós temos que
+	
+	$$
+	\det A = \det(a_1, a_1, a_3, \cdots, a_n).
+	$$
+	Por outro lado, pela propriedade $2$, nós podemos permutar as duas primeiras linhas, obtendo:
+	
+	$$
+	\det A = -\det(a_1, a_1, a_3, \cdots, a_n).
+	$$
+	Assim sendo, nós temos que:
+	
+	$$
+	\det A = -\det A\implies 2\det A = 0.
+	$$
+	Logo, $\det A = 0$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Invariância por eliminação]
+	Seja $A$ uma matriz $n\times n$. Então, subtrair $\lambda$ vezes a linha $i$ da linha $j$ de $A$ não altera $\det A$. 
+\end{Proposition}
+
+\begin{Proof}
+	Suponha que $\det A = \det(a_1, a_2, \cdots, a_i, \cdots, a_j, \cdots, a_n)$. Então, usando a propriedade $3$:
+	
+	\begin{align*}
+		&\det(a_1, a_2, \cdots, a_i, \cdots, a_j - \lambda a_i, \cdots, a_n)\\ &= \det(a_1, a_2, \cdots, a_i, \cdots, a_j, \cdots, a_n) - \lambda\det(a_1, a_2, \cdots, a_i, \cdots, a_i, \cdots, a_n).
+	\end{align*}
+	Pela propriedade $2$, segue que $\det(a_1, a_2, \cdots, a_i, \cdots, a_i, \cdots, a_n) = 0$. Logo:
+	
+	$$
+	\det(a_1, a_2, \cdots, a_i, \cdots, a_j - \lambda a_i, \cdots, a_n) = \det(a_1, a_2, \cdots, a_i, \cdots, a_j, \cdots, a_n) = \det A.
+	$$
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Linha de zeros]
+	Seja $A$ uma matriz $n\times n$ tal que $a_i = 0$, para algum $i\in\{1, \cdots, n\}$. Então, $\det A = 0$.
+\end{Proposition}
+
+\begin{Proof}
+	Suponha que $\det A = \det(a_1, \cdots, 0, \cdots, a_n)$. Então, podemos escrever $\det A$ como:
+	
+	$$
+	\det A = \det(a_1, \cdots, 0\cdot b, \cdots, a_n),
+	$$
+	em que $b$ é um vetor qualquer. Pela propriedade $3$, segue que:
+	
+	$$
+	\det(a_1, \cdots, 0\cdot b, \cdots, a_n) = 0\cdot\det(a_1, \cdots, b, \cdots, a_n) = 0.
+	$$
+	Logo, $\det A = 0$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Determinante de uma matriz diagonal]
+	Seja $D_{n\times n}$ uma matriz diagonal cujas entradas são $\lambda_1, \lambda_2, \cdots, \lambda_n$. Então, $\det D = \prod\limits_{i = 1}^{n} \lambda_i$.
+\end{Proposition}
+
+\begin{Proof}
+	Nós temos que $\det D = \det(\lambda_1e_1, \lambda_2e_2, \cdots, \lambda_ne_n)$. Usando a propriedade $3$ repetidamente, nós temos que:
+	
+	\begin{align*}
+		\det(\lambda_1e_1, \lambda_2e_2, \cdots, \lambda_ne_n) &= \lambda_1\det(e_1, \lambda_2e_2, \cdots, \lambda_ne_n)\\ &= \lambda_1\lambda_2\det(e_1, e_2, \lambda_3e_3, \cdots, \lambda_ne_n) \\ &\cdots \\ &= \lambda_1\lambda_2\cdots\lambda_n\det(e_1, e_2, \cdots, e_n)\\ &= \lambda_1\lambda_2\cdots\lambda_n.
+	\end{align*}
+	Logo, $\det D = \lambda_1\cdot\lambda_2\cdot\cdots\cdot\lambda_n$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Determinante de uma matriz triangular]
+	Seja $T$ uma matriz triangular, e sejam $\lambda_1, \cdots, \lambda_n$ os elementos da sua diagonal principal. Então, $\det T = \prod\limits_{i = 1}^{n} \lambda_i$.
+\end{Proposition}
+
+\begin{Proof}
+	Nós temos dois casos possíveis: o caso em que não há $0$ na diagonal principal, e o caso em que há algum $0$ na diagonal principal. 
+	
+	No primeiro caso, nós podemos fazer eliminação para chegar na matriz diagonal $D = \operatorname{diag}(\lambda_1, \cdots, \lambda_n)$ (nós não usamos a notação $\operatorname{diag}$ anteriormente, ela serve basicamente para dizer quais são as entradas de uma matriz diagonal). Assim sendo, dado que eliminação não altera o determinante, nós temos que
+	
+	$$
+	\det T = \det D = \prod\limits_{i = 1}^{n}\lambda_i.
+	$$
+	
+	No segundo caso, nós temos que o processo de eliminação nos dará uma linha de zeros. Assim sendo, nós obtemos:
+	
+	$$
+	\det T = \prod\limits_{i = 1}^{n}\lambda_i = 0.
+	$$
+	
+	Logo, $\det T = \prod\limits_{i = 1}^{n}\lambda_i$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Determinante em função dos pivôs]
+	Seja $A$ uma matriz $n\times n$ qualquer, e sejam $d_1, \cdots, d_n$ os pivôs de $A$ (possivelmente nulos). Então, $\det A = \pm\prod\limits_{i = 1}^{n}d_i$.
+\end{Proposition}
+
+\begin{Proof}
+	Considere a fatoração $A = PLU$. Então, segue-se imediatamente que $U = EP^TA$, onde $L^{-1}$ é a matriz elementar. Como $U$ é a matriz triangular que possui os pivôs de $A$ na diagonal, segue que $\det U = \prod\limits_{i = 1}^{n}d_i$. Por outro lado, nós temos que $E$, multiplicado à esquerda por $P^TA$, não altera o determinante de $P^TA$ (lembre-se que o processo de eliminação não altera o determinante, como nós já demonstramos, e $E$ é a matriz que realiza a eliminação. Logo, a matriz $E$ não altera o determinante). Assim sendo, nós temos que $\det(EP^TA) = \det(P^TA)$. Por sua vez, $\det(P^TA) = (-1)^k\det A$, onde $k$ é o número de trocas de linhas feitas, como já provamos anteriormente. Como $\det U = \det(EP^TA)$, segue que $\det A = \pm\prod\limits_{i = 1}^{n}d_i$.
+	
+	\qed
+\end{Proof}
+
+Faremos uma breve pausa para falar de um fato que segue diretamente desta proposição: se $A$ é singular, então $\det A = 0$. Isto é muito claro pois, se $A$ é singular, então pelo menos um dos seus pivôs é igual a zero, e o resultado sai naturalmente. Porém, há um resultado mais forte ainda que não demonstraremos aqui: $A$ é singular se, e somente se, $\det A = 0$. Ou seja, conhecendo o determinante de uma matriz quadrada, somos capazes de determinar se o seu posto é completo ou não. A demonstração deste fato será um dos exercícios deste capítulo.
