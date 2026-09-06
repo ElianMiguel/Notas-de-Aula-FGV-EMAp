@@ -229,3 +229,116 @@ A partir dos axiomas que definem o determinante, nós podemos encontrar várias 
 \end{Proof}
 
 Faremos uma breve pausa para falar de um fato que segue diretamente desta proposição: se $A$ é singular, então $\det A = 0$. Isto é muito claro pois, se $A$ é singular, então pelo menos um dos seus pivôs é igual a zero, e o resultado sai naturalmente. Porém, há um resultado mais forte ainda que não demonstraremos aqui: $A$ é singular se, e somente se, $\det A = 0$. Ou seja, conhecendo o determinante de uma matriz quadrada, somos capazes de determinar se o seu posto é completo ou não. A demonstração deste fato será um dos exercícios deste capítulo.
+
+Prosseguindo com as propriedades do determinante, vamos demonstrar a sua unicidade.
+
+\begin{Theorem}[Unicidade do Determinante]
+	A única função $f:\mathbb{M}^{n\times n}\to\mathbb{R}$ que satisfaz as propriedades $1$, $2$ e $3$ é o determinante.
+\end{Theorem}
+
+\begin{Proof}
+	Seja $f:\mathbb{M}^{n\times n}\to\mathbb{R}$ uma outra função que satisfaz as propriedades $1$, $2$ e $3$. Então, $f$ também satisfaz todas as propriedades que nós provamos até aqui (de fato, todas elas se seguem dos três axiomas). Em particular, nós temos que $f(A) = \pm\prod\limits_{i = 1}^{n} d_i$, onde $d_i$ são os pivôs de $A$. Porém, $\pm\prod\limits_{i = 1}^{n} d_i = \det A$. Logo, $f(A) = \det A$.
+	
+	\qed
+\end{Proof}
+
+Tendo estabelecido a unicidade do determinante, nós podemos prosseguir para as outras propriedades.
+
+\begin{Proposition}[Determinante do produto]
+	Sejam $A$ e $B$ duas matrizes $n\times n$. Então, $\det AB = \det A\det B$.
+\end{Proposition}
+
+\begin{Proof}
+	Suponha, sem perda de generalidade, que $\det B = 0$, e defina $f(A) =\dfrac{\det(AB)}{\det(B)}$. Nós queremos mostrar que $f(A) = \det(A)$. Para isso, nós vamos verificar que $f(A)$ satisfaz as propriedades $1$, $2$ e $3$.
+	
+	$\mathbf{1)}$ Queremos mostrar que $f(I) = 1$. Nós temos que
+	
+	$$
+	f(I) = \dfrac{\det(IB)}{\det(B)} = \dfrac{\det(B)}{\det(B)} = 1.
+	$$
+	
+	$\mathbf{2)}$ Queremos mostrar que $f(PA) = \pm f(A)$. Nós temos que
+	
+	$$
+	f(PA) = \dfrac{\det((PA)B)}{\det(B)} = \dfrac{\det(P(AB))}{\det(B)} = (-1)^k\dfrac{\det(AB)}{\det(B)} = \pm f(A).
+	$$
+	
+	$\mathbf{3)}$ Sejam $a_1, \cdots, a_n$ as linhas de $A$, e seja $A'$ a matriz definida como a matriz $A$ alterada na linha $i$ como $a_i + \lambda c_i$. Nós queremos mostrar que $f(A') = f(A) + \lambda f(a_1, \cdots, c_i, \cdots, a_n)$. Nós temos que:
+	
+	$$
+	f(A') = \dfrac{\det(A'B)}{\det(B)}.
+	$$
+	
+	Calculando $\det(A'B)$, nós obtemos:
+	
+	\begin{align*}
+		\det(A'B) &= \det(a_1B, \cdots, (a_i + \lambda c_i)B, \cdots, a_nB) \\ &= \det(a_1B, \cdots, a_iB, \cdots, a_nB) + \lambda\det(a_1B, \cdots, c_iB, \cdots, a_nB) \\ &= \det(AB) + \lambda\det(\tilde{A}B),
+	\end{align*}
+	onde $\tilde{A}$ é a matriz $A$ alterada na linha $i$ como $c_i$. Assim sendo:
+	
+	$$
+	f(A') = \dfrac{\det(AB) + \lambda\det(\tilde{A}B)}{\det(B)} = \dfrac{\det(AB)}{\det(B)} + \lambda\dfrac{\det(\tilde{A}B)}{\det(B)} = f(A) + \lambda f(\tilde{A}).
+	$$
+	Ou seja, $f(a_1, \cdots, a_i + \lambda c_i, \cdots, a_n) = f(a_1, \cdots, a_i, \cdots, a_n) + \lambda f(a_1, \cdots, c_i, \cdots, a_n)$, como queríamos provar. Logo, pelo Teorema da Unicidade do Determinante:
+	
+	$$
+	\dfrac{\det(AB)}{\det(B)} = f(A) = \det(A)\implies \det(AB) = \det(A)\det(B).
+	$$
+	
+	No caso em que $\det(B) = 0$, nós temos que $B$ é singular. Logo, existe $x\neq 0$ tal que $Bx = 0$. Multiplicando $A$ à esquerda de ambos os lados, nós temos que este mesmo $x$ satisfaz $ABx = 0$, ou seja, $(AB)x = 0$. Logo, $AB$ é singular, e $\det(AB) = 0$. Portanto, $\det(AB) = \det(A)\det(B)$. Repare que não é necessário tratar o caso $\det(A) = 0$, pois ele já sai direto da definição de $f(A)$.
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Determinante da inversa]
+	Seja $A_{n\times n}$ uma matriz invertível. Então, $\det(A^{-1}) = \dfrac{1}{\det(A)}$.
+\end{Proposition}
+
+\begin{Proof}
+	Nós temos que $\det(I) = \det(AA^{-1}) = 1$. Por sua vez, pela proposição anterior, é verdade que $\det(AA^{-1}) = \det(A)\det(A^{-1})$. Logo:
+	
+	$$
+	\det(A)\det(A^{-1}) = 1\implies\det(A^{-1}) = \dfrac{1}{\det(A)}.
+	$$
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Determinante da transposta]
+	Seja $A$ uma matriz $n\times n$ qualquer. Então, $\det(A^T) = \det(A)$.
+\end{Proposition}
+
+\begin{Proof}
+	Considere a fatoração $PA = LU$ (que sabemos por trezentos teoremas anteriores que existe e, sob certas condições, é única). Então, podemos escrever $A^TP^T = U^TL^T$. Por um lado, sabendo que $P^T = P^{-1}$, nós temos que:
+	
+	$$
+	\det(A^TP^T) = \det(A^T)\det(P^T) = \det(A^T)\dfrac{1}{\det(P)} = \pm\det(A^T).
+	$$
+	Por outro lado, nós temos que:
+	
+	$$
+	\det(U^TL^T) = \det(U^T)\det(L^T) = \left(\prod\limits_{i = 1}^{n} d_i\right) \cdot 1 = \prod\limits_{i = 1}^{n} d_i.
+	$$
+	Assim sendo, igualando os dois determinantes, segue que:
+	
+	$$
+	\det(A^T) = \pm\prod\limits_{i = 1}^{n} d_i = \det(A).
+	$$
+	
+	\qed
+\end{Proof}
+
+\begin{Proposition}[Determinante de uma matriz ortogonal]
+	Seja $Q_{n\times n}$ uma matriz ortogonal. Então, $|\det(Q)| = 1$.
+\end{Proposition}
+
+\begin{Proof}
+	Sabemos que, se $Q$ é ortogonal, então $Q^TQ = I$. Então, nós temos que:
+	
+	$$
+	\det(Q^TQ) = \det(Q^T)\det(Q) = (\det(Q))^2 = 1.
+	$$
+	Logo, $\det(Q) = \pm 1$, o que quer dizer que $|\det(Q)| = 1$.
+	
+	\qed
+\end{Proof}
