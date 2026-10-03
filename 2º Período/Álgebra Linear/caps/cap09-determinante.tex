@@ -342,3 +342,126 @@ Tendo estabelecido a unicidade do determinante, nós podemos prosseguir para as 
 	
 	\qed
 \end{Proof}
+
+\section{Fórmulas para o Determinante}
+
+Nesta seção, o nosso objetivo é chegar em uma fórmula fechada para o cálculo do determinante de uma matriz $n\times n$ qualquer (que, vai por mim, se nós temos uma matriz grande, eu não quero usar e você também não quer usar, definitivamente existem formas melhores de se calcular o determinante de matrizes grandes). Para isto, nós começaremos discutindo uma forma de encontrar uma fórmula para o determinante de uma matriz $3\times 3$ qualquer, e depois faremos a generalização para o caso $n\times n$. Para isso, provaremos a seguinte proposição:
+
+\begin{Proposition}[Fórmula dos Pivôs]
+	Seja $A_{n\times n}$ uma matriz invertível, e seja $A_k$ a submatriz de tamanho $k\times k$ localizada na quina superior esquerda de $A$. Então, o $k$-ésimo pivô de $A$, denotado por $d_k$, é dado por:
+	
+	$$
+	d_k = \dfrac{\det(A_k)}{\det(A_{k - 1})}.
+	$$
+\end{Proposition}
+
+\begin{Proof}
+	Sejam $d_1, \cdots, d_n$ os pivôs de $A$; e $d_1, \cdots, d_k$ os pivôs de $A_k$, com $k\neq n$. Então, nós temos que:
+	
+	$$
+	d_k = \dfrac{d_1d_2\cdots d_k}{d_1d_2\cdots d_{k - 1}}.
+	$$
+	Porém, $\det(A_k) = d_1d_2\cdots d_k$ e $\det(A_{k - 1}) = d_1d_2\cdots d_{k - 1}$. Logo, $d_k = \dfrac{\det(A_k)}{\det(A_{k - 1})}$.
+	
+	\qed
+\end{Proof}
+
+Evidentemente, de modo a tornar esta proposição mais rigorosa, sem cairmos em uma recursão infinita sem sentido, nós podemos definir $\det(A_0) = 1$, e todo o resultado segue. A partir da Fórmula dos Pivôs, nós chegaremos à fórmula para o determinante de uma matriz $3\times 3$ (supondo inicialmente que $A$ é invertível e que não ocorrem trocas de linhas).
+
+Seja $A$ a matriz $3\times 3$ dada por:
+
+$$
+A = \begin{bmatrix}
+	a_{11} & a_{12} & a_{13} \\
+	a_{21} & a_{22} & a_{23} \\
+	a_{31} & a_{32} & a_{33}
+\end{bmatrix}.
+$$
+Antes de iniciar o processo de eliminação, nós temos que $d_1 = \det(A_1) = a_11$. Vamos guardar este resultado. Agora, nós vamos realizar o processo de eliminação até encontrar o segundo pivô:
+
+$$
+\begin{bmatrix}
+	a_{11} & a_{12} & a_{13} \\
+	a_{21} & a_{22} & a_{23} \\
+	a_{31} & a_{32} & a_{33}
+\end{bmatrix}\overset{\substack{L_2 - (a_{21}/a_{11})L_1 \\ L_3 - (a_{31}/a_{11})L_1}}{\implies} \begin{bmatrix}
+	a_{11} & a_{12} & a_{13} \\
+	0 & \frac{a_{11}a_{22} - a_{21}a_{12}}{a_{11}} & \frac{a_{11}a_{23} - a_{21}a_{13}}{a_{11}} \\
+	0 & \frac{a_{11}a_{32} - a_{31}a_{12}}{a_{11}} & \frac{a_{11}a_{33} - a_{31}a_{13}}{a_{11}}
+\end{bmatrix}.
+$$
+Assim sendo, nós encontramos o nosso segundo pivô, que é $d_2 = \dfrac{a_{11}a_{22} - a_{21}a_{12}}{a_{11}}$. Note que isto demonstra que o determinante de uma matriz $2\times 2$ é dado por $\det(A_2) = a_{11}a_{22} - a_{21}a_{12}$. Agora, prossigamos com o processo de eliminação, para encontrarmos o nosso terceiro pivô. Suponha que a matriz que obtivemos possa ser escrita como:
+
+$$
+\begin{bmatrix}
+	a_{11} & a_{12} & a_{13} \\
+	0 & a'_{22} & a'_{23} \\
+	0 & a'_{32} & a'_{33}
+\end{bmatrix}.
+$$
+O processo de eliminação continua com $L_3 \leftarrow L_3 - \dfrac{a'_{32}}{a'_{22}}L_2$ (esta é a notação correta para se utilizar ao descrever o processo de eliminação). O elemento que atualmente corresponde a $a'_{32}$ irá zerar, e no lugar de $a'_{33}$, obteremos:
+
+$$
+d_3 = \left(\dfrac{a_{11}a_{33} - a_{31}a_{13}}{a_{11}}\right) - \dfrac{\left(\frac{a_{11}a_{32} - a_{31}a_{12}}{a_{11}}\right)}{\left(\frac{a_{11}a_{22} - a_{21}a_{12}}{a_{11}}\right)}\cdot\dfrac{a_{11}a_{23} - a_{21}a_{13}}{a_{11}}.
+$$
+Fazendo algumas simplificações, nós obtemos:
+
+$$
+d_3 = \dfrac{a_{11}a_{33} - a_{31}a_{13}}{a_{11}} - \dfrac{(a_{11}a_{32} - a_{31}a_{12})(a_{11}a_{23} - a_{21}a_{13})}{a_{11}(a_{11}a_{22} - a_{21}a_{12})}.
+$$
+Vamos colocar esta fórmula sob um denominador comum:
+
+$$
+d_3 = \dfrac{(a_{11}a_{33} - a_{31}a_{13})(a_{11}a_{22} - a_{21}a_{12}) - (a_{11}a_{32} - a_{31}a_{12})(a_{11}a_{23} - a_{21}a_{13})}{a_{11}(a_{11}a_{22} - a_{21}a_{12})}.
+$$
+Expandindo o numerador e realizando os cancelamentos necessários, nós obtemos:
+
+$$
+d_3 = \dfrac{a_{11}^2a_{33}a_{22} - a_{11}a_{33}a_{21}a_{12} - a_{31}a_{13}a_{11}a_{22} - a_{11}^2a_{32}a_{23} + a_{11}a_{32}a_{21}a_{13} + a_{31}a_{12}a_{11}a_{23}}{a_{11}(a_{11}a_{22} - a_{21}a_{12})}.
+$$
+Vamos fatorar o numerador da seguinte forma:
+
+$$
+d_3 = \dfrac{a_1(a_{11}a_{33}a_{22} - a_{33}a_{21}a_{12} - a_{31}a_{13}a_{22} - a_{11}a_{32}a_{23} + a_{32}a_{21}a_{13} + a_{31}a_{12}a_{23})}{a_{11}(a_{11}a_{22} - a_{21}a_{12})}.
+$$
+
+Como $a_1\neq 0$ por hipótese (já que não há trocas de linha), segue que:
+
+$$
+d_3 = \dfrac{a_{11}a_{33}a_{22} - a_{33}a_{21}a_{12} - a_{31}a_{13}a_{22} - a_{11}a_{32}a_{23} + a_{32}a_{21}a_{13} + a_{31}a_{12}a_{23}}{a_{11}a_{22} - a_{21}a_{12}}.
+$$
+Como o denominador é igual a $\det(A_2)$, segue, pela Fórmula dos Pivôs, que:
+
+$$
+\det(A) = a_{11}a_{33}a_{22} - a_{33}a_{21}a_{12} - a_{31}a_{13}a_{22} - a_{11}a_{32}a_{23} + a_{32}a_{21}a_{13} + a_{31}a_{12}a_{23}.
+$$
+
+Para o caso em que houvesse trocas de linhas, bastaria alterar o sinal do determinante tantas vezes quantas tricas de linhas fosse feitas, e como as submatrizes mudariam, ao final chegaríamos à mesma fórmula. Assim sendo, vamos enunciar formalmente esta fórmula como uma proposição:
+
+\begin{Proposition}[Fórmula de Sarrus]
+	Seja $A$ uma matriz $3\times 3$ qualquer. Então:
+	
+	$$
+	\det(A) = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{21}a_{32}a_{13}- a_{13}a_{22}a_{31} - a_{11}a_{23}a_{32} - a_{21}a_{12}a_{33}.
+	$$
+\end{Proposition}
+
+\begin{Proof}
+	Tudo o que fizemos anteriormente nesta seção.
+	
+	\qed
+\end{Proof}
+
+Para se chegar a uma fórmula fechada para o determinante de uma matriz $n\times n$, pode-se utilizar o mesmo raciocínio recursivamente. Mas, como vocês podem imaginar, definitivamente eu não quero fazer isto. Uma outra opção mais simples é utilizar os axiomas do determinante, e a partir deles deduzir a fórmula. Este será um dos exercícios deste capítulo. Por agora, eu vou apenas escrever a fórmula do caso geral, e pedir que confiem em mim:
+
+\begin{Theorem}[Fórmula de Leibniz]
+	Seja $A$ uma matriz $n\times n$ qualquer. Então, o seu determinante é dado por:
+	
+	$$
+	\sum\limits_{n! \text{termos}}\pm a_{1\alpha}a_{2\beta}\cdots a_{n\omega},
+	$$
+	onde $(\alpha, \beta, \cdots, \omega)$ é uma das $n!$ permutações de $(1, 2, \cdots, n)$, e o sinal equivale à quantidade de linhas trocadas necessária para termos uma matriz diagonal.
+\end{Theorem}
+
+A mesma fórmula pode ser escrita de um jeito mais formal e elegante, porém, para fazer isto, são necessários conhecimentos sobre grupos e, mais especificamente, sobre o grupo simétrico $S_n$, que é o grupo das permutações de $(1, 2, \cdots, n)$. Como, no entanto, nós não estamos assumindo um conhecimento prévio de Álgebra Abstrata, eu não escreverei esta versão da fórmula. Na prática, ser humano nenhum quer ter que calcular o determinante de uma matriz $100\times 100$ utilizando esta fórmula: nós teríamos que fazer $\sim 100!$ operações, e definitivamente não compensa. No entanto, é bom conhecer a regra, porque ela dá base para uma ideia que nós vamos explorar na próxima seção.
+
