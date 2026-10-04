@@ -60,11 +60,27 @@ jobs:
       - name: Baixar código do repositório
         uses: actions/checkout@v4.2.2
 
-      - name: Compilar PDF da pasta ${{ matrix.directory }}
+      - name: Criar atalho temporário para pastas com acento
+        id: prepare-path
+        run: |
+          ORIGINAL_DIR="${{ matrix.directory }}"
+          
+          # Gera um nome limpo substituindo tudo que não for letra/número por underline
+          CLEAN_DIR=$(echo "$ORIGINAL_DIR" | sed 's/[^A-Za-z0-9_]/_/g')
+          
+          # Se o nome mudou, cria um link simbólico para enganar o compilador
+          if [ "$ORIGINAL_DIR" != "$CLEAN_DIR" ]; then
+            ln -s "$ORIGINAL_DIR" "$CLEAN_DIR"
+            echo "compilation_dir=$CLEAN_DIR" >> $GITHUB_OUTPUT
+          else
+            echo "compilation_dir=$ORIGINAL_DIR" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Compilar PDF da pasta
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
-          working_directory: ${{ matrix.directory }}
+          working_directory: ${{ steps.prepare-path.outputs.compilation_dir }}
           compiler: pdflatex
           args: "-interaction=nonstopmode -halt-on-error"
 
