@@ -36,10 +36,13 @@ jobs:
           json: true
           escape_json: false
           safe_output: false
-          # Ignora a pasta .github e arquivos Markdown
+          # Ignora a pasta .github, arquivos Markdown e subpastas de imagens/capítulos
           files_ignore: |
             .github/**
             *.md
+            **/imgs/**
+            **/caps/**
+            **/images/**
 
   # ============================================================
   # 2. Compila cada diretório que foi alterado
@@ -62,15 +65,25 @@ jobs:
 
       - name: Criar atalho temporário para pastas com acento
         id: prepare-path
+        env:
+          RAW_DIR: ${{ matrix.directory }}
         run: |
-          ORIGINAL_DIR="${{ matrix.directory }}"
+          # Captura a variável de ambiente injetada de forma segura contra quebras de aspas
+          ORIGINAL_DIR="$RAW_DIR"
+          
+          # Remove barras invertidas residuais e limpa escapes octais se houver
+          ORIGINAL_DIR=$(printf '%b' "$ORIGINAL_DIR" 2>/dev/null || echo "$ORIGINAL_DIR")
           
           # Gera um nome limpo substituindo tudo que não for letra/número por underline
           CLEAN_DIR=$(echo "$ORIGINAL_DIR" | sed 's/[^A-Za-z0-9_]/_/g')
           
+          # Se o nome limpo ficou vazio por algum motivo, usa um fallback seguro
+          if [ -z "$CLEAN_DIR" ]; then CLEAN_DIR="latex_target_dir"; fi
+          
           # Se o nome mudou, cria um link simbólico para enganar o compilador
           if [ "$ORIGINAL_DIR" != "$CLEAN_DIR" ]; then
-            ln -s "$ORIGINAL_DIR" "$CLEAN_DIR"
+            mkdir -p "$(dirname "$CLEAN_DIR")"
+            ln -s "$PWD/$ORIGINAL_DIR" "$CLEAN_DIR"
             echo "compilation_dir=$CLEAN_DIR" >> $GITHUB_OUTPUT
           else
             echo "compilation_dir=$ORIGINAL_DIR" >> $GITHUB_OUTPUT
@@ -83,4 +96,3 @@ jobs:
           working_directory: ${{ steps.prepare-path.outputs.compilation_dir }}
           compiler: pdflatex
           args: "-interaction=nonstopmode -halt-on-error"
-
