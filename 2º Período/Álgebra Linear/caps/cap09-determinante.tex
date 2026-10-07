@@ -658,3 +658,482 @@ Para terminar esta seção, faremos mais um exemplo:
 	\end{bmatrix}.
 	$$
 \end{Example}
+
+\section{Determinantes na Solução de Sistemas Lineares}
+
+Há vários capítulos, nós mostramos o método de Gauss-Jordan para encontrar a inversa de uma matriz. Agora, nós veremos que é possível calcular a inversa usando determinantes. Primeiramente, vamos fazer uma definição:
+
+\begin{Definition}[Matriz adjunta]
+	Seja $A$ uma matriz $n\times n$ qualquer, e seja $C$ a sua matriz de cofatores. Então, a matriz $C^T$ é chamada a \textbf{matriz adjunta de $A$}.
+\end{Definition}
+
+A matriz adjunta de $A$ também pode ser denotada por $\operatorname{adj}(A)$. Mas, no nosso caso, nós a denotaremos por $C^T$ mesmo. Para começar a mostrar a ideia que nós queremos desenvolver nesta seção, nós vamos trabalhar com o caso $2\times 2$.
+
+Seja $A = \begin{bmatrix}
+	a & b \\
+	c & d
+\end{bmatrix}$. Vamos encontrar a matriz de cofatores de $A$. No caso $2\times 2$ isto é bem fácil: imediatamente nós temos que $c_{11} = d$, $c_{12} = -c$, $c_{21} = -b$ e $c_{22} = a$. Assim sendo, a matriz de cofatores de $A$ é:
+
+$$
+C = \begin{bmatrix}
+	d & -c \\
+	-b & a
+\end{bmatrix}.
+$$
+Segue-se imediatamente que a matriz adjunta de $A$ é:
+
+$$
+C^T = \begin{bmatrix}
+	d & -b \\
+	-c & a
+\end{bmatrix}.
+$$
+
+O fato interessante é que, recordando a fórmula da inversa de uma matriz $2\times 2$, nós temos que:
+
+$$
+A^{-1} = \dfrac{1}{ad - bc}\begin{bmatrix}
+	d & -b \\
+	-c & a
+\end{bmatrix} = \dfrac{C^T}{\det(A)}.
+$$
+Será que, para uma matriz $n\times n$ qualquer, também é válida esta fórmula? Nós mostraremos nesta seção que sim. Especificamente, nós vamos mostrar que, dada uma matriz $A_{n\times n}$ qualquer, é verdade que $A\cdot C^T = \det(A)\cdot I$, onde $I$ é a matriz identidade. Primeiramente, nós vamos enunciar e demonstrar um teorema, chamado Teorema dos Cofatores Falsos:
+
+\begin{Theorem}[Teorema dos Cofatores Falsos]
+	Sejam $A = (a_{ij})$ uma matriz $n\times n$, e $C = (c_{ij})$ a sua matriz de cofatores. Se escolhermos duas linhas $i$ e $k$, com $i\neq k$, então
+	
+	$$
+	\sum\limits_{j = 1}^{n} a_{ij}c_{kj} = 0.
+	$$
+\end{Theorem}
+
+\begin{Proof}
+	Em primeiro lugar, nós vamos construir uma matriz auxiliar $B$ tal que, na linha $k$ da matriz $B$, nós colocamos a linha $i$ de $A$, e nas demais linhas nós simplesmente copiamos os elementos originais de $A$. Ou seja, se
+	
+	$$
+	A = \begin{bmatrix}
+		a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & a_{23} & \cdots & a_{2n} \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		a_{i1} & a_{i2} & a_{i3} & \cdots & a_{in} \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		a_{k1} & a_{k2} & a_{k3} & \cdots & a_{kn} \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & a_{n3} & \cdots & a_{nn}
+	\end{bmatrix},
+	$$
+	então
+	
+	$$
+	B = \begin{bmatrix}
+		a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & a_{23} & \cdots & a_{2n} \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		a_{i1} & a_{i2} & a_{i3} & \cdots & a_{in} \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		a_{i1} & a_{i2} & a_{i3} & \cdots & a_{in} \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & a_{n3} & \cdots & a_{nn}
+	\end{bmatrix}.
+	$$
+	Nós temos que a matriz $B$ possui duas linhas idênticas (no caso, as linhas $i$ e $k$). Nós vamos então calcular o determinante de $B$ utilizando a sua linha $k$. Recordando uma observação que nós fizemos na seção anterior, nós temos que:
+	
+	$$
+	\det(B) = \sum\limits_{j = 1}^{n} b_{kj}c'_{kj},
+	$$
+	onde $c'_{kj}$ são os cofatores dos elementos $b_{kj}$. Por construção, nós temos que $b_{kj} = a_{ij}$ (lembre-se que a linha $k$ de $B$ é igual à linha $i$ de $A$). Por sua vez, cada cofator $c'_{kj}$ é calculado eliminando-se a linha $k$ e a coluna $j$ de $B$. Como todas as outras linhas de $B$ são idênticas às de $A$, a submatriz que nós obtemos é idêntica à que nós obteríamos eliminando a linha $k$ e a coluna $j$ de $A$. Logo, segue que $c'_{kj} = c_{kj}$. Assim sendo, nós temos que:
+	
+	$$
+	\det(B) = \sum\limits_{j = 1}^{n} a_{ij}c_{kj}.
+	$$
+	Porém, como a matriz $B$ possui duas linhas iguais, segue-se que $\det(B) = 0$. Logo:
+	
+	$$
+	\sum\limits_{j = 1}^{n} a_{ij}c_{kj} = 0,
+	$$
+	como queríamos provar.
+	
+	\qed
+\end{Proof}
+
+O que este teorema está nos dizendo é muito simples: o produto escalar de uma linha de $A$ pelo vetor dos cofatores referentes a outra linha de $A$ é igual a zero. Este fato será muito útil para demonstrarmos que $AC^T = \det(A)I$ no caso geral.
+
+\begin{Theorem}[Propriedade Fundamental da Matriz Adjunta]
+	Seja $A$ uma matriz $n\times n$ qualquer, e $C$ a sua matriz de cofatores. Então:
+	
+	$$
+	A\cdot C^T = \det(A)\cdot I.
+	$$
+\end{Theorem}
+
+\begin{Proof}
+	Suponha que $A = (a_{ij})$, e $C = (c_{ij})$, com as definições feitas anteriormente. Então, nós temos que $C^T = (c_{ji})$. Vamos definir uma matriz $P = AC^T$. Então, nós temos que a entrada $ik$ de $P$, denotada por $p_{ik}$, é dado pelo produto escalar entre a $i$-ésima linha de $A$ e a $k$-ésima coluna de $C^T$. Ou seja:
+	
+	$$
+	p_{ik} = \sum\limits_{j = 1}^{n} a_{ij}\cdot (c_{jk})^T = \sum\limits_{j = 1}^{n} a_{ij}\cdot c_{kj}.
+	$$
+	Nós temos dois casos: $i = k$ e $i\neq k$. Quando $i = k$ (ou seja, para os elementos da diagonal principal de $P$), nós temos que:
+	
+	$$
+	p_{ii} = \sum\limits_{j = 1}^{n} a_{ij}c_{ij}.
+	$$
+	Do que discutimos anteriormente, segue que:
+	
+	$$
+	p_{ii} = \det(A).
+	$$
+	Por outro lado, quando $i\neq k$, nós temos
+	
+	$$
+	p_{ik} = \sum\limits_{j = 1}^{n} a_{ij}\cdot c_{kj},
+	$$
+	com $i\neq k$. Logo, pelo Teorema dos Cofatores Falsos, segue que $p_{ik} = 0$ neste caso. Assim sendo, nós temos que $P$ também pode ser escrita matricialmente como:
+	
+	$$
+	P = \det(A)\cdot I.
+	$$
+	Logo, segue que $A\cdot C^T = \det(A)\cdot I$.
+	
+	\qed
+\end{Proof}
+
+Deste teorema, segue um corolário, que é o método da adjunta:
+
+\begin{Corolary}[Método da Adjunta]
+	Seja $A$ uma matriz $n\times n$ não-singular, e seja $C$ a sua matiz de cofatores. Então:
+	
+	$$
+	A^{-1} = \dfrac{1}{\det(A)}C^T.
+	$$
+\end{Corolary}
+
+Dado que nós encontramos uma nova forma de escrever $A^{-1}$ (quando esta matriz existe), nós encontramos também uma nova forma de expressar a solução do sistema linear $Ax = b$.
+
+\begin{Corolary}
+	Sejam $A_{n\times n}$ uma matriz invertível, $C$ a sua matriz de cofatores e $b\in\mathbb{R}^{n}$ um vetor tal que $Ax = b$, para algum $x\in\mathbb{R}^n$. Então:
+	
+	$$
+	x = \dfrac{1}{\det(A)}C^Tb.
+	$$
+\end{Corolary}
+
+\begin{Proof}
+	Evidente (como diria o grande matemático Elon Lages Lima, ao falar sobre um certo teorema que até o enunciado é difícil de entender).
+	
+	\qed
+\end{Proof}
+
+Desta discussão toda que fizemos, nasce um método muito famoso para a resolução de sistemas lineares, chamado ``Regra de Cramer''.
+
+\begin{Theorem}
+	Considere o sistema linear $Ax = b$, onde $A_{n\times n}$ é uma matriz invertível, e $x, b\in\mathbb{R}^n$. Então:
+	
+	$$
+	x_i = \dfrac{\det(A_i)}{\det(A)},
+	$$
+	onde $A_i$ é a matriz obtida substituindo-se a $i$-ésima coluna de $A$ por $b$.
+\end{Theorem}
+
+\begin{Proof}
+	Nós sabemos que $x = \dfrac{1}{\det(A)}C^Tb$, dado que $\det(A)\neq 0$ por hipótese. Assim sendo, se $c_{ij}$ corresponde ao elemento $ij$ de $C$, nós temos que o elemento $ij$ de $C^T$ é dado por $c_{ji}$. Escrevendo o produto $C^Tb$ para a linha $i$, nós temos:
+	
+	$$
+	x_i = \dfrac{1}{\det(A)}\sum\limits_{j = 1}^{n} c_{ji}\cdot b_j.
+ 	$$
+ 	Ou seja, 
+ 	
+ 	$$
+ 	x_i = \dfrac{1}{\det(A)}(b_1c_{1i} + b_2c_{2i} + \cdots + b_nc_{ni}).
+ 	$$
+ 	Considere a matriz $A_i$, que é igual à matriz $A$ exceto pela sua $i$-ésima coluna, que é substituída pelo vetor $b$. Então, os elementos dessa coluna são os $b_j$, e os seus cofatores associados são exatamente os mesmos da matriz original $A$ (pois os cofatores de uma coluna não dependem dos elementos da própria coluna). Assim sendo, segue que:
+ 	
+ 	$$
+ 	\det(A_i) = b_1c_{1i} + b_2c_{2i} + \cdots + b_nc_{ni}.
+ 	$$
+ 	Logo, da expressão que obtivemos para $x_i$, segue que:
+ 	
+ 	$$
+ 	x_i = \dfrac{\det(A_i)}{\det(A)}.
+ 	$$
+ 	
+ 	\qed
+\end{Proof}
+
+Vamos fazer um exemplo prático usando a Regra de Cramer em um sistema $2\times 2$, para fixar esta ideia.
+
+\begin{Example}
+	Considere o seguinte sistema linear:
+	
+	$$
+	\begin{bmatrix}
+		1 & 3 \\
+		2 & 4
+	\end{bmatrix}\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		3
+	\end{bmatrix}.
+	$$
+	
+	Primeiramente, vamos encontrar $x_1$. Neste caso, a matriz $A_1$ é
+	
+	$$
+	A_1 = \begin{bmatrix}
+		0 & 3 \\
+		2 & 4
+	\end{bmatrix}
+	$$
+	e, portanto,
+	
+	$$
+	x_1 = \dfrac{\det(A_1)}{\det(A)} = \dfrac{-6}{-2} = 3.
+	$$
+	Agora, fazendo o mesmo para $x_2$, nós temos que a matriz $A_2$ é
+	
+	$$
+	A_2 = \begin{bmatrix}
+		1 & 3 \\
+		0 & 3
+	\end{bmatrix}
+	$$
+	e, portanto, 
+	
+	$$
+	x_2 = \dfrac{\det(A_2)}{\det(A)} = \dfrac{3}{-2} = -\dfrac{3}{2}.
+	$$
+	Portanto, a solução deste sistema linear é:
+	
+	$$
+	x = \begin{bmatrix}
+		3 \\
+		-3/2
+	\end{bmatrix}.
+	$$
+\end{Example}
+
+\section{Geometria do Determinante}
+
+Até agora, nós falamos sobre o determinante como uma função muito abstrata, e a maior aplicação que demos a ele foi a resolução de sistemas lineares $n\times n$ que, para $n$ muito grande, não possuem uma visualização geométrica muito boa (a menos que alguém consiga visualizar o espaço $\mathbb{R}^{100}$, aí já é um caso bem especial). A partir de agora, no entanto, nós iremos discutir o que o determinante representa geometricamente para dimensões baixas (especificamente o $\mathbb{R}^2$ e o $\mathbb{R}^3$).
+
+A primeira propriedade que nós demonstraremos está relacionada com o volume de um paralelepípedo.
+
+\begin{Proposition}
+	Seja $A$ uma matriz $3\times 3$ tal que as suas colunas partem do mesmo vértice e definem as arestas de um paralelepípedo. Então, se $V$ é o volume deste paralelepípedo, nós temos que:
+	
+	$$
+	V = |\det(A)|.
+	$$
+\end{Proposition}
+
+\begin{Proof}
+	Suponha que $A = \begin{bmatrix}
+		a_1 & a_2 & a_3
+	\end{bmatrix}$, onde cada $a_i\in\mathbb{R}^3$ é uma coluna de $A$ (embora nós tenhamos desenvolvido o determinante a partir das linhas de uma matriz, nós provamos anteriormente que $\det(A) = \det(A^T)$, assim sendo, nós podemos utilizar os axiomas nas colunas de $A$ sem problemas). Nós queremos provar que, em módulo, o volume do paralelepípedo definido pelos vetores $a_1$, $a_2$ e $a_3$ segue os axiomas do determinante.
+	
+	$\mathbf{1)}$ \textbf{Normalização:} Suponha que $a_i = e_i$, para $i\in\{1, 2, 3\}$. Do capítulo sobre ortogonalidade, segue que os três vetores são perpendiculares entre si. Então, este paralelepípedo é, na verdade, um cubo unitário, cujo volume é igual a $1$ por definição. Por outro lado, sabemos que $A = I$ neste caso, e que $\det(I) = 1$, pelo Axioma da Normalização. Logo, $V = |\det(I)|$.
+	
+	$\mathbf{2)}$ \textbf{Permutação:} Suponha que, a partir de $A$, nós construímos uma matriz $A'$ trocando a ordem de dois vetores (digamos, sem perda de generalidade, $a_1$ e $a_2$). Por um lado, o paralelepípedo que é definido por $A'$ é exatamente o mesmo paralelepípedo definido por $A$ (a ordem das colunas trocou, mas os vetores são exatamente os mesmos). Por outro lado, pelo Axioma da Permutação, $\det(A) = -\det(A')$. Logo, o volume do paralelepípedo continua igual, enquanto, em módulo, o determinante continua o mesmo (trocar o sinal de um certo $x$ não altera $|x|$). Assim sendo, em módulo, $V$ satisfaz ao segundo axioma dos determinantes.
+	
+	$\mathbf{3)}$ \textbf{Linearidade:} Suponha, sem perda de generalidade, que $A = \begin{bmatrix}
+		\alpha a_1 + \beta & a_2 & a_3
+ 	\end{bmatrix}$. Vamos, novamente, comparar o que acontece com o determinante com o que acontece com o volume. Em relação ao determinante de $A$, nós temos, pelo Axioma da Linearidade, que:
+ 	
+ 	$$
+ 	\det(A) = \alpha\det(a_1, a_2, a_3) + \det(b_1, a2, a_3).
+ 	$$
+ 	Por outro lado, vamos analisar o que acontece com o volume do paralelepípedo definido por $A$, fazendo isto em dois passos: primeiro estudando a multiplicação por escalar e, em seguida, a soma de vetores. No primeiro passo, nós temos que a operação $\alpha a_1$ significa esticar ou encolher esta aresta do paralelepípedo. Como o volume é proporcional à multiplicação da base pela altura, esticar uma das arestas por $\alpha$ multiplica a altura (ou o comprimento correspondente) por $\alpha$. Ou seja, o volume final $V$ é dado por:
+ 	
+ 	$$
+ 	V_f = |\alpha|V.
+ 	$$
+ 	Em segundo lugar, consideremos dois paralelepípedos cujas arestas $a_2$ e $a_3$ sejam iguais, mas que diferem na primeira aresta (um deles possui aresta $a_1$ e o outro possui aresta $b_1$). Pelo Princípio de Cavalieri (que não será enunciado neste texto, mas que provavelmente eu devo incluir num futuro texto de Geometria Analítica), nós temos que, ao somar os vetores para formar a aresta $a_1 + b_1$, o novo paralelepípedo possui altura igual às somas das alturas dos paralelepípedos individuais. Consequentemente, o volume do novo sólido é igual à soma dos volumes dos dois paralelepípedos originais. Portanto, o volume do paralelepípedo definido pelas colunas de $A$ segue o terceiro axioma dos determinantes em módulo.
+ 	
+ 	Logo, $V = |\det(A)|$.
+ 	
+ 	
+ 	\qed 
+\end{Proof}
+
+Este raciocínio que nós empregamos em $\mathbb{R}^3$ pode ser usado para demonstrar que o volume $n$-dimensional de um paralelepípedo em $\mathbb{R}^n$ definido pelas colunas de uma matriz $A_{n\times n}$ é dado por $V = |\det(A)|$. Em outras palavras:
+
+\begin{Theorem}
+	Seja $A$ uma matriz $n\times n$ tal que as suas colunas definem as arestas de um paralelepípedo em $\mathbb{R}^n$. Então, o volume $n$-dimensional deste paralelepípedo, dado por $V_n$, é dado por:
+	
+	$$
+	V_n = |\det(A)|.
+	$$
+\end{Theorem}
+
+\begin{Proof}
+	Basta usar o mesmo raciocínio feito anteriormente, porém usando uma matriz $n\times n$ ao invés de uma matriz $3\times 3$.
+	
+	\qed
+\end{Proof}
+
+Em particular, se nós temos uma matriz $A_{2\times 2}$ que define um paralelepípedo em $\mathbb{R}^2$ (ou seja, um paralelogramo), nós temos que a área $S$ do paralelogramo (que corresponde a um volume $2$-dimensional) é dada por:
+
+$$
+S = |\det(A)|.
+$$
+
+Façamos um exemplo simples em $\mathbb{R}^3$, para visualizarmos melhor esta interpretação:
+
+\begin{Example}
+	Considere o paralelepípedo definido pelos vetores $u = (2, 1, 0)$, $v = (1, 0, 1)$ e $w = (3, 0, 1)$ (aqui, considere que a notação $v = (v_1, v_2, v_3)$ representa um vetor coluna, diferente de um vetor linha pelo fato de termos usado vírgulas entre os elementos). Nós podemos construir a matriz $A$ e achar o seu determinante. Nós temos que:
+	
+	$$
+	A = \begin{bmatrix}
+		2 & 1 & 3 \\
+		1 & 0 & 0 \\
+		0 & 1 & 1
+	\end{bmatrix}.
+	$$
+	O determinante de $A$ pode ser dado, de uma maneira bem fácil, por:
+	
+	$$
+	\det(A) = 1\cdot c_{21} = 1\cdot (-1)^3(-2) = 2.
+	$$
+	Logo, o volume do paralelepípedo que nós construímos é $V = |\det(A)| = 2$.
+\end{Example}
+
+Note que nós calculamos o volume do paralelepípedo sem sequer pensar em visualizá-lo no espaço. No entanto, dado que a intenção deste capítulo é dar uma interpretação geométrica do determinante, vamos exibir uma imagem deste paralelepípedo do exemplo:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{imgs/alglin-12-determinantes-1}
+	\caption[Paralelepípedo em $\mathbb{R}^3$]{Paralelepípedo em $\mathbb{R}^3$ definido pelos vetores $u$, $v$ e $w$ do exemplo anterior (arquivo pessoal)}
+	\label{fig:alglin-12-determinantes-1}
+\end{figure}
+
+Ainda, note que há uma interpretação para o caso $\det(A) = 0$: trata-se de um paralelepípedo degenerado, dado que há vetores colineares que o geram. Supondo que $A$ seja uma matriz $n\times n$ com posto $r < n$, nós teríamos um paralelepípedo de dimensão $r$ em um espaço $n$-dimensional. Por consequência, o volume $n$-dimensional deste paralelepípedo é $0$.
+
+Saindo dos paralelepípedos em $\mathbb{R}^3$ (e também em $\mathbb{R}^n$), vamos agora falar sobre os triângulos em $\mathbb{R}^2$. De fato, a área de um triângulo também está relacionada com um determinante.
+
+\begin{Theorem}
+	Sejam $(x_1, y_1)$, $(x_2, y_2)$ e $(x_3, y_3)$ os pontos que definem um triângulo $T$ em $\mathbb{R}^2$. Então, a área de $T$, denotada por $S(T)$, é dada por:
+	
+	$$
+	S(T) = \dfrac{1}{2}\det\left(\begin{bmatrix}
+		1 & 1 & 1 \\
+		x_1 & x_2 & x_3 \\
+		y_1 & y_2 & y_3
+	\end{bmatrix}\right).
+	$$
+\end{Theorem}
+
+\begin{Proof}
+	Para esta demonstração, nós utilizaremos um fato básico da Geometria Analítica: a área de um triângulo não se altera quando ele transladado no plano. Assim sendo, nós vamos deslocar o triângulo de forma que o vértice $(x_1, y_1)$ coincida com a origem $(0, 0)$. Para fazer isto, subtraímos $(x_1, y_1)$ de todos os vértices, obtendo $(0, 0)$, $(x_2 - x_1, y_2 - y_1)$ e $(x_3 - x_1, y_3 - y_1)$ como os novos vértices de $T$. Por sua vez, em decorrência do que nós discutimos extensivamente antes, se nós construímos uma matriz
+	
+	$$
+	B = \begin{bmatrix}
+		x_2 - x_1 & x_3 - x_1 \\
+		y_2 - y_1 & y_3 - y_1
+	\end{bmatrix},
+	$$
+	a área do paralelogramo definido pelos dois vetores colunas de $A$ é dada por $S = |\det(B)|$. Por outro lado, como o triângulo $T$ é definido pelos mesmos dois vetores, segue que a sua área é exatamente metade da área do paralelogramo correspondente. Assim sendo, segue que:
+	
+	$$
+	S(T) = \dfrac{1}{2}\det\left(\begin{bmatrix}
+		x_2 - x_1 & x_3 - x_1 \\
+		y_2 - y_1 & y_3 - y_1
+	\end{bmatrix}\right) = \dfrac{1}{2}\det(B).
+	$$
+	
+	Por outro lado, consideremos agora a matriz original
+	
+	$$
+	A = \begin{bmatrix}
+		1 & 1 & 1 \\
+		x_1 & x_2 & x_3 \\
+		y_1 & y_2 & y_3
+	\end{bmatrix}.
+	$$
+	Como nós sabemos, aplicar operações elementares nas colunas não altera o valor do determinante. Então, podemos fazer $C_2\leftarrow C_2 - C_1$ e $C_3\leftarrow C_3 - C_1$, obtendo:
+	
+	$$
+	\det(A) = \det\left(\begin{bmatrix}
+		1 & 0 & 0 \\
+		x_1 & x_2 - x_1 & x_3 - x_1 \\
+		y_1 & y_2 - y_1 & y_3 - y_1
+	\end{bmatrix}\right).
+	$$
+	Nós sabemos que $\det(A) = 1\cdot c_{11}$ neste caso. Calculando o cofator $c_{11}$, nós temos:
+	
+	$$
+	c_{11} = (-1)^2\det\left(\begin{bmatrix}
+		x_2 - x_1 & x_3 - x_1 \\
+		y_2 - y_1 & y_3 - y_1
+	\end{bmatrix}\right) = \det(B).
+	$$
+	Logo, $\det(A) = \det(B)$ e, portanto,
+	
+	$$
+	S(T) = \dfrac{1}{2}\det\left(\begin{bmatrix}
+		1 & 1 & 1 \\
+		x_1 & x_2 & x_3 \\
+		y_1 & y_2 & y_3
+	\end{bmatrix}\right).
+	$$
+	
+	\qed
+\end{Proof}
+
+Vamos fazer um exemplo simples envolvendo este novo conhecimento:
+
+\begin{Example}
+	Considere o triângulo $T$ cujos pontos são $(0, 0)$, $(1, 0)$ e $(0, 1)$. Então, a sua área é dada por $S(T) = \dfrac{1}{2}\det(A)$, onde $A$ é:
+	
+	$$
+	A = \begin{bmatrix}
+		1 & 1 & 1 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+	\end{bmatrix}.
+	$$
+	É fácil calcular o determinante de $A$: basta perceber que $\det(A) = 1\cdot c_{33} = 1\cdot(-1)^6\cdot 1 = 1$. Logo:
+	
+	$$
+	S(T) = \dfrac{1}{2}\cdot 1 = \dfrac{1}{2}.
+	$$
+\end{Example}
+
+Apenas para uma maior visualização geométrica, vamos mostrar uma imagem deste triângulo:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{imgs/alglin-13-determinantes-2}
+	\caption[Triângulo em $\mathbb{R}^2$]{Triângulo em $\mathbb{R}^2$ relativo ao exemplo anterior (arquivo pessoal)}
+	\label{fig:alglin-13-determinantes-2}
+\end{figure}
+
+Para terminar a parte teórica deste capítulo, nós vamos definir o conceito de \textbf{produto vetorial} em $\mathbb{R}^3$, e enunciar algumas das suas propriedades que não serão provadas por mim (mas serão provadas por vocês, se vocês fizerem os exercícios desta seção).
+
+\begin{Definition}[Produto vetorial]
+	Sejam $u = (u_1, u_2, u_3)$ e $v = (v_1, v_2, v_3)$ dois vetores quaisquer em $\mathbb{R}^3$, e considere a base canônica do $\mathbb{R}^3$ dada por $\{e_1, e_2, e_3\}$. Então, o \textbf{produto vetorial de $u$ e $v$}, denotado por $u\times v$, é definido como:
+	
+	$$
+	u\times v = \det\left(\begin{bmatrix}
+		e_1 & e_2 & e_3 \\
+		u_1 & u_2 & u_3 \\
+		v_1 & v_2 & v_3
+	\end{bmatrix}\right) = (u_2v_3 - u_3v_2)e_1 + (u_3v_1 - u_1v_3)e_2 + (u_1v_2 - u_2v_1)e_3. 
+	$$
+\end{Definition}
+
+Diferentemente do produto escalar que ``multiplicava'' dois vetores e retornava um escalar, o produto vetorial é uma operação que ``multiplica'' dois vetores em $\mathbb{R}^3$ e retorna um novo vetor em $\mathbb{R}^3$. Algumas das suas propriedades são as descritas na seguinte proposição:
+
+\begin{Proposition}
+	Sejam $u$, $v$ e $w$ três vetores em $\mathbb{R}^3$. Então, são válidas as seguintes propriedades:
+	
+	$\mathbf{1)}$ $v\times u = -(u\times v)$.
+	
+	$\mathbf{2)}$ $u\cdot(u\times v) = v\cdot(u\times v) = 0$.
+	
+	$\mathbf{3)}$ $u\times u = 0$.
+	
+	$\mathbf{4)}$ $||u\times v|| = ||u||||v|||\sin(\theta)|$, onde $\theta$ é o ângulo entre $u$ e $v$.
+	
+	$\mathbf{5)}$ $(u\times v)\cdot w = 0$ se, e somente se, $u$, $v$ e $w$ estão no mesmo plano.
+\end{Proposition}
