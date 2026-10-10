@@ -1137,3 +1137,213 @@ Diferentemente do produto escalar que ``multiplicava'' dois vetores e retornava 
 	
 	$\mathbf{5)}$ $(u\times v)\cdot w = 0$ se, e somente se, $u$, $v$ e $w$ estão no mesmo plano.
 \end{Proposition}
+
+\section{Exercícios}
+\textbf{Importante:} alguns dos exercícios são baseados em \cite{lista2doguilherme} e em \cite{slide6doyuri}.
+
+\noindent $\mathbf{9.1)}$ Seja $A$ a matriz
+
+$$
+A = \begin{bmatrix}
+	5 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 3 & 0 & 0 \\
+	0 & 1 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 4 & 0 \\
+	0 & 0 & 0 & 0 & 7
+\end{bmatrix}
+$$
+Use os axiomas do determinante para calcular $\det(A)$.
+
+$\\$
+$\mathbf{9.2)}$ Demonstre que, na definição de determinante, o Axioma da Permutação pode ser substituído pelo Axioma da Alternância: $\det(a_1, a_2, \cdots, a_i, \cdots, a_i, \cdots, a_n) = 0$.
+
+$\\$
+$\mathbf{9.3)}$ Use os axiomas do determinante para demonstrar que
+
+$$
+\det\left(\begin{bmatrix}
+	1 & a & a^2 \\
+	1 & b & b^2 \\
+	1 & c & c^2
+\end{bmatrix}\right) = (b - a)(c - a)(c - b).
+$$
+
+$\\$
+$\mathbf{9.4)}$ Se os elementos de uma linha de uma matriz $A$ somam zero, ache uma solução para $Ax = 0$ e conclua que $\det(A) = 0$. Se estes elementos somam $1$, conclua que $\det(A - I) = 0$.
+
+$\\$
+$\mathbf{9.5)}$ Dada uma transformação linear $T:V\to V$, em que $V$ é um espaço vetorial de dimensão finita, nós podemos definir $\det(T) = \det([T]_\mathcal{B})$, onde $\mathcal{B}$ é uma base para $V$. Considere a transformação linear $T:\mathbb{R}^2\to\mathbb{R}^2$ definida como: $T(x, y) = (2x - 3y, 4x)^T$, e considere as bases $\mathcal{U} = \{e_1, e_2\}$ e $\mathcal{V} = \left\{\begin{bmatrix}
+	1 \\
+	1
+\end{bmatrix}, \begin{bmatrix}
+	0 \\
+	2
+\end{bmatrix}\right\}$:
+
+a) Calcule o determinante de $T$ como $\det(T) = \det([T]_\mathcal{U})$.
+
+b) Calcule o determinante de $T$ como $\det(T) = \det([T]_\mathcal{V})$.
+
+c) Conclua que $\det([T]_\mathcal{U}) = \det([T]_\mathcal{V})$ (em um exercício futuro, provaremos de maneira mais geral que mudança de base não altera o determinante da transformação linear).
+
+$\\$
+$\mathbf{9.6)}$ Use o fato de que
+
+$$
+\det\left(\begin{bmatrix}
+	1 & 1 & 1 & 1 \\
+	1 & 2 & 3 & 4 \\
+	1 & 3 & 6 & 10 \\
+	1 & 4 & 10 & 20
+\end{bmatrix}\right) = 1
+$$
+para mostrar que
+
+$$
+\det\left(\begin{bmatrix}
+	1 & 1 & 1 & 1 \\
+	1 & 2 & 3 & 4 \\
+	1 & 3 & 6 & 10 \\
+	1 & 4 & 10 & 19
+\end{bmatrix}\right) = 0.
+$$
+
+$\\$
+$\mathbf{9.7)}$ Seja $A$ uma matriz $n\times n$. Prove que $A$ é singular se, e somente se, $\det(A) = 0$.
+
+$\\$
+$\mathbf{9.8)}$ Seja $A$ uma matriz quadrada de ordem $n$, e considere uma fatoração $QR$ de $A$. Se $r_{11}, r_{22}, \cdots, r_{nn}$ são os elementos da diagonal de $R$, prove que $\det(A) = \pm\prod\limits_{i = 1}^{n} r_{ii}$.
+
+$\\$
+$\mathbf{9.9)}$ Nós sabemos, das propriedades do determinante, que $\det(AB) = \det(A)\det(B)$. É verdade que $\det(A + B) = \det(A) + \det(B)$? Se sim, demonstre; se não, mostre um contra-exemplo.
+
+$\\$
+$\mathbf{9.10)}$ Sejam $A$ uma matriz quadrada e invertível de ordem $n$, e $u, v\in\mathbb{R}^n$. Mostre que $\det(A + uv^T) = (1 + v^TA^{-1}u)\det(A)$. 
+
+Sugestão: você pode usar sem provar o chamado Teorema de Sylvester, que afirma que, para quaisquer matrizes $X_{n\times m}$ e $Y_{m\times n}$, vale a identidade $\det(I_n + XY) = \det(I_m + YX)$.
+
+$\\$
+$\mathbf{9.11)}$ Suponha que $A$, $B$ e $P$ são três matrizes $n\times n$ tais que $A = P^{-1}BP$. Prove que $\det(A) = \det(B)$ (ou seja, mudança de base não altera o determinante de uma transformação linear).
+
+$\\$
+$\mathbf{9.12)}$ Considere a matriz
+
+$$
+A = \begin{bmatrix}
+	2 & 5 & 1 \\
+	0 & 8 & 3 \\
+	1 & 4 & 2
+\end{bmatrix}.
+$$
+
+Use a Fórmula dos Pivôs para encontrar todos os pivôs de $A$.
+
+$\\$
+$\mathbf{9.13)}$ Deduza a fórmula geral do determinante de uma matriz $n\times n$ (Fórmula de Leibniz) unicamente usando os axiomas do determinante (para o axioma $2$, você pode escolher entre o Axioma da Permutação e o Axioma da Alternância, use o que considerar mais apropriado).
+
+$\\$
+$\mathbf{9.14)}$ Usando a Fórmula de Leibniz, calcule o determinante da seguinte matriz:
+
+$$
+A = \begin{bmatrix}
+	1 & 0 & 1 & 1 \\
+	0 & 0 & 1 & 1 \\
+	1 & 0 & 0 & 1 \\
+	1 & 1 & 1 & 0
+\end{bmatrix}.
+$$
+
+$\\$
+$\mathbf{9.15)}$ Considere a matriz
+
+$$
+A = \begin{bmatrix}
+	5 & 1 & 4 \\
+	0 & 2 & 3 \\
+	9 & 1 & 8
+\end{bmatrix}.
+$$
+
+a) Determine todos os menores complementares de $A$.
+
+b) Encontre a matriz de cofatores de $A$.
+
+b) Calcule $\det(A)$.
+
+$\\$
+$\mathbf{9.16)}$ Ache o determinante da seguinte matriz
+
+$$
+A = \begin{bmatrix}
+	1 & 1 & 4 \\
+	1 & 2 & 2 \\
+	1 & 2 & 5
+\end{bmatrix}
+$$
+usando cofatores. O que acontece quando mudamos o valor $4$ para $100$?
+
+$\\$
+$\mathbf{9.17)}$ Considere a matriz
+
+$$
+A = \begin{bmatrix}
+	1 & 2 & 3 \\
+	1 & 4 & 9 \\
+	2 & 1 & 0
+\end{bmatrix}.
+$$
+Encontre a inversa de $A$ (se existir) através do Método da Adjunta.
+
+$\\$
+$\mathbf{9.18)}$ Seja $A$ uma matriz $n\times n$ qualquer, e seja $C^T$ a sua matriz adjunta. Prove que $\det(C^T) = (\det(A))^{n - 1}$.
+
+$\\$
+$\mathbf{9.19)}$ Sejam $A$ e $B$ duas matrizes $n\times n$. Prove que $\operatorname{adj}(AB) = \operatorname{adj}(B)\cdot\operatorname{adj}(A)$.
+
+$\\$
+$\mathbf{9.20)}$ Seja $A$ uma matriz $n\times n$ qualquer. Prove que $\operatorname{adj}(A^T) = (\operatorname{adj}(A))^T$.
+
+$\\$
+$\mathbf{9.21)}$ Sejam $A$ uma matriz $n\times n$, e $k\in\mathbb{R}$ um escalar. Prove que $\operatorname{adj}(k\cdot A) = k^{n - 1}\cdot\operatorname{adj}(A)$.
+
+$\\$
+$\mathbf{9.22)}$ Resolva o sistema linear
+
+$$
+\begin{bmatrix}
+	1 & 3 & 0 \\
+	9 & 2 & 1 \\
+	-5 & 6 & 8
+\end{bmatrix}\begin{bmatrix}
+	x_1 \\
+	x_2 \\
+	x_3
+\end{bmatrix} = \begin{bmatrix}
+	3 \\
+	1 \\
+	0
+\end{bmatrix}
+$$
+através da Regra de Cramer.
+
+$\\$
+$\mathbf{9.23)}$ Considere o paralelepípedo $P$ definido pelos vetores $u = (1, 2, 0)$, $v = (4, 3, 1)$ e $w = (2, 5, 1)$. Calcule o volume de $P$.
+
+$\\$
+$\mathbf{9.24)}$ Suponha que um triângulo $T$ em $\mathbb{R}^2$ é definido pelos pontos $(3, 4)$, $(2, 1)$ e $(1, 6)$. Calcule a área de $T$.
+
+$\\$
+$\mathbf{9.25)}$ Sejam $u$, $v$ e $w$ três vetores em $\mathbb{R}^3$. Prove que:
+
+a) $v\times u = -(u \times v)$.
+
+b) $u\cdot(u\times v) = v\cdot (u\times v) = 0$.
+
+c) $u\times u = 0$.
+
+d) $||u\times v|| = ||u||||v|||\sin(\theta)|$, onde $\theta$ é o ângulo entre $u$ e $v$.
+
+e) $(u\times v)\cdot w = 0$ se, e somente se, $u$, $v$ e $w$ estão no mesmo plano.
+
+$\\$
+$\mathbf{9.26)}$ Para cada um dos itens do exercício anterior, forneça uma interpretação geométrica.
