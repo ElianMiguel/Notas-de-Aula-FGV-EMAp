@@ -1,0 +1,129 @@
+\chapter{Autovalores e Autovetores}
+\label{cap:autovalores-e-autovetores}
+
+\textbf{Importante:} este capítulo é baseado em \cite{slide7doyuri}.
+
+Neste capítulo, nós começaremos a estudar dois dos conceitos mais importantes da Álgebra Linear: autovalores e autovetores de uma matriz. O seu estudo, historicamente, iniciou-se com o estudo de Equações Diferenciais Ordinárias (EDOs), e possui, além destas, várias outras aplicações, como o estudo de sequências definidas recursivamente, modelagem de epidemias e muitas outras coisas.
+
+\section{Definição de Autovalor e Autovetor}
+
+Nós começaremos esta seção definindo formalmente os conceitos de autovalor e autovetor de uma matriz.
+
+\begin{Definition}[Autovalor e Autovetor]
+	Seja $A$ uma matriz quadrada $n\times n$ qualquer. Dizemos que $\lambda\in\mathbb{C}$ é um \textbf{autovalor} de $A$ se existe um vetor $x\in\mathbb{R}^n$ não-nulo tal que:
+	
+	$$
+	Ax = \lambda x.
+	$$
+	Neste caso, o vetor $x$ é dito ser um \textbf{autovetor} de $A$ associado ao autovalor $\lambda$.
+\end{Definition}
+
+Uma das primeiras coisas que decorre desta definição é a seguinte proposição:
+
+\begin{Proposition}
+	Seja $A$ uma matriz quadrada $n\times n$ tal que $x\in\mathbb{R}^n$ é um autovetor de $A$. Então, para qualquer escalar $\alpha$, $\alpha x$ também é autovetor de $A$. 
+\end{Proposition}
+
+\begin{Proof}
+	Se $x$ é um autovetor de $A$, então existe um escalar $\lambda$ tal que $Ax = \lambda x$. Por sua vez, como $A$ é linear, nós temos que:
+	
+	$$
+	A(\alpha x) = \alpha(Ax) = \alpha(\lambda x) = \lambda(\alpha x).
+	$$
+	
+	\qed
+\end{Proof}
+
+Uma outra coisa que poderíamos pensar imediatamente é: se uma matriz $A$ possui autovalores iguais a zero, existe alguma relação entre os seus autovetores associados e o núcleo de $A$? A resposta é sim, como veremos agora:
+
+\begin{Proposition}
+	Seja $A$ uma matriz $n\times n$. Se $0$ é um autovalor de $A$, então os seus autovetores associados pertencem ao núcleo de $A$. Além disso, $A$ é singular se, e somente se, $0$ é um autovalor de $A$.
+\end{Proposition}
+
+\begin{Proof}
+	Suponha primeiramente que $0$ é um autovalor de $A$. Então, existe pelo menos um vetor $x$ não-nulo tal que $Ax = 0x = 0$. Ou seja, $x\in N(A)$. Consequentemente, $A$ é singular. Reciprocamente, se $A$ é singular, então existe pelo menos um vetor $x$ não-nulo tal que $x\in N(A)$. Ou seja, $Ax = 0$, o que implica que $Ax = 0x$, ou seja, $0$ é um autovalor de $A$.
+	
+	\qed
+\end{Proof}
+
+A partir da definição, nós podemos também estabelecer uma propriedade válida para qualquer matriz de projeção:
+
+\begin{Proposition}
+	Seja $P_{n\times n}$ uma matriz de projeção. Então, os seus únicos autovalores são $0$ e $1$.
+\end{Proposition}
+
+\begin{Proof}
+	Se $P$ é uma matriz de projeção, nós sabemos que $P^2 = P$. Suponha que $\lambda$ é autovalor de $P$. Então, existe $x\in\mathbb{R}^n$ não-nulo tal que:
+	
+	$$
+	Px = \lambda x.
+	$$
+	Por sua vez, nós temos que:
+	
+	$$
+	P^2x = P(Px) = P(\lambda x) = \lambda (Px) = \lambda^2 x.
+	$$
+	Como $P$ é uma matriz de projeção e $x$ é autovetor associado a $\lambda$, segue que:
+	
+	$$
+	\lambda^2 x = \lambda x \iff \lambda^2 = \lambda.
+	$$
+	Segue imediatamente que $\lambda = 0$ ou $\lambda = 1$.
+	
+	\qed
+\end{Proof}
+
+Dado que achamos os autovalores de uma matriz de projeção qualquer, é interessante também encontrar os seus autovetores. Mas é isto é fácil: para $\lambda = 0$, nós temos $Px = 0$. Logo, qualquer vetor diferente de zero em $N(P)$ é autovetor de $P$. Por sua vez, para $x = 1$, nós temos $Px = x$. Logo, qualquer vetor que pertença ao subespaço sobre o qual $P$ está projetando é um autovetor de $P$. Ou, em outras palavras, qualquer vetor que pertença a $C(P)$ é autovetor de $P$.
+
+Antes de mostrarmos como se faz, de maneira geral, o cálculo dos autovalores e dos autovetores de uma matriz, vamos mostrar um exemplo simples:
+
+\begin{Example}
+	Seja $A$ a matriz dada por:
+	
+	$$
+	A = \begin{bmatrix}
+		0 & 1 \\
+		1 & 0
+	\end{bmatrix}.
+	$$
+	É fácil ver que $A^2 = I$. Assim sendo, se $\lambda$ é autovalor de $A$, nós temos que:
+	
+	$$
+	Ax = \lambda x \iff A^2x = x \iff \lambda^2 x = x \iff \lambda^2 = 1 \iff \lambda = \pm 1.
+	$$
+	Logo, os autovalores de $A$ são $1$ e $-1$. Por sua vez, como $A$ é uma matriz de permutação, nós temos que:
+	
+	$$
+	\begin{bmatrix}
+		0 & 1 \\
+		1 & 0
+	\end{bmatrix}\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix} = \begin{bmatrix}
+		x_2 \\
+		x_1
+	\end{bmatrix}.
+	$$
+	Para $x = \begin{bmatrix}
+		1 \\
+		1
+	\end{bmatrix}$, nós temos que $Ax = x$. Logo, $\begin{bmatrix}
+		1 \\
+		1
+	\end{bmatrix}$ é um autovetor associado ao autovalor $1$. Por outro lado, para $x = \begin{bmatrix}
+		-1 \\
+		1
+	\end{bmatrix}$, nós temos que $Ax = -x$. Logo, $\begin{bmatrix}
+		-1 \\
+		1
+	\end{bmatrix}$ é um autovetor associado ao autovalor $-1$.
+\end{Example}
+
+Repare que os autovetores associados a um autovalor não são únicos. No mesmo exemplo anterior, $\begin{bmatrix}
+	2 \\
+	2
+\end{bmatrix}$ e $\begin{bmatrix}
+	-2 \\
+	2
+\end{bmatrix}$ também são autovetores associados a $1$ e a $-1$, respectivamente. Mas isto é óbvio, dado que nós já provamos este fato. Na próxima seção, por sua vez, nós estudaremos um método para calcular os autovalores e os autovetores de uma matriz $A$, e faremos mais exemplos (em matrizes $2\times 2$, é claro, porque é um sofrimento fazer isto no caso $3\times 3$, pior ainda é fazer isto no caso $4\times 4$, e muito em breve eu vou contar o problema que é o caso $5\times 5$ ou matrizes maiores).
