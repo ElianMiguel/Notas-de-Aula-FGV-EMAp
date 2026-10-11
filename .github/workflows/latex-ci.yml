@@ -9,6 +9,9 @@ on:
       - main
 
 jobs:
+  # ============================================================
+  # 1. Detecta quais diretórios foram modificados
+  # ============================================================
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
@@ -33,15 +36,21 @@ jobs:
           json: true
           escape_json: false
           safe_output: false
+          # Ignora pastas de suporte que NÃO possuem um main.tex próprio
           files_ignore: |
             .github/**
             *.md
             **/imgs/**
             **/caps/**
             **/images/**
+            **/refs/**
 
+  # ============================================================
+  # 2. Compila cada diretório que foi alterado
+  # ============================================================
   compile:
     needs: detect-changes
+    # Só executa se houver pelo menos um diretório alterado
     if: >
       needs.detect-changes.outputs.has_changes == 'true' &&
       needs.detect-changes.outputs.matrix != '[]' &&
