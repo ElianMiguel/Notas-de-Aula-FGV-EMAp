@@ -10,7 +10,7 @@ Neste capítulo, nós começaremos a estudar dois dos conceitos mais importantes
 Nós começaremos esta seção definindo formalmente os conceitos de autovalor e autovetor de uma matriz.
 
 \begin{Definition}[Autovalor e Autovetor]
-	Seja $A$ uma matriz quadrada $n\times n$ qualquer. Dizemos que $\lambda\in\mathbb{C}$ é um \textbf{autovalor} de $A$ se existe um vetor $x\in\mathbb{R}^n$ não-nulo tal que:
+	Seja $A$ uma matriz quadrada $n\times n$ qualquer. Dizemos que $\lambda\in\mathbb{C}$ é um \textbf{autovalor} de $A$ se existe um vetor $x\in\mathbb{C}^n$ não-nulo tal que:
 	
 	$$
 	Ax = \lambda x.
@@ -21,7 +21,7 @@ Nós começaremos esta seção definindo formalmente os conceitos de autovalor e
 Uma das primeiras coisas que decorre desta definição é a seguinte proposição:
 
 \begin{Proposition}
-	Seja $A$ uma matriz quadrada $n\times n$ tal que $x\in\mathbb{R}^n$ é um autovetor de $A$. Então, para qualquer escalar $\alpha$, $\alpha x$ também é autovetor de $A$. 
+	Seja $A$ uma matriz quadrada $n\times n$ tal que $x\in\mathbb{C}^n$ é um autovetor de $A$. Então, para qualquer escalar $\alpha$, $\alpha x$ também é autovetor de $A$. 
 \end{Proposition}
 
 \begin{Proof}
@@ -53,7 +53,7 @@ A partir da definição, nós podemos também estabelecer uma propriedade válid
 \end{Proposition}
 
 \begin{Proof}
-	Se $P$ é uma matriz de projeção, nós sabemos que $P^2 = P$. Suponha que $\lambda$ é autovalor de $P$. Então, existe $x\in\mathbb{R}^n$ não-nulo tal que:
+	Se $P$ é uma matriz de projeção, nós sabemos que $P^2 = P$. Suponha que $\lambda$ é autovalor de $P$. Então, existe $x\in\mathbb{C}^n$ não-nulo tal que:
 	
 	$$
 	Px = \lambda x.
@@ -127,3 +127,262 @@ Repare que os autovetores associados a um autovalor não são únicos. No mesmo 
 	-2 \\
 	2
 \end{bmatrix}$ também são autovetores associados a $1$ e a $-1$, respectivamente. Mas isto é óbvio, dado que nós já provamos este fato. Na próxima seção, por sua vez, nós estudaremos um método para calcular os autovalores e os autovetores de uma matriz $A$, e faremos mais exemplos (em matrizes $2\times 2$, é claro, porque é um sofrimento fazer isto no caso $3\times 3$, pior ainda é fazer isto no caso $4\times 4$, e muito em breve eu vou contar o problema que é o caso $5\times 5$ ou matrizes maiores).
+
+\section{Cálculo de Autovalores e Autovetores}
+
+Nesta seção, nós veremos um método geral para calcular os autovalores e os autovetores de uma matriz $n\times n$ qualquer. Recordando, lembre-se que $\lambda\in\mathbb{C}$ é um autovalor de uma matriz $A_{n\times n}$ se existe um vetor não-nulo $x\in\mathbb{C}^n$ tal que $Ax = \lambda x$. Assim sendo, nós podemos reescrever esta equação como $Ax - \lambda x = 0$, ou seja, $(A - \lambda I)x = 0$. Note que, como $x\neq 0$, $A - \lambda I$ é uma matriz singular. Assim sendo, é válida a seguinte proposição:
+
+\begin{Proposition}
+	Seja $A$ uma matriz $n\times n$ qualquer. Então, $\lambda$ é um autovalor de $A$ se, e somente se, $\det(A - \lambda I) = 0$.
+\end{Proposition}
+
+Mais geralmente, nós podemos fazer a seguinte definição:
+
+\begin{Definition}[Polinômio característico]
+	Seja $A$ uma matriz $n\times n$ qualquer. Então, o polinômio
+	
+	$$
+	p(\lambda) = \det(A - \lambda I)
+	$$
+	é chamado o \textbf{polinômio característico} de $A$.
+\end{Definition}
+
+Encontrar os autovalores de $A$ equivale a encontrar as raízes do polinômio característico de $A$. Se $A$ é uma matriz $n\times n$, este polinômio possui $n$ raízes (não necessariamente todas distintas) e, portanto, a matriz $A$ possui $n$ autovalores (que podem ser reais ou complexos, como já vimos, e podem ser repetidos).
+
+Na verdade, isto explica o comentário que eu fiz no final da seção anterior: existe um teorema de Álgebra que diz que não existe uma fórmula algébrica fechada para a resolução de equações polinomiais de grau maior ou igual a $5$. No entanto, encontrar os autovalores de uma matriz $A_{n\times n}$ com $n\geq 5$ equivale a resolver uma equação polinomial de grau $n$. Assim sendo, todo e qualquer método para encontrar os autovalores de uma matriz é, necessariamente, um método numérico. Mas não se preocupem com isto agora, nós trabalharemos apenas com o caso $2\times 2$, que é fácil de lidar.
+
+Uma vez que nós encontramos os autovalores de $A$, basta resolver o sistema linear $(A - \lambda I)x = 0$ usando eliminação para encontrar os seus autovetores. Note que nós queremos encontrar algum vetor $x\in\mathbb{C}^n$ tal que $x\in N(A - \lambda I)$. A partir disso, podemos fazer uma definição:
+
+\begin{Definition}[Autoespaço]
+	Seja $A$ uma matriz quadrada $n\times n$ qualquer. O subespaço $N(A - \lambda I)$ é chamado o \textbf{autoespaço associado ao autovalor $\lambda$}, e é denotado por $S_{\lambda}$.
+\end{Definition}
+
+Vamos agora fazer alguns exemplos para fixar melhor as ideias que nós desenvolvemos até aqui:
+
+\begin{Example}
+	Seja $A = \begin{bmatrix}
+		3 & 1 \\
+		1 & 3
+	\end{bmatrix}$. Vamos encontrar os autovalores de $A$, e autovetores associados a estes autovalores. Para encontrar os autovalores, nós resolveremos a equação
+	
+	$$
+	\det(A - \lambda I) = 0.
+	$$
+	Nós temos que:
+	
+	$$
+	A - \lambda I = \begin{bmatrix}
+		3 - \lambda & 1 \\
+		1 & 3 - \lambda
+	\end{bmatrix}.
+	$$
+	Assim sendo:
+	
+	$$
+	p(\lambda) = \det(A - \lambda I) = (3 - \lambda)(3 - \lambda) - 1\cdot 1 = \lambda^2 - 6\lambda + 9 - 1 = \lambda^2 - 6\lambda + 8.
+	$$
+	Igualando o polinômio característico a zero, nós temos:
+	
+	$$
+	\lambda^2 - 6\lambda + 8 = 0 \iff (\lambda - 2)(\lambda - 4) = 0.
+	$$
+	Logo, nós temos $\lambda = 2$ ou $\lambda = 4$. Estes são os autovalores de $A$. Para encontrar os autovetores associados, nós resolvemos os sistemas lineares substituindo $\lambda$ pelos valores que encontramos.
+	
+	Para $\lambda = 2$, nós temos:
+	
+	$$
+	(A - 2I)x = 0 \implies \begin{bmatrix}
+		1 & 1 \\
+		1 & 1
+	\end{bmatrix}\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}.
+	$$
+	Uma possível solução para este sistema é dada pelo vetor $x = \begin{bmatrix}
+		1 \\
+		-1
+	\end{bmatrix}$. Assim sendo, este é um autovetor de $A$ associado a $2$.
+	
+	Para $\lambda = 4$, nós temos:
+	
+	$$
+	(A - 4I)x = 0 \implies \begin{bmatrix}
+		-1 & 1 \\
+		1 & -1
+	\end{bmatrix}\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}.
+	$$
+	Uma possível solução para este sistema é dada pelo vetor $x = \begin{bmatrix}
+		1 \\
+		1
+	\end{bmatrix}$. Logo, este é um autovetor de $A$ associado a $4$.
+	
+	Note que, na definição de autoespaço que nós fizemos anteriormente, nós temos:
+	
+	$$
+	S_2 = \operatorname{span}\left(\left\{\begin{bmatrix}
+		-1 \\
+		1
+	\end{bmatrix}\right\}\right)
+	$$
+	e
+	
+	$$
+	S_4 = \operatorname{span}\left(\left\{\begin{bmatrix}
+		1 \\
+		1
+	\end{bmatrix}\right\}\right).
+	$$
+\end{Example}
+
+\begin{Example}
+	Seja $Q = \begin{bmatrix}
+		0 & -1 \\
+		1 & 0
+	\end{bmatrix}$. Os autovalores de $Q$ são dados pelas soluções da equação
+	
+	$$
+	\det(Q - \lambda I) = 0 \iff (-\lambda)(-\lambda) - 1\cdot(-1) = 0 \iff \lambda^2 + 1 = 0.
+	$$
+	As soluções desta equação são $\lambda = i$ e $\lambda = -i$ (onde $i$ denota a unidade imaginária). Repare que, agora, os autovalores de $Q$ são números complexos. Mas não fiquem com medo, as contas seguem normalmente. Novamente, nós vamos resolver os sistemas lineares para encontrar autovetores de $Q$.
+	
+	Para $\lambda = i$, nós temos:
+	
+	$$
+	(Q - iI)x = 0 \implies \begin{bmatrix}
+		-i & -1 \\
+		1 & -i
+	\end{bmatrix}\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}.
+	$$
+	Substituindo $x_1$ por $1$, nós encontramos $x_2 = -i$. Logo, $x = \begin{bmatrix}
+		1 \\
+		-i
+	\end{bmatrix}$ é um autovetor associado a $i$.
+	
+	Para $\lambda = -i$, nós temos:
+	
+	$$
+	(Q + iI)x = 0 \implies \begin{bmatrix}
+		i & -1 \\
+		1 & i
+	\end{bmatrix}\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}.
+	$$
+	Substituindo $x_1$ por $1$, nós obtemos $x_2 = i$. Logo, $x = \begin{bmatrix}
+		1 \\
+		i
+	\end{bmatrix}$ é um autovetor associado a $-i$.
+	
+	Note que, com a definição de autoespaço que nós temos, nós temos que, neste caso, 
+	
+	$$
+	S_i = \operatorname{span}\left(\left\{\begin{bmatrix}
+		1 \\
+		-i
+	\end{bmatrix}\right\}\right)
+	$$
+	e
+	
+	$$
+	S_{-i} = \operatorname{span}\left(\left\{\begin{bmatrix}
+		1 \\
+		i
+	\end{bmatrix}\right\}\right).
+	$$
+\end{Example}
+
+\begin{Example}
+	Seja $B = \begin{bmatrix}
+		5 & 2 \\
+		0 & 5
+	\end{bmatrix}$. Nós temos que os autovalores de $B$ são as soluções de
+	
+	$$
+	\det(B - \lambda I) = 0.
+	$$
+	Por sua vez, é verdade que
+	
+	$$
+	\det(B - \lambda I) = (5 - \lambda)^2.
+	$$
+	Logo, nós temos a equação
+	
+	$$
+	(5 - \lambda)^2 = 0 \iff \lambda = 5.
+	$$
+	Para encontrar um autovetor associado a $5$, nós resolveremos o sistema linear $(A - 5I)x = 0$. Nós temos:
+	
+	$$
+	\begin{bmatrix}
+		0 & 2 \\
+		0 & 0
+	\end{bmatrix}\begin{bmatrix}
+		x_1 \\
+		x_2
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		0
+	\end{bmatrix}.
+	$$
+	Escolhendo $x_1 = 1$, nós temos que $x_2 = 0$. Logo, o vetor $x = \begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix}$ é um autovetor de $B$ associado a $5$. Por sua vez, nós temos que, para esta matriz, $S_5 = \operatorname{span}\left(\left\{\begin{bmatrix}
+		1 \\
+		0
+	\end{bmatrix}\right\}\right)$.
+\end{Example}
+
+No caso $2\times 2$, existe uma maneira bem fácil de encontrar o polinômio característico de $A$, como veremos na proposição a seguir:
+
+\begin{Proposition}
+	Seja $A$ uma matriz $2\times 2$, com
+	
+	$$
+	A = \begin{bmatrix}
+		a & b \\
+		c & d
+	\end{bmatrix}.
+	$$
+	Então, $p(\lambda) = \lambda^2 - (a + d)\lambda + (ad - bc)$.
+\end{Proposition}
+
+\begin{Proof}
+	Nós temos que $p(\lambda) = \det(A - \lambda I)$. Por sua vez:
+	
+	$$
+	A - \lambda I = \begin{bmatrix}
+		a - \lambda & b \\
+		c & d - \lambda
+	\end{bmatrix}.
+	$$
+	Assim sendo, 
+	
+	\begin{align*}
+		\det(A - \lambda I) &= (a - \lambda)(d - \lambda) - bc = \lambda^2 - a\lambda - d\lambda + ad - bc \\ &= \lambda^2 - (a + d)\lambda + (ad - bc).
+	\end{align*}
+	
+	\qed
+\end{Proof}
+
+No futuro, nós veremos que o traço de uma matriz quadrada é definido como a soma dos seus elementos na diagonal, e é denotado por $\operatorname{Tr}(A)$. Assim sendo, nós podemos reescrever esta equação que obtivemos como $p(\lambda) = \lambda^2 - \operatorname{Tr}(A) + \det(A)$.
