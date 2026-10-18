@@ -386,3 +386,163 @@ No caso $2\times 2$, existe uma maneira bem fácil de encontrar o polinômio car
 \end{Proof}
 
 No futuro, nós veremos que o traço de uma matriz quadrada é definido como a soma dos seus elementos na diagonal, e é denotado por $\operatorname{Tr}(A)$. Assim sendo, nós podemos reescrever esta equação que obtivemos como $p(\lambda) = \lambda^2 - \operatorname{Tr}(A)\lambda + \det(A)$.
+
+\section{Propriedades dos Autovalores}
+
+Nesta seção, nós estudaremos algumas propriedades dos autovalores de uma matriz, e também veremos algumas definições e propriedades envolvendo o polinômio característico. Começaremos com a seguinte proposição:
+
+\begin{Proposition}
+	Sejam $A$ e $B$ duas matrizes $n\times n$ tais que $Ax = \lambda x$ e $Bx = \mu x$, para algum $x\in\mathbb{C}^n$ não-nulo. Então, $\lambda + \mu$ é autovalor de $A + B$. 
+\end{Proposition}
+
+\begin{Proof}
+	Se $A$ e $B$ satisfazem a propriedade do enunciado, então: 
+	
+	$$
+	Ax + Bx = \lambda x + \mu x \implies (A + B)x = (\lambda + \mu)x.
+	$$
+	Logo, $\lambda + \mu$ é autovalor de $A + B$.
+	
+	\qed
+\end{Proof}
+
+Por sua vez, em geral, o autovalor da soma de duas matrizes não é a soma dos seus autovalores. Note que, no enunciado anterior, as duas matrizes possuem o mesmo autovetor, o que garante que o autovalor da soma das matrizes seja a soma dos seus autovalores. De igual modo, o autovalor do produto entre duas matrizes não necessariamente é o produto dos seus autovalores.
+
+Agora, veremos o que acontece com os autovalores das potências de uma matriz:
+
+\begin{Proposition}
+	Seja $A$ uma matriz $n\times n$ tal que $Ax = \lambda x$, com $x\in\mathbb{C}^n$ não-nulo. Então, $A^{k}x = \lambda^{k}x$.
+\end{Proposition}
+
+\begin{Proof}
+	Nós provaremos esta proposição por indução em $k$. Para $k = 1$, o resultado é trivial. Para $k = 2$, nós temos que $A^2x = A(Ax) = A(\lambda x) = \lambda(Ax) = \lambda^2 x$. Suponha que a propriedade vale para $k = n - 1$. Provaremos que vale também para $k = n$. De fato, $A^{n}x = A(A^{n - 1}x) = A(\lambda^{n - 1}x) = \lambda^{n - 1}(Ax) = \lambda^n x$.
+	
+	\qed
+\end{Proof}
+
+A próxima propriedade relaciona os autovalores de uma matriz não-singular com os autovalores da sua inversa:
+
+\begin{Proposition}
+	Seja $A$ uma matriz $n\times n$ invertível tal que $Ax = \lambda x$, para algum $x\in\mathbb{C}^n$ não-nulo. Então, $A^{-1}x = \dfrac{1}{\lambda}x$.
+\end{Proposition}
+
+\begin{Proof}
+	Primeiramente, como $A$ é invertível, nós temos que $x$ pode ser escrito como:
+	
+	$$
+	x = A^{-1}Ax.
+	$$
+	Como $x$ é autovetor de $A$, segue que:
+	
+	$$
+	x = A^{-1}(Ax) = A^{-1}(\lambda x) = \lambda A^{-1}x.
+	$$
+	Segue que
+	
+	$$
+	A^{-1}x = \dfrac{1}{\lambda}x.
+	$$
+	
+	\qed
+\end{Proof}
+
+Agora, nós vamos tratar do polinômio característico de uma matriz $A_{n\times n}$. Recordando a sua definição, nós temos que o polinômio característico de $A$ é definido como $p(\lambda) = \det(A - \lambda I)$. Por sua vez, da linearidade do determinante, nós podemos ver facilmente que $\det(k\cdot A) = k^n\det(A)$, para algum escalar $k$. Assim sendo, uma outra forma de enxergar o polinômio característico é como $p(\lambda) = (-1)^n\det(\lambda I - A)$. Note que, nesta segunda maneira de ver o polinômio, as suas raízes não se alteram. Como este é um polinômio de grau $n$, nós também podemos escrevê-lo, nesta segunda forma, como:
+
+$$
+p(\lambda) = (-1)^n (\lambda^n + c_{n - 1}\lambda^{n - 1} + \cdots + c_1\lambda + c_0).
+$$
+
+Por sua vez, se $\lambda_1, \cdots, \lambda_n$ são as raízes de $p$ (incluindo as multiplicidades), pelo Teorema Fundamental da Álgebra (que não enunciaremos nem provaremos aqui), nós temos que $p$ pode ser decomposto como:
+
+$$
+p(\lambda) = (-1)^n(\lambda - \lambda_1)(\lambda - \lambda_2)\cdots(\lambda - \lambda_n).
+$$
+
+Usando esta decomposição, nós poderemos provar duas propriedades. A primeira delas é a seguinte:
+
+\begin{Proposition}
+	Sejam $\lambda_1, \cdots, \lambda_n$ os autovalores de $A$. Então, $\det(A) = \prod\limits_{i = 1}^{n} \lambda_i$.
+\end{Proposition}
+
+\begin{Proof}
+	Nós temos que $\det(A) = \det(A - 0I) = p(0)$. Assim sendo, vamos calcular $p(0)$:
+	
+	$$
+	p(0) = (-1)^n\prod\limits_{i = 1}^{n} (0 - \lambda_i) = (-1)^n\prod\limits_{i = 1}^{n} (-\lambda_i) = (-1)^n(-1)^n\prod\limits_{i = 1}^{n} \lambda_i = (-1)^{2n}\prod\limits_{i = 1}^{n} \lambda_i = \prod\limits_{i = 1}^{n} \lambda_i.
+	$$
+	
+	\qed
+\end{Proof}
+
+A partir deste fato, nós podemos determinar facilmente qual é o coeficiente $c_0$ do polinômio expandido. De fato, nós temos que:
+
+$$
+p(0) = (-1)^n(0^{n} + c_{n - 1}\cdot0^{n - 1} + \cdots + c_1\cdot 0 + c_0).
+$$
+Assim sendo, $p(0) = (-1)^n c_0$ e, como $p(0) = \det(A)$, segue que $c_0 = (-1)^n\det(A)$.
+
+Antes de demonstrarmos a segunda propriedade, vamos fazer uma definição:
+
+\begin{Definition}[Traço de uma matriz]
+	Seja $A$ uma matriz $n\times n$ tal que a sua entrada $ij$ é dada por $a_{ij}$. Então, definimos o \textbf{traço} de $A$, com notação $\operatorname{Tr}(A)$, por:
+	
+	$$
+	Tr(A) = \sum\limits_{i = 1}^{n} a_{ii}.
+	$$
+\end{Definition}
+
+Em resumo, o traço de uma matriz $A$ é a soma dos seus elementos diagonais. Agora, nós podemos enunciar e demonstrar a segunda propriedade:
+
+\begin{Proposition}
+	Seja $A$ uma matriz $n\times n$ com autovalores $\lambda_1, \cdots, \lambda_n$. Então, $Tr(A) = \sum\limits_{i = 1}^{n}$.
+\end{Proposition}
+
+\begin{Proof}
+	Se $p(\lambda)$ é o polinômio característico de $A$, então nós calcularemos o coeficiente $c_{n - 1}$ de duas formas. Primeiramente, nós podemos enxergar $p(\lambda)$ como:
+	
+	$$
+	p(\lambda) = (-1)^n(\lambda - \lambda_1)\cdots(\lambda - \lambda_n).
+	$$
+	O coeficiente $c_{n - 1}$ é aquele que acompanha o termo $\lambda^{n - 1}$. Assim sendo, como $p(\lambda)$ possui $n$ termos ``entre parênteses'', nós precisamos ``pegar'' $n - 1$ $\lambda$'s de parênteses diferentes, e escolher $1$ termo diferente de $\lambda$ em um dos parênteses. Por sua vez, como nós precisamos fazer isto de todas as formas possíveis, ao final nós chegamos a $c_{n - 1} = - (\lambda_1 + \cdots + \lambda_n)$.
+	
+	Por outro lado, nós podemos enxergar $p(\lambda)$ como $(-1)^n\det(\lambda I - A)$, e analisar o que ocorre com $\det(\lambda I - A)$. Nós temos que a expansão por cofatores nos dá:
+	
+	\begin{align*}
+		\det(\lambda I - A) &= \det\left(\begin{bmatrix}
+			\lambda - a_{11} & a_{12} & \cdots & a_{1n} \\
+			a_{21} & \lambda - a_{22} & \cdots & a_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{n1} & a_{n2} & \cdots & \lambda - a_{nn}
+		\end{bmatrix}\right)\\ &= (\lambda - a_{11})\det\left(\begin{bmatrix}
+			\lambda - a_{22} & \cdots & a_{2n} \\
+			\vdots & \ddots & \vdots \\
+			a_{n2} & \cdots & \lambda - a_{nn}
+		\end{bmatrix}\right) + q(\lambda),
+	\end{align*}
+	onde $q$ é um polinômio de grau $n - 2$. Por sua vez, fazendo mais uma expansão, nós temos que:
+	
+	\begin{align*}
+		& (\lambda - a_{11})\det\left(\begin{bmatrix}
+			\lambda - a_{22} & \cdots & a_{2n} \\
+			\vdots & \ddots & \vdots \\
+			a_{n2} & \cdots & \lambda - a_{nn}
+		\end{bmatrix}\right) + q(\lambda)\\ = & (\lambda - a_{11})(\lambda - a_{22})\det\left(\begin{bmatrix}
+			\lambda - a_{33} & \cdots & a_{3n} \\
+			\vdots & \ddots & \vdots \\
+			a_{n3} & \cdots & \lambda - a_{nn}
+		\end{bmatrix}\right) + \tilde{q}(\lambda),
+	\end{align*}
+	onde $\tilde{q}$ é um outro polinômio de grau $n - 2$. Executando este raciocínio recursivamente, ao final nós obtemos:
+	
+	$$
+	\det(\lambda I - A) = (\lambda - a_{11})(\lambda - a_{22})\cdots(\lambda - a_{nn}) + \hat{q}(\lambda),
+	$$
+	onde $\hat{q}$ é um polinômio de grau $n - 2$. Usando o mesmo raciocínio que nós usamos no primeiro caso, nós temos que o coeficiente $c_{n - 1}$ é dado por $c_{n - 1} = - (a_{11} + a_{22} + \cdots + a_{nn})$. Logo, segue que:
+	
+	$$
+	a_{11} + a_{22} + \cdots + a_{nn} = \lambda_1 + \cdots + \lambda_n.
+	$$
+	Mas $a_{11} + a_{22} + \cdots + a_{nn} = \operatorname{Tr}(A)$. Logo, $\operatorname{Tr}(A) = \lambda_1 + \cdots + \lambda_n$.
+	
+	\qed
+\end{Proof}
